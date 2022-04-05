@@ -18,5 +18,7 @@ public class HatSystem {
     public static void main(String[] args) {
        
     }
-    
+    /**
+     * Test
+     */
 }
