@@ -27,11 +27,11 @@ public class LoginMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        panel_start = new javax.swing.JPanel();
+        lbl_title = new javax.swing.JLabel();
+        btn_logout = new javax.swing.JButton();
+        btn_changePassword = new javax.swing.JButton();
+        panel_createOrder = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
@@ -42,11 +42,11 @@ public class LoginMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panel_register = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        panel_search = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
@@ -55,47 +55,47 @@ public class LoginMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Välkommen");
+        lbl_title.setText("Välkommen");
 
-        jButton2.setText("Logga ut");
+        btn_logout.setText("Logga ut");
 
-        jButton5.setText("Ändra lösenord");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_changePassword.setText("Ändra lösenord");
+        btn_changePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn_changePasswordActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_startLayout = new javax.swing.GroupLayout(panel_start);
+        panel_start.setLayout(panel_startLayout);
+        panel_startLayout.setHorizontalGroup(
+            panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_startLayout.createSequentialGroup()
+                .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_startLayout.createSequentialGroup()
                         .addGap(312, 312, 312)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_logout))
+                    .addGroup(panel_startLayout.createSequentialGroup()
                         .addGap(295, 295, 295)
-                        .addComponent(jButton5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_changePassword))
+                    .addGroup(panel_startLayout.createSequentialGroup()
                         .addGap(315, 315, 315)
-                        .addComponent(jLabel1)))
+                        .addComponent(lbl_title)))
                 .addContainerGap(327, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panel_startLayout.setVerticalGroup(
+            panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_startLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
+                .addComponent(lbl_title)
                 .addGap(105, 105, 105)
-                .addComponent(jButton5)
+                .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
-                .addComponent(jButton2)
+                .addComponent(btn_logout)
                 .addContainerGap(227, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Start", jPanel1);
+        jTabbedPane1.addTab("Start", panel_start);
 
         jButton7.setText("Spara order");
 
@@ -135,56 +135,56 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jLabel5.setText("Orderstatus");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_createOrderLayout = new javax.swing.GroupLayout(panel_createOrder);
+        panel_createOrder.setLayout(panel_createOrderLayout);
+        panel_createOrderLayout.setHorizontalGroup(
+            panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(15, 15, 15))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(panel_createOrderLayout.createSequentialGroup()
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jButton7))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(panel_createOrderLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(35, 35, 35)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        panel_createOrderLayout.setVerticalGroup(
+            panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addGap(5, 5, 5)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -192,7 +192,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        jTabbedPane1.addTab("Skapa order", jPanel2);
+        jTabbedPane1.addTab("Skapa order", panel_createOrder);
 
         jButton8.setText("Registrera ny kund");
 
@@ -200,26 +200,26 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jButton1.setText("Registrera nytt tyg");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_registerLayout = new javax.swing.GroupLayout(panel_register);
+        panel_register.setLayout(panel_registerLayout);
+        panel_registerLayout.setHorizontalGroup(
+            panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_registerLayout.createSequentialGroup()
+                .addGroup(panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_registerLayout.createSequentialGroup()
                         .addGap(277, 277, 277)
                         .addComponent(jButton8))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(panel_registerLayout.createSequentialGroup()
                         .addGap(254, 254, 254)
                         .addComponent(jButton9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(panel_registerLayout.createSequentialGroup()
                         .addGap(284, 284, 284)
                         .addComponent(jButton1)))
                 .addContainerGap(311, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panel_registerLayout.setVerticalGroup(
+            panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_registerLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(jButton8)
                 .addGap(41, 41, 41)
@@ -229,7 +229,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addContainerGap(193, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Registrera", jPanel3);
+        jTabbedPane1.addTab("Registrera", panel_register);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -244,31 +244,31 @@ public class LoginMenu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
+        panel_search.setLayout(panel_searchLayout);
+        panel_searchLayout.setHorizontalGroup(
+            panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
                 .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
                             .addComponent(jComboBox1, 0, 229, Short.MAX_VALUE))
                         .addGap(24, 24, 24)
                         .addComponent(jButton10)
                         .addGap(190, 190, 190))))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panel_searchLayout.setVerticalGroup(
+            panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_searchLayout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10))
                 .addGap(18, 18, 18)
@@ -276,7 +276,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Sök", jPanel4);
+        jTabbedPane1.addTab("Sök", panel_search);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,9 +294,9 @@ public class LoginMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btn_changePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePasswordActionPerformed
     new ChangePsw().setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btn_changePasswordActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -312,31 +312,31 @@ public class LoginMenu extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_changePassword;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lbl_title;
+    private javax.swing.JPanel panel_createOrder;
+    private javax.swing.JPanel panel_register;
+    private javax.swing.JPanel panel_search;
+    private javax.swing.JPanel panel_start;
     // End of variables declaration//GEN-END:variables
 }
