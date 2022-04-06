@@ -29,7 +29,7 @@ public class SqlQuery {
      * @param query Query to the database.
      * @return A String containing the result, empty if no matches were found.
      */
-    public static String getAValue(String query) {
+    public static String getValue(String query) {
         
         String returnString = "";
 
@@ -51,7 +51,7 @@ public class SqlQuery {
      * @param query Query to the database.
      * @return A HashMap containing the result, empty if no matches were found.
      */
-    public static HashMap getARow(String query) {
+    public static HashMap getRow(String query) {
 
         HashMap<String, String> returnMap = new HashMap<>();
 
