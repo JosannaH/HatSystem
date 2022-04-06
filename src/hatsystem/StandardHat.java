@@ -24,9 +24,9 @@ public class StandardHat {
      * @param chosenDescription
      * @param chosenFabric
      */
-    public static void addStandardHat(String chosenName, String chosenPrice, String chosenDescription, int chosenFabric) {
+    public static void addStandardHat(String chosenName, String chosenPrice, String chosenDescription, String chosenFabricID) {
 
-        String query = "INSERT INTO standard_hat (Name, Price, Description, Hat_Fabric) VALUES ('" + chosenName + "', " + chosenPrice + ", '" + chosenDescription + "', " + chosenFabric + ");";
+        String query = "INSERT INTO standard_hat (Name, Price, Description, Hat_Fabric) VALUES ('" + chosenName + "', " + chosenPrice + ", '" + chosenDescription + "', " + chosenFabricID + ");";
         SqlQuery.add(query);
     }
 
@@ -41,6 +41,24 @@ public class StandardHat {
         allStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat;");
 
         return allStandardHats;
+    }
+    
+    /**
+     * Checks whether a specific hat name and fabric combination already exists.
+     * @param hatName Hat name to check.
+     * @param fabricID FabricID to check.
+     * @return True if combination is unique, otherwise false.
+     */
+    public static boolean isUniqueCombination(String hatName, String fabricID){
+        
+        boolean isUnique = false;
+        String id = SqlQuery.getValue("SELECT Standard_Hat_ID FROM standard_hat WHERE Name = '"+ hatName +"' AND Hat_Fabric = "+ fabricID +";");
+        
+        if(id == null){
+            isUnique = true;
+        }
+        
+        return isUnique;
     }
 
 }

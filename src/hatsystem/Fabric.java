@@ -70,26 +70,42 @@ public class Fabric {
 
         return colors;
     }
-
+    
     /**
-     * Checks whether or not a fabric with the specified name and color combination exists.
-     *
+     * Returns the id of a fabric with the specified name and color combination.
      * @param fabricName Fabric to check.
      * @param fabricColor Color to check.
-     * @return true if unique combination, false if not.
+     * @return A string containing the fabric ID. Null if no match was found.
      */
-    public static boolean isUniqueCombination(String fabricName, String fabricColor) {
+    public static String getFabricID(String fabricName, String fabricColor) {
 
-        String fabricToCheck = "";
-        boolean isUnique = false;
+ 
+        String fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
 
-        fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
-
-        if (fabricToCheck.isBlank()) {
-            isUnique = true;
-        }
-
-        return isUnique;
+        return fabricToCheck;
     }
+
+//    /** KANSKE INTE BEHÖVER DENNA EFTERSOM JAG SKAPAT METODEN OVAN
+//     * Checks whether or not a fabric with the specified name and color combination exists.
+//     *
+//     * @param fabricName Fabric to check.
+//     * @param fabricColor Color to check.
+//     * @return true if unique combination, false if not.
+//     */
+//    public static boolean isUniqueCombination(String fabricName, String fabricColor) {
+//
+//        String fabricToCheck = "";
+//        boolean isUnique = false;
+//
+//        fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
+//
+//        if (fabricToCheck.isBlank()) {
+//            isUnique = true;
+//        }
+//
+//        return isUnique;
+//    }
+
+    
 
 }
