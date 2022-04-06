@@ -26,7 +26,7 @@ public class ChangePsw extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
         psw1 = new javax.swing.JPasswordField();
         psw2 = new javax.swing.JPasswordField();
         psw3 = new javax.swing.JPasswordField();
@@ -38,7 +38,7 @@ public class ChangePsw extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Spara nytt lösenord");
+        btn_save.setText("Spara nytt lösenord");
 
         psw1.setText("jPasswordField1");
 
@@ -85,7 +85,7 @@ public class ChangePsw extends javax.swing.JFrame {
                         .addGap(282, 282, 282)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1))))
+                            .addComponent(btn_save))))
                 .addContainerGap(238, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,7 +108,7 @@ public class ChangePsw extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btn_save)
                 .addGap(44, 44, 44))
         );
 
@@ -151,7 +151,7 @@ public class ChangePsw extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblNewPsw;
