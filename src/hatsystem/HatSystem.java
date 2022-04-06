@@ -6,21 +6,28 @@
  */
 package hatsystem;
 
+import oru.inf.InfDB;
+import oru.inf.InfException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Blazl
  */
 public class HatSystem {
+    
+    private static InfDB idb;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       new Login().setVisible(true);
+        try {
+            idb = new InfDB("hatdb", "3306", "hatdb", "hatkey");
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        new Login().setVisible(true);
     }
-    /**
-     * Test Jonas
-     * 
-     * Josanna test igen
-     */
 }
