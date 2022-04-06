@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Blazl
  */
 public class HatSystem {
-    
+
     private static InfDB idb;
 
     /**
@@ -27,7 +27,9 @@ public class HatSystem {
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
+
+        SqlQuery.setDatabase(idb);
+
         new Login().setVisible(true);
     }
 }
