@@ -125,8 +125,8 @@ public class AddStandardHat extends javax.swing.JFrame {
                         .addGap(214, 214, 214)
                         .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(110, 110, 110)
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,7 +183,7 @@ public class AddStandardHat extends javax.swing.JFrame {
             lblErrorMessage.setText("Vänligen fyll i alla fält");
             lblErrorMessage.setVisible(true);
         } else {
-            String fabricComboID = Fabric.getFabricID(chosenName, chosenColor);
+            int fabricComboID = Fabric.getFabricID(chosenFabric, chosenColor);
             boolean isUniqueHatAndFabricCombo = StandardHat.isUniqueCombination(chosenName, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
                 StandardHat.addStandardHat(chosenName, chosenPrice, chosenDescription, fabricComboID);

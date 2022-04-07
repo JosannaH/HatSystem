@@ -78,12 +78,11 @@ public class Fabric {
      * @param fabricColor Color to check.
      * @return A string containing the fabric ID. Null if no match was found.
      */
-    public static String getFabricID(String fabricName, String fabricColor) {
+    public static int getFabricID(String fabricName, String fabricColor) {
 
- 
-        String fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
-
-        return fabricToCheck;
+        String fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '"+ fabricName +"' AND Color = '"+ fabricColor +"';");
+        int fabricID = Integer.parseInt(fabricToCheck);
+        return fabricID;
     }
 
 //    /** KANSKE INTE BEHÖVER DENNA EFTERSOM JAG SKAPAT METODEN OVAN
