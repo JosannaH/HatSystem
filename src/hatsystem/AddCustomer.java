@@ -11,7 +11,6 @@ package hatsystem;
 public class AddCustomer extends javax.swing.JFrame {
 
     /**
-     * Creates new form Customerinfo
      */
     public AddCustomer() {
         initComponents();
@@ -41,8 +40,6 @@ public class AddCustomer extends javax.swing.JFrame {
         lbl_telephoneNumber = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         lbl_email = new javax.swing.JLabel();
-        lbl_genratedCustomerNumber = new javax.swing.JLabel();
-        lbl_customerNumber = new javax.swing.JLabel();
         txt_comment = new javax.swing.JTextField();
         lbl_comment = new javax.swing.JLabel();
         btn_save = new javax.swing.JButton();
@@ -86,10 +83,6 @@ public class AddCustomer extends javax.swing.JFrame {
 
         lbl_email.setText("E-post");
 
-        lbl_genratedCustomerNumber.setText("0");
-
-        lbl_customerNumber.setText("Kundnummer");
-
         txt_comment.setText("                     ");
         txt_comment.setMinimumSize(new java.awt.Dimension(150, 22));
         txt_comment.addActionListener(new java.awt.event.ActionListener() {
@@ -117,39 +110,28 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addComponent(lbl_city, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_telephoneNumber)
                     .addComponent(lbl_email)
-                    .addComponent(lbl_customerNumber)
                     .addComponent(lbl_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_lastName)
                     .addComponent(lbl_streetAdress)
                     .addComponent(lbl_postCode)
                     .addComponent(lbl_comment))
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                        .addComponent(lbl_genratedCustomerNumber)
-                        .addGap(106, 106, 106))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_postCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_comment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_telephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_save))
-                        .addContainerGap())))
+                    .addComponent(txt_postCode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_comment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_telephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_save))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_customerNumber)
-                    .addComponent(lbl_genratedCustomerNumber))
-                .addGap(21, 21, 21)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_firstName)
                     .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,10 +193,8 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_city;
     private javax.swing.JLabel lbl_comment;
-    private javax.swing.JLabel lbl_customerNumber;
     private javax.swing.JLabel lbl_email;
     private javax.swing.JLabel lbl_firstName;
-    private javax.swing.JLabel lbl_genratedCustomerNumber;
     private javax.swing.JLabel lbl_lastName;
     private javax.swing.JLabel lbl_postCode;
     private javax.swing.JLabel lbl_streetAdress;

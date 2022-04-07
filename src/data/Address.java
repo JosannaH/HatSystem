@@ -8,11 +8,18 @@ package data;
  *
  * @author Friday
  */
-public class Adress {
+public class Address {
 
-    public Adress() {
+    public Address() {
     }
 
+    /**
+     * Adds a new adress to the database. User inputs should be checked before calling this method.
+     * @param street
+     * @param postal
+     * @param city
+     * @param country 
+     */
     public void addAdress(String street, String postal, String city, String country) {
 
         String query = "INSERT INTO address (Street, Postal, City, Country) VALUES ('"+ street +"', '"+ postal +"', '"+ city +"', '"+ country +"');";
