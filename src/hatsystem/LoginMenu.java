@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.Fabric;
 import data.StandardHat;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
@@ -23,10 +24,13 @@ public class LoginMenu extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
+     */
     private void listAllStandardHats() {
 
-        DefaultListModel listModel = new DefaultListModel();
-        listFound.setModel(listModel);
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listFoundResults.setModel(listModel);
 
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
         int index = 0;
@@ -35,13 +39,12 @@ public class LoginMenu extends javax.swing.JFrame {
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            String infoToAdd = currentHat.get("Name") + "     " + currentHat.get("Price") + "     " + currentFabric.get("Name") + "     " + currentFabric.get("Color");
-            //Varför funkar inte tabbed space här ovan?? Har satt lite tomrum så länge...
-            
-            listModel.addElement(infoToAdd);
+            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index++;
         }
+        Font defaultListFont = listFoundResults.getFont();
+        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
     /**
@@ -68,16 +71,16 @@ public class LoginMenu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         panel_register = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRegisterCustomer = new javax.swing.JButton();
+        btnRegisterStandardHat = new javax.swing.JButton();
+        btnRegisterFabric = new javax.swing.JButton();
         panel_search = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblChooseCategory = new javax.swing.JLabel();
         cbCategory = new javax.swing.JComboBox<>();
-        tfInput = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
+        tfUserInput = new javax.swing.JTextField();
+        btnSearchCategory = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listFound = new javax.swing.JList<>();
+        listFoundResults = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,21 +226,21 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Skapa order", panel_createOrder);
 
-        jButton8.setText("Registrera ny kund");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterCustomer.setText("Registrera ny kund");
+        btnRegisterCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnRegisterCustomerActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Registrera ny standardhatt");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterStandardHat.setText("Registrera ny standardhatt");
+        btnRegisterStandardHat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnRegisterStandardHatActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Registrera nytt tyg");
+        btnRegisterFabric.setText("Registrera nytt tyg");
 
         javax.swing.GroupLayout panel_registerLayout = new javax.swing.GroupLayout(panel_register);
         panel_register.setLayout(panel_registerLayout);
@@ -246,31 +249,31 @@ public class LoginMenu extends javax.swing.JFrame {
             .addGroup(panel_registerLayout.createSequentialGroup()
                 .addGroup(panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(jButton8))
-                    .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(jButton9))
+                        .addGap(294, 294, 294)
+                        .addComponent(btnRegisterCustomer))
                     .addGroup(panel_registerLayout.createSequentialGroup()
                         .addGap(275, 275, 275)
-                        .addComponent(jButton1)))
-                .addContainerGap(340, Short.MAX_VALUE))
+                        .addComponent(btnRegisterStandardHat))
+                    .addGroup(panel_registerLayout.createSequentialGroup()
+                        .addGap(296, 296, 296)
+                        .addComponent(btnRegisterFabric)))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         panel_registerLayout.setVerticalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_registerLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jButton8)
-                .addGap(41, 41, 41)
-                .addComponent(jButton9)
-                .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addGap(117, 117, 117)
+                .addComponent(btnRegisterCustomer)
+                .addGap(50, 50, 50)
+                .addComponent(btnRegisterStandardHat)
+                .addGap(45, 45, 45)
+                .addComponent(btnRegisterFabric)
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera", panel_register);
 
-        jLabel1.setText("Ange sökkategori:");
+        lblChooseCategory.setText("Ange sökkategori:");
 
         cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kunder", "Ordrar", "Standardhattar" }));
         cbCategory.addActionListener(new java.awt.event.ActionListener() {
@@ -279,14 +282,14 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setText("Sök");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchCategory.setText("Sök");
+        btnSearchCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                btnSearchCategoryActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(listFound);
+        jScrollPane1.setViewportView(listFoundResults);
 
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
@@ -296,13 +299,13 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblChooseCategory)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfInput)
+                            .addComponent(tfUserInput)
                             .addComponent(cbCategory, 0, 229, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearch)
+                        .addComponent(btnSearchCategory)
                         .addGap(196, 196, 196))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,11 +317,11 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblChooseCategory))
                 .addGap(27, 27, 27)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                    .addComponent(tfUserInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchCategory))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(76, Short.MAX_VALUE))
@@ -360,7 +363,7 @@ public class LoginMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCategoryActionPerformed
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void btnSearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCategoryActionPerformed
 
         switch (cbCategory.getSelectedItem().toString()) {
             case "Standardhattar":
@@ -371,31 +374,30 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Kunder":
                 break;
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }//GEN-LAST:event_btnSearchCategoryActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-     new AddCustomer().setVisible(true);
-     this.dispose();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void btnRegisterCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterCustomerActionPerformed
+        new AddCustomer().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegisterCustomerActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    new AddStandardHat().setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void btnRegisterStandardHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterStandardHatActionPerformed
+        new AddStandardHat().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnRegisterCustomer;
+    private javax.swing.JButton btnRegisterFabric;
+    private javax.swing.JButton btnRegisterStandardHat;
+    private javax.swing.JButton btnSearchCategory;
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -405,12 +407,13 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblChooseCategory;
     private javax.swing.JLabel lbl_title;
-    private javax.swing.JList<String> listFound;
+    private javax.swing.JList<String> listFoundResults;
     private javax.swing.JPanel panel_createOrder;
     private javax.swing.JPanel panel_register;
     private javax.swing.JPanel panel_search;
     private javax.swing.JPanel panel_start;
-    private javax.swing.JTextField tfInput;
+    private javax.swing.JTextField tfUserInput;
     // End of variables declaration//GEN-END:variables
 }
