@@ -26,32 +26,25 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="lbl_wrong" min="-2" pref="243" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="lbl_wrong" min="-2" pref="275" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="btn_login" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                              <Component id="btn_login" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_username" min="-2" pref="88" max="-2" attributes="0"/>
-                                  <Component id="lbl_password" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_username" max="32767" attributes="0"/>
-                                  <Component id="txt_password" min="-2" pref="122" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="lbl_title" min="-2" pref="265" max="-2" attributes="0"/>
+                          <Component id="lbl_username" min="-2" pref="88" max="-2" attributes="0"/>
+                          <Component id="lbl_password" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_username" max="32767" attributes="0"/>
+                          <Component id="txt_password" min="-2" pref="122" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
+                  <Component id="lbl_title" min="-2" pref="265" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,7 +98,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamnet och/eller l&#xf6;senordet &#xe4;r fel."/>
+        <Property name="text" type="java.lang.String" value="Fel anv&#xe4;ndarnamn eller l&#xf6;senord."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txt_password">

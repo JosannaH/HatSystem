@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.SqlQuery;
 import javax.swing.JOptionPane;
+import java.util.Arrays;
 
 /**
  *
@@ -53,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         lbl_wrong.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_wrong.setText("Användarnamnet och/eller lösenordet är fel.");
+        lbl_wrong.setText("Fel användarnamn eller lösenord.");
 
         lbl_title.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         lbl_title.setText("Välkommen till Hattsystem!");
@@ -65,24 +66,20 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_wrong, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_wrong, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(99, 99, 99)
+                        .addComponent(btn_login))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(btn_login))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_username)
-                                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(67, Short.MAX_VALUE))))
+                            .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_username)
+                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,14 +107,15 @@ public class Login extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
         String username = txt_username.getText();
-        String password = txt_password.getText();
+        char []  password = txt_password.getPassword();
         
         // TODO: validera textfält
         // TODO: ev ändra till txt_password.getPassword()
         
         String password_db = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + username + "'");
         
-            if (password.equals(password_db)){
+        
+            if (Arrays.equals(password, password_db.toCharArray())){              
                 setVisible(false);
                 LoginMenu menu = new LoginMenu();
                 menu.setVisible(true);
@@ -125,6 +123,8 @@ public class Login extends javax.swing.JFrame {
             else{
                 lbl_wrong.setVisible(true);
             }
+            password = null;
+            password_db = "";
     }//GEN-LAST:event_btn_loginActionPerformed
 
 
