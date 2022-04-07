@@ -6,6 +6,7 @@
  */
 package hatsystem;
 
+import hatsystem.data.SqlQuery;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
