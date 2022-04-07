@@ -365,12 +365,11 @@ public class AddHatType extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbSpecialFabricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSpecialFabricsActionPerformed
-
+        
     }//GEN-LAST:event_cmbSpecialFabricsActionPerformed
 
     private void btnSpecialSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialSaveActionPerformed
-
-    
+           
 
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
