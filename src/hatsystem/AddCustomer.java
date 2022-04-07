@@ -249,6 +249,8 @@ public class AddCustomer extends javax.swing.JFrame {
                 }
             }
         }
+        
+        //Behövs validering för att ex kontrollera att ett telefonnummer bara består av siffror osv.
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
