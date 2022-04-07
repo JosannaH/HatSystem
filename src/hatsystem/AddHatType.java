@@ -4,6 +4,7 @@
  */
 package hatsystem;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -397,6 +398,8 @@ public class AddHatType extends javax.swing.JFrame {
         newHeight = Math.round(origHeight*scaleFactor);
         */
         
+        
+        
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
@@ -404,9 +407,23 @@ public class AddHatType extends javax.swing.JFrame {
         
         lblImageTxt.setText(filename);
         
-        ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(300, 350, Image.SCALE_DEFAULT));
+        ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
         
-        lblImage.setIcon(icon);
+        double frameWidth = 300;
+        double frameHeight = 350;
+        double selectedImgWidth = icon.getIconWidth();
+        double selectedImgHeight = icon.getIconHeight();
+        
+        double widthRatio = frameWidth/selectedImgWidth;
+        double heightRatio = frameHeight/selectedImgHeight;
+        double ratio = Math.min(widthRatio, heightRatio);
+        
+        int resizedWidth = (int)(selectedImgWidth*ratio);
+        int resizedHeight = (int)(selectedImgHeight*ratio);
+        
+        ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
+        
+        lblImage.setIcon(iconNew);
    
     }//GEN-LAST:event_btbAddImageActionPerformed
 
