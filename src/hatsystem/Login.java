@@ -4,6 +4,7 @@
  */
 package hatsystem;
 
+import data.SqlQuery;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        lbl_wrong.setVisible(false);
     }
 
     /**
@@ -30,10 +32,12 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         txt_username = new javax.swing.JTextField();
-        txt_password = new javax.swing.JTextField();
         lbl_username = new javax.swing.JLabel();
         lbl_password = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
+        lbl_wrong = new javax.swing.JLabel();
+        txt_password = new javax.swing.JPasswordField();
+        lbl_title = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,79 +52,89 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        lbl_wrong.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_wrong.setText("Användarnamnet och/eller lösenordet är fel.");
+
+        lbl_title.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbl_title.setText("Välkommen till Hattsystem!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_wrong, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btn_login)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(btn_login))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_username)
+                                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(67, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(30, 30, 30)
+                .addComponent(lbl_title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_username))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_password))
-                .addGap(56, 56, 56)
+                    .addComponent(lbl_password)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(lbl_wrong)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_login)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+
         String username = txt_username.getText();
         String password = txt_password.getText();
         
-        // TODO: hämta från databasen
-        String username_db = "u";
-        String password_db = "p";
+        // TODO: validera textfält
+        // TODO: ev ändra till txt_password.getPassword()
         
+        String password_db = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + username + "'");
         
-                
-        if (username.equals(username_db)){
             if (password.equals(password_db)){
                 setVisible(false);
-                Test testsida = new Test();
-                testsida.setVisible(true);
+                LoginMenu menu = new LoginMenu();
+                menu.setVisible(true);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Lösenordet är fel, försök igen");
+                lbl_wrong.setVisible(true);
             }
-                
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Användarnamnet är fel, försök igen");
-        }
-        
-        
     }//GEN-LAST:event_btn_loginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JLabel lbl_password;
+    private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_username;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JLabel lbl_wrong;
+    private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
