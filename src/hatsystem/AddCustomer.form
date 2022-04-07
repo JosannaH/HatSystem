@@ -9,7 +9,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -30,88 +30,138 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_city" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="lbl_telephoneNumber" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_email" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_firstName" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="lbl_lastName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_streetAdress" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_postCode" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_comment" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                          <Component id="lbl_email" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_streetAdress" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_telephoneNumber" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_postCode" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lbl_lastName" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_firstName" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="lbl_city" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_comment" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_country" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txt_postCode" max="32767" attributes="0"/>
+                                      <Component id="txt_lastName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_telephoneNumber" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_streetAddress" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_firstName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_city" max="32767" attributes="0"/>
+                                      <Component id="txt_country" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                      <Component id="lbl_errorMessage" min="-2" pref="344" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
+                      <Component id="btn_save" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_postCode" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_comment" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_lastName" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_telephoneNumber" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_email" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_streetAddress" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_city" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="txt_firstName" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Component id="btn_save" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="128" max="32767" attributes="0"/>
+              <EmptySpace pref="125" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_streetAdress" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_streetAddress" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_postCode" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_postCode" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_city" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_city" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_telephoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_telephoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_telephoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txt_comment" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_streetAdress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_city" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_city" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_country" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_country" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Component id="lbl_errorMessage" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btn_save" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="86" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrera ny kund"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JTextField" name="txt_firstName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                  "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -119,7 +169,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_lastName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                      "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -127,7 +176,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_streetAddress">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                  "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -150,7 +198,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_postCode">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                   "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -163,7 +210,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_city">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                    "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -176,7 +222,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_telephoneNumber">
       <Properties>
-        <Property name="text" type="java.lang.String" value="            "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -189,7 +234,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_email">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                      "/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 22]"/>
         </Property>
@@ -199,17 +243,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="E-post"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txt_comment">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="                     "/>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 22]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_commentActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_comment">
       <Properties>
@@ -224,5 +257,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_saveActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="lbl_country">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Land"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_country">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_errorMessage">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="V&#xe4;nligen fyll i alla f&#xe4;lt"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="ta_comment">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
