@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package hatsystem;
+package hatsystem.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class SqlQuery {
      * Retrieves a single value from the database and stores the result in a String.
      *
      * @param query Query to the database.
-     * @return A String containing the result, empty if no matches were found.
+     * @return A String containing the result, null if no matches were found.
      */
     public static String getValue(String query) {
         
