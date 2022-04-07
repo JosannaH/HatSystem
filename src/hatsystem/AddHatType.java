@@ -330,7 +330,7 @@ public class AddHatType extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(cmbSpecialColors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40)
-                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btbAddImage)
                             .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -375,17 +375,37 @@ public class AddHatType extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
-                            
-
+        
+        //Det nedaför är lite grejs för att automatiskt justera aspekten när en bild förändras i storlek
+        //är ej klart, men kanske pillar lite på fritiden. Kan tas bort sen om det fortfarande är utkommenterat/Jonas.
+                          
+        /*int origWidth = lblImage.getWidth();
+        int origHeight = lblImage.getHeight();
+        int newWidth = lblImage.getWidth();
+        int newHeight = lblImage.getHeight();
+        
+        float scaleWidth;
+        float scaleHeight;
+        float scaleFactor;
+        
+        
+        scaleWidth = (float)newWidth/origWidth;
+        scaleHeight = (float)newHeight/origHeight;
+        scaleFactor = Math.min(scaleWidth, scaleHeight);
+        
+        newWidth = Math.round(origWidth*scaleFactor);
+        newHeight = Math.round(origHeight*scaleFactor);
+        */
+        
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String filename = f.getAbsolutePath();
-
+        File file = chooser.getSelectedFile();
+        String filename = file.getAbsolutePath();
+        
         lblImageTxt.setText(filename);
-        Image getAbsolutePath = null;
-        ImageIcon icon = new ImageIcon(filename);
-        Image image = icon.getImage().getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
+        
+        ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(300, 350, Image.SCALE_DEFAULT));
+        
         lblImage.setIcon(icon);
    
     }//GEN-LAST:event_btbAddImageActionPerformed
