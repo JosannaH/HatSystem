@@ -387,6 +387,8 @@ public class AddHatType extends javax.swing.JFrame {
         
         ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
         
+        //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
+        //fortfarande behåller sitt ursprungliga bildförhållande.
         double frameWidth = 300;
         double frameHeight = 350;
         double selectedImgWidth = icon.getIconWidth();
