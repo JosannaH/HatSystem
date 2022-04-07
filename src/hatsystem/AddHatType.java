@@ -377,29 +377,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
         
-        //Det nedaför är lite grejs för att automatiskt justera aspekten när en bild förändras i storlek
-        //är ej klart, men kanske pillar lite på fritiden. Kan tas bort sen om det fortfarande är utkommenterat/Jonas.
-                          
-        /*int origWidth = lblImage.getWidth();
-        int origHeight = lblImage.getHeight();
-        int newWidth = lblImage.getWidth();
-        int newHeight = lblImage.getHeight();
-        
-        float scaleWidth;
-        float scaleHeight;
-        float scaleFactor;
-        
-        
-        scaleWidth = (float)newWidth/origWidth;
-        scaleHeight = (float)newHeight/origHeight;
-        scaleFactor = Math.min(scaleWidth, scaleHeight);
-        
-        newWidth = Math.round(origWidth*scaleFactor);
-        newHeight = Math.round(origHeight*scaleFactor);
-        */
-        
-        
-        
+       
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
