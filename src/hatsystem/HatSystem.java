@@ -6,7 +6,7 @@
  */
 package hatsystem;
 
-import hatsystem.data.SqlQuery;
+import data.SqlQuery;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
@@ -32,6 +32,6 @@ public class HatSystem {
         SqlQuery.setDatabase(idb);
 
         new Login().setVisible(true);
-        new AddStandardHat().setVisible(true);
+
     }
 }

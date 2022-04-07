@@ -4,8 +4,8 @@
  */
 package hatsystem;
 
-import hatsystem.data.StandardHat;
-import hatsystem.data.Fabric;
+import data.StandardHat;
+import data.Fabric;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
