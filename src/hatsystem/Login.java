@@ -108,14 +108,12 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-                setVisible(false);
-                LoginMenu menu = new LoginMenu();
-                menu.setVisible(true);
-        /* String username = txt_username.getText();
+
+        String username = txt_username.getText();
         String password = txt_password.getText();
-       // char[] password = txt_password.getPassword();
         
         // TODO: validera textfält
+        // TODO: ev ändra till txt_password.getPassword()
         
         String password_db = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + username + "'");
         
@@ -127,7 +125,6 @@ public class Login extends javax.swing.JFrame {
             else{
                 lbl_wrong.setVisible(true);
             }
-*/
     }//GEN-LAST:event_btn_loginActionPerformed
 
 
