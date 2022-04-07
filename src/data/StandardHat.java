@@ -39,7 +39,7 @@ public class StandardHat {
     public static ArrayList<HashMap<String, String>> getAllStandardHats() {
 
         ArrayList<HashMap<String, String>> allStandardHats = new ArrayList<>();
-        allStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat;");
+        allStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat ORDER BY Name;");
 
         return allStandardHats;
     }
