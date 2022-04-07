@@ -366,34 +366,11 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void cmbSpecialFabricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSpecialFabricsActionPerformed
 
-        String chosenFabric = cmbSpecialFabrics.getSelectedItem().toString();
-
-        fillColorComboBox(chosenFabric);
     }//GEN-LAST:event_cmbSpecialFabricsActionPerformed
 
     private void btnSpecialSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialSaveActionPerformed
 
-        String chosenName = txtfSpecialName.getText();
-        String chosenPrice = txtfSpecialPrice.getText();
-        String chosenDescription = txtfSpecialDescription.getText();
-        String chosenFabric = cmbSpecialFabrics.getSelectedItem().toString();
-        String chosenColor = cmbSpecialColors.getSelectedItem().toString();
-
-        if (chosenName.isBlank() || chosenPrice.isBlank()) {
-            lblSpecialError.setText("Vänligen fyll i alla fält");
-            lblSpecialError.setVisible(true);
-        } else {
-            int fabricComboID = Fabric.getFabricID(chosenFabric, chosenColor);
-            boolean isUniqueHatAndFabricCombo = StandardHat.isUniqueCombination(chosenName, fabricComboID);
-            if (isUniqueHatAndFabricCombo) {
-                StandardHat.addStandardHat(chosenName, chosenPrice, chosenDescription, fabricComboID);
-                JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
-                this.dispose();
-            } else {
-                lblSpecialError.setText("Denna kombinationen är redan registrerad som en standardhatt");
-                lblSpecialError.setVisible(true);
-            }
-        }
+    
 
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
