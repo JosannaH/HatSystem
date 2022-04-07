@@ -370,6 +370,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btnSpecialSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialSaveActionPerformed
            
+        
 
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
