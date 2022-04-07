@@ -8,12 +8,12 @@ package hatsystem;
  *
  * @author barak
  */
-public class Customerinfo extends javax.swing.JFrame {
+public class AddCustomer extends javax.swing.JFrame {
 
     /**
      * Creates new form Customerinfo
      */
-    public Customerinfo() {
+    public AddCustomer() {
         initComponents();
     }
 
