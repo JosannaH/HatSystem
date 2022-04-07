@@ -25,7 +25,7 @@ public class StandardHat {
      * @param chosenDescription
      * @param chosenFabric
      */
-    public static void addStandardHat(String chosenName, String chosenPrice, String chosenDescription, String chosenFabricID) {
+    public static void addStandardHat(String chosenName, String chosenPrice, String chosenDescription, int chosenFabricID) {
 
         String query = "INSERT INTO standard_hat (Name, Price, Description, Hat_Fabric) VALUES ('" + chosenName + "', " + chosenPrice + ", '" + chosenDescription + "', " + chosenFabricID + ");";
         SqlQuery.add(query);
@@ -50,7 +50,7 @@ public class StandardHat {
      * @param fabricID FabricID to check.
      * @return True if combination is unique, otherwise false.
      */
-    public static boolean isUniqueCombination(String hatName, String fabricID){
+    public static boolean isUniqueCombination(String hatName, int fabricID){
         
         boolean isUnique = false;
         String id = SqlQuery.getValue("SELECT Standard_Hat_ID FROM standard_hat WHERE Name = '"+ hatName +"' AND Hat_Fabric = "+ fabricID +";");
