@@ -29,8 +29,10 @@ public class AddHatType extends javax.swing.JFrame {
     public AddHatType() {
         initComponents();
         fillFabricsComboBox();
+        fillFabricComboBox();
         fillEmployeeComboBox();
         lblSpecialError.setVisible(false);
+        fillList();
     }
 
      /**
@@ -519,26 +521,26 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void cmb_customFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customFabricActionPerformed
         String chosenFabric = cmb_customFabric.getSelectedItem().toString();
-        fillColorsComboBox(chosenFabric);
+        fillColorComboBox(chosenFabric);
     }//GEN-LAST:event_cmb_customFabricActionPerformed
 
-    private void fillList() {
-
+        private void fillList() {
+        
         DefaultListModel<String> listModel = new DefaultListModel<>();
         lstCustHat.setModel(listModel);
-
+        
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
         int index = 0;
         while (index < allHats.size()) {
             HashMap<String, String> currentHat = allHats.get(index);
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-
+            
             listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
-
+            
             index++;
         }
-
+        
         Font defaultListFont = lstCustHat.getFont();
         lstCustHat.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
