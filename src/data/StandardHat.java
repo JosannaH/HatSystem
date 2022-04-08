@@ -43,23 +43,28 @@ public class StandardHat {
 
         return allStandardHats;
     }
-    
+
     /**
      * Checks whether a specific hat name and fabric combination already exists.
+     *
      * @param hatName Hat name to check.
      * @param fabricID FabricID to check.
      * @return True if combination is unique, otherwise false.
      */
-    public static boolean isUniqueCombination(String hatName, int fabricID){
-        
+    public static boolean isUniqueCombination(String hatName, int fabricID) {
+
         boolean isUnique = false;
-        String id = SqlQuery.getValue("SELECT Standard_Hat_ID FROM standard_hat WHERE Name = '"+ hatName +"' AND Hat_Fabric = "+ fabricID +";");
-        
-        if(id == null){
+        String id = SqlQuery.getValue("SELECT Standard_Hat_ID FROM standard_hat WHERE Name = '" + hatName + "' AND Hat_Fabric = " + fabricID + ";");
+
+        if (id == null) {
             isUnique = true;
         }
-        
+
         return isUnique;
     }
 
+    public static HashMap<String, String> getHat(int hatID) {
+        HashMap<String, String> foundHat = SqlQuery.getRow("SELECT * FROM standard_hat WHERE Standard_Hat_ID = " + hatID + ";");
+        return foundHat;
+    }
 }
