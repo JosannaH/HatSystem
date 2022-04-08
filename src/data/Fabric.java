@@ -84,6 +84,18 @@ public class Fabric {
         int fabricID = Integer.parseInt(fabricToCheck);
         return fabricID;
     }
+    
+    /**
+     * Retrieves a fabric from the database having the specified id.
+     * @param fabricID
+     * @return A HashMap containing the fabric, empty if no match was found.
+     */
+    public static HashMap<String, String> getFabricFromID(String fabricID){
+        
+        HashMap<String, String> fabric = SqlQuery.getRow("SELECT * FROM fabric WHERE Fabric_ID = "+ fabricID +";");
+        return fabric;
+        
+    }
 
 //    /** KANSKE INTE BEHÖVER DENNA EFTERSOM JAG SKAPAT METODEN OVAN
 //     * Checks whether or not a fabric with the specified name and color combination exists.
