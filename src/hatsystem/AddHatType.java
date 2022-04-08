@@ -28,7 +28,7 @@ public class AddHatType extends javax.swing.JFrame {
     //konstr
     public AddHatType() {
         initComponents();
-        fillFabricComboBox();
+        fillFabricsComboBox();
         fillEmployeeComboBox();
         lblSpecialError.setVisible(false);
     }
@@ -36,7 +36,7 @@ public class AddHatType extends javax.swing.JFrame {
      /**
      * Fills the fabric combo box with fabric options.
      */
-    private void fillFabricComboBox() {
+    private void fillFabricsComboBox() {
 
         HashSet<String> fabrics = Fabric.getAllFabricNames();
 
@@ -53,7 +53,7 @@ public class AddHatType extends javax.swing.JFrame {
         }
     }
 
-    private void fillColorComboBox(String fabricName) {
+    private void fillColorsComboBox(String fabricName) {
 
         cmbSpecialColors.removeAllItems();
 
@@ -439,7 +439,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void cmbSpecialFabricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSpecialFabricsActionPerformed
         String chosenFabric = cmbSpecialFabrics.getSelectedItem().toString();
-        fillColorComboBox(chosenFabric);
+        fillColorsComboBox(chosenFabric);
     }//GEN-LAST:event_cmbSpecialFabricsActionPerformed
 
     private void btnSpecialSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialSaveActionPerformed
@@ -519,7 +519,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void cmb_customFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customFabricActionPerformed
         String chosenFabric = cmb_customFabric.getSelectedItem().toString();
-        fillColorComboBox(chosenFabric);
+        fillColorsComboBox(chosenFabric);
     }//GEN-LAST:event_cmb_customFabricActionPerformed
 
     private void fillList() {
@@ -551,7 +551,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         String fabricName = defaultFabric.get("Name");
         cmb_customFabric.setSelectedItem(fabricName);
-        fillColorComboBox(fabricName);
+        fillColorsComboBox(fabricName);
     }
 
     /**
