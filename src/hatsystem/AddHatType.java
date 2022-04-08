@@ -75,7 +75,7 @@ public class AddHatType extends javax.swing.JFrame {
         panel_standardHatLayout.setHorizontalGroup(
             panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_standardHatLayout.createSequentialGroup()
-                .addGap(114, 588, Short.MAX_VALUE)
+                .addGap(114, 709, Short.MAX_VALUE)
                 .addComponent(lbl_size)
                 .addGap(226, 226, 226))
             .addGroup(panel_standardHatLayout.createSequentialGroup()
@@ -126,6 +126,12 @@ public class AddHatType extends javax.swing.JFrame {
 
         jLabel7.setText("Pris");
 
+        cmbFabric.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFabricActionPerformed(evt);
+            }
+        });
+
         cmbSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
 
         jLabel4.setFont(new java.awt.Font("Apple Braille", 0, 18)); // NOI18N
@@ -140,16 +146,8 @@ public class AddHatType extends javax.swing.JFrame {
             .addGroup(panel_customHatLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_customHatLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(453, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_customHatLayout.createSequentialGroup()
-                        .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addGroup(panel_customHatLayout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addComponent(btnAddToOrder)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2)
                         .addGap(18, 18, 18)
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panel_customHatLayout.createSequentialGroup()
@@ -170,7 +168,14 @@ public class AddHatType extends javax.swing.JFrame {
                                     .addComponent(cmbFabric, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbColor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(74, 74, 74))))
+                        .addGap(74, 74, 74))
+                    .addGroup(panel_customHatLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(574, Short.MAX_VALUE))))
+            .addGroup(panel_customHatLayout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(btnAddToOrder)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panel_customHatLayout.setVerticalGroup(
             panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +216,7 @@ public class AddHatType extends javax.swing.JFrame {
         panel_specialHat.setLayout(panel_specialHatLayout);
         panel_specialHatLayout.setHorizontalGroup(
             panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 971, Short.MAX_VALUE)
         );
         panel_specialHatLayout.setVerticalGroup(
             panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +240,7 @@ public class AddHatType extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCustHatValueChanged
-
+        
         String stringID = lstCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         int hatID = Integer.parseInt(newString);
@@ -243,33 +248,38 @@ public class AddHatType extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lstCustHatValueChanged
 
+    private void cmbFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFabricActionPerformed
+        String chosenFabric = cmbFabric.getSelectedItem().toString();
+        fillColorComboBox(chosenFabric);
+    }//GEN-LAST:event_cmbFabricActionPerformed
+    
     private void fillList() {
-
+        
         DefaultListModel<String> listModel = new DefaultListModel<>();
         lstCustHat.setModel(listModel);
-
+        
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
         int index = 0;
         while (index < allHats.size()) {
             HashMap<String, String> currentHat = allHats.get(index);
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-
+            
             listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
-
+            
             index++;
         }
-
+        
         Font defaultListFont = lstCustHat.getFont();
         lstCustHat.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-
+    
     private void setValues(int hatID) {
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
-
+        
         String fabricID = chosenHat.get("Hat_Fabric");
         HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
-
+        
         String fabricName = defaultFabric.get("Name");
         cmbFabric.setSelectedItem(fabricName);
         fillColorComboBox(fabricName);
@@ -279,20 +289,20 @@ public class AddHatType extends javax.swing.JFrame {
      * Fills the fabric combo box with fabric options.
      */
     private void fillFabricComboBox() {
-
+        
         HashSet<String> fabrics = Fabric.getAllFabricNames();
-
+        
         for (String s : fabrics) {
             cmbFabric.addItem(s);
         }
     }
-
+    
     private void fillColorComboBox(String fabricName) {
-
+        
         cmbColor.removeAllItems();
-
+        
         ArrayList<String> colors = Fabric.getFabricColors(fabricName);
-
+        
         for (String s : colors) {
             cmbColor.addItem(s);
         }
