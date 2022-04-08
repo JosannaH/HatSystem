@@ -4,11 +4,16 @@
  */
 package hatsystem;
 
-import java.awt.Dimension;
+import data.Fabric;
+import data.SpecialHat;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import data.SqlQuery;
+import java.util.ArrayList;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +26,35 @@ public class AddHatType extends javax.swing.JFrame {
      */
     public AddHatType() {
         initComponents();
+        fillFabricComboBox();
+        lblSpecialError.setVisible(false);
     }
 
+     /**
+     * Fills the fabric combo box with fabric options.
+     */
+    private void fillFabricComboBox() {
+
+        HashSet<String> fabrics = Fabric.getAllFabricNames();
+
+        for (String s : fabrics) {
+            cmbSpecialFabrics.addItem(s);
+        }
+    }
+
+    private void fillColorComboBox(String fabricName) {
+
+        cmbSpecialColors.removeAllItems();
+
+        ArrayList<String> colors = Fabric.getFabricColors(fabricName);
+
+        for (String s : colors) {
+            cmbSpecialColors.addItem(s);
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -364,20 +396,43 @@ public class AddHatType extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmbSpecialFabricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSpecialFabricsActionPerformed
+  
         
+    private void cmbSpecialFabricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSpecialFabricsActionPerformed
+        String chosenFabric = cmbSpecialFabrics.getSelectedItem().toString();
+        fillColorComboBox(chosenFabric);        
     }//GEN-LAST:event_cmbSpecialFabricsActionPerformed
 
     private void btnSpecialSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialSaveActionPerformed
-           
+        String name = txtfSpecialName.getText();
+        String price = txtfSpecialPrice.getText();
+        String description = txtfSpecialDescription.getText();
+        String fabric = cmbSpecialFabrics.getSelectedItem().toString();
+        String colour = cmbSpecialColors.getSelectedItem().toString();
+        
+        if (name.isBlank() || price.isBlank()) {
+            lblSpecialError.setText("Vänligen fyll i alla fält");
+            lblSpecialError.setVisible(true);
+        }
+            else {
+            int fabricComboID = Fabric.getFabricID(fabric, colour);
+            boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
+            if (isUniqueHatAndFabricCombo) {
+                SpecialHat.addSpecialHat(name, price, description, fabricComboID);
+                SpecialHat.addImage(WIDTH, name);
+                JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
+                this.dispose();
+            } else {
+                lblSpecialError.setText("Denna kombinationen är redan registrerad som en standardhatt");
+                lblSpecialError.setVisible(true);
+            }
+        }
         
 
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
         
-       
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
