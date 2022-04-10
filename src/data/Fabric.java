@@ -8,7 +8,6 @@ import data.SqlQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -66,7 +65,7 @@ public class Fabric {
      *
      * @return All colors for a specific fabric,
      */
-    public static ArrayList<String> getFabricColorsFromFabricName(String fabricName) {
+    public static ArrayList<String> getFabricColors(String fabricName) {
 
         ArrayList<String> colors = SqlQuery.getColumn("SELECT Color FROM fabric WHERE Name = '" + fabricName + "';");
 
@@ -96,18 +95,6 @@ public class Fabric {
         HashMap<String, String> fabric = SqlQuery.getRow("SELECT * FROM fabric WHERE Fabric_ID = "+ fabricID +";");
         return fabric;
         
-    }
-    
-    public static String getFabricNameFromHatID(int hatID) {
-
-        HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
-        
-        String fabricID = chosenHat.get("Hat_Fabric");
-        
-        HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
-        String fabricName = defaultFabric.get("Name");
-        
-        return fabricName;
     }
 
 //    /** KANSKE INTE BEHÖVER DENNA EFTERSOM JAG SKAPAT METODEN OVAN
