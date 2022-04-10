@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class EditStandardHat extends javax.swing.JFrame {
     
     private static String hatId;
-    public String deleteQuery = "Delete from ordered_st_hat where Standard_Hat ="+ hatId +";Delete from standard_hat where standard_hat.Standard_Hat_ID =1 " + hatId;
+    public String deleteQuery = "Delete from ordered_st_hat where Standard_Hat ="+ hatId +";Delete from standard_hat where standard_hat.Standard_Hat_ID =" + hatId;
     /**
      * Creates new form EditStandardHat
      */
