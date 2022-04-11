@@ -18,7 +18,9 @@ import javax.swing.JOptionPane;
 import data.StandardHat;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.function.ToDoubleFunction;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 
 /**
  * @author luna
@@ -30,8 +32,8 @@ public class AddHatType extends javax.swing.JFrame {
     //konstr
     public AddHatType() {
         initComponents();
-        fillFabricsComboBox();
-        fillFabricComboBox();
+        fillFabricComboBox(cmb_customFabric);
+        fillFabricComboBox(cmbSpecialFabrics);
         fillEmployeeComboBox();
         lblSpecialError.setVisible(false);
         fillList();
@@ -40,12 +42,13 @@ public class AddHatType extends javax.swing.JFrame {
     /**
      * Fills the fabric combo box with fabric options.
      */
-    private void fillFabricsComboBox() {
+    
+    private void fillFabricComboBox(JComboBox cmbBox) {
         
         HashSet<String> fabrics = Fabric.getAllFabricNames();
         
         for (String s : fabrics) {
-            cmbSpecialFabrics.addItem(s);
+            cmbBox.addItem(s);
         }
     }
     
@@ -88,7 +91,6 @@ public class AddHatType extends javax.swing.JFrame {
         lbl_customFabric = new javax.swing.JLabel();
         lbl_customColor = new javax.swing.JLabel();
         lbl_customSize = new javax.swing.JLabel();
-        textField_customDescription = new javax.swing.JTextField();
         lbl_customDescription = new javax.swing.JLabel();
         lbl_customPrice = new javax.swing.JLabel();
         textField_customPrice = new javax.swing.JTextField();
@@ -99,6 +101,8 @@ public class AddHatType extends javax.swing.JFrame {
         btn_customAddToOrder = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         cmb_customEmployee = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaCustomDescription = new javax.swing.JTextArea();
         panel_specialHat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -169,7 +173,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         lstCustHat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstCustHatValueChanged(evt);
+                listCustHatValueChanged(evt);
             }
         });
         scrollPane_CustomHat.setViewportView(lstCustHat);
@@ -184,13 +188,16 @@ public class AddHatType extends javax.swing.JFrame {
 
         lbl_customPrice.setText("Pris");
 
+        cmb_customFabric.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
         cmb_customFabric.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_customFabricActionPerformed(evt);
             }
         });
 
-        cmb_customSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
+        cmb_customColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+
+        cmb_customSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
 
         lbl_customTitle.setFont(new java.awt.Font("Apple Braille", 0, 18)); // NOI18N
         lbl_customTitle.setText("Lägg till anpassad standardhatt");
@@ -203,6 +210,17 @@ public class AddHatType extends javax.swing.JFrame {
         });
 
         jLabel13.setText("Ansvarig");
+
+        cmb_customEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        cmb_customEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_customEmployeeActionPerformed(evt);
+            }
+        });
+
+        txtAreaCustomDescription.setColumns(20);
+        txtAreaCustomDescription.setRows(5);
+        jScrollPane2.setViewportView(txtAreaCustomDescription);
 
         javax.swing.GroupLayout panel_customHatLayout = new javax.swing.GroupLayout(panel_customHat);
         panel_customHat.setLayout(panel_customHatLayout);
@@ -230,12 +248,13 @@ public class AddHatType extends javax.swing.JFrame {
                                     .addComponent(lbl_customDescription)
                                     .addComponent(lbl_customPrice)
                                     .addComponent(jLabel13))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField_customPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                    .addComponent(textField_customDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                    .addComponent(cmb_customEmployee, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(74, 74, 74))
+                                .addGap(24, 24, 24)
+                                .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(textField_customPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                        .addComponent(cmb_customEmployee, 0, 209, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(43, 43, 43))
                     .addGroup(panel_customHatLayout.createSequentialGroup()
                         .addComponent(lbl_customTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(581, Short.MAX_VALUE))))
@@ -267,18 +286,18 @@ public class AddHatType extends javax.swing.JFrame {
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_customSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_customSize))
-                        .addGap(30, 30, 30)
-                        .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_customDescription)
-                            .addComponent(textField_customDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_customHatLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
+                                .addGap(30, 30, 30)
+                                .addComponent(lbl_customDescription)
+                                .addGap(74, 74, 74)
                                 .addComponent(lbl_customPrice))
                             .addGroup(panel_customHatLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(textField_customPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
+                        .addGap(31, 31, 31)
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(cmb_customEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -521,14 +540,17 @@ public class AddHatType extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btbAddImageActionPerformed
 
-    private void lstCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCustHatValueChanged
+    private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
         
+        //TODO: Raden nedan skapar error.
+        cmb_customFabric.removeAllItems();
+        fillFabricComboBox(cmb_customFabric);
         String stringID = lstCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
         setValues(customSelectedHatID);
 
-    }//GEN-LAST:event_lstCustHatValueChanged
+    }//GEN-LAST:event_listCustHatValueChanged
 
     private void cmb_customFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customFabricActionPerformed
         String chosenFabric = cmb_customFabric.getSelectedItem().toString();
@@ -538,9 +560,13 @@ public class AddHatType extends javax.swing.JFrame {
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
         saveCustomHatToDB();
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
-        textField_customDescription.setText("");
-        textField_customPrice.setText("");   
+        dispose();
+        
     }//GEN-LAST:event_btn_customAddToOrderActionPerformed
+
+    private void cmb_customEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_customEmployeeActionPerformed
     
     private void fillList() {
         
@@ -576,17 +602,7 @@ public class AddHatType extends javax.swing.JFrame {
         // TODO: nåt fel med cmb för color, den byter inte färg som den ska när man byter hatt i listan
     }
 
-    /**
-     * Fills the fabric combo box with fabric options.
-     */
-    private void fillFabricComboBox() {
-        
-        HashSet<String> fabrics = Fabric.getAllFabricNames();
-        
-        for (String s : fabrics) {
-            cmb_customFabric.addItem(s);
-        }
-    }
+   
     
     private void fillColorComboBox(String fabricName) {
         
@@ -606,7 +622,7 @@ public class AddHatType extends javax.swing.JFrame {
         String fabricColor = cmb_customColor.getSelectedItem().toString();
         int fabricID = Fabric.getFabricID(fabricName, fabricColor);
         String size = cmb_customSize.getSelectedItem().toString();
-        String description = textField_customDescription.getText();
+        String description = txtAreaCustomDescription.getText();
         String price = textField_customPrice.getText();
         String employee = cmb_customEmployee.getSelectedItem().toString();
         int employeeID = Employee.getEmployeeID(employee);
@@ -639,6 +655,7 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblImageText;
@@ -658,8 +675,8 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JPanel panel_specialHat;
     private javax.swing.JPanel panel_standardHat;
     private javax.swing.JScrollPane scrollPane_CustomHat;
-    private javax.swing.JTextField textField_customDescription;
     private javax.swing.JTextField textField_customPrice;
+    private javax.swing.JTextArea txtAreaCustomDescription;
     private javax.swing.JTextField txtfSpecialDescription;
     private javax.swing.JTextField txtfSpecialName;
     private javax.swing.JTextField txtfSpecialPrice;

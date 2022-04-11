@@ -159,15 +159,17 @@
                                           <Component id="lbl_customPrice" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="textField_customPrice" pref="209" max="32767" attributes="0"/>
-                                          <Component id="textField_customDescription" pref="209" max="32767" attributes="0"/>
-                                          <Component id="cmb_customEmployee" alignment="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="textField_customPrice" pref="209" max="32767" attributes="0"/>
+                                              <Component id="cmb_customEmployee" pref="209" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lbl_customTitle" min="-2" pref="339" max="-2" attributes="0"/>
@@ -209,22 +211,21 @@
                                   <Component id="cmb_customSize" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_customSize" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_customDescription" min="-2" max="-2" attributes="0"/>
-                                  <Component id="textField_customDescription" min="-2" pref="73" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="lbl_customDescription" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                       <Component id="lbl_customPrice" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="textField_customPrice" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmb_customEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -250,7 +251,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstCustHatValueChanged"/>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listCustHatValueChanged"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -273,8 +274,6 @@
                 <Property name="text" type="java.lang.String" value="Storlek"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textField_customDescription">
-            </Component>
             <Component class="javax.swing.JLabel" name="lbl_customDescription">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Beskrivning"/>
@@ -290,7 +289,9 @@
             <Component class="javax.swing.JComboBox" name="cmb_customFabric">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="---"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <Events>
@@ -303,7 +304,9 @@
             <Component class="javax.swing.JComboBox" name="cmb_customColor">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="---"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <AuxValues>
@@ -313,14 +316,15 @@
             <Component class="javax.swing.JComboBox" name="cmb_customSize">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="7">
-                    <StringItem index="0" value="XXS"/>
-                    <StringItem index="1" value="XS"/>
-                    <StringItem index="2" value="S"/>
-                    <StringItem index="3" value="M"/>
-                    <StringItem index="4" value="L"/>
-                    <StringItem index="5" value="XL"/>
-                    <StringItem index="6" value="XXL"/>
+                  <StringArray count="8">
+                    <StringItem index="0" value="---"/>
+                    <StringItem index="1" value="XXS"/>
+                    <StringItem index="2" value="XS"/>
+                    <StringItem index="3" value="S"/>
+                    <StringItem index="4" value="M"/>
+                    <StringItem index="5" value="L"/>
+                    <StringItem index="6" value="XL"/>
+                    <StringItem index="7" value="XXL"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -352,13 +356,33 @@
             <Component class="javax.swing.JComboBox" name="cmb_customEmployee">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="---"/>
+                  </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_customEmployeeActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="txtAreaCustomDescription">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panel_specialHat">
