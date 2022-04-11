@@ -31,7 +31,7 @@ public class HatSystem {
 
         SqlQuery.setDatabase(idb);
 
-        new Login().setVisible(true);
+        //new Login().setVisible(true);
         new AddHatType().setVisible(true);
     }
 }
