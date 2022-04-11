@@ -554,7 +554,7 @@ public class AddHatType extends javax.swing.JFrame {
         // set values in fabric cmb
         cmb_customFabric.setSelectedItem(fabricName);
         fillColorComboBox(fabricName);
-        
+        cmb_customColor.setSelectedItem(defaultFabric.get("Color"));
         // TODO: nåt fel med cmb för color, den byter inte färg som den ska när man byter hatt i listan
     }
   
