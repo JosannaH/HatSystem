@@ -21,8 +21,8 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private ArrayList<Integer> listStandardHat;
-    private ArrayList<Integer> listOtherHat;
+    private static ArrayList<Integer> listStandardHat;
+    private static ArrayList<Integer> listOtherHat;
     
     public LoginMenu() {
         initComponents();
@@ -33,11 +33,11 @@ public class LoginMenu extends javax.swing.JFrame {
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
     
-    public void setListStandardHat(int hatID){
+    public static void setListStandardHat(int hatID){
         listStandardHat.add(hatID);
     }
     
-    public void setListOtherHat(int hatID){
+    public static void setListOtherHat(int hatID){
         listOtherHat.add(hatID);
     }
     
