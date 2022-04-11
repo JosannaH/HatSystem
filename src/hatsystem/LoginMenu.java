@@ -21,11 +21,14 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private static ArrayList<Integer> listStandardHat;
+    private ArrayList<Integer> listStandardHat;
     private static ArrayList<Integer> listOtherHat;
+    private static int test;
     
     public LoginMenu() {
         initComponents();
+        listOtherHat = new ArrayList<Integer>();
+        test = 0;
         
     }
 
@@ -33,12 +36,14 @@ public class LoginMenu extends javax.swing.JFrame {
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
     
-    public static void setListStandardHat(int hatID){
+    public void setListStandardHat(int hatID){
         listStandardHat.add(hatID);
     }
     
     public static void setListOtherHat(int hatID){
+        //TODO: Det funkar med test variabeln som är int, men blir fel med array.
         listOtherHat.add(hatID);
+        //test=hatID;
     }
     
     private void listAllStandardHats() {
@@ -87,11 +92,11 @@ public class LoginMenu extends javax.swing.JFrame {
         
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            int ID = listOtherHat.get(index);
+            int ID = listOtherHat.get(index2);
             
             allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
            
-            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
+            HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
             
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);

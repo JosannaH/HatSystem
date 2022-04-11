@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 public class AddHatType extends javax.swing.JFrame {
     
     private int customSelectedHatID;
+    private int orderedHatID;
 
     //konstr
     public AddHatType() {
@@ -559,6 +560,8 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
         saveCustomHatToDB();
+        //TODO: Datan skickas till LoginMenu, men vi lyckas inte få in det i en array.
+        LoginMenu.setListOtherHat(orderedHatID);
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         dispose();
         
@@ -631,6 +634,7 @@ public class AddHatType extends javax.swing.JFrame {
         SqlQuery.add(query);
         String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
         SqlQuery.add("INSERT INTO custom_hat (Hat_ID) VALUES (" + newHatID + ");");
+        orderedHatID = Integer.parseInt(newHatID);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
