@@ -406,7 +406,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseCustomerActionPerformed
-        new ListAllCustomers().setVisible(true);
+      jTabbedPane1.setSelectedComponent(panel_search);
     }//GEN-LAST:event_btnChooseCustomerActionPerformed
 
     private void btnCreateNewCustomerFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewCustomerFromOrderActionPerformed
