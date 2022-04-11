@@ -167,11 +167,6 @@ public class AddHatType extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Standardhatt", panel_standardHat);
 
-        lstCustHat.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstCustHat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstCustHatValueChanged(evt);
@@ -184,8 +179,6 @@ public class AddHatType extends javax.swing.JFrame {
         lbl_customColor.setText("Färg");
 
         lbl_customSize.setText("Storlek");
-
-        textField_customDescription.setText("Beskriv din hatt här");
 
         lbl_customDescription.setText("Beskrivning");
 
@@ -545,10 +538,8 @@ public class AddHatType extends javax.swing.JFrame {
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
         saveCustomHatToDB();
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
-        fillFabricComboBox();
         textField_customDescription.setText("");
-        textField_customPrice.setText("");
-        
+        textField_customPrice.setText("");   
     }//GEN-LAST:event_btn_customAddToOrderActionPerformed
     
     private void fillList() {
