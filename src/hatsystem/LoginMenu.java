@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import data.SqlQuery;
 
 /**
  *
@@ -25,6 +26,7 @@ public class LoginMenu extends javax.swing.JFrame {
     
     public LoginMenu() {
         initComponents();
+        
     }
 
     /**
@@ -63,11 +65,16 @@ public class LoginMenu extends javax.swing.JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
 
-        ArrayList<HashMap<String, String>> allOrders = StandardHat.getAllStandardHats();
+        ArrayList<HashMap<String, String>> allOrderedStandardHats = new ArrayList<>();
         
         int index = 0;
-        while (index < allOrders.size()) {
-            HashMap<String, String> currentHat = allOrders.get(index);
+        while (index < listStandardHat.size()) {
+            int ID = listStandardHat.get(index);
+           
+            allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
+           
+            HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
+            
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -75,9 +82,27 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index++;
         }
+                
+        ArrayList<HashMap<String, String>> allOrderedOtherHats = new ArrayList<>();
+        
+        int index2 = 0;
+        while (index2 < listOtherHat.size()) {
+            int ID = listOtherHat.get(index);
+            
+            allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
+           
+            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
+            
+            String fabricID = currentHat.get("Hat_Fabric");
+            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+
+            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+
+            index++;
+        }
+        
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-    
     }
 
     /**
@@ -424,6 +449,7 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Ordrar":
                 break;
             case "Kunder":
+                listAllOrders();
                 break;
         }
     }//GEN-LAST:event_btnSearchCategoryActionPerformed

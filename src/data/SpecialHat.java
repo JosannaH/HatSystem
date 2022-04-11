@@ -4,6 +4,9 @@
  */
 package data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author Lisa
@@ -40,5 +43,9 @@ public class SpecialHat {
         String query = "INSERT INTO special_hat VALUES ('" + hatID + "', '" + image + "');";
         SqlQuery.add(query);
     }
+    
+
+    
+}
     
 }
