@@ -26,7 +26,8 @@ public class LoginMenu extends javax.swing.JFrame {
     
     public LoginMenu() {
         initComponents();
-        
+        listStandardHat = new ArrayList<>();
+        listOtherHat = new ArrayList<>();
     }
 
     /**
@@ -65,40 +66,42 @@ public class LoginMenu extends javax.swing.JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
 
-        ArrayList<HashMap<String, String>> allOrderedStandardHats = new ArrayList<>();
+        //TODO skapa if-sats för om en arraylista är tom så ska den inte köras. Nu blir det fel då det söks i standardhattars id...
         
-        int index = 0;
-        while (index < listStandardHat.size()) {
-            int ID = listStandardHat.get(index);
+        
+       // int index = 0;
+       // while (index < listStandardHat.size()) {
+        //    int ID = listStandardHat.get(index);
            
-            allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
+        //    ArrayList<HashMap<String, String>> allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
            
-            HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
+        //    HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
             
-            String fabricID = currentHat.get("Hat_Fabric");
-            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+        //    String fabricID = currentHat.get("Hat_Fabric");
+        //    HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+        //    listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
-            index++;
-        }
-                
-        ArrayList<HashMap<String, String>> allOrderedOtherHats = new ArrayList<>();
+        //    index++;
+        //}
         
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            int ID = listOtherHat.get(index);
+            int ID = listOtherHat.get(index2);
             
-            allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
+            ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
+
+            ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
            
-            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
+            //Här fungerar det inte att lägga till ännu en hatt
+            HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
             
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
             listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
-            index++;
+            index2++;
         }
         
         Font defaultListFont = listFoundResults.getFont();
@@ -293,13 +296,12 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(btnAddNewHatType)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
                 .addGap(16, 16, 16))
