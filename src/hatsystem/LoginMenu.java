@@ -23,50 +23,28 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private ArrayList<Integer> listStandardHat;
-    public static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
-    private static int[] nyLista = new int[10]; 
-    private static int test;
-    
+    private static ArrayList<Integer> listStandardHat = new ArrayList<>();
+    private static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
+
     public LoginMenu() {
         initComponents();
-        test = 0;
-        listOtherHat.add(59);
-        setListOtherHat(9);
-        
+
     }
 
     /**
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
-    
-    public void setListStandardHat(int hatID){
+    public static void setListStandardHat(int hatID) {
         listStandardHat.add(hatID);
-        
-        
+
     }
-    
-    public static void setListOtherHat(int hatID){
-        //TODO: Det funkar med test variabeln som är int, men blir fel med array.
-        
-        ArrayList<Integer> testLista = new ArrayList<Integer>();
-        testLista.add(0, 78);
-        testLista.add(6);
-        for (int i : testLista) {
-      System.out.println(i);}
-        
-        
-        int test = 7;
-        listOtherHat.add(test);
-        
-        listOtherHat.add(29);
-        
+
+    public static void setListOtherHat(int hatID) {
+
         listOtherHat.add(hatID);
-        
-        //nyLista[0] = hatID;
-        //test=hatID;
+
     }
-    
+
     private void listAllStandardHats() {
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -86,21 +64,21 @@ public class LoginMenu extends javax.swing.JFrame {
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
-    private void listAllOrders(){
+
+    private void listAllOrders() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
 
         ArrayList<HashMap<String, String>> allOrderedStandardHats = new ArrayList<>();
-        
+
         int index = 0;
         while (index < listStandardHat.size()) {
             int ID = listStandardHat.get(index);
-           
+
             allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
-           
+
             HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
-            
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -108,17 +86,17 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index++;
         }
-                
+
         ArrayList<HashMap<String, String>> allOrderedOtherHats = new ArrayList<>();
-        
+
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
             int ID = listOtherHat.get(index2);
-            
+
             allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
-           
+
             HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
-            
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -126,7 +104,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index++;
         }
-        
+
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
@@ -491,7 +469,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseCustomerActionPerformed
-      jTabbedPane1.setSelectedComponent(panel_search);
+        jTabbedPane1.setSelectedComponent(panel_search);
     }//GEN-LAST:event_btnChooseCustomerActionPerformed
 
     private void btnCreateNewCustomerFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewCustomerFromOrderActionPerformed

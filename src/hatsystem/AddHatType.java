@@ -26,7 +26,7 @@ import javax.swing.JComboBox;
  * @author luna
  */
 public class AddHatType extends javax.swing.JFrame {
-    
+
     private int customSelectedHatID;
     private int orderedHatID;
 
@@ -43,31 +43,30 @@ public class AddHatType extends javax.swing.JFrame {
     /**
      * Fills the fabric combo box with fabric options.
      */
-    
     private void fillFabricComboBox(JComboBox cmbBox) {
-        
+
         HashSet<String> fabrics = Fabric.getAllFabricNames();
-        
+
         for (String s : fabrics) {
             cmbBox.addItem(s);
         }
     }
-    
+
     private void fillEmployeeComboBox() {
         ArrayList<String> employees = Employee.getEmployee();
-        
+
         for (String e : employees) {
             cmbSpecialResponsible.addItem(e);
             cmb_customEmployee.addItem(e);
         }
     }
-    
+
     private void fillColorsComboBox(String fabricName) {
-        
+
         cmbSpecialColors.removeAllItems();
-        
+
         ArrayList<String> colors = Fabric.getFabricColors(fabricName);
-        
+
         for (String s : colors) {
             cmbSpecialColors.addItem(s);
         }
@@ -481,7 +480,7 @@ public class AddHatType extends javax.swing.JFrame {
         String image = lblImageTxt.getText();
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
-        
+
         if (name.isBlank() || price.isBlank()) {
             lblSpecialError.setText("Vänligen fyll i alla fält");
             lblSpecialError.setVisible(true);
@@ -506,7 +505,7 @@ public class AddHatType extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSpecialSaveActionPerformed
 
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
@@ -514,7 +513,7 @@ public class AddHatType extends javax.swing.JFrame {
         //TODO Validering för att det endast går att lägga in bild.
 
         lblImageTxt.setText(filename);
-        
+
         ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
 
         //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
@@ -523,22 +522,22 @@ public class AddHatType extends javax.swing.JFrame {
         double frameHeight = 350;
         double selectedImgWidth = icon.getIconWidth();
         double selectedImgHeight = icon.getIconHeight();
-        
+
         double widthRatio = frameWidth / selectedImgWidth;
         double heightRatio = frameHeight / selectedImgHeight;
         double ratio = Math.min(widthRatio, heightRatio);
-        
+
         int resizedWidth = (int) (selectedImgWidth * ratio);
         int resizedHeight = (int) (selectedImgHeight * ratio);
-        
+
         ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
-        
+
         lblImage.setIcon(iconNew);
 
     }//GEN-LAST:event_btbAddImageActionPerformed
 
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
-        
+
         String stringID = lstCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
@@ -553,39 +552,40 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
         saveCustomHatToDB();
-        //TODO: Datan skickas till LoginMenu, men vi lyckas inte få in det i en array.
-        LoginMenu.listOtherHat.add(39);
+        
+        
         LoginMenu.setListOtherHat(orderedHatID);
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
+        //TODO: Om alla fönster stängs ner, ändra här.
         dispose();
-        
+
     }//GEN-LAST:event_btn_customAddToOrderActionPerformed
 
     private void cmb_customEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customEmployeeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_customEmployeeActionPerformed
-    
+
     private void fillList() {
-        
+
         DefaultListModel<String> listModel = new DefaultListModel<>();
         lstCustHat.setModel(listModel);
-        
+
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
         int index = 0;
         while (index < allHats.size()) {
             HashMap<String, String> currentHat = allHats.get(index);
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-            
+
             listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
-            
+
             index++;
         }
-        
+
         Font defaultListFont = lstCustHat.getFont();
         lstCustHat.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
+
     private void setValues(int hatID) {
         // get fabric for chosen hat
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
@@ -599,19 +599,17 @@ public class AddHatType extends javax.swing.JFrame {
         // TODO: nåt fel med cmb för color, den byter inte färg som den ska när man byter hatt i listan
     }
 
-   
-    
     private void fillColorComboBox(String fabricName) {
-        
+
         cmb_customColor.removeAllItems();
-        
+
         ArrayList<String> colors = Fabric.getFabricColors(fabricName);
-        
+
         for (String s : colors) {
             cmb_customColor.addItem(s);
         }
     }
-    
+
     private void saveCustomHatToDB() {
         HashMap<String, String> chosenHat = StandardHat.getHat(customSelectedHatID);
         String chosenHatName = chosenHat.get("Name");
@@ -623,7 +621,7 @@ public class AddHatType extends javax.swing.JFrame {
         String price = textField_customPrice.getText();
         String employee = cmb_customEmployee.getSelectedItem().toString();
         int employeeID = Employee.getEmployeeID(employee);
-        
+
         String query = "INSERT INTO hat (Name, Price, Size, Description, Hat_Fabric, Worker) VALUES ('" + chosenHatName + "', " + price + ", '" + size + "', '" + description + "', " + fabricID + ", " + employeeID + ");";
         SqlQuery.add(query);
         String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
