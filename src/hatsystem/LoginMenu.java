@@ -8,6 +8,8 @@ import data.Fabric;
 import data.StandardHat;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
@@ -21,27 +23,28 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private static ArrayList<Integer> listStandardHat;
-    private static ArrayList<Integer> listOtherHat;
-    
+    private static ArrayList<Integer> listStandardHat = new ArrayList<>();
+    private static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
+
     public LoginMenu() {
         initComponents();
-        listStandardHat = new ArrayList<>();
-        listOtherHat = new ArrayList<>();
+
     }
 
     /**
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
-    
-    public static void setListStandardHat(int hatID){
+    public static void addToListStandardHat(int hatID) {
         listStandardHat.add(hatID);
+
     }
-    
-    public static void setListOtherHat(int hatID){
+
+    public static void addToListOtherHat(int hatID) {
+
         listOtherHat.add(hatID);
+
     }
-    
+
     private void listAllStandardHats() {
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -61,8 +64,8 @@ public class LoginMenu extends javax.swing.JFrame {
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
-    private void listAllOrders(){
+
+    private void listAllOrders() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
 
@@ -70,11 +73,11 @@ public class LoginMenu extends javax.swing.JFrame {
             int index = 0;
             while (index < listStandardHat.size()) {
             int ID = listStandardHat.get(index);
-           
+
             ArrayList<HashMap<String, String>> allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
-           
+
             HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
-            
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -83,17 +86,17 @@ public class LoginMenu extends javax.swing.JFrame {
             index++;
             }
         }
-        
+
        if(!listOtherHat.isEmpty()){
         ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
         ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
-        
+
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
             int ID = listOtherHat.get(index2);
-           
+
             HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
-            
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -101,7 +104,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index2++;
         }
-        
+
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
@@ -472,7 +475,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseCustomerActionPerformed
-      jTabbedPane1.setSelectedComponent(panel_search);
+        jTabbedPane1.setSelectedComponent(panel_search);
     }//GEN-LAST:event_btnChooseCustomerActionPerformed
 
     private void btnCreateNewCustomerFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewCustomerFromOrderActionPerformed

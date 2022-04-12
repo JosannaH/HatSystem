@@ -33,6 +33,6 @@ public class HatSystem {
 
         new Login().setVisible(true);
         new LoginMenu().setVisible(true);
-        
+
     }
 }
