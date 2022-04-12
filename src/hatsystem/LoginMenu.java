@@ -25,10 +25,16 @@ public class LoginMenu extends javax.swing.JFrame {
      */
     private static ArrayList<Integer> listStandardHat = new ArrayList<>();
     private static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
+    private static DefaultListModel<String> otherListModel = new DefaultListModel<>();
+    private Font defaultListFontOther;
+    
 
     public LoginMenu() {
         initComponents();
-
+        jListAllOrders.setModel(otherListModel);
+        defaultListFontOther = jListAllOrders.getFont();
+        jListAllOrders.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
+        
     }
 
     /**
@@ -65,13 +71,13 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
-    private void listAllOrders() {
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        listAllOrders.setModel(listModel);
-        
+    public static void listAllOrders() {
+              
         ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
         ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
-
+        
+        otherListModel.clear();
+              
         if(!listStandardHat.isEmpty()){
             int index = 0;
             while (index < listStandardHat.size()) {
@@ -80,7 +86,7 @@ public class LoginMenu extends javax.swing.JFrame {
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+            otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index++;
             }
@@ -94,13 +100,10 @@ public class LoginMenu extends javax.swing.JFrame {
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+            otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index2++;
         }
-
-        Font defaultListFont = listFoundResults.getFont();
-        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
     }
 
@@ -119,7 +122,7 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_createOrder = new javax.swing.JPanel();
         btnSaveOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listAllOrders = new javax.swing.JList<>();
+        jListAllOrders = new javax.swing.JList<>();
         btnAddNewHatType = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -196,12 +199,12 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        listAllOrders.setModel(new javax.swing.AbstractListModel<String>() {
+        jListAllOrders.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(listAllOrders);
+        jScrollPane2.setViewportView(jListAllOrders);
 
         btnAddNewHatType.setText("Lägg till ny hatt i order");
         btnAddNewHatType.addActionListener(new java.awt.event.ActionListener() {
@@ -498,12 +501,12 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JList<String> jListAllOrders;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblChooseCategory;
     private javax.swing.JLabel lbl_title;
-    private javax.swing.JList<String> listAllOrders;
     private javax.swing.JList<String> listFoundResults;
     private javax.swing.JPanel panel_createOrder;
     private javax.swing.JPanel panel_register;

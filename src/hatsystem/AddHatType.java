@@ -563,6 +563,7 @@ public class AddHatType extends javax.swing.JFrame {
 
 
         LoginMenu.addToListOtherHat(orderedHatID);
+        LoginMenu.listAllOrders();
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         //TODO: Om alla fönster stängs ner, ändra här.
         dispose();
