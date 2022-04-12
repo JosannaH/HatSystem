@@ -119,7 +119,7 @@ public class AddHatType extends javax.swing.JFrame {
         lblSpecialResponsible = new javax.swing.JLabel();
         cmbSpecialResponsible = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -137,27 +137,27 @@ public class AddHatType extends javax.swing.JFrame {
         panel_standardHatLayout.setHorizontalGroup(
             panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_standardHatLayout.createSequentialGroup()
-                .addGap(114, 715, Short.MAX_VALUE)
-                .addComponent(lbl_size)
-                .addGap(226, 226, 226))
+                .addContainerGap(284, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(377, 377, 377))
             .addGroup(panel_standardHatLayout.createSequentialGroup()
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_standardHatLayout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(btn_addHat)))
+                        .addComponent(btn_addHat))
+                    .addGroup(panel_standardHatLayout.createSequentialGroup()
+                        .addGap(414, 414, 414)
+                        .addComponent(lbl_size)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_standardHatLayout.setVerticalGroup(
             panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_standardHatLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(117, 117, 117)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(40, 40, 40)
                 .addComponent(lbl_size)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(btn_addHat)
                 .addGap(53, 53, 53))
         );
@@ -584,35 +584,23 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JButton btbAddImage;
     private javax.swing.JButton btnSpecialSave;
     private javax.swing.JButton btn_addHat;
-private javax.swing.JButton btn_customAddToOrder;
-private javax.swing.JComboBox<String> cmb_customColor;
-private javax.swing.JComboBox<String> cmb_customFabric;
-private javax.swing.JComboBox<String> cmb_customSize;
+    private javax.swing.JButton btn_customAddToOrder;
     private javax.swing.JComboBox<String> cmbSpecialColors;
     private javax.swing.JComboBox<String> cmbSpecialFabrics;
     private javax.swing.JComboBox<String> cmbSpecialResponsible;
     private javax.swing.JComboBox<String> cmbSpecialSize;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cmb_customColor;
+    private javax.swing.JComboBox<String> cmb_customFabric;
+    private javax.swing.JComboBox<String> cmb_customSize;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblImageText;
     private javax.swing.JLabel lblImageTxt;
@@ -630,11 +618,11 @@ private javax.swing.JComboBox<String> cmb_customSize;
     private javax.swing.JPanel panel_customHat;
     private javax.swing.JPanel panel_specialHat;
     private javax.swing.JPanel panel_standardHat;
-    private javax.swing.JTextField txtfSpecialDescription;
-    private javax.swing.JTextField txtfSpecialName;
-    private javax.swing.JTextField txtfSpecialPrice;
     private javax.swing.JScrollPane scrollPane_CustomHat;
     private javax.swing.JTextField textField_customDescription;
     private javax.swing.JTextField textField_customPrice;
+    private javax.swing.JTextField txtfSpecialDescription;
+    private javax.swing.JTextField txtfSpecialName;
+    private javax.swing.JTextField txtfSpecialPrice;
     // End of variables declaration//GEN-END:variables
 }

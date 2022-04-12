@@ -456,12 +456,10 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void btnRegisterCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterCustomerActionPerformed
         new AddCustomer().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnRegisterCustomerActionPerformed
 
     private void btnRegisterStandardHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterStandardHatActionPerformed
         new AddStandardHat().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseCustomerActionPerformed
