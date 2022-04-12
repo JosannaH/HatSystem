@@ -8,6 +8,8 @@ import data.Fabric;
 import data.StandardHat;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
@@ -21,26 +23,28 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private static ArrayList<Integer> listStandardHat;
-    private static ArrayList<Integer> listOtherHat;
-    
+    private static ArrayList<Integer> listStandardHat = new ArrayList<>();
+    private static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
+
     public LoginMenu() {
         initComponents();
-        
+
     }
 
     /**
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
-    
-    public static void setListStandardHat(int hatID){
+    public static void addToListStandardHat(int hatID) {
         listStandardHat.add(hatID);
+
     }
-    
-    public static void setListOtherHat(int hatID){
+
+    public static void addToListOtherHat(int hatID) {
+
         listOtherHat.add(hatID);
+
     }
-    
+
     private void listAllStandardHats() {
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -60,49 +64,50 @@ public class LoginMenu extends javax.swing.JFrame {
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
-    private void listAllOrders(){
+
+    private void listAllOrders() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
 
-        ArrayList<HashMap<String, String>> allOrderedStandardHats = new ArrayList<>();
-        
-        int index = 0;
-        while (index < listStandardHat.size()) {
+        if(!listStandardHat.isEmpty()){
+            int index = 0;
+            while (index < listStandardHat.size()) {
             int ID = listStandardHat.get(index);
-           
-            allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
-           
+
+            ArrayList<HashMap<String, String>> allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
+
             HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
-            
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
             listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index++;
+            }
         }
-                
-        ArrayList<HashMap<String, String>> allOrderedOtherHats = new ArrayList<>();
-        
+
+       if(!listOtherHat.isEmpty()){
+        ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
+        ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
+
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            int ID = listOtherHat.get(index);
-            
-            allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
-           
-            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
-            
+            int ID = listOtherHat.get(index2);
+
+            HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
+
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
             listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
-            index++;
+            index2++;
         }
-        
+
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
     }
 
     /**
@@ -118,7 +123,7 @@ public class LoginMenu extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         btn_changePassword = new javax.swing.JButton();
         panel_createOrder = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
+        btnSaveOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listAllOrders = new javax.swing.JList<>();
         btnAddNewHatType = new javax.swing.JButton();
@@ -190,7 +195,12 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Start", panel_start);
 
-        jButton7.setText("Spara order");
+        btnSaveOrder.setText("Spara order");
+        btnSaveOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveOrderActionPerformed(evt);
+            }
+        });
 
         listAllOrders.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -243,7 +253,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(313, 313, 313)
-                        .addComponent(jButton7))
+                        .addComponent(btnSaveOrder))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,16 +302,18 @@ public class LoginMenu extends javax.swing.JFrame {
                             .addComponent(txtExpectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(btnAddNewHatType)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(btnSaveOrder)
                 .addGap(16, 16, 16))
         );
 
@@ -463,12 +475,16 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseCustomerActionPerformed
-      jTabbedPane1.setSelectedComponent(panel_search);
+        jTabbedPane1.setSelectedComponent(panel_search);
     }//GEN-LAST:event_btnChooseCustomerActionPerformed
 
     private void btnCreateNewCustomerFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewCustomerFromOrderActionPerformed
         new AddCustomer().setVisible(true);
     }//GEN-LAST:event_btnCreateNewCustomerFromOrderActionPerformed
+
+    private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
+        // TODO lägg till kod för att spara en order:
+    }//GEN-LAST:event_btnSaveOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -478,12 +494,12 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnRegisterCustomer;
     private javax.swing.JButton btnRegisterFabric;
     private javax.swing.JButton btnRegisterStandardHat;
+    private javax.swing.JButton btnSaveOrder;
     private javax.swing.JButton btnSearchCategory;
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
