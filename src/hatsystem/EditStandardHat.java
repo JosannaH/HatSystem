@@ -115,7 +115,7 @@ public class EditStandardHat extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(348, 348, 348)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelete))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(325, 325, 325)
