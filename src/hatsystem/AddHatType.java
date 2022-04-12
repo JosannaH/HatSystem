@@ -540,8 +540,8 @@ public class AddHatType extends javax.swing.JFrame {
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
         
         //TODO: Raden nedan skapar error.
-        cmb_customFabric.removeAllItems();
-        fillFabricComboBox(cmb_customFabric);
+        //cmb_customFabric.removeAllItems();
+        //fillFabricComboBox(cmb_customFabric);
         String stringID = lstCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
