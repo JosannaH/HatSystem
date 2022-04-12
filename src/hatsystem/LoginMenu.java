@@ -68,15 +68,14 @@ public class LoginMenu extends javax.swing.JFrame {
     private void listAllOrders() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listAllOrders.setModel(listModel);
+        
+        ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
+        ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
 
         if(!listStandardHat.isEmpty()){
             int index = 0;
             while (index < listStandardHat.size()) {
-            int ID = listStandardHat.get(index);
-
-            ArrayList<HashMap<String, String>> allOrderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE standard_Hat_ID = " + ID);
-
-            HashMap<String, String> currentHat = allOrderedStandardHats.get(index);
+            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
 
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
@@ -88,13 +87,8 @@ public class LoginMenu extends javax.swing.JFrame {
         }
 
        if(!listOtherHat.isEmpty()){
-        ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
-        ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
-
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            int ID = listOtherHat.get(index2);
-
             HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
 
             String fabricID = currentHat.get("Hat_Fabric");
