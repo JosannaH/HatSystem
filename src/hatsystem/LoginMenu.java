@@ -22,12 +22,13 @@ public class LoginMenu extends javax.swing.JFrame {
      * Creates new form LoginMenu
      */
     private ArrayList<Integer> listStandardHat;
-    private static ArrayList<Integer> listOtherHat;
+    private static ArrayList<String> listOtherHat;
+    private static int[] nyLista; 
     private static int test;
     
     public LoginMenu() {
         initComponents();
-        listOtherHat = new ArrayList<Integer>();
+        listOtherHat = new ArrayList<String>();
         test = 0;
         
     }
@@ -42,7 +43,10 @@ public class LoginMenu extends javax.swing.JFrame {
     
     public static void setListOtherHat(int hatID){
         //TODO: Det funkar med test variabeln som är int, men blir fel med array.
-        listOtherHat.add(hatID);
+        
+        //listOtherHat.add(Integer.toString(hatID));
+        
+        nyLista[0] = test;
         //test=hatID;
     }
     
@@ -92,7 +96,7 @@ public class LoginMenu extends javax.swing.JFrame {
         
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            int ID = listOtherHat.get(index2);
+            String ID = listOtherHat.get(index2);
             
             allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
            

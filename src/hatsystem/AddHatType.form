@@ -289,9 +289,7 @@
             <Component class="javax.swing.JComboBox" name="cmb_customFabric">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="---"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
@@ -304,9 +302,7 @@
             <Component class="javax.swing.JComboBox" name="cmb_customColor">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="---"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -316,15 +312,14 @@
             <Component class="javax.swing.JComboBox" name="cmb_customSize">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
-                    <StringItem index="0" value="---"/>
-                    <StringItem index="1" value="XXS"/>
-                    <StringItem index="2" value="XS"/>
-                    <StringItem index="3" value="S"/>
-                    <StringItem index="4" value="M"/>
-                    <StringItem index="5" value="L"/>
-                    <StringItem index="6" value="XL"/>
-                    <StringItem index="7" value="XXL"/>
+                  <StringArray count="7">
+                    <StringItem index="0" value="XXS"/>
+                    <StringItem index="1" value="XS"/>
+                    <StringItem index="2" value="S"/>
+                    <StringItem index="3" value="M"/>
+                    <StringItem index="4" value="L"/>
+                    <StringItem index="5" value="XL"/>
+                    <StringItem index="6" value="XXL"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -356,9 +351,7 @@
             <Component class="javax.swing.JComboBox" name="cmb_customEmployee">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="---"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>

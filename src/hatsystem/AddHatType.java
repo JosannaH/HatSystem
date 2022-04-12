@@ -33,8 +33,8 @@ public class AddHatType extends javax.swing.JFrame {
     //konstr
     public AddHatType() {
         initComponents();
-        fillFabricComboBox(cmb_customFabric);
         fillFabricComboBox(cmbSpecialFabrics);
+        fillFabricComboBox(cmb_customFabric);
         fillEmployeeComboBox();
         lblSpecialError.setVisible(false);
         fillList();
@@ -189,16 +189,13 @@ public class AddHatType extends javax.swing.JFrame {
 
         lbl_customPrice.setText("Pris");
 
-        cmb_customFabric.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
         cmb_customFabric.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_customFabricActionPerformed(evt);
             }
         });
 
-        cmb_customColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
-
-        cmb_customSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
+        cmb_customSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
 
         lbl_customTitle.setFont(new java.awt.Font("Apple Braille", 0, 18)); // NOI18N
         lbl_customTitle.setText("Lägg till anpassad standardhatt");
@@ -212,7 +209,6 @@ public class AddHatType extends javax.swing.JFrame {
 
         jLabel13.setText("Ansvarig");
 
-        cmb_customEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
         cmb_customEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_customEmployeeActionPerformed(evt);
