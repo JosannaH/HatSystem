@@ -100,7 +100,6 @@ public class LoginMenu extends javax.swing.JFrame {
             listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index2++;
-            array++;
         }
         
         Font defaultListFont = listFoundResults.getFont();
@@ -121,7 +120,7 @@ public class LoginMenu extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         btn_changePassword = new javax.swing.JButton();
         panel_createOrder = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
+        btnSaveOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listAllOrders = new javax.swing.JList<>();
         btnAddNewHatType = new javax.swing.JButton();
@@ -193,7 +192,12 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Start", panel_start);
 
-        jButton7.setText("Spara order");
+        btnSaveOrder.setText("Spara order");
+        btnSaveOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveOrderActionPerformed(evt);
+            }
+        });
 
         listAllOrders.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -246,7 +250,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(313, 313, 313)
-                        .addComponent(jButton7))
+                        .addComponent(btnSaveOrder))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,7 +310,7 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addComponent(jButton4))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(btnSaveOrder)
                 .addGap(16, 16, 16))
         );
 
@@ -475,6 +479,10 @@ public class LoginMenu extends javax.swing.JFrame {
         new AddCustomer().setVisible(true);
     }//GEN-LAST:event_btnCreateNewCustomerFromOrderActionPerformed
 
+    private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
+        // TODO lägg till kod för att spara en order:
+    }//GEN-LAST:event_btnSaveOrderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewHatType;
@@ -483,12 +491,12 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnRegisterCustomer;
     private javax.swing.JButton btnRegisterFabric;
     private javax.swing.JButton btnRegisterStandardHat;
+    private javax.swing.JButton btnSaveOrder;
     private javax.swing.JButton btnSearchCategory;
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
