@@ -87,7 +87,7 @@ public class AddHatType extends javax.swing.JFrame {
         lbl_size = new javax.swing.JLabel();
         panel_customHat = new javax.swing.JPanel();
         scrollPane_CustomHat = new javax.swing.JScrollPane();
-        lstCustHat = new javax.swing.JList<>();
+        listCustHat = new javax.swing.JList<>();
         lbl_customFabric = new javax.swing.JLabel();
         lbl_customColor = new javax.swing.JLabel();
         lbl_customSize = new javax.swing.JLabel();
@@ -176,12 +176,12 @@ public class AddHatType extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Standardhatt", panel_standardHat);
 
-        lstCustHat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        listCustHat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listCustHatValueChanged(evt);
             }
         });
-        scrollPane_CustomHat.setViewportView(lstCustHat);
+        scrollPane_CustomHat.setViewportView(listCustHat);
 
         lbl_customFabric.setText("Tyg");
 
@@ -460,7 +460,7 @@ public class AddHatType extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,7 +547,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
 
-        String stringID = lstCustHat.getSelectedValue().substring(0, 8);
+        String stringID = listCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
         setValues(customSelectedHatID);
@@ -586,7 +586,7 @@ public class AddHatType extends javax.swing.JFrame {
     private void fillList() {
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        lstCustHat.setModel(listModel);
+        listCustHat.setModel(listModel);
 
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
         int index = 0;
@@ -600,8 +600,8 @@ public class AddHatType extends javax.swing.JFrame {
             index++;
         }
 
-        Font defaultListFont = lstCustHat.getFont();
-        lstCustHat.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+        Font defaultListFont = listCustHat.getFont();
+        listCustHat.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
     private void setValues(int hatID) {
@@ -684,7 +684,7 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_customSize;
     private javax.swing.JLabel lbl_customTitle;
     private javax.swing.JLabel lbl_size;
-    private javax.swing.JList<String> lstCustHat;
+    private javax.swing.JList<String> listCustHat;
     private javax.swing.JPanel panel_customHat;
     private javax.swing.JPanel panel_specialHat;
     private javax.swing.JPanel panel_standardHat;
