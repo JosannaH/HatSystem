@@ -34,12 +34,12 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
-    public static void setListStandardHat(int hatID) {
+    public static void addToListStandardHat(int hatID) {
         listStandardHat.add(hatID);
 
     }
 
-    public static void setListOtherHat(int hatID) {
+    public static void addToListOtherHat(int hatID) {
 
         listOtherHat.add(hatID);
 

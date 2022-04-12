@@ -136,6 +136,11 @@ public class AddHatType extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         btn_addHat.setText("Lägg till hatt");
+        btn_addHat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addHatActionPerformed(evt);
+            }
+        });
 
         lbl_size.setText("Storlek");
 
@@ -491,6 +496,10 @@ public class AddHatType extends javax.swing.JFrame {
             if (isUniqueHatAndFabricCombo) {
                 SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
                 SpecialHat.addSpecialHat(name, price, fabricComboID, image);
+                
+                String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
+                orderedHatID = Integer.parseInt(newHatID);
+                LoginMenu.addToListOtherHat(orderedHatID);
                 //TODO validering för om hatten verkligen kom in i databasen.
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
@@ -554,7 +563,7 @@ public class AddHatType extends javax.swing.JFrame {
         saveCustomHatToDB();
         
         
-        LoginMenu.setListOtherHat(orderedHatID);
+        LoginMenu.addToListOtherHat(orderedHatID);
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         //TODO: Om alla fönster stängs ner, ändra här.
         dispose();
@@ -564,6 +573,15 @@ public class AddHatType extends javax.swing.JFrame {
     private void cmb_customEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_customEmployeeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_customEmployeeActionPerformed
+
+    private void btn_addHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addHatActionPerformed
+        // TODO: Koden nedanför ska anpassas för standard hatt.
+        
+        
+        String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
+        orderedHatID = Integer.parseInt(newHatID);
+        LoginMenu.addToListOtherHat(orderedHatID);
+    }//GEN-LAST:event_btn_addHatActionPerformed
 
     private void fillList() {
 
