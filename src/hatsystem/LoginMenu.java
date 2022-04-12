@@ -27,14 +27,13 @@ public class LoginMenu extends javax.swing.JFrame {
     private static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
     private static DefaultListModel<String> otherListModel = new DefaultListModel<>();
     private Font defaultListFontOther;
-    
 
     public LoginMenu() {
         initComponents();
         jListAllOrders.setModel(otherListModel);
         defaultListFontOther = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
-        
+
     }
 
     /**
@@ -72,39 +71,57 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     public static void listAllOrders() {
-              
-        ArrayList<HashMap<String, String>> allHats = SqlQuery.getMultipleRows("SELECT * FROM hat ORDER BY Name");
-        ArrayList<HashMap<String, String>> allOrderedOtherHats = allHats;
-        
+
+        ArrayList<HashMap<String, String>> addedStandardHats = new ArrayList<>();
+        ArrayList<HashMap<String, String>> addedOtherHats = new ArrayList<>();
+
         otherListModel.clear();
-              
-        if(!listStandardHat.isEmpty()){
+
+        if (!listStandardHat.isEmpty()) {
+            for (int id : listStandardHat) {
+                HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Hat_ID = " + id + ";");
+                addedStandardHats.add(fetchedHat);
+            }
             int index = 0;
             while (index < listStandardHat.size()) {
-            HashMap<String, String> currentHat = allOrderedOtherHats.get(index);
+                HashMap<String, String> currentHat = addedStandardHats.get(index);
 
-            String fabricID = currentHat.get("Hat_Fabric");
-            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+                String fabricID = currentHat.get("Hat_Fabric");
+                HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+                otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
-            index++;
+                index++;
             }
+
         }
 
-       if(!listOtherHat.isEmpty()){
-        int index2 = 0;
-        while (index2 < listOtherHat.size()) {
-            HashMap<String, String> currentHat = allOrderedOtherHats.get(index2);
+        if (!listOtherHat.isEmpty()) {
+            for (int id : listOtherHat) {
+                HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Hat WHERE Hat_ID = " + id + ";");
+                addedOtherHats.add(fetchedHat);
+            }
+            int index2 = 0;
+            while (index2 < listOtherHat.size()) {
+                HashMap<String, String> currentHat = addedOtherHats.get(index2);
 
-            String fabricID = currentHat.get("Hat_Fabric");
-            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+                String fabricID = currentHat.get("Hat_Fabric");
+                HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+                otherListModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
-            index2++;
+                index2++;
+            }
+
         }
     }
+    
+    private void deleteNonOrderedHats(){
+        
+        for(int id : listOtherHat){
+            SqlQuery.delete("")
+        }
+        
     }
 
     /**
