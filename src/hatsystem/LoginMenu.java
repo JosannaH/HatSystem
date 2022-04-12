@@ -115,13 +115,17 @@ public class LoginMenu extends javax.swing.JFrame {
 
         }
     }
-    
-    private void deleteNonOrderedHats(){
-        
-        for(int id : listOtherHat){
-            SqlQuery.delete("")
+
+    private void deleteNonOrderedHats() {
+
+        for (int id : listOtherHat) {
+            SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + id + ";");
+            SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + id + ";");
+            SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + id + ";");
         }
-        
+        listStandardHat.clear();
+        listOtherHat.clear();
+        otherListModel.clear();
     }
 
     /**
@@ -163,6 +167,11 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFocusable(false);
@@ -459,7 +468,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddNewHatTypeActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        deleteNonOrderedHats();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
@@ -499,6 +508,10 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
         // TODO lägg till kod för att spara en order:
     }//GEN-LAST:event_btnSaveOrderActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    deleteNonOrderedHats();
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
