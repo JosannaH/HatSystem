@@ -539,9 +539,6 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
         
-        //TODO: Raden nedan skapar error.
-        //cmb_customFabric.removeAllItems();
-        //fillFabricComboBox(cmb_customFabric);
         String stringID = lstCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
@@ -557,6 +554,7 @@ public class AddHatType extends javax.swing.JFrame {
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
         saveCustomHatToDB();
         //TODO: Datan skickas till LoginMenu, men vi lyckas inte få in det i en array.
+        LoginMenu.listOtherHat.add(39);
         LoginMenu.setListOtherHat(orderedHatID);
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         dispose();

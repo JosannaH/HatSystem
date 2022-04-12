@@ -8,6 +8,8 @@ import data.Fabric;
 import data.StandardHat;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
@@ -22,14 +24,15 @@ public class LoginMenu extends javax.swing.JFrame {
      * Creates new form LoginMenu
      */
     private ArrayList<Integer> listStandardHat;
-    private static ArrayList<String> listOtherHat;
-    private static int[] nyLista; 
+    public static ArrayList<Integer> listOtherHat = new ArrayList<Integer>();
+    private static int[] nyLista = new int[10]; 
     private static int test;
     
     public LoginMenu() {
         initComponents();
-        listOtherHat = new ArrayList<String>();
         test = 0;
+        listOtherHat.add(59);
+        setListOtherHat(9);
         
     }
 
@@ -39,14 +42,28 @@ public class LoginMenu extends javax.swing.JFrame {
     
     public void setListStandardHat(int hatID){
         listStandardHat.add(hatID);
+        
+        
     }
     
     public static void setListOtherHat(int hatID){
         //TODO: Det funkar med test variabeln som är int, men blir fel med array.
         
-        //listOtherHat.add(Integer.toString(hatID));
+        ArrayList<Integer> testLista = new ArrayList<Integer>();
+        testLista.add(0, 78);
+        testLista.add(6);
+        for (int i : testLista) {
+      System.out.println(i);}
         
-        nyLista[0] = test;
+        
+        int test = 7;
+        listOtherHat.add(test);
+        
+        listOtherHat.add(29);
+        
+        listOtherHat.add(hatID);
+        
+        //nyLista[0] = hatID;
         //test=hatID;
     }
     
@@ -96,7 +113,7 @@ public class LoginMenu extends javax.swing.JFrame {
         
         int index2 = 0;
         while (index2 < listOtherHat.size()) {
-            String ID = listOtherHat.get(index2);
+            int ID = listOtherHat.get(index2);
             
             allOrderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE hat_ID = " + ID);
            
