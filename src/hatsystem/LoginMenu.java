@@ -23,10 +23,11 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    private static ArrayList<Integer> arrayStandardHat = new ArrayList<>();
+    private static HashMap<String, String> hashMapStandardHat = new HashMap<>();
     private static ArrayList<Integer> arrayOtherHat = new ArrayList<Integer>();
     private static DefaultListModel<String> orderListModel = new DefaultListModel<>();
     private Font defaultListFontOther;
+    //private static int index = 0;
 
     public LoginMenu() {
         initComponents();
@@ -39,8 +40,8 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Retrieves all standard hats and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
-    public static void addToListStandardHat(int hatID) {
-        arrayStandardHat.add(hatID);
+    public static void addToListStandardHat(String completeHatIdentifier, String size) {
+        hashMapStandardHat.put(completeHatIdentifier, size);
 
     }
 
@@ -74,24 +75,52 @@ public class LoginMenu extends javax.swing.JFrame {
 
         ArrayList<HashMap<String, String>> addedStandardHats = new ArrayList<>();
         ArrayList<HashMap<String, String>> addedOtherHats = new ArrayList<>();
+        
+        ArrayList<String> testLista = new ArrayList<>();
+        
 
         orderListModel.clear();
+        
 
-        if (!arrayStandardHat.isEmpty()) {
-            for (int id : arrayStandardHat) {
+        if (!hashMapStandardHat.isEmpty()) {
+            hashMapStandardHat.forEach(( key, value) -> {
+                String id = key.substring(0, key.indexOf("."));
                 HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID = " + id + ";");
                 addedStandardHats.add(fetchedHat);
-            }
+            });
+//            for (String id : hashMapStandardHat) {
+//                HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID = " + id + ";");
+//                addedStandardHats.add(fetchedHat);
+//            }
             int index = 0;
-            while (index < arrayStandardHat.size()) {
+            String completeId;
+            String size;
+            
+            while (index < hashMapStandardHat.size()) {
                 HashMap<String, String> currentHat = addedStandardHats.get(index);
-
+                
+                for(String currentKey : hashMapStandardHat.keySet()){
+                    testLista.add(currentKey);
+                }
+                
+                completeId = testLista.get(index);
+                
+               
+               
+                
+                //Object[] completeHatIdentifier = hashMapStandardHat.keySet().toArray();
+                
+                //String id = hashMapStandardHat.get(completeHatIdentifier[index]);
+                //String completeHatID = completeHatIdentifier[index].toString();
+                
                 String fabricID = currentHat.get("Hat_Fabric");
                 HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-                orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "S" + currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
+                orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), 
+                        "placeholderID", currentHat.get("Name"), currentFabric.get("Name"),
                 currentFabric.get("Color"), currentHat.get("Size")));
                 index++;
+                
             }
 
         }
@@ -109,10 +138,12 @@ public class LoginMenu extends javax.swing.JFrame {
                 String fabricID = currentHat.get("Hat_Fabric");
                 HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-                orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C" + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
+                orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C" + 
+                        currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
                 currentFabric.get("Color"), currentHat.get("Size")));
 
                 index2++;
+                
             }
 
         }
@@ -125,7 +156,7 @@ public class LoginMenu extends javax.swing.JFrame {
             SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + id + ";");
             SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + id + ";");
         }
-        arrayStandardHat.clear();
+        hashMapStandardHat.clear();
         arrayOtherHat.clear();
         orderListModel.clear();
     }
@@ -533,21 +564,26 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
         String itemToDelete = orderListModel.getElementAt(jListAllOrders.getSelectedIndex());
         String typeOfHat = itemToDelete.substring(0, 1);
-        String hatID = itemToDelete.substring(1, 5).replaceAll("\\s", "");
-        if(typeOfHat.equals("S")){
-            //arrayStandardHat.remove(hatID);
-            arrayStandardHat.remove(Integer.valueOf(Integer.parseInt(hatID)));
+        String customHatID = itemToDelete.substring(1, 5).replaceAll("\\s", "");
+        String standardHatID = itemToDelete.substring(0, 5).replaceAll("\\s", "");
+        
+        
+        String hatIdentifier; 
+        if(typeOfHat.equals("C")){
+            
+            //Lambda uttryck som tar bort ALLA element i listan som har värdet av hatID.
+            arrayOtherHat.removeIf(s -> s == Integer.parseInt(customHatID));
+                      
+            SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + customHatID + ";");
+            SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + customHatID + ";");
+            SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + customHatID + ";");
+            
         }
         else{
-            //Lambda uttryck som tar bort ALLA element i listan som har värdet av hatID.
-            arrayOtherHat.removeIf(s -> s == Integer.parseInt(hatID));
             
-            //Gör samma som ovan förutom att den enbart tar bort det första matchande elementet.
-            //arrayOtherHat.remove(Integer.valueOf(Integer.parseInt(hatID)));
-            SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + hatID + ";");
-            SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + hatID + ";");
-            SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + hatID + ";");
-                            
+            
+            //Tar bort det första matchande elementet.
+            hashMapStandardHat.remove(Integer.valueOf(Integer.parseInt(standardHatID)));
         }
         listAllOrders();
         

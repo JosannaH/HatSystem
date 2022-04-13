@@ -29,6 +29,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private int customSelectedHatID;
     private int orderedHatID;
+    private static int hatIdentifier = 1;
 
     //konstr
     public AddHatType() {
@@ -40,7 +41,9 @@ public class AddHatType extends javax.swing.JFrame {
         lblStandardErrorMessage.setVisible(false);
         fillList();
     }
-
+    
+    
+    //public String getHatIdentifier;
     /**
      * Fills the fabric combo box with fabric options.
      */
@@ -594,23 +597,29 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btn_addHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addHatActionPerformed
         
+        String separator = ".";
+        
+        
         lblStandardErrorMessage.setVisible(false);
  
         try {
             String stringID = jListStandardHat.getSelectedValue().substring(0, 8);
             String newString = stringID.replaceAll("\\s", "");
+            String completeHatIdentifier = newString + separator + hatIdentifier;
             int selectedHatID = Integer.parseInt(newString);
             
             String chosenSize = cmbStandardChosenSize.getSelectedItem().toString();
             
-            LoginMenu.addToListStandardHat(selectedHatID);
+            LoginMenu.addToListStandardHat(completeHatIdentifier, chosenSize);
             LoginMenu.listAllOrders();
             JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
+            hatIdentifier++;
             this.dispose();
             
         } catch (NullPointerException e) {
             lblStandardErrorMessage.setVisible(true);
         }
+        
 
 //        String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
 //        orderedHatID = Integer.parseInt(newHatID);
