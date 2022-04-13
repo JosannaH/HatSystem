@@ -71,53 +71,50 @@ public class Fabric {
 
         return colors;
     }
-    
+
     /**
      * Returns the id of a fabric with the specified name and color combination.
+     *
      * @param fabricName Fabric to check.
      * @param fabricColor Color to check.
      * @return A string containing the fabric ID. Null if no match was found.
      */
     public static int getFabricID(String fabricName, String fabricColor) {
 
-        String fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '"+ fabricName +"' AND Color = '"+ fabricColor +"';");
+        String fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
         int fabricID = Integer.parseInt(fabricToCheck);
         return fabricID;
     }
-    
+
     /**
      * Retrieves a fabric from the database having the specified id.
+     *
      * @param fabricID
      * @return A HashMap containing the fabric, empty if no match was found.
      */
-    public static HashMap<String, String> getFabricFromID(String fabricID){
-        
-        HashMap<String, String> fabric = SqlQuery.getRow("SELECT * FROM fabric WHERE Fabric_ID = "+ fabricID +";");
+    public static HashMap<String, String> getFabricFromID(String fabricID) {
+
+        HashMap<String, String> fabric = SqlQuery.getRow("SELECT * FROM fabric WHERE Fabric_ID = " + fabricID + ";");
         return fabric;
-        
+
     }
 
-//    /** KANSKE INTE BEHÖVER DENNA EFTERSOM JAG SKAPAT METODEN OVAN
-//     * Checks whether or not a fabric with the specified name and color combination exists.
-//     *
-//     * @param fabricName Fabric to check.
-//     * @param fabricColor Color to check.
-//     * @return true if unique combination, false if not.
-//     */
-//    public static boolean isUniqueCombination(String fabricName, String fabricColor) {
-//
-//        String fabricToCheck = "";
-//        boolean isUnique = false;
-//
-//        fabricToCheck = SqlQuery.getValue("SELECT Fabric_ID FROM fabric WHERE Name = '" + fabricName + "' AND Color = '" + fabricColor + "';");
-//
-//        if (fabricToCheck.isBlank()) {
-//            isUnique = true;
-//        }
-//
-//        return isUnique;
-//    }
+    /**
+     * Checks whether a fabric with the specified values already exists in the db.
+     * @param name
+     * @param price
+     * @param color
+     * @param supplier
+     * @return true if it exists, otherwise false.
+     */
+    public static boolean checkIfFabricExists(String name, String price, String color, String supplier) {
+        boolean exists = true;
 
-    
-
+        String query = "SELECT Fabric_ID FROM fabric WHERE Name = '" + name + "' AND Price = " + price + " AND Color = '" + color + "' AND Supplier = '" + supplier + "';";
+        String id = SqlQuery.getValue(query);
+        if (id == null) {
+            exists = false;
+        }
+        return exists;
+    }
 }
