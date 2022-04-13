@@ -13,9 +13,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import data.SqlQuery;
+import java.io.File;
 import java.util.ArrayList;
-
-
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -23,13 +23,13 @@ import java.util.ArrayList;
  */
 public class InvoicePDF {
 
-
     public static void generateInvoicePDF(String weight, String shippingCost, String description, String searchPath, String orderNr) {
 
         try {
+
 //            String fileName = "C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testar.pdf";
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(searchPath));
+            PdfWriter.getInstance(document, new FileOutputStream(searchPath+ ".pdf"));
 
             document.open();
 
@@ -51,12 +51,12 @@ public class InvoicePDF {
 
             paragraph = new Paragraph("Fraktkostnad: " + shippingCost);
             document.add(paragraph);
-            
-            if(!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")){
-            paragraph = new Paragraph("Varukod: 52081300");
-            document.add(paragraph);
+
+            if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")) {
+                paragraph = new Paragraph("Varukod: 52081300");
+                document.add(paragraph);
             }
-            
+
             PdfPTable table = new PdfPTable(2);
             table.setWidthPercentage(95);
             table.setSpacingBefore(11f);
@@ -105,7 +105,7 @@ public class InvoicePDF {
             //pris och moms
             paragraph = new Paragraph("Pris innehåll: " + totalPrice + ", varav moms: " + totalPrice * 0.25);
             document.add(paragraph);
-            
+
             paragraph = new Paragraph("Beskrivning av innehållet: " + description);
             document.add(paragraph);
 
@@ -115,5 +115,4 @@ public class InvoicePDF {
             System.out.println(ex);
         }
     }
-
 }
