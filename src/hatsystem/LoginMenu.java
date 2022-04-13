@@ -79,7 +79,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         if (!listStandardHat.isEmpty()) {
             for (int id : listStandardHat) {
-                HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Hat_ID = " + id + ";");
+                HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID = " + id + ";");
                 addedStandardHats.add(fetchedHat);
             }
             int index = 0;
@@ -532,7 +532,8 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
         String itemToDelete = otherListModel.getElementAt(jListAllOrders.getSelectedIndex());
-        
+        String typeOfHat = itemToDelete.substring(0, 1);
+        String hatID = itemToDelete.substring(1, 5);
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
 
