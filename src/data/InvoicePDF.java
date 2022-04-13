@@ -14,55 +14,49 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import data.SqlQuery;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import oru.inf.InfDB;
-import oru.inf.InfException;
+
+
 
 /**
  *
  * @author Friday
  */
-public class GeneratePDF {
+public class InvoicePDF {
 
-    private static InfDB idb;
 
-    public static void main(String args[]) {
-        try {
-            idb = new InfDB("hatdb", "3306", "hatdb", "hatkey");
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-
-        SqlQuery.setDatabase(idb);
+    public static void generateInvoicePDF(String weight, String shippingCost, String description, String searchPath, String orderNr) {
 
         try {
-            String fileName = "C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testar.pdf";
+//            String fileName = "C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testar.pdf";
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(fileName));
+            PdfWriter.getInstance(document, new FileOutputStream(searchPath));
 
             document.open();
 
             Paragraph paragraph = new Paragraph("Fraktsedel");
-//            paragraph.setAlignment(150);
+
             document.add(paragraph);
 
+            //ska de ha en standardadress?
             paragraph = new Paragraph("Avsändaradress: Hattmakargatan 69, 66666, Örebro, Sverige");
             document.add(paragraph);
 
             HashMap<String, String> deliveryAddress = SqlQuery.getRow("SELECT * FROM address WHERE Address_ID IN "
-                    + "(SELECT Delivery_Address FROM orders WHERE Orders_ID = 1);");
+                    + "(SELECT Delivery_Address FROM orders WHERE Orders_ID = " + orderNr + ");");
             paragraph = new Paragraph("Leveransadress: " + deliveryAddress.get("Street") + ", " + deliveryAddress.get("Postal") + ", " + deliveryAddress.get("City") + ", " + deliveryAddress.get("Country"));
             document.add(paragraph);
 
-            paragraph = new Paragraph("Vikt: ");
+            paragraph = new Paragraph("Vikt: " + weight);
             document.add(paragraph);
 
-            paragraph = new Paragraph("Fraktkostnad: ");
+            paragraph = new Paragraph("Fraktkostnad: " + shippingCost);
             document.add(paragraph);
-
-            paragraph = new Paragraph("Beskrivning av innehållet: ");
+            
+            if(!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")){
+            paragraph = new Paragraph("Varukod: 52081300");
             document.add(paragraph);
-
+            }
+            
             PdfPTable table = new PdfPTable(2);
             table.setWidthPercentage(95);
             table.setSpacingBefore(11f);
@@ -75,10 +69,9 @@ public class GeneratePDF {
             table.addCell(c1);
             table.addCell(c2);
             //lägger till innehåll i tabellen, från vänster till höger
-            //nedan ska hämtas hattarna i ordern och läggas till i tabellen
 
-            String query1 = "SELECT Name, Price FROM hat WHERE Hat_ID IN (SELECT Hat_ID FROM ordered_hat WHERE Order_Nr = 1);";
-            String query2 = "SELECT Name, Price FROM standard_hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM ordered_st_hat WHERE Order_Nr = 1);";
+            String query1 = "SELECT Name, Price FROM hat WHERE Hat_ID IN (SELECT Hat_ID FROM ordered_hat WHERE Order_Nr = " + orderNr + ");";
+            String query2 = "SELECT Name, Price FROM standard_hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM ordered_st_hat WHERE Order_Nr = " + orderNr + ");";
 
             double totalPrice = 0;
 
@@ -108,9 +101,12 @@ public class GeneratePDF {
             table.setHeaderRows(1);
 
             document.add(table);
-            
+
             //pris och moms
-            paragraph = new Paragraph("Pris innehåll: " + totalPrice + ", varav moms: " + totalPrice*0.25);
+            paragraph = new Paragraph("Pris innehåll: " + totalPrice + ", varav moms: " + totalPrice * 0.25);
+            document.add(paragraph);
+            
+            paragraph = new Paragraph("Beskrivning av innehållet: " + description);
             document.add(paragraph);
 
             document.close();
