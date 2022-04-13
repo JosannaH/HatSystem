@@ -236,11 +236,6 @@ public class LoginMenu extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jListAllOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListAllOrdersValueChanged(evt);
-            }
-        });
         jScrollPane2.setViewportView(jListAllOrders);
 
         btnAddNewHatType.setText("Lägg till ny hatt i order");
@@ -536,12 +531,9 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
+        String itemToDelete = otherListModel.getElementAt(jListAllOrders.getSelectedIndex());
         
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
-
-    private void jListAllOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAllOrdersValueChanged
-        otherListModel.getElementAt(jListAllOrders.getSelectedIndex());
-    }//GEN-LAST:event_jListAllOrdersValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
