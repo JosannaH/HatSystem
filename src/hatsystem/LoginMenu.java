@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
+import data.Customer;
+import data.Address;
 
 /**
  *
@@ -90,7 +92,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
                 otherListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "S" + currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
-                currentFabric.get("Color"), currentHat.get("Size")));
+                        currentFabric.get("Color"), currentHat.get("Size")));
                 index++;
             }
 
@@ -101,7 +103,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Hat WHERE Hat_ID = " + id + ";");
                 addedOtherHats.add(fetchedHat);
             }
-            
+
             int index2 = 0;
             while (index2 < listOtherHat.size()) {
                 HashMap<String, String> currentHat = addedOtherHats.get(index2);
@@ -110,7 +112,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
                 otherListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C" + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
-                currentFabric.get("Color"), currentHat.get("Size")));
+                        currentFabric.get("Color"), currentHat.get("Size")));
 
                 index2++;
             }
@@ -501,7 +503,7 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Ordrar":
                 break;
             case "Kunder":
-                listAllOrders();
+                listAllCustomers();
                 break;
         }
     }//GEN-LAST:event_btnSearchCategoryActionPerformed
@@ -532,9 +534,42 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
         String itemToDelete = otherListModel.getElementAt(jListAllOrders.getSelectedIndex());
-        
+
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
+    // från här
+    private void listAllCustomers() {
+        
+        
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listFoundResults.setModel(listModel);
+
+        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
+        int index = 0;
+        while (index < allCustomers.size()) {
+            HashMap<String, String> currentCustomer = allCustomers.get(index);
+            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+
+            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                    + currentCustomer.get("Comment"),
+                    currentCustomer.get("Customer_Nr"),
+                    currentCustomer.get("First_Name"),
+                    currentCustomer.get("Last_Name"),
+                    currentCustomer.get("Email"),
+                    currentAddress.get("Street"),
+                    currentAddress.get("Postal"),
+                    currentAddress.get("City"),
+                    currentAddress.get("Country")
+            ));
+
+            index++;
+        }
+        
+        Font defaultListFont = listFoundResults.getFont();
+        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+
+    //till här
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbDeleteChosenHat;

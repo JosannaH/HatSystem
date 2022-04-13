@@ -96,4 +96,12 @@ public class Customer {
         return customer;
 
     }
+    
+    public static ArrayList<HashMap<String, String>> getAllCustomers(){
+        ArrayList<HashMap<String, String>> allCustomers = new ArrayList<>();
+        
+        allCustomers = SqlQuery.getMultipleRows("SELECT * FROM customer where Active = 1;");
+        
+        return allCustomers;
+    }
 }
