@@ -4,8 +4,10 @@
  */
 package hatsystem;
 
+import data.Address;
 import data.Fabric;
 import data.StandardHat;
+import data.Order;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -523,7 +527,38 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateNewCustomerFromOrderActionPerformed
 
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
-        // TODO lägg till kod för att spara en order:
+        String totalPrice = "";
+        String deliveryDate = txtExpectedDate.getText();
+        String orderDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        String status = "Ongoing";
+        
+        String streetAddress = "";
+        String postCode = "";
+        String city = "";
+        String country = "";
+        HashMap<String, String> chosenAddress = Address.getAddress(streetAddress, postCode, city, country);       
+        String adressID = chosenAddress.get("Address_ID");
+        
+        // TODO få med kunden från sökrutan/skapandet av kund
+        String customer = "";
+        // TODO få med vem som skapade ordern. Behöver man lagra detta i konstruktorn för att få med vem som är inloggad?
+        String createdBy = "";        
+        
+        // TODO validering för om kund/adress/datum är valt
+        
+        if(!arrayStandardHat.isEmpty()){
+            for (int id : arrayStandardHat){
+                Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customer, createdBy);
+            }
+        }
+        else{
+            for (int id : arrayOtherHat){
+                
+            }
+        }
+        if(!arrayOtherHat.isEmpty()){
+            
+        }
     }//GEN-LAST:event_btnSaveOrderActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
