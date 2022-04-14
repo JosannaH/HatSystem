@@ -17,6 +17,8 @@ import javax.swing.DefaultListModel;
 import data.SqlQuery;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import data.Customer;
+import data.Address;
 
 /**
  *
@@ -27,7 +29,7 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-    
+
     // A HashMap that stores id and size from class AddHatType.
     private static HashMap<String, String> hashMapStandardHat = new HashMap<>();
     // An Array that stores id from class AddHatType.
@@ -50,10 +52,10 @@ public class LoginMenu extends javax.swing.JFrame {
         hashMapStandardHat.put(completeHatIdentifier, size);
 
     }
-    
+
     /**
      * Retrives one custum or special hats id and adds it to the ArrayList. Is then used for retrieving the hat from db.
-     * @param hatID 
+     * @param hatID
      */
     public static void addToListOtherHat(int hatID) {
 
@@ -85,7 +87,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * Fills the jList with information about all hats for the ongoing order.  
+     * Fills the jList with information about all hats for the ongoing order.
      */
     public static void listOrderItems() {
 
@@ -114,7 +116,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 HashMap<String, String> currentHat = addedStandardHats.get(index);
                 String completeID = arrayOfCompleteID.get(index);
                 String size = hashMapStandardHat.get(completeID);
-                            
+
                 String fabricID = currentHat.get("Hat_Fabric");
                 HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
@@ -582,7 +584,8 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Ordrar":
                 break;
             case "Kunder":
-                listOrderItems();
+//TODO listOrderItems();
+                listAllCustomers();
                 break;
         }
     }//GEN-LAST:event_btnSearchCategoryActionPerformed
@@ -604,21 +607,21 @@ public class LoginMenu extends javax.swing.JFrame {
         String deliveryDate = txtExpectedDate.getText();
         String orderDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         String status = "Ongoing";
-        
+
         String streetAddress = "";
         String postCode = "";
         String city = "";
         String country = "";
-        HashMap<String, String> chosenAddress = Address.getAddress(streetAddress, postCode, city, country);       
+        HashMap<String, String> chosenAddress = Address.getAddress(streetAddress, postCode, city, country);
         String adressID = chosenAddress.get("Address_ID");
-        
+
         // TODO få med kunden från sökrutan/skapandet av kund
         String customer = "";
         // TODO få med vem som skapade ordern. Behöver man lagra detta i konstruktorn för att få med vem som är inloggad?
-        String createdBy = "";        
-        
+        String createdBy = "";
+
         // TODO validering för om kund/adress/datum är valt
-        
+
         if(!hashMapStandardHat.isEmpty()){
             int index = 0;
             while (index < hashMapStandardHat.size()){
@@ -627,11 +630,11 @@ public class LoginMenu extends javax.swing.JFrame {
         }
         else{
             for (int id : arrayOtherHat){
-                
+
             }
         }
         if(!arrayOtherHat.isEmpty()){
-            
+
         }
     }//GEN-LAST:event_btnSaveOrderActionPerformed
 
@@ -641,7 +644,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     /**
      * Deletes choosen hat from jList, db and static lists.
-     * @param evt 
+     * @param evt
      */
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
         String itemToDelete = orderListModel.getElementAt(jListAllOrders.getSelectedIndex());
@@ -659,13 +662,46 @@ public class LoginMenu extends javax.swing.JFrame {
             SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + customHatID + ";");
             SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + customHatID + ";");
 
-        } else {            
-            hashMapStandardHat.remove(standardHatID);                          
+        } else {
+            hashMapStandardHat.remove(standardHatID);
         }
         listOrderItems();
 
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
+    // från här
+    private void listAllCustomers() {
+
+
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listFoundResults.setModel(listModel);
+
+        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
+        int index = 0;
+        while (index < allCustomers.size()) {
+            HashMap<String, String> currentCustomer = allCustomers.get(index);
+            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+
+            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                    + currentCustomer.get("Comment"),
+                    currentCustomer.get("Customer_Nr"),
+                    currentCustomer.get("First_Name"),
+                    currentCustomer.get("Last_Name"),
+                    currentCustomer.get("Email"),
+                    currentAddress.get("Street"),
+                    currentAddress.get("Postal"),
+                    currentAddress.get("City"),
+                    currentAddress.get("Country")
+            ));
+
+            index++;
+        }
+
+        Font defaultListFont = listFoundResults.getFont();
+        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+
+    //till här
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbDeleteChosenHat;
