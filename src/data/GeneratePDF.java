@@ -12,14 +12,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.util.HashMap;
-import data.SqlQuery;
-import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import oru.inf.InfDB;
-import oru.inf.InfException;
-import data.Customer;
+
 
 /**
  *
@@ -27,7 +21,6 @@ import data.Customer;
  */
 public class GeneratePDF {
 
-    private static InfDB idb;
 
     public static void generateMomsPDF(String year, String searchPath) {
         try {
