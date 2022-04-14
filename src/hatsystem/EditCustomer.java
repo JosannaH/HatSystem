@@ -4,19 +4,28 @@
  */
 package hatsystem;
 
+import data.Address;
+import data.Customer;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import data.SqlQuery;
+import static hatsystem.EditStandardHat.hatId;
 /**
  *
  * @author Friday
  */
 public class EditCustomer extends javax.swing.JFrame {
-
+    
+    private static String custId = "2";
+    public String deActivateCustQuery = "update customer set Active = 0 where Customer_ID = "+custId+";";;
     /**
      * Creates new form EditInformation
      */
     public EditCustomer() {
         initComponents();
+        this.custId = custId;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +54,7 @@ public class EditCustomer extends javax.swing.JFrame {
         txt_city = new javax.swing.JTextField();
         btn_save = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +88,13 @@ public class EditCustomer extends javax.swing.JFrame {
 
         jLabel9.setText("Redigera kunduppgifter");
 
+        btnDelete.setText("Radera");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,10 +112,6 @@ public class EditCustomer extends javax.swing.JFrame {
                                 .addComponent(lbl_firstName)
                                 .addGap(73, 73, 73)
                                 .addComponent(txt_firstName))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_comment)
-                                .addGap(58, 58, 58)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_city)
                                 .addGap(98, 98, 98)
@@ -122,12 +135,17 @@ public class EditCustomer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_lastName)
                                 .addGap(66, 66, 66)
-                                .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_comment)
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_save)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnDelete))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(203, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_save)
-                .addGap(284, 284, 284))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +185,9 @@ public class EditCustomer extends javax.swing.JFrame {
                     .addComponent(lbl_comment)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_save)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_save)
+                    .addComponent(btnDelete))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -178,9 +198,25 @@ public class EditCustomer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_firstNameActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        boolean deActivated = false;
+        if (JOptionPane.showConfirmDialog(null, "Är du säker?", "VARNING! Detta kommer att radera vald kund!",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            deActivated = SqlQuery.update(deActivateCustQuery);
+        } else {
+            // no option
+        }
+        if (deActivated) {
+            JOptionPane.showMessageDialog(null, "Kunden är nu raderad!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingen kund har raderats!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btn_save;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
