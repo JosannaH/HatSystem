@@ -52,7 +52,7 @@ public class InvoicePDF {
             paragraph = new Paragraph("Fraktkostnad: " + shippingCost);
             document.add(paragraph);
 
-            if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")) {
+            if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige") || !deliveryAddress.get("Country").equalsIgnoreCase("Sweden")) {
                 paragraph = new Paragraph("Varukod: 52081300");
                 document.add(paragraph);
             }

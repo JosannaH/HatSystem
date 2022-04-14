@@ -23,18 +23,30 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
 
     public void createInvoice() {
 
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File file = chooser.getSelectedFile();
-        String filename = file.getAbsolutePath();
+        JFileChooser fc = new JFileChooser();
+//        fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        fc.setDialogTitle("Välj en mapp");
+//        fc.setApproveButtonText("Välj");
+        int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            
+            File file = fc.getSelectedFile();
+            
+            String searchPath = file.getAbsolutePath();
+            
+  
+            String orderNr = "1";
 
         String weight = tfChosenWeight.getText();
         String shippingCost = tfChosenShippingCost.getText();
         String description = taChosenDescription.getText();
-        String searchPath = "";
-        String orderNr = "";
+        searchPath += ("\\Ordernummer_" + orderNr);
+        
+        InvoicePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);            
+            
+        }
 
-        InvoicePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
     }
 
     /**
@@ -102,7 +114,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfChosenShippingCost)
-                            .addComponent(tfChosenWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfChosenWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(40, 40, 40)
@@ -139,7 +151,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    createInvoice();
+        createInvoice();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
