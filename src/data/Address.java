@@ -44,4 +44,17 @@ public class Address {
         return address;
     }
     
+    /**
+     * Retrieves an address from the database having the specified address ID.
+     * @param addressID
+     * @return A HashMap containing the ID, empty if no match was found.
+     */
+    public static HashMap<String, String> getAddressFromID(String addressID){
+        
+        String query = "SELECT * FROM address WHERE Address_ID = "+ addressID +";";
+        HashMap<String, String> address = SqlQuery.getRow(query);
+        
+        return address;
+    }
+    
 }

@@ -29,6 +29,7 @@ public class AddHatType extends javax.swing.JFrame {
 
     private int customSelectedHatID;
     private int orderedHatID;
+    private static int hatIdentifier = 1;
 
     //konstr
     public AddHatType() {
@@ -40,7 +41,9 @@ public class AddHatType extends javax.swing.JFrame {
         lblStandardErrorMessage.setVisible(false);
         fillList();
     }
-
+    
+    
+    //public String getHatIdentifier;
     /**
      * Fills the fabric combo box with fabric options.
      */
@@ -143,7 +146,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         lbl_size.setText("Storlek");
 
-        cmbStandardChosenSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XSS", "XS", "S", "M", "L", "XL", "XXL" }));
+        cmbStandardChosenSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
         cmbStandardChosenSize.setToolTipText("");
 
         jLabel1.setText("Lägg till standardhatt");
@@ -159,9 +162,8 @@ public class AddHatType extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88))
             .addGroup(panel_standardHatLayout.createSequentialGroup()
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
@@ -517,7 +519,7 @@ public class AddHatType extends javax.swing.JFrame {
                 String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
                 orderedHatID = Integer.parseInt(newHatID);
                 LoginMenu.addToListOtherHat(orderedHatID);
-                LoginMenu.listAllOrders();
+                LoginMenu.listOrderItems();
                 //TODO validering för om hatten verkligen kom in i databasen.
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
@@ -581,7 +583,7 @@ public class AddHatType extends javax.swing.JFrame {
         saveCustomHatToDB();
 
         LoginMenu.addToListOtherHat(orderedHatID);
-        LoginMenu.listAllOrders();
+        LoginMenu.listOrderItems();
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         //TODO: Om alla fönster stängs ner, ändra här.
         dispose();
@@ -594,23 +596,29 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btn_addHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addHatActionPerformed
         
+        String separator = ".";
+        
+        
         lblStandardErrorMessage.setVisible(false);
  
         try {
             String stringID = jListStandardHat.getSelectedValue().substring(0, 8);
             String newString = stringID.replaceAll("\\s", "");
+            String completeHatIdentifier = newString + separator + hatIdentifier;
             int selectedHatID = Integer.parseInt(newString);
             
             String chosenSize = cmbStandardChosenSize.getSelectedItem().toString();
             
-            LoginMenu.addToListStandardHat(selectedHatID);
-            LoginMenu.listAllOrders();
+            LoginMenu.addToListStandardHat(completeHatIdentifier, chosenSize);
+            LoginMenu.listOrderItems();
             JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
+            hatIdentifier++;
             this.dispose();
             
         } catch (NullPointerException e) {
             lblStandardErrorMessage.setVisible(true);
         }
+        
 
 //        String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
 //        orderedHatID = Integer.parseInt(newHatID);
