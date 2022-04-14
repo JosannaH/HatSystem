@@ -520,7 +520,7 @@ public class AddHatType extends javax.swing.JFrame {
                 String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
                 orderedHatID = Integer.parseInt(newHatID);
                 LoginMenu.addToListOtherHat(orderedHatID);
-                LoginMenu.listAllOrders();
+                LoginMenu.listOrderItems();
                 //TODO validering för om hatten verkligen kom in i databasen.
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
@@ -584,7 +584,7 @@ public class AddHatType extends javax.swing.JFrame {
         saveCustomHatToDB();
 
         LoginMenu.addToListOtherHat(orderedHatID);
-        LoginMenu.listAllOrders();
+        LoginMenu.listOrderItems();
         JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
         //TODO: Om alla fönster stängs ner, ändra här.
         dispose();
@@ -611,7 +611,7 @@ public class AddHatType extends javax.swing.JFrame {
             String chosenSize = cmbStandardChosenSize.getSelectedItem().toString();
             
             LoginMenu.addToListStandardHat(completeHatIdentifier, chosenSize);
-            LoginMenu.listAllOrders();
+            LoginMenu.listOrderItems();
             JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
             hatIdentifier++;
             this.dispose();
