@@ -4,7 +4,7 @@
  */
 package hatsystem;
 
-import data.InvoicePDF;
+import data.GeneratePDF;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -44,7 +44,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
             searchPath += ("\\Fraktsedel_Ordernummer_" + orderNr);
 
             //skapar fraktsedeln
-            InvoicePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
+            GeneratePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
         }
     }
 

@@ -16,19 +16,64 @@ import data.SqlQuery;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
  * @author Friday
  */
-public class InvoicePDF {
+public class GeneratePDF {
+
+    private static InfDB idb;
+
+    public static void main(String args[]) {
+        try {
+            try {
+                idb = new InfDB("hatdb", "3306", "hatdb", "hatkey");
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+
+            SqlQuery.setDatabase(idb);
+
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testMoms.pdf"));
+
+            document.open();
+
+            Paragraph paragraph = new Paragraph("Totalförsäljning inkl. moms");
+
+            document.add(paragraph);
+
+            ArrayList<String> allOrders = SqlQuery.getColumn("SELECT Total_Price FROM orders WHERE Order_Date LIKE '2022%';");
+
+            double totalPrice = 0;
+
+            for (String s : allOrders) {
+                totalPrice += Double.parseDouble(s);
+            }
+            paragraph = new Paragraph("Totalförsäljning: " + totalPrice);
+            document.add(paragraph);
+
+            paragraph = new Paragraph("Moms: " + totalPrice * 0.25);
+            document.add(paragraph);
+
+            document.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+    }
 
     public static void generateInvoicePDF(String weight, String shippingCost, String description, String searchPath, String orderNr) {
 
         try {
 
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(searchPath+ ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(searchPath + ".pdf"));
 
             document.open();
 
