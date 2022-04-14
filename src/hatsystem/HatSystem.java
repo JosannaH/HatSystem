@@ -30,8 +30,7 @@ public class HatSystem {
         }
 
         SqlQuery.setDatabase(idb);
-
-        new GenerateInvoicePDF().setVisible(true);
+        
         
     }
 }

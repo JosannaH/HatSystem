@@ -5,6 +5,7 @@
 package hatsystem;
 
 import data.GeneratePDF;
+import data.Validation;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -15,37 +16,51 @@ import javax.swing.JOptionPane;
  */
 public class GenerateInvoicePDF extends javax.swing.JFrame {
 
-   private String orderNr;
-   
+    private String orderNr;
+
     public GenerateInvoicePDF(String orderNr) {
         initComponents();
         this.orderNr = orderNr;
+        lblErrorMessage.setVisible(false);
     }
 
     public void createInvoice() {
+        lblErrorMessage.setVisible(false);
 
-        JFileChooser fc = new JFileChooser();
-        //så användaren endast kan välja mappar
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        // behövs validering på de två nedanstående raderna så de endast innehåller siffror
+        String weight = tfChosenWeight.getText();
+        String shippingCost = tfChosenShippingCost.getText();
 
-        int returnVal = fc.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        String description = taChosenDescription.getText();
 
-            File file = fc.getSelectedFile();
-            //hämtar den valda mappens sökväg
-            String searchPath = file.getAbsolutePath();
+        if (!weight.isBlank() && !shippingCost.isBlank() && !description.isBlank()) {
 
+            if (Validation.isDouble(shippingCost) && Validation.isDouble(weight)) {
 
-            // behövs validering på de två nedanstående raderna så de endast innehåller siffror
-            String weight = tfChosenWeight.getText();
-            String shippingCost = tfChosenShippingCost.getText();
+                JFileChooser fc = new JFileChooser();
+                //så användaren endast kan välja mappar
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-            String description = taChosenDescription.getText();
-            searchPath += ("\\Fraktsedel_Ordernummer_" + orderNr);
+                int returnVal = fc.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-            //skapar fraktsedeln
-            GeneratePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
-            JOptionPane.showMessageDialog(null, "Fraktsedeln har skapats");
+                    File file = fc.getSelectedFile();
+                    //hämtar den valda mappens sökväg
+                    String searchPath = file.getAbsolutePath();
+
+                    searchPath += ("\\Fraktsedel_Ordernummer_" + orderNr);
+
+                    //skapar fraktsedeln
+                    GeneratePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
+                    JOptionPane.showMessageDialog(null, "Fraktsedeln har skapats");
+                }
+            } else {
+                lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror");
+                lblErrorMessage.setVisible(true);
+            }
+        } else {
+            lblErrorMessage.setText("Vänligen fyll i alla fält");
+            lblErrorMessage.setVisible(true);
         }
     }
 
@@ -65,7 +80,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
         taChosenDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,9 +103,9 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("FEL");
+        lblErrorMessage.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorMessage.setText("FEL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +134,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
@@ -141,7 +156,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addComponent(jLabel5)
+                .addComponent(lblErrorMessage)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(57, 57, 57))
@@ -161,8 +176,8 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JTextArea taChosenDescription;
     private javax.swing.JTextField tfChosenShippingCost;
     private javax.swing.JTextField tfChosenWeight;
