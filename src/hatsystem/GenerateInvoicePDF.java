@@ -7,6 +7,7 @@ package hatsystem;
 import data.GeneratePDF;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,11 +15,11 @@ import javax.swing.JFileChooser;
  */
 public class GenerateInvoicePDF extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GenerateInvoicePDF
-     */
-    public GenerateInvoicePDF() {
+   private String orderNr;
+   
+    public GenerateInvoicePDF(String orderNr) {
         initComponents();
+        this.orderNr = orderNr;
     }
 
     public void createInvoice() {
@@ -34,7 +35,6 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
             //hämtar den valda mappens sökväg
             String searchPath = file.getAbsolutePath();
 
-            String orderNr = "1";
 
             // behövs validering på de två nedanstående raderna så de endast innehåller siffror
             String weight = tfChosenWeight.getText();
@@ -45,6 +45,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
 
             //skapar fraktsedeln
             GeneratePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
+            JOptionPane.showMessageDialog(null, "Fraktsedeln har skapats");
         }
     }
 

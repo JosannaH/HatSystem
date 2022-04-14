@@ -26,28 +26,19 @@ import oru.inf.InfException;
  */
 public class GeneratePDF {
 
-    private static InfDB idb;
-
-    public static void main(String args[]) {
+    public static void generateMomsPDF(String year, String searchPath) {
         try {
-            try {
-                idb = new InfDB("hatdb", "3306", "hatdb", "hatkey");
-            } catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, ex);
-            }
-
-            SqlQuery.setDatabase(idb);
 
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testMoms.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(searchPath + ".pdf"));
 
             document.open();
 
-            Paragraph paragraph = new Paragraph("Totalförsäljning inkl. moms");
+            Paragraph paragraph = new Paragraph("Totalförsäljning år " + year + " inkl. moms");
 
             document.add(paragraph);
 
-            ArrayList<String> allOrders = SqlQuery.getColumn("SELECT Total_Price FROM orders WHERE Order_Date LIKE '2022%';");
+            ArrayList<String> allOrders = SqlQuery.getColumn("SELECT Total_Price FROM orders WHERE Order_Date LIKE '"+ year +"%';");
 
             double totalPrice = 0;
 
