@@ -146,7 +146,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         lbl_size.setText("Storlek");
 
-        cmbStandardChosenSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XSS", "XS", "S", "M", "L", "XL", "XXL" }));
+        cmbStandardChosenSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XXS", "XS", "S", "M", "L", "XL", "XXL" }));
         cmbStandardChosenSize.setToolTipText("");
 
         jLabel1.setText("Lägg till standardhatt");
@@ -162,9 +162,8 @@ public class AddHatType extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88))
             .addGroup(panel_standardHatLayout.createSequentialGroup()
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_standardHatLayout.createSequentialGroup()

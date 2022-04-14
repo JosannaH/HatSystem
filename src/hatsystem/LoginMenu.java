@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import data.Customer;
 import data.Address;
+import javax.swing.JList;
 
 /**
  *
@@ -36,6 +37,11 @@ public class LoginMenu extends javax.swing.JFrame {
     private static ArrayList<Integer> arrayOtherHat = new ArrayList<Integer>();
     private static DefaultListModel<String> orderListModel = new DefaultListModel<>();
     private Font defaultListFontOther;
+    
+    private static DefaultListModel<String> listModel = new DefaultListModel<>();
+    
+    private LoginMenu test;
+    
 
     public LoginMenu() {
         initComponents();
@@ -43,7 +49,13 @@ public class LoginMenu extends javax.swing.JFrame {
         defaultListFontOther = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
         jPanelOrderAddress.setVisible(false);
+        //jListAllOrders.setModel(listModel);
+        Font defaultListFont = jListAllOrders.getFont();
+        jListAllOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+        
+        this.test = test;
     }
+    
 
     /**
      * Retrieves one standard hats compeleteID and size, and adds them to the jList "listFoundResults". Used in the "Sök" tab.
@@ -553,10 +565,11 @@ public class LoginMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_changePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePasswordActionPerformed
@@ -585,7 +598,9 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             case "Kunder":
 //TODO listOrderItems();
-                listAllCustomers();
+                
+                listAllCustomers(listModel);
+                
                 break;
         }
     }//GEN-LAST:event_btnSearchCategoryActionPerformed
@@ -599,7 +614,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterStandardHatActionPerformed
 
     private void btnCreateNewCustomerFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewCustomerFromOrderActionPerformed
-        new FindCustomerFromOrder().setVisible(true);
+        new FindCustomerFromOrder(this).setVisible(true);
     }//GEN-LAST:event_btnCreateNewCustomerFromOrderActionPerformed
 
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
@@ -670,11 +685,11 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
     // från här
-    private void listAllCustomers() {
+    public static void listAllCustomers(DefaultListModel listModel) {
 
 
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        listFoundResults.setModel(listModel);
+//        DefaultListModel<String> listModel = new DefaultListModel<>();
+//        resultList.setModel(listModel);
 
         ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
         int index = 0;
@@ -697,8 +712,27 @@ public class LoginMenu extends javax.swing.JFrame {
             index++;
         }
 
-        Font defaultListFont = listFoundResults.getFont();
-        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+//        Font defaultListFont = resultList.getFont();
+//        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+    
+    public void setCustomerStuff(HashMap<String, String> customerInfo){
+        
+    }
+    
+    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo){
+        
+        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
+        
+        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
+        
+        txtDeliveryAdress.setText(address.get("Street"));
+        txtPostCode.setText(address.get("Postal"));
+        txtCity.setText(address.get("City"));
+        txtCountry.setText(address.get("Country"));
+        jPanelOrderAddress.setVisible(true);
+              
+        
     }
 
     //till här
