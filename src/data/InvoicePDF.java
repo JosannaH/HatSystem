@@ -27,7 +27,6 @@ public class InvoicePDF {
 
         try {
 
-//            String fileName = "C:\\Users\\Friday\\Desktop\\UNI\\Scrum & eXtreme Programming\\PDF\\testar.pdf";
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(searchPath+ ".pdf"));
 
@@ -52,7 +51,7 @@ public class InvoicePDF {
             paragraph = new Paragraph("Fraktkostnad: " + shippingCost);
             document.add(paragraph);
 
-            if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige") || !deliveryAddress.get("Country").equalsIgnoreCase("Sweden")) {
+            if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")) {
                 paragraph = new Paragraph("Varukod: 52081300");
                 document.add(paragraph);
             }

@@ -24,29 +24,28 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
     public void createInvoice() {
 
         JFileChooser fc = new JFileChooser();
-//        fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
+        //så användaren endast kan välja mappar
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//        fc.setDialogTitle("Välj en mapp");
-//        fc.setApproveButtonText("Välj");
+
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            
+
             File file = fc.getSelectedFile();
-            
+            //hämtar den valda mappens sökväg
             String searchPath = file.getAbsolutePath();
-            
-  
+
             String orderNr = "1";
 
-        String weight = tfChosenWeight.getText();
-        String shippingCost = tfChosenShippingCost.getText();
-        String description = taChosenDescription.getText();
-        searchPath += ("\\Ordernummer_" + orderNr);
-        
-        InvoicePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);            
-            
-        }
+            // behövs validering på de två nedanstående raderna så de endast innehåller siffror
+            String weight = tfChosenWeight.getText();
+            String shippingCost = tfChosenShippingCost.getText();
 
+            String description = taChosenDescription.getText();
+            searchPath += ("\\Fraktsedel_Ordernummer_" + orderNr);
+
+            //skapar fraktsedeln
+            InvoicePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
+        }
     }
 
     /**
