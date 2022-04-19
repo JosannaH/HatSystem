@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class Login extends javax.swing.JFrame {
 
-    
+    private String username;
     /**
      * Creates new form Login
      */
@@ -113,7 +113,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
-        String username = txt_username.getText();
+        username = txt_username.getText();
         char []  password = txt_password.getPassword();
         
         // TODO: validera textfält
@@ -124,7 +124,7 @@ public class Login extends javax.swing.JFrame {
         
             if (Arrays.equals(password, password_db.toCharArray())){              
                 setVisible(false);
-                LoginMenu menu = new LoginMenu();
+                LoginMenu menu = new LoginMenu(username);
                 menu.setVisible(true);
                 dispose();
             }

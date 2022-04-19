@@ -240,14 +240,14 @@ public class AddCustomer extends javax.swing.JFrame {
                     Customer.addCustomer(firstName, lastName, email, telephone, addedAddressID, comment);
                     JOptionPane.showMessageDialog(null, "Kunden är registrerad!");
                     this.dispose();
-                    new LoginMenu().setVisible(true);
+                    //LoginMenu().setVisible(true);
                 }
                 else{
                     String chosenAddressID = chosenAddress.get("Address_ID");
                     Customer.addCustomer(firstName, lastName, email, telephone, chosenAddressID, comment);
                     JOptionPane.showMessageDialog(null, "Kunden är registrerad!");
                     this.dispose();
-                    new LoginMenu().setVisible(true);
+                    //new LoginMenu().setVisible(true);
                 }
             }
         }

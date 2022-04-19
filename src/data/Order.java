@@ -25,6 +25,8 @@ public class Order {
                 + "VALUES('" + totalPrice + "', '" + deliveryDate + "', '" + orderDate + "', '" + status + "', '" + deliveryAddress + "', '" + customer + "', '" + createdBy + "', 1);";
         SqlQuery.add(query);
     }   
+    
+    
       
     
 }

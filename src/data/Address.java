@@ -57,4 +57,20 @@ public class Address {
         return address;
     }
     
+    public static boolean doesAddressExist (String street, String postCode, String city, String country ){
+        boolean exists = true;
+        
+        String query = "select count(*) from address where Street in ('" + street + "') "
+                + "and Postal in ('" + postCode + "')"
+                + "and City in ('" + city + "') "
+                + "and Country in ('" + country + "');";
+        
+        int count = Integer.parseInt(SqlQuery.getValue(query));
+        if(count < 1){
+            exists = false;
+        }
+      
+        return exists;    
+   }
+    
 }

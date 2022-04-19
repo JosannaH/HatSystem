@@ -30,35 +30,48 @@ public class LoginMenu extends javax.swing.JFrame {
     /**
      * Creates new form LoginMenu
      */
-
+    private static String username;
     // A HashMap that stores id and size from class AddHatType.
     private static HashMap<String, String> hashMapStandardHat = new HashMap<>();
     // An Array that stores id from class AddHatType.
     private static ArrayList<Integer> arrayOtherHat = new ArrayList<Integer>();
     private static DefaultListModel<String> orderListModel = new DefaultListModel<>();
     private Font defaultListFontOther;
-    
     private static DefaultListModel<String> listModel = new DefaultListModel<>();
-    
-    private LoginMenu test;
-    
 
-    public LoginMenu() {
+    private static HashMap<String, String> hashMapListPrice = new HashMap<>();
+
+    // refers to current LoginMenu object
+    private static LoginMenu mainLoginMenu;
+
+    public LoginMenu(String username) {
         initComponents();
         jListAllOrders.setModel(orderListModel);
         defaultListFontOther = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
         jPanelOrderAddress.setVisible(false);
-        //jListAllOrders.setModel(listModel);
+        listFoundResults.setModel(listModel);
         Font defaultListFont = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-        
-        this.test = test;
+
+        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+
+        this.mainLoginMenu = mainLoginMenu;
+        this.username = username;
     }
-    
 
     /**
-     * Retrieves one standard hats compeleteID and size, and adds them to the jList "listFoundResults". Used in the "Sök" tab.
+     * Returns the logged in username
+     *
+     * @return
+     */
+    public static String getUsername() {
+        return username;
+    }
+
+    /**
+     * Retrieves one standard hats compeleteID and size, and adds them to the
+     * jList "listFoundResults". Used in the "Sök" tab.
      */
     public static void addToListStandardHat(String completeHatIdentifier, String size) {
         hashMapStandardHat.put(completeHatIdentifier, size);
@@ -66,7 +79,9 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * Retrives one custum or special hats id and adds it to the ArrayList. Is then used for retrieving the hat from db.
+     * Retrives one custum or special hats id and adds it to the ArrayList. Is
+     * then used for retrieving the hat from db.
+     *
      * @param hatID
      */
     public static void addToListOtherHat(int hatID) {
@@ -79,7 +94,9 @@ public class LoginMenu extends javax.swing.JFrame {
      * Fills the jList with standard hats from db.
      */
     private void listAllStandardHats() {
-
+        
+        hashMapListPrice.clear();
+        
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listFoundResults.setModel(listModel);
 
@@ -97,12 +114,22 @@ public class LoginMenu extends javax.swing.JFrame {
         Font defaultListFont = listFoundResults.getFont();
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
+    
+    private static String getTotalPrice(){
+        int totalPrice = 0;
+        for (String i : hashMapListPrice.keySet()){
+            int price = Integer.parseInt(hashMapListPrice.get(i));
+            
+            totalPrice += price;
+        }
+        String stringPrice = Integer.toString(totalPrice);
+        return stringPrice;
+    }
 
     /**
      * Fills the jList with information about all hats for the ongoing order.
      */
     public static void listOrderItems() {
-
         ArrayList<HashMap<String, String>> addedStandardHats = new ArrayList<>();
         ArrayList<HashMap<String, String>> addedOtherHats = new ArrayList<>();
 
@@ -111,7 +138,7 @@ public class LoginMenu extends javax.swing.JFrame {
         orderListModel.clear();
 
         if (!hashMapStandardHat.isEmpty()) {
-                hashMapStandardHat.forEach((key, value) -> {
+            hashMapStandardHat.forEach((key, value) -> {
                 String id = key.substring(0, key.indexOf("."));
                 HashMap<String, String> fetchedHat = SqlQuery.getRow("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID = " + id + ";");
                 addedStandardHats.add(fetchedHat);
@@ -135,6 +162,8 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"),
                         completeID, currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), size));
+                
+                hashMapListPrice.put(currentHat.get("Standard_Hat_ID"), currentHat.get("Price"));
                 index++;
 
             }
@@ -157,13 +186,16 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C"
                         + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), currentHat.get("Size")));
-
+                hashMapListPrice.put(currentHat.get("Standard_Hat_ID"), currentHat.get("Price"));   
                 index2++;
 
             }
 
         }
+        String totalPrice = getTotalPrice();
+        mainLoginMenu.lblTotalPrice.setText(totalPrice);
     }
+    
 
     /**
      * Deletes all hats in jList from db and static lists.
@@ -181,7 +213,9 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -214,6 +248,10 @@ public class LoginMenu extends javax.swing.JFrame {
         txtPostCode = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
         txtCountry = new javax.swing.JTextField();
+        lblCustomerNumber = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblTotalPrice = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         panel_register = new javax.swing.JPanel();
         btnRegisterCustomer = new javax.swing.JButton();
         btnRegisterStandardHat = new javax.swing.JButton();
@@ -273,7 +311,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Start", panel_start);
@@ -366,58 +404,70 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel7.setText("Kundnummer");
+
+        jLabel9.setText("Summa");
+
         javax.swing.GroupLayout panel_createOrderLayout = new javax.swing.GroupLayout(panel_createOrder);
         panel_createOrder.setLayout(panel_createOrderLayout);
         panel_createOrderLayout.setHorizontalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_createOrderLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(btnSaveOrder))
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtExpectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jPanelOrderAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCustomerNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCustomerName, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(btnCreateNewCustomerFromOrder))
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAddNewHatType)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel_createOrderLayout.createSequentialGroup()
+                                .addComponent(btnSaveOrder)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btbDeleteChosenHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panel_createOrderLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(105, 105, 105)
-                                .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(btnCreateNewCustomerFromOrder))
-                            .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel6))
-                                .addGap(53, 53, 53)
-                                .addComponent(jPanelOrderAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtExpectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(21, 31, Short.MAX_VALUE))
         );
         panel_createOrderLayout.setVerticalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCustomerNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lblCustomerName)
-                    .addComponent(btnCreateNewCustomerFromOrder))
+                    .addComponent(btnCreateNewCustomerFromOrder)
+                    .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
@@ -448,7 +498,10 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSaveOrder)
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaveOrder)
+                    .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(16, 16, 16))
         );
 
@@ -496,7 +549,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addComponent(btnRegisterStandardHat)
                 .addGap(45, 45, 45)
                 .addComponent(btnRegisterFabric)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera", panel_register);
@@ -552,7 +605,7 @@ public class LoginMenu extends javax.swing.JFrame {
                     .addComponent(btnSearchCategory))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sök", panel_search);
@@ -598,9 +651,9 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             case "Kunder":
 //TODO listOrderItems();
-                
+
                 listAllCustomers(listModel);
-                
+
                 break;
         }
     }//GEN-LAST:event_btnSearchCategoryActionPerformed
@@ -623,35 +676,41 @@ public class LoginMenu extends javax.swing.JFrame {
         String orderDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         String status = "Ongoing";
 
-        String streetAddress = "";
-        String postCode = "";
-        String city = "";
-        String country = "";
+        String streetAddress = txtDeliveryAdress.getText();
+        String postCode = txtPostCode.getText();
+        String city = txtCity.getText();
+        String country = txtCountry.getText();
         HashMap<String, String> chosenAddress = Address.getAddress(streetAddress, postCode, city, country);
         String adressID = chosenAddress.get("Address_ID");
 
-        // TODO få med kunden från sökrutan/skapandet av kund
-        String customer = "";
-        // TODO få med vem som skapade ordern. Behöver man lagra detta i konstruktorn för att få med vem som är inloggad?
-        String createdBy = "";
-
         // TODO validering för om kund/adress/datum är valt
+        String customerNr = lblCustomerNumber.getText();
+        String customerID = Customer.getCustomerID(customerNr);
 
-        if(!hashMapStandardHat.isEmpty()){
-            int index = 0;
-            while (index < hashMapStandardHat.size()){
-                Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customer, createdBy);
+        if (hashMapStandardHat.isEmpty() && arrayOtherHat.isEmpty()) {
+
+        } else {
+
+            boolean exists = Address.doesAddressExist(streetAddress, postCode, city, country);
+            if (!exists) {
+                Address.addAddress(streetAddress, postCode, city, country);
+            }
+
+            if (!hashMapStandardHat.isEmpty()) {
+                int index = 0;
+                while (index < hashMapStandardHat.size()) {
+                    Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customerID, username);
+                }
+
+            }
+            if (!arrayOtherHat.isEmpty()) {
+
             }
         }
-        else{
-            for (int id : arrayOtherHat){
 
-            }
-        }
-        if(!arrayOtherHat.isEmpty()){
-
-        }
     }//GEN-LAST:event_btnSaveOrderActionPerformed
+
+
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         deleteNonOrderedHats();
@@ -659,6 +718,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     /**
      * Deletes choosen hat from jList, db and static lists.
+     *
      * @param evt
      */
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
@@ -687,9 +747,9 @@ public class LoginMenu extends javax.swing.JFrame {
     // från här
     public static void listAllCustomers(DefaultListModel listModel) {
 
-
 //        DefaultListModel<String> listModel = new DefaultListModel<>();
 //        resultList.setModel(listModel);
+        listModel.clear();
 
         ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
         int index = 0;
@@ -715,24 +775,24 @@ public class LoginMenu extends javax.swing.JFrame {
 //        Font defaultListFont = resultList.getFont();
 //        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
-    public void setCustomerStuff(HashMap<String, String> customerInfo){
-        
+
+    public void setCustomerStuff(HashMap<String, String> customerInfo) {
+
     }
-    
-    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo){
-        
+
+    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
+
         lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
-        
+
         HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
-        
+
         txtDeliveryAdress.setText(address.get("Street"));
         txtPostCode.setText(address.get("Postal"));
         txtCity.setText(address.get("City"));
         txtCountry.setText(address.get("Country"));
         jPanelOrderAddress.setVisible(true);
-              
-        
+        lblCustomerNumber.setText(customerNr);
+
     }
 
     //till här
@@ -757,6 +817,8 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListAllOrders;
     private javax.swing.JPanel jPanelOrderAddress;
     private javax.swing.JScrollPane jScrollPane1;
@@ -764,6 +826,8 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblChooseCategory;
     private javax.swing.JLabel lblCustomerName;
+    private javax.swing.JLabel lblCustomerNumber;
+    private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JList<String> listFoundResults;
     private javax.swing.JPanel panel_createOrder;
