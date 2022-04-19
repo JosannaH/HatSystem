@@ -4,17 +4,21 @@
  */
 package hatsystem;
 
+import javax.swing.JOptionPane;
+import data.SqlQuery;
 /**
  *
  * @author Friday
  */
 public class EditOrder extends javax.swing.JFrame {
-
+    private static String orderId = "2";
+    public String deActivateOrderQuery = "update orders set Active = 0 where Orders_ID = "+orderId+";";
     /**
      * Creates new form EditOrder
      */
     public EditOrder() {
         initComponents();
+        this.orderId = orderId;
     }
 
     /**
@@ -26,24 +30,55 @@ public class EditOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnDelete = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnDelete.setText("Radera");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(513, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(89, 89, 89))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(384, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(58, 58, 58))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        boolean deActivated = false;
+        if (JOptionPane.showConfirmDialog(null, "Är du säker?", "VARNING! Detta kommer att radera vald order!",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            deActivated = SqlQuery.update(deActivateOrderQuery);
+        } else {
+            // no option
+        }
+        if (deActivated) {
+            JOptionPane.showMessageDialog(null, "Ordern är nu raderad!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingen order har raderats!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     // End of variables declaration//GEN-END:variables
 }
