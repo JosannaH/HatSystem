@@ -10,6 +10,9 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import data.Address;
+import data.Validation;
 
 /**
  *
@@ -18,6 +21,13 @@ import javax.swing.DefaultListModel;
 public class EditOrder extends javax.swing.JFrame {
 
     private int orderID;
+    private String oldCustomerID;
+    private String oldStreet;
+    private String oldPostal;
+    private String oldCity;
+    private String oldCountry;
+    private String oldDeliveryDate;
+    private String oldStatus;
 
     /**
      * Creates new form EditOrder
@@ -37,15 +47,16 @@ public class EditOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstListOrderedHats = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         lblOrderNr = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtCustName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtShippingAd = new javax.swing.JTextField();
+        tfStreet = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         lblTotPrice = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -54,37 +65,43 @@ public class EditOrder extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tfExpectedDeliveryDate = new javax.swing.JTextField();
+        tfPostal = new javax.swing.JTextField();
+        tfCity = new javax.swing.JTextField();
+        tfCountry = new javax.swing.JTextField();
+        btnDeleteOrder = new javax.swing.JButton();
+        btnDeleteHat = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
+        tfCustomerNr = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Redigera :-)");
+        jLabel1.setText("Redigera orderuppgifter");
 
-        lstListOrderedHats.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(lstListOrderedHats);
 
         jLabel2.setText("Ordernummer:");
 
         lblOrderNr.setText("jLabel3");
 
-        jLabel4.setText("Kundens namn");
-
-        txtCustName.setText("jTextField1");
+        jLabel4.setText("Kundnummer");
 
         jLabel5.setText("Leveransadress");
 
-        txtShippingAd.setText("jTextField2");
+        tfStreet.setToolTipText("Gatuadress");
 
-        jLabel6.setText("Produkter i ordern");
+        jLabel6.setText("Redigera hattuppgifter");
 
         lblTotPrice.setText("------");
 
         jLabel3.setText("Orderstatus");
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Under utvärdering", "Pågående", "Redo att skickas", "Skickad" }));
 
         lblOrderDate.setText("jLabel7");
 
@@ -92,89 +109,196 @@ public class EditOrder extends javax.swing.JFrame {
 
         jLabel7.setText("Förväntat leveransdatum:");
 
-        tfExpectedDeliveryDate.setText("jTextField1");
+        tfPostal.setToolTipText("Postnummer");
+
+        tfCity.setToolTipText("Stad");
+
+        tfCountry.setToolTipText("Land");
+
+        btnDeleteOrder.setBackground(new java.awt.Color(153, 0, 0));
+        btnDeleteOrder.setForeground(new java.awt.Color(0, 0, 0));
+        btnDeleteOrder.setText("Radera order");
+        btnDeleteOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteOrderActionPerformed(evt);
+            }
+        });
+
+        btnDeleteHat.setText("Radera vald hatt från ordern");
+        btnDeleteHat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteHatActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Totalpris:");
+
+        btnSave.setText("Spara kund- och orderuppgifter");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        tfCustomerNr.setText("----------");
+
+        lblName.setText("Bertil Bertilsson");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6)
-                        .addComponent(jScrollPane1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeleteOrder)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblOrderNr, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(50, 50, 50)
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel4))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfExpectedDeliveryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(tfCustomerNr, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5)
-                                    .addGap(18, 18, 18))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(40, 40, 40)))
-                            .addGap(39, 39, 39)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtShippingAd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(lblTotPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblOrderNr, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                            .addGap(50, 50, 50)
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(62, 62, 62)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfExpectedDeliveryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(55, 55, 55))
+                                    .addGap(61, 61, 61)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfCity, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(tfStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(tfPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblTotPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDeleteHat))))
+                        .addContainerGap(52, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(btnSave)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(625, 625, 625))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnDeleteOrder))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblOrderNr)
                     .addComponent(jLabel8)
                     .addComponent(lblOrderDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tfExpectedDeliveryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblName)
+                    .addComponent(tfCustomerNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtShippingAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tfStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotPrice)
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotPrice)
+                    .addComponent(btnDeleteHat)
+                    .addComponent(jLabel9))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDeleteOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrderActionPerformed
+        int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna order?", "Varning!", JOptionPane.YES_NO_OPTION);
+
+        if (x == JOptionPane.YES_OPTION) {
+            SqlQuery.update("UPDATE orders SET Active = 0 WHERE Orders_ID = " + orderID + ";");
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_btnDeleteOrderActionPerformed
+
+    private void btnDeleteHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHatActionPerformed
+        int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna hatt från ordern?", "Varning!", JOptionPane.YES_NO_OPTION);
+
+        if (x == JOptionPane.YES_OPTION) {
+            String chosenHat = lstListOrderedHats.getSelectedValue();
+            if (chosenHat.substring(1, 2).equalsIgnoreCase("S")) {
+                String hatID = chosenHat.substring(0, 1);
+                SqlQuery.delete("DELETE FROM ordered_st_hat WHERE Standard_Hat = " + hatID + " AND Order_Nr = " + orderID + ";");
+            } else {
+                String hatID = chosenHat.substring(0, 1);
+                SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + hatID + ";");
+                SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + hatID + ";");
+                SqlQuery.delete("DELETE FROM ordered_hat WHERE Hat_ID = " + hatID + ";");
+                SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + hatID + ";");
+            }
+        }
+        fillHatList();
+    }//GEN-LAST:event_btnDeleteHatActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    String chosenDeliveryDate = tfExpectedDeliveryDate.getText();
+    String chosenCustomerNr = tfCustomerNr.getText();
+    String chosenStreet = tfStreet.getText();
+    String chosenPostal = tfPostal.getText();
+    String chosenCity = tfCity.getText();
+    String chosenCountry = tfCountry.getText();
+    
+       
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * Hämtar alla hattar
@@ -182,6 +306,7 @@ public class EditOrder extends javax.swing.JFrame {
     public void fillHatList() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         lstListOrderedHats.setModel(listModel);
+        double totalPrice = 0;
 
         ArrayList<HashMap<String, String>> orderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM Ordered_St_Hat WHERE Order_Nr = " + orderID + ")");
 
@@ -199,6 +324,8 @@ public class EditOrder extends javax.swing.JFrame {
                     size,
                     currentFabric.get("Name"),
                     currentFabric.get("Color")));
+
+            totalPrice += Double.parseDouble(currentHat.get("Price"));
 
             index++;
         }
@@ -219,8 +346,12 @@ public class EditOrder extends javax.swing.JFrame {
                     currentFabric.get("Name"),
                     currentFabric.get("Color")));
 
+            totalPrice += Double.parseDouble(currentHat.get("Price"));
+
             index++;
         }
+
+        lblTotPrice.setText(Double.toString(totalPrice));
 
         Font defaultListFont = lstListOrderedHats.getFont();
         lstListOrderedHats.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
@@ -229,14 +360,70 @@ public class EditOrder extends javax.swing.JFrame {
 
     public void fillOrderInfo() {
         lblOrderNr.setText(Integer.toString(orderID));
-        HashMap<String, String> order = SqlQuery.getRow("SELECT * FROM orders WHERE Orders_ID = "+ orderID +";");
+
+        //fixar orderinfo
+        HashMap<String, String> order = SqlQuery.getRow("SELECT * FROM orders WHERE Orders_ID = " + orderID + ";");
         lblOrderDate.setText(order.get("Order_Date"));
-        tfExpectedDeliveryDate.setText(order.get("Delivery_Date"));
+        oldDeliveryDate = order.get("Delivery_Date");
+        oldStatus = order.get("Status");
         
+        tfExpectedDeliveryDate.setText(oldDeliveryDate);
+        cmbStatus.setSelectedItem(oldStatus);
+
+        //fixar adressinfo
+        HashMap<String, String> address = SqlQuery.getRow("SELECT * FROM address WHERE Address_ID IN (SELECT Delivery_Address FROM orders WHERE Orders_ID = " + orderID + ");");
+        oldStreet = address.get("Street");
+        oldPostal = address.get("Postal");
+        oldCity = address.get("City");
+        oldCountry = address.get("Country");
+
+        tfStreet.setText(oldStreet);
+        tfPostal.setText(oldPostal);
+        tfCity.setText(oldCity);
+        tfCountry.setText(oldCountry);
+
+        //fixar kundinfo
+        HashMap<String, String> customer = SqlQuery.getRow("SELECT * FROM customer WHERE Customer_ID IN (SELECT Customer FROM orders WHERE Orders_ID = " + orderID + ");");
+        lblName.setText(customer.get("First_Name") + " " + customer.get("Last_Name"));
+        oldCustomerID = customer.get("Customer_Nr");
+        
+        tfCustomerNr.setText(oldCustomerID);
+        
+    }
+
+    public void setOrderStatus(String status) {
+        SqlQuery.update("UPDATE orders SET Status = '" + status + "' WHERE Orders_ID = " + orderID + ";");
+    }
+
+    public void setDeliveryDate(String date) {
+        SqlQuery.update("UPDATE orders SET Delivery_Date = '" + date + "' WHERE Orders_ID = " + orderID + ";");
+    }
+
+    public void setCustomer(String customerNr) {
+        String id = SqlQuery.getValue("SELECT Customer_ID FROM customer WHERE Customer_Nr = " + customerNr + ";");
+        SqlQuery.update("UPDATE orders SET Customer = " + id + " WHERE Orders_ID = " + orderID + ";");
+    }
+
+    public void setAddress() {
+        String street = tfStreet.getText();
+        String postal = tfPostal.getText();
+        String city = tfCity.getText();
+        String country = tfCountry.getText();
+
+        HashMap<String, String> existingAddress = Address.getAddress(street, postal, city, country);
+        if (existingAddress.isEmpty()) {
+            Address.addAddress(street, postal, city, country);
+        }
+        HashMap<String, String> address = Address.getAddress(street, postal, city, country);
+        String addressID = address.get("Address_ID");
+        SqlQuery.update("UPDATE orders SET Delivery_Address = " + addressID + " WHERE Orders_ID = " + orderID + ";");
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeleteHat;
+    private javax.swing.JButton btnDeleteOrder;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -246,13 +433,20 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderDate;
     private javax.swing.JLabel lblOrderNr;
     private javax.swing.JLabel lblTotPrice;
     private javax.swing.JList<String> lstListOrderedHats;
+    private javax.swing.JTextField tfCity;
+    private javax.swing.JTextField tfCountry;
+    private javax.swing.JTextField tfCustomerNr;
     private javax.swing.JTextField tfExpectedDeliveryDate;
-    private javax.swing.JTextField txtCustName;
-    private javax.swing.JTextField txtShippingAd;
+    private javax.swing.JTextField tfPostal;
+    private javax.swing.JTextField tfStreet;
     // End of variables declaration//GEN-END:variables
 }
