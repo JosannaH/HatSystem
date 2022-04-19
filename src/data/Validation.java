@@ -45,6 +45,11 @@ public class Validation {
         return isDouble;
     }
     
+    /**
+     * Checks if a string is in the correct date format, yyyy-mm-dd.
+     * @param stringToCheck
+     * @return true if correct format, otherwise false
+     */
     public static boolean isDate(String stringToCheck) {
         boolean returBoolean = true;
 
@@ -72,10 +77,10 @@ public class Validation {
 
         if (monthsAndDays.containsKey(month)) {
             
-            int angivenDag = Integer.parseInt(day);
-            int antalDagar = Integer.parseInt(monthsAndDays.get(month));
+            int chosenDay = Integer.parseInt(day);
+            int nrOfDays = Integer.parseInt(monthsAndDays.get(month));
             
-            if (angivenDag > 0 && angivenDag <= antalDagar) {
+            if (chosenDay > 0 && chosenDay <= nrOfDays) {
                 isVaild = true;
             }
         }
@@ -84,26 +89,27 @@ public class Validation {
     
     /**
      * En HashMap för att hålla reda på hur många dagar det finns i respektive månad.
+     * Används av metoden isValidMonthAndDay
      * Används för att kontrollera användares datum-input.
      * Fungerar inte med skottår.
      * @return En HashMap med månadens nr (01-12) och tillhörande antal dagar i den månaden.
      */
-    public static HashMap<String, String> monthsAndDays() {
-        HashMap<String, String> manaderOchDagar = new HashMap<>();
+    private static HashMap<String, String> monthsAndDays() {
+        HashMap<String, String> monthsAndDays = new HashMap<>();
 
-        manaderOchDagar.put("01", "31");
-        manaderOchDagar.put("02", "28");
-        manaderOchDagar.put("03", "31");
-        manaderOchDagar.put("04", "30");
-        manaderOchDagar.put("05", "31");
-        manaderOchDagar.put("06", "30");
-        manaderOchDagar.put("07", "31");
-        manaderOchDagar.put("08", "31");
-        manaderOchDagar.put("09", "30");
-        manaderOchDagar.put("10", "31");
-        manaderOchDagar.put("11", "30");
-        manaderOchDagar.put("12", "31");
+        monthsAndDays.put("01", "31");
+        monthsAndDays.put("02", "28");
+        monthsAndDays.put("03", "31");
+        monthsAndDays.put("04", "30");
+        monthsAndDays.put("05", "31");
+        monthsAndDays.put("06", "30");
+        monthsAndDays.put("07", "31");
+        monthsAndDays.put("08", "31");
+        monthsAndDays.put("09", "30");
+        monthsAndDays.put("10", "31");
+        monthsAndDays.put("11", "30");
+        monthsAndDays.put("12", "31");
 
-        return manaderOchDagar;
+        return monthsAndDays;
     }
 }
