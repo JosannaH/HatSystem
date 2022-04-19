@@ -41,7 +41,9 @@ public class LoginMenu extends javax.swing.JFrame {
     private static DefaultListModel<String> listModel = new DefaultListModel<>();
 
     private static HashMap<String, String> hashMapListPrice = new HashMap<>();
-    
+    private HashMap<String, String> hashMapListPriceNonStatic;
+    //Had to create a static label variable that references to the non-static lable
+    //to be able to use it with static methods.
     private static JLabel totalPriceLabel;
     
     // refers to current LoginMenu object
@@ -63,6 +65,8 @@ public class LoginMenu extends javax.swing.JFrame {
         this.username = username;
         
         totalPriceLabel = lblTotalPrice;
+        
+        hashMapListPriceNonStatic = hashMapListPrice;
     }
 
     /**
@@ -121,6 +125,19 @@ public class LoginMenu extends javax.swing.JFrame {
     }
     
     private static double getTotalPrice(){
+        double totalPrice = 0;
+        for (String i : hashMapListPrice.keySet()){
+            Double price = Double.parseDouble(hashMapListPrice.get(i));
+            
+            totalPrice += price;
+            
+        }
+        //String stringPrice = Integer.toString(totalPrice);
+        return totalPrice;
+        //currentOrderPrice = totalPrice;
+    }
+    
+    private double getTotalPriceNonStatic(){
         double totalPrice = 0;
         for (String i : hashMapListPrice.keySet()){
             Double price = Double.parseDouble(hashMapListPrice.get(i));
@@ -193,7 +210,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C"
                         + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), currentHat.get("Size")));
-                hashMapListPrice.put("C" + currentHat.get("Hat_ID"), currentHat.get("Price"));   
+                hashMapListPrice.put(currentHat.get("Hat_ID"), currentHat.get("Price"));   
                 index2++;
 
             }
@@ -218,6 +235,8 @@ public class LoginMenu extends javax.swing.JFrame {
         hashMapStandardHat.clear();
         arrayOtherHat.clear();
         orderListModel.clear();
+        hashMapListPrice.clear();
+        lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
     }
 
     /**
@@ -744,11 +763,14 @@ public class LoginMenu extends javax.swing.JFrame {
             SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + customHatID + ";");
             SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + customHatID + ";");
             SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + customHatID + ";");
+            hashMapListPrice.remove(customHatID);
 
         } else {
             hashMapStandardHat.remove(standardHatID);
+            hashMapListPrice.remove(standardHatID);
         }
         listOrderItems();
+        //lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
 
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
