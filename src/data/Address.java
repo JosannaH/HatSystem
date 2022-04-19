@@ -57,6 +57,11 @@ public class Address {
         return address;
     }
     
+    public static String getAddressID(){
+        String addressID = SqlQuery.getValue("SELECT MAX(Address_ID) FROM Address");
+        return addressID;
+    }
+    
     public static boolean doesAddressExist (String street, String postCode, String city, String country ){
         boolean exists = true;
         

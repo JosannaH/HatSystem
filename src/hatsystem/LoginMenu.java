@@ -42,7 +42,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private static DefaultListModel<String> listModel = new DefaultListModel<>();
 
     private static HashMap<String, String> hashMapListPrice = new HashMap<>();
-    private HashMap<String, String> hashMapListPriceNonStatic;
     //Had to create a static label variable that references to the non-static lable
     //to be able to use it with static methods.
     private static JLabel totalPriceLabel;
@@ -65,9 +64,7 @@ public class LoginMenu extends javax.swing.JFrame {
         this.mainLoginMenu = mainLoginMenu;
         this.username = username;
         
-        totalPriceLabel = lblTotalPrice;
-        
-        hashMapListPriceNonStatic = hashMapListPrice;
+        totalPriceLabel = lblTotalPrice;        
     }
 
     /**
@@ -710,7 +707,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String city = txtCity.getText();
         String country = txtCountry.getText();
         HashMap<String, String> chosenAddress = Address.getAddress(streetAddress, postCode, city, country);
-        String adressID = chosenAddress.get("Address_ID");
+        String addressID = chosenAddress.get("Address_ID");
 
         // TODO validering för om kund/adress/datum är valt
         String customerNr = lblCustomerNumber.getText();
@@ -725,9 +722,11 @@ public class LoginMenu extends javax.swing.JFrame {
             boolean exists = Address.doesAddressExist(streetAddress, postCode, city, country);
             if (!exists) {
                 Address.addAddress(streetAddress, postCode, city, country);
+                addressID = Address.getAddressID();
+                
             }
             
-            Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customerID, employeeID);
+            Order.addToOrder(totalPrice, deliveryDate, orderDate, status, addressID, customerID, employeeID);
             int orderID = Order.getOrderID();
 
             if (!hashMapStandardHat.isEmpty()) {
@@ -741,8 +740,14 @@ public class LoginMenu extends javax.swing.JFrame {
 
             }
             if (!arrayOtherHat.isEmpty()) {
-                
+                for(int id : arrayOtherHat){
+                    Order.addToOrderedHat(id, orderID);
+                }
             }
+            hashMapStandardHat.clear();
+            arrayOtherHat.clear();
+            hashMapListPrice.clear();
+            listOrderItems();
         }
 
     }//GEN-LAST:event_btnSaveOrderActionPerformed
