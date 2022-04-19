@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author luna
  */
 public class ChangePsw extends javax.swing.JFrame {
-    public String userName="Mo";
+    public String userName= LoginMenu.getUsername();
     public String oldPasw;
     public String newPasw;
     public String updatePaswQuery;

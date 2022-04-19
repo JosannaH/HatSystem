@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
-        userName = txt_username.getText();
+        String userName = txt_username.getText();
         char []  password = txt_password.getPassword();
 
         // TODO: validera textfält
