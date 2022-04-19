@@ -32,6 +32,5 @@ public class HatSystem {
         SqlQuery.setDatabase(idb);
 
         new Login().setVisible(true);
-        new EditOrder().setVisible(true);
     }
 }
