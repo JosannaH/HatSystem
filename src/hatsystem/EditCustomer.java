@@ -9,7 +9,6 @@ import data.Customer;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import data.SqlQuery;
-import static hatsystem.EditStandardHat.hatId;
 /**
  *
  * @author Friday
