@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import data.Customer;
 import data.Address;
+import javax.swing.JLabel;
 import javax.swing.JList;
 
 /**
@@ -40,7 +41,9 @@ public class LoginMenu extends javax.swing.JFrame {
     private static DefaultListModel<String> listModel = new DefaultListModel<>();
 
     private static HashMap<String, String> hashMapListPrice = new HashMap<>();
-
+    
+    private static JLabel totalPriceLabel;
+    
     // refers to current LoginMenu object
     private static LoginMenu mainLoginMenu;
 
@@ -58,6 +61,8 @@ public class LoginMenu extends javax.swing.JFrame {
 
         this.mainLoginMenu = mainLoginMenu;
         this.username = username;
+        
+        totalPriceLabel = lblTotalPrice;
     }
 
     /**
@@ -115,15 +120,17 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
     
-    private static String getTotalPrice(){
-        int totalPrice = 0;
+    private static double getTotalPrice(){
+        double totalPrice = 0;
         for (String i : hashMapListPrice.keySet()){
-            int price = Integer.parseInt(hashMapListPrice.get(i));
+            Double price = Double.parseDouble(hashMapListPrice.get(i));
             
             totalPrice += price;
+            
         }
-        String stringPrice = Integer.toString(totalPrice);
-        return stringPrice;
+        //String stringPrice = Integer.toString(totalPrice);
+        return totalPrice;
+        //currentOrderPrice = totalPrice;
     }
 
     /**
@@ -163,7 +170,7 @@ public class LoginMenu extends javax.swing.JFrame {
                         completeID, currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), size));
                 
-                hashMapListPrice.put(currentHat.get("Standard_Hat_ID"), currentHat.get("Price"));
+                hashMapListPrice.put(completeID, currentHat.get("Price"));
                 index++;
 
             }
@@ -186,14 +193,15 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C"
                         + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), currentHat.get("Size")));
-                hashMapListPrice.put(currentHat.get("Standard_Hat_ID"), currentHat.get("Price"));   
+                hashMapListPrice.put("C" + currentHat.get("Hat_ID"), currentHat.get("Price"));   
                 index2++;
 
             }
 
         }
-        String totalPrice = getTotalPrice();
-        mainLoginMenu.lblTotalPrice.setText(totalPrice);
+        //myLabel.setText("Test");
+        String totalPrice = String.valueOf(getTotalPrice());
+        totalPriceLabel.setText(totalPrice);
     }
     
 
