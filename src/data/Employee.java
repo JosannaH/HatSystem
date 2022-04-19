@@ -21,7 +21,7 @@ public class Employee {
     
     public static int getEmployeeID(String name) {
 
-        String employeeToCheck = SqlQuery.getValue("SELECT Employee_ID FROM employee WHERE Name = '"+ name +"'");
+        String employeeToCheck = SqlQuery.getValue("SELECT Employee_ID FROM Employee WHERE Username = 'Ottoadmin'");
         int employeeID = Integer.parseInt(employeeToCheck);
         return employeeID;
     }

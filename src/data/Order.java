@@ -16,15 +16,21 @@ public class Order {
     }
     
     public static void addToOrderedStandardHat(String size, int hatID, int orderID) {
-        String query = "INSERT INTO ordered_st_hat (Size, Standard_Hat, Order_Nr) VALUES ('" + size + "', " + hatID + ", '" + orderID + ");";
+        String query = "INSERT INTO ordered_st_hat (Size, Standard_Hat, Order_Nr) VALUES ('" + size + "', " + hatID + ", " + orderID + ");";
         SqlQuery.add(query);
     }
 
-    public static void addToOrder(String totalPrice, String deliveryDate, String orderDate, String status, String deliveryAddress, String customer, String createdBy) {
+    public static void addToOrder(String totalPrice, String deliveryDate, String orderDate, String status, String deliveryAddress, String customer, int createdBy) {
         String query = "Insert INTO orders(Total_Price, Delivery_Date, Order_Date, Status, Delivery_Address, Customer, Created_By, Active) "
-                + "VALUES('" + totalPrice + "', '" + deliveryDate + "', '" + orderDate + "', '" + status + "', '" + deliveryAddress + "', '" + customer + "', '" + createdBy + "', 1);";
+                + "VALUES('" + totalPrice + "', '" + deliveryDate + "', '" + orderDate + "', '" + status + "', '" + deliveryAddress + "', '" + customer + "', " + createdBy + ", 1);";
         SqlQuery.add(query);
-    }   
+    }
+    
+    public static int getOrderID(){
+        String orderID = SqlQuery.getValue("SELECT MAX(Orders_ID) FROM Orders;");
+        int orderIDInt = Integer.parseInt(orderID);
+        return orderIDInt;
+    }
     
     
       

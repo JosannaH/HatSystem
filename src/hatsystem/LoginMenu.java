@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import data.Customer;
 import data.Address;
+import data.Employee;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
@@ -170,9 +171,9 @@ public class LoginMenu extends javax.swing.JFrame {
 
             });
 
-            for (String currentKey : hashMapStandardHat.keySet()) {
-                String key = currentKey;
-            }
+           // for (String currentKey : hashMapStandardHat.keySet()) {
+           //     String key = currentKey;
+           // }
             int index = 0;
 
             while (index < hashMapStandardHat.size()) {
@@ -491,10 +492,11 @@ public class LoginMenu extends javax.swing.JFrame {
                     .addComponent(lblCustomerNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnCreateNewCustomerFromOrder)
-                    .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCustomerName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(btnCreateNewCustomerFromOrder)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
@@ -698,7 +700,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateNewCustomerFromOrderActionPerformed
 
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
-        String totalPrice = "";
+        String totalPrice = lblTotalPrice.getText();
         String deliveryDate = txtExpectedDate.getText();
         String orderDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         String status = "Ongoing";
@@ -714,6 +716,8 @@ public class LoginMenu extends javax.swing.JFrame {
         String customerNr = lblCustomerNumber.getText();
         String customerID = Customer.getCustomerID(customerNr);
 
+        int employeeID = Employee.getEmployeeID(username);
+        
         if (hashMapStandardHat.isEmpty() && arrayOtherHat.isEmpty()) {
 
         } else {
@@ -722,16 +726,22 @@ public class LoginMenu extends javax.swing.JFrame {
             if (!exists) {
                 Address.addAddress(streetAddress, postCode, city, country);
             }
+            
+            Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customerID, employeeID);
+            int orderID = Order.getOrderID();
 
             if (!hashMapStandardHat.isEmpty()) {
-                int index = 0;
-                while (index < hashMapStandardHat.size()) {
-                    Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customerID, username);
+                for(String i : hashMapStandardHat.keySet()){
+                    String size = hashMapStandardHat.get(i);
+                    String standardHatID = i.substring(0, i.indexOf("."));
+                    int hatID = Integer.parseInt(standardHatID);
+                                        
+                    Order.addToOrderedStandardHat(size, hatID, orderID);
                 }
 
             }
             if (!arrayOtherHat.isEmpty()) {
-
+                
             }
         }
 
