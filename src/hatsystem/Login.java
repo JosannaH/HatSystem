@@ -42,6 +42,12 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_usernameActionPerformed(evt);
+            }
+        });
+
         lbl_username.setText("Användarnamn");
 
         lbl_password.setText("Lösenord");
@@ -112,13 +118,13 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
-        String username = txt_username.getText();
+        String userName = txt_username.getText();
         char []  password = txt_password.getPassword();
         
         // TODO: validera textfält
         // TODO: ev ändra till txt_password.getPassword()
         
-        String password_db = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + username + "'");
+        String password_db = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + userName + "'");
         
         
             if (Arrays.equals(password, password_db.toCharArray())){              
@@ -132,6 +138,10 @@ public class Login extends javax.swing.JFrame {
             password = null;
             password_db = "";
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usernameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
