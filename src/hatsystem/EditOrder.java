@@ -4,17 +4,28 @@
  */
 package hatsystem;
 
+import data.Fabric;
+import data.SqlQuery;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Friday
  */
 public class EditOrder extends javax.swing.JFrame {
 
+    
+    private int orderID;
     /**
      * Creates new form EditOrder
      */
     public EditOrder() {
         initComponents();
+        orderID = 1;
+        fillHatList();
     }
 
     /**
@@ -28,7 +39,7 @@ public class EditOrder extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstListOrderedHats = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         lblOrderNr = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,12 +57,12 @@ public class EditOrder extends javax.swing.JFrame {
 
         jLabel1.setText("Redigera :-)");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstListOrderedHats.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstListOrderedHats);
 
         jLabel2.setText("Ordernummer");
 
@@ -153,7 +164,43 @@ public class EditOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+public void fillHatList () {
 
+    ArrayList <HashMap <String, String>> orderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM Ordered_St_Hat WHERE Order_Nr = " + orderID + ")");
+    DefaultListModel <String> listModel = new DefaultListModel<>();
+    lstListOrderedHats.setModel(listModel);
+    
+    int index = 0;
+    while (index < orderedStandardHats.size())
+    {
+    HashMap<String, String> currentHat = orderedStandardHats.get(index);
+    String fabricID = currentHat.get("Hat_Fabric");
+    HashMap <String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+    String size = SqlQuery.getValue("SELECT Size FROM Ordered_St_Hat WHERE Standard_Hat = " + currentHat.get("Standard_Hat_ID") + " AND Order_Nr = " + orderID + ")");
+
+    listModel.addElement(String.format("%-20s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), size, currentFabric.get("Name"), currentFabric.get("Color")));
+
+    index++;
+    }
+    Font defaultListFont = lstListOrderedHats.getFont();
+    lstListOrderedHats.setFont(new Font("monospaced", defaultListFont.getStyle(),defaultListFont.getSize()));
+            }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JLabel jLabel1;
@@ -163,11 +210,11 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOrderDate;
     private javax.swing.JLabel lblOrderNr;
     private javax.swing.JLabel lblTotPrice;
+    private javax.swing.JList<String> lstListOrderedHats;
     private javax.swing.JTextField txtCustName;
     private javax.swing.JTextField txtShippingAd;
     // End of variables declaration//GEN-END:variables
