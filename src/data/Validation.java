@@ -4,6 +4,9 @@
  */
 package data;
 
+import java.util.HashMap;
+
+
 /**
  *
  * @author Friday
@@ -41,5 +44,66 @@ public class Validation {
         }
         return isDouble;
     }
+    
+    public static boolean isDate(String stringToCheck) {
+        boolean returBoolean = true;
 
+        if (stringToCheck.length() == 10) {
+            String subText1 = stringToCheck.substring(0, 4) + stringToCheck.substring(5, 7) + stringToCheck.substring(8, 10);
+            String subText2 = stringToCheck.substring(4, 5) + stringToCheck.substring(7, 8);
+            if (!(isInteger(subText1) && subText2.equals("--"))) {
+                returBoolean = false;
+            }
+        } else {
+            returBoolean = false;
+        }
+        return returBoolean;
+    }
+    
+  /**
+   * Kontrollerar om en angiven day är giltig för angiven månad
+   * @param month månaden man vill kolla
+   * @param day dagen man vill kolla
+   * @return true och datumet är giltigt, annars false
+   */
+    public static boolean isValidMonthAndDay(String month, String day) {
+        HashMap<String, String> monthsAndDays = monthsAndDays();
+        boolean isVaild = false;
+
+        if (monthsAndDays.containsKey(month)) {
+            
+            int angivenDag = Integer.parseInt(day);
+            int antalDagar = Integer.parseInt(monthsAndDays.get(month));
+            
+            if (angivenDag > 0 && angivenDag <= antalDagar) {
+                isVaild = true;
+            }
+        }
+        return isVaild;
+    }
+    
+    /**
+     * En HashMap för att hålla reda på hur många dagar det finns i respektive månad.
+     * Används för att kontrollera användares datum-input.
+     * Fungerar inte med skottår.
+     * @return En HashMap med månadens nr (01-12) och tillhörande antal dagar i den månaden.
+     */
+    public static HashMap<String, String> monthsAndDays() {
+        HashMap<String, String> manaderOchDagar = new HashMap<>();
+
+        manaderOchDagar.put("01", "31");
+        manaderOchDagar.put("02", "28");
+        manaderOchDagar.put("03", "31");
+        manaderOchDagar.put("04", "30");
+        manaderOchDagar.put("05", "31");
+        manaderOchDagar.put("06", "30");
+        manaderOchDagar.put("07", "31");
+        manaderOchDagar.put("08", "31");
+        manaderOchDagar.put("09", "30");
+        manaderOchDagar.put("10", "31");
+        manaderOchDagar.put("11", "30");
+        manaderOchDagar.put("12", "31");
+
+        return manaderOchDagar;
+    }
 }

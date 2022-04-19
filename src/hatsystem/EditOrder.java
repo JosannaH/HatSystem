@@ -13,6 +13,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import data.Address;
 import data.Validation;
+import data.Customer;
+import data.StandardHat;
 
 /**
  *
@@ -37,6 +39,7 @@ public class EditOrder extends javax.swing.JFrame {
         orderID = 1;
         fillHatList();
         fillOrderInfo();
+        lblErrorMessage.setVisible(false);
 
     }
 
@@ -74,6 +77,7 @@ public class EditOrder extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         tfCustomerNr = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -144,6 +148,10 @@ public class EditOrder extends javax.swing.JFrame {
 
         lblName.setText("Bertil Bertilsson");
 
+        lblErrorMessage.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorMessage.setText("jLabel10");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,14 +207,19 @@ public class EditOrder extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnDeleteHat))))
                         .addContainerGap(52, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(btnSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(625, 625, 625))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(btnSave))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,17 +256,20 @@ public class EditOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addComponent(lblErrorMessage)
+                .addGap(12, 12, 12)
                 .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotPrice)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDeleteHat)
-                    .addComponent(jLabel9))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTotPrice)
+                        .addComponent(jLabel9)))
                 .addGap(25, 25, 25))
         );
 
@@ -271,6 +287,7 @@ public class EditOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteOrderActionPerformed
 
     private void btnDeleteHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHatActionPerformed
+        double totalPrice = Double.parseDouble(SqlQuery.getValue("SELECT Total_Price FROM orders WHERE Orders_ID = "+ orderID +";"));
         int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna hatt från ordern?", "Varning!", JOptionPane.YES_NO_OPTION);
 
         if (x == JOptionPane.YES_OPTION) {
@@ -278,26 +295,75 @@ public class EditOrder extends javax.swing.JFrame {
             if (chosenHat.substring(1, 2).equalsIgnoreCase("S")) {
                 String hatID = chosenHat.substring(0, 1);
                 SqlQuery.delete("DELETE FROM ordered_st_hat WHERE Standard_Hat = " + hatID + " AND Order_Nr = " + orderID + ";");
+                HashMap<String,String> hat = StandardHat.getHat(Integer.parseInt(hatID));
+                totalPrice -= Double.parseDouble(hat.get("Price"));
+                SqlQuery.update("UPDATE orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
             } else {
                 String hatID = chosenHat.substring(0, 1);
+                totalPrice -= Double.parseDouble(SqlQuery.getValue("SELECT Price FROM hat WHERE Hat_ID = "+ hatID +";"));
+                SqlQuery.update("UPDATE orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
+                
                 SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM ordered_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + hatID + ";");
             }
         }
+        
         fillHatList();
     }//GEN-LAST:event_btnDeleteHatActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-    String chosenDeliveryDate = tfExpectedDeliveryDate.getText();
-    String chosenCustomerNr = tfCustomerNr.getText();
-    String chosenStreet = tfStreet.getText();
-    String chosenPostal = tfPostal.getText();
-    String chosenCity = tfCity.getText();
-    String chosenCountry = tfCountry.getText();
-    
-       
+        lblErrorMessage.setVisible(false);
+
+        String chosenDeliveryDate = tfExpectedDeliveryDate.getText();
+        String chosenCustomerNr = tfCustomerNr.getText();
+        String chosenStreet = tfStreet.getText();
+        String chosenPostal = tfPostal.getText();
+        String chosenCity = tfCity.getText();
+        String chosenCountry = tfCountry.getText();
+        String chosenStatus = cmbStatus.getSelectedItem().toString();
+
+        if (chosenDeliveryDate.isBlank() || chosenCustomerNr.isBlank() || chosenStreet.isBlank() || chosenPostal.isBlank() || chosenCity.isBlank() || chosenCountry.isBlank()) {
+            lblErrorMessage.setText("Vänligen se till att alla fält är ifyllda");
+            lblErrorMessage.setVisible(true);
+        } else {
+            if (Validation.isDate(chosenDeliveryDate)) {
+                if (Validation.isInteger(chosenCustomerNr)) {
+                    if (Validation.isInteger(chosenPostal)) {
+                        if (Validation.isValidMonthAndDay(chosenDeliveryDate.substring(5, 7), chosenDeliveryDate.substring(8, 10))) {
+                            HashMap<String, String> foundCustomer = Customer.getCustomer(chosenCustomerNr);
+                            if (!foundCustomer.isEmpty()) {
+                                setDeliveryDate(chosenDeliveryDate);
+                                setCustomer(chosenCustomerNr);
+                                setDeliveryAddress();
+                                setOrderStatus(chosenStatus);
+                                fillOrderInfo();
+                                JOptionPane.showMessageDialog(null, "Ändringar sparade");
+                            } else {
+                                lblErrorMessage.setText("Kund med angivet kundnummer existerar inte");
+                                lblErrorMessage.setVisible(true);
+                            }
+                        } else {
+                            lblErrorMessage.setText("Vänligen ange ett giltigt datum");
+                            lblErrorMessage.setVisible(true);
+                        }
+                    } else {
+                        lblErrorMessage.setText("Postnummer måste bestå av endast siffror");
+                        lblErrorMessage.setVisible(true);
+                    }
+                } else {
+                    lblErrorMessage.setText("Kundnummer måste bestå av endast siffror");
+                    lblErrorMessage.setVisible(true);
+                }
+            } else {
+                lblErrorMessage.setText("Vänligen ange datum i formatet yyyy-mm-dd");
+                lblErrorMessage.setVisible(true);
+            }
+        }
+
+//        InputValidering.isValidMonthAndDay(datum.substring(5, 7), datum.substring(8, 10));
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
@@ -366,7 +432,7 @@ public class EditOrder extends javax.swing.JFrame {
         lblOrderDate.setText(order.get("Order_Date"));
         oldDeliveryDate = order.get("Delivery_Date");
         oldStatus = order.get("Status");
-        
+
         tfExpectedDeliveryDate.setText(oldDeliveryDate);
         cmbStatus.setSelectedItem(oldStatus);
 
@@ -386,9 +452,9 @@ public class EditOrder extends javax.swing.JFrame {
         HashMap<String, String> customer = SqlQuery.getRow("SELECT * FROM customer WHERE Customer_ID IN (SELECT Customer FROM orders WHERE Orders_ID = " + orderID + ");");
         lblName.setText(customer.get("First_Name") + " " + customer.get("Last_Name"));
         oldCustomerID = customer.get("Customer_Nr");
-        
+
         tfCustomerNr.setText(oldCustomerID);
-        
+
     }
 
     public void setOrderStatus(String status) {
@@ -404,7 +470,7 @@ public class EditOrder extends javax.swing.JFrame {
         SqlQuery.update("UPDATE orders SET Customer = " + id + " WHERE Orders_ID = " + orderID + ";");
     }
 
-    public void setAddress() {
+    public void setDeliveryAddress() {
         String street = tfStreet.getText();
         String postal = tfPostal.getText();
         String city = tfCity.getText();
@@ -437,6 +503,7 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderDate;
     private javax.swing.JLabel lblOrderNr;
