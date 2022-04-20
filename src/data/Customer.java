@@ -81,6 +81,17 @@ public class Customer {
     }
 
     /**
+     * Get customer ID by generated Customer Nr
+     * @param customerNr
+     * @return 
+     */
+    public static String getCustomerID(String customerNr) {
+        String query = "SELECT Customer_ID from Customer WHERE Customer_Nr = '" + customerNr + "';";
+        String customerID = SqlQuery.getValue(query);
+        return customerID;
+    }
+    
+    /**
      * Retrieves a customer from the database using specified values. Can be used to check if a customer with entered details already exists.
      *
      * @param firstName
@@ -104,4 +115,5 @@ public class Customer {
         
         return allCustomers;
     }
+    
 }

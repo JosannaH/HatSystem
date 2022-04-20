@@ -189,7 +189,7 @@ public class AddStandardHat extends javax.swing.JFrame {
                 StandardHat.addStandardHat(chosenName, chosenPrice, chosenDescription, fabricComboID);
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
-                new LoginMenu().setVisible(true);
+
             } else {
                 lblErrorMessage.setText("Denna kombinationen är redan registrerad som en standardhatt");
                 lblErrorMessage.setVisible(true);

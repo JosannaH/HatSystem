@@ -177,6 +177,13 @@ public class EditOrder extends javax.swing.JFrame {
         lblErrorMessage2.setForeground(new java.awt.Color(153, 0, 51));
         lblErrorMessage2.setText("Vänligen välj en hatt i listan först");
 
+        btnDelete.setText("Radera");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

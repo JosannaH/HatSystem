@@ -21,7 +21,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
     private static DefaultListModel<String> customerListModel = new DefaultListModel<>();
     private Font defaultListFontOther;
     
-    private LoginMenu test;
+    private LoginMenu mainLoginMenu;
     
     public FindCustomerFromOrder(LoginMenu test) {
         initComponents();
@@ -30,7 +30,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
         jListResult.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
         LoginMenu.listAllCustomers(customerListModel);
         
-        this.test = test;
+        this.mainLoginMenu = test;
         
     }
 
@@ -113,7 +113,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
         String selectedCustomer = customerListModel.getElementAt(jListResult.getSelectedIndex());
         String customerNr = selectedCustomer.substring(0, 8);
         HashMap<String, String> customer = Customer.getCustomer(customerNr);
-        test.addCustomerInfoToOrder(customer);
+        mainLoginMenu.addCustomerInfoToOrder(customer, customerNr);
         customerListModel.clear();
         dispose();
     }//GEN-LAST:event_btnSelectCustomerActionPerformed

@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.Address;
 import data.Customer;
+import data.SqlQuery;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -147,12 +148,12 @@ public class AddCustomer extends javax.swing.JFrame {
                                 .addGap(183, 183, 183)
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(lbl_errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(249, 249, 249)
-                        .addComponent(btn_save)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addComponent(btn_save))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(lbl_errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +231,10 @@ public class AddCustomer extends javax.swing.JFrame {
             HashMap<String, String> customer = Customer.checkIfCustomerExists(firstName, lastName, email, telephone);
 
             if (!customer.isEmpty()) {
-                lbl_errorMessage.setText("Denna kund finns redan registrerad");
+                String query = "update customer set Active = 1 where First_Name = '"+ firstName+"' and Last_Name ='"+lastName+"' and Phone_Nr ='"+telephone+"'  and Email ='"+email+"';";
+                SqlQuery.update(query);
+                lbl_errorMessage.setText("Denna kund finns redan registrerad och har blivit aktiverad igen.");
+
                 lbl_errorMessage.setVisible(true);
             } else {
                 if (chosenAddress.isEmpty()) {
@@ -240,14 +244,14 @@ public class AddCustomer extends javax.swing.JFrame {
                     Customer.addCustomer(firstName, lastName, email, telephone, addedAddressID, comment);
                     JOptionPane.showMessageDialog(null, "Kunden är registrerad!");
                     this.dispose();
-                    new LoginMenu().setVisible(true);
+                    //LoginMenu().setVisible(true);
                 }
                 else{
                     String chosenAddressID = chosenAddress.get("Address_ID");
                     Customer.addCustomer(firstName, lastName, email, telephone, chosenAddressID, comment);
                     JOptionPane.showMessageDialog(null, "Kunden är registrerad!");
                     this.dispose();
-                    new LoginMenu().setVisible(true);
+                    //new LoginMenu().setVisible(true);
                 }
             }
         }
