@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class Login extends javax.swing.JFrame {
 
-    private String username;
+    private String userName;
     /**
      * Creates new form Login
      */
@@ -130,7 +130,7 @@ public class Login extends javax.swing.JFrame {
 
             if (Arrays.equals(password, password_db.toCharArray())){
                 setVisible(false);
-                LoginMenu menu = new LoginMenu(username);
+                LoginMenu menu = new LoginMenu(userName);
                 menu.setVisible(true);
                 dispose();
             }
