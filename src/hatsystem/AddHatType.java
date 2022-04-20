@@ -562,10 +562,18 @@ public class AddHatType extends javax.swing.JFrame {
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
 
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
+        int isFileChosen = chooser.showOpenDialog(null);
+        
+        if (isFileChosen == 1){
+
+        }
+        else{
+        
         File file = chooser.getSelectedFile();
-        if(file.getPath() == null){
-            String filename = file.getAbsolutePath();
+        String filename = "null"; //file.getAbsolutePath();
+        if(file.getAbsolutePath() == null){
+            System.out.println("ifsats");
+        }
         
         
         //TODO Validering för att det endast går att lägga in bild.
