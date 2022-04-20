@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author luna
  */
 public class ChangePsw extends javax.swing.JFrame {
-    public String userName= LoginMenu.getUsername();
+    public String userName;//= LoginMenu.getUsername();
     public String oldPasw;
     public String newPasw;
     public String updatePaswQuery;
@@ -24,9 +24,13 @@ public class ChangePsw extends javax.swing.JFrame {
     public ChangePsw() {
         initComponents();
         lblError.setVisible(false);
-        
-    }
+        }
 
+    public ChangePsw(String userName) {
+        initComponents();
+        this.userName = userName;
+        lblError.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,6 +157,7 @@ public class ChangePsw extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Lösenordet har inte ändrats.");
         }
+        dispose();
     }//GEN-LAST:event_btn_saveActionPerformed
 }
 

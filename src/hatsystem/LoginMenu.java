@@ -51,7 +51,10 @@ public class LoginMenu extends javax.swing.JFrame {
     private static LoginMenu mainLoginMenu;
 
     public LoginMenu(String username) {
+        this.username = username;
         initComponents();
+        
+
         jListAllOrders.setModel(orderListModel);
         defaultListFontOther = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
@@ -63,7 +66,6 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
 
         this.mainLoginMenu = mainLoginMenu;
-        this.username = username;
         
         totalPriceLabel = lblTotalPrice;
         
@@ -302,9 +304,15 @@ public class LoginMenu extends javax.swing.JFrame {
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFocusable(false);
 
-        lbl_title.setText("Välkommen");
+        lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title.setText("Välkommen "+ username);
 
         btn_logout.setText("Logga ut");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
         btn_changePassword.setText("Ändra lösenord");
         btn_changePassword.addActionListener(new java.awt.event.ActionListener() {
@@ -326,21 +334,23 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addGap(295, 295, 295)
                         .addComponent(btn_changePassword))
                     .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(lbl_title)))
-                .addContainerGap(356, Short.MAX_VALUE))
+                        .addGap(217, 217, 217)
+                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         panel_startLayout.setVerticalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(lbl_title)
-                .addGap(105, 105, 105)
+                .addGap(40, 40, 40)
+                .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
+
+        lbl_title.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.addTab("Start", panel_start);
 
@@ -482,7 +492,7 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btbDeleteChosenHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(21, 31, Short.MAX_VALUE))
+                .addGap(21, 190, Short.MAX_VALUE))
         );
         panel_createOrderLayout.setVerticalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,7 +577,7 @@ public class LoginMenu extends javax.swing.JFrame {
                     .addGroup(panel_registerLayout.createSequentialGroup()
                         .addGap(296, 296, 296)
                         .addComponent(btnRegisterFabric)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
         panel_registerLayout.setVerticalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,7 +616,7 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_searchLayout.setHorizontalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(215, Short.MAX_VALUE)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
                         .addComponent(lblChooseCategory)
@@ -655,7 +665,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_changePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePasswordActionPerformed
-        new ChangePsw().setVisible(true);
+        new ChangePsw(username).setVisible(true);
     }//GEN-LAST:event_btn_changePasswordActionPerformed
 
     private void btnAddNewHatTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewHatTypeActionPerformed
@@ -783,6 +793,10 @@ public class LoginMenu extends javax.swing.JFrame {
         //lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
 
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     // från här
     public static void listAllCustomers(DefaultListModel listModel) {
