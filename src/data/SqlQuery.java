@@ -62,6 +62,7 @@ public class SqlQuery {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println(ex.getMessage());
         }
 
         return returnMap;
