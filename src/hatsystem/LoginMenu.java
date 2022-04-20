@@ -765,7 +765,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String totalPrice = lblTotalPrice.getText();
         String deliveryDate = txtExpectedDate.getText();
         String orderDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        String status = "Ongoing";
+        String status = cmbStatus.getSelectedItem().toString();
 
         String streetAddress = txtDeliveryAdress.getText();
         String postCode = txtPostCode.getText();
