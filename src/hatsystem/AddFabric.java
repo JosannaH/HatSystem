@@ -77,6 +77,14 @@ public class AddFabric extends javax.swing.JFrame {
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorMessage.setText("Detta tyg är redan registrerat");
 
+        lblCheckName.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPrice.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckColor.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckSupplier.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(

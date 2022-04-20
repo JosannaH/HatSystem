@@ -71,7 +71,7 @@ public class ChangePsw extends javax.swing.JFrame {
 
         lblRepNewPsw.setText("Upprepa nytt lösenord");
 
-        lblError.setForeground(new java.awt.Color(255, 0, 51));
+        lblError.setForeground(new java.awt.Color(153, 0, 0));
         lblError.setText("Försök igen");
         lblError.setEnabled(false);
 

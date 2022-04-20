@@ -167,6 +167,10 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorMessage.setText("jLabel9");
 
+        lblCheckName.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPrice.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

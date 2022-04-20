@@ -98,6 +98,10 @@ public class AddStandardHat extends javax.swing.JFrame {
 
         jLabel6.setText("Registerera ny standardmodell av hatt ");
 
+        lblCheckName.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPrice.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
