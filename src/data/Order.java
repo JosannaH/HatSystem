@@ -4,18 +4,21 @@
  */
 package data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author Lisa
  */
 public class Order {
-    
+
     public static void addToOrderedHat(int hatID, int orderID) {
-        String query = "INSERT INTO ordered_hat (Hat_ID, Order_Nr) VALUES ('" + hatID + "', '" + orderID +"');";
+        String query = "INSERT INTO ordered_hat (Hat_ID, Order_Nr) VALUES ('" + hatID + "', '" + orderID + "');";
         SqlQuery.add(query);
         
     }
-    
+
     public static void addToOrderedStandardHat(String size, int hatID, int orderID) {
         String query = "INSERT INTO ordered_st_hat (Size, Standard_Hat, Order_Nr) VALUES ('" + size + "', " + hatID + ", " + orderID + ");";
         SqlQuery.add(query);
@@ -27,14 +30,16 @@ public class Order {
         boolean success = SqlQuery.add(query);
         return success;
     }
-    
-    public static int getOrderID(){
+
+    public static int getOrderID() {
         String orderID = SqlQuery.getValue("SELECT MAX(Orders_ID) FROM Orders;");
         int orderIDInt = Integer.parseInt(orderID);
         return orderIDInt;
     }
-    
-    
-      
-    
+
+    public static ArrayList<HashMap<String, String>> getAllOrders() {
+        ArrayList<HashMap<String, String>> allOrders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Active = 1;");
+        return allOrders;
+    }
+
 }

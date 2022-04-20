@@ -35,9 +35,9 @@ public class EditOrder extends javax.swing.JFrame {
     /**
      * Creates new form EditOrder
      */
-    public EditOrder() {
+    public EditOrder(int orderID) {
         initComponents();
-        orderID = 1;
+        this.orderID = orderID;
         fillHatList();
         fillOrderInfo();
         lblErrorMessage.setVisible(false);
