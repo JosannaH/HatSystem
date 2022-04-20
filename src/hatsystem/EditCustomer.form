@@ -269,18 +269,53 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckFirstName">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckEmail">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckPhone">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckPostal">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckCity">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckStreet">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCheckEmail1">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

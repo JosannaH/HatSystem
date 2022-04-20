@@ -101,6 +101,20 @@ public class EditCustomer extends javax.swing.JFrame {
             }
         });
 
+        lblCheckFirstName.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckEmail.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPhone.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPostal.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckCity.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckStreet.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckEmail1.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
