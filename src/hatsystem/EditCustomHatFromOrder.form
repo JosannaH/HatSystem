@@ -51,6 +51,11 @@
                           <Component id="cmbFabricName" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmbColor" alignment="0" min="-2" pref="247" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblCheckName" max="32767" attributes="0"/>
+                          <Component id="lblCheckPrice" pref="119" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -61,7 +66,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="90" max="32767" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -84,11 +89,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblHatName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfHatName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCheckName" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCheckPrice" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -270,6 +277,10 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="jLabel9"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckPrice">
     </Component>
   </SubComponents>
 </Form>
