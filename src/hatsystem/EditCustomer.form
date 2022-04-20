@@ -83,7 +83,17 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="203" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblCheckFirstName" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckEmail" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckPhone" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckPostal" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckCity" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckStreet" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="lblCheckEmail1" min="-2" pref="123" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,36 +106,61 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txt_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCheckFirstName" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblCheckEmail" min="-2" pref="22" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblCheckPhone" min="-2" pref="22" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lblCheckEmail1" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lblCheckStreet" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_city" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_city" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblCheckPostal" min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl_city" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_city" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lblCheckCity" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -232,6 +267,20 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckFirstName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckEmail">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckPhone">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckPostal">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckCity">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckStreet">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckEmail1">
     </Component>
   </SubComponents>
 </Form>
