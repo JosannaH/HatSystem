@@ -154,6 +154,20 @@ public class Validation {
         return result;
 
     }
+    
+    public static boolean isPrice(String text, JLabel lbl) {
+
+        boolean result = true;
+
+        if (!text.matches("^\\d+(\\.\\d{1,2})?$")) {
+            result = false;
+            lbl.setText("Endast siffror/punkt");
+        }
+        
+
+        return result;
+
+    }
 
     public static boolean emailFormat(String text, JLabel lbl) {
 
