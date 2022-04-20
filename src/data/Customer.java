@@ -91,6 +91,18 @@ public class Customer {
         return customerID;
     }
     
+    public static String getCustomerNr(String customerID){
+        String query = "SELECT Customer_Nr from Customer WHERE Customer_ID = '" + customerID + "';";
+        String customerNr = SqlQuery.getValue(query);
+        return customerNr;
+    }
+    
+    public static String getLatestCustomer(){
+        String query = "SELECT MAX(Customer_ID) FROM Customer";
+        String customerID = SqlQuery.getValue(query);
+        return customerID;
+    }
+    
     /**
      * Retrieves a customer from the database using specified values. Can be used to check if a customer with entered details already exists.
      *
@@ -115,5 +127,7 @@ public class Customer {
         
         return allCustomers;
     }
+    
+    
     
 }

@@ -23,14 +23,14 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
     
     private LoginMenu mainLoginMenu;
     
-    public FindCustomerFromOrder(LoginMenu test) {
+    public FindCustomerFromOrder(LoginMenu mainLoginMenu) {
         initComponents();
         jListResult.setModel(customerListModel);
         defaultListFontOther = jListResult.getFont();
         jListResult.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
         LoginMenu.listAllCustomers(customerListModel);
         
-        this.mainLoginMenu = test;
+        this.mainLoginMenu = mainLoginMenu;
         
     }
 
@@ -105,7 +105,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
-        // TODO add your handling code here:
+        new AddCustomer(this, mainLoginMenu).setVisible(true);
     }//GEN-LAST:event_btnCreateCustomerActionPerformed
 
     private void btnSelectCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectCustomerActionPerformed

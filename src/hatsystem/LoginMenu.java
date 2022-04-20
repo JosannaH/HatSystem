@@ -239,6 +239,60 @@ public class LoginMenu extends javax.swing.JFrame {
         hashMapListPrice.clear();
         lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
     }
+    
+       // från här
+    public static void listAllCustomers(DefaultListModel listModel) {
+
+//        DefaultListModel<String> listModel = new DefaultListModel<>();
+//        resultList.setModel(listModel);
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
+        int index = 0;
+        while (index < allCustomers.size()) {
+            HashMap<String, String> currentCustomer = allCustomers.get(index);
+            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+
+            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                    + currentCustomer.get("Comment"),
+                    currentCustomer.get("Customer_Nr"),
+                    currentCustomer.get("First_Name"),
+                    currentCustomer.get("Last_Name"),
+                    currentCustomer.get("Email"),
+                    currentAddress.get("Street"),
+                    currentAddress.get("Postal"),
+                    currentAddress.get("City"),
+                    currentAddress.get("Country")
+            ));
+
+            index++;
+        }
+
+//        Font defaultListFont = resultList.getFont();
+//        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+
+    public void setCustomerStuff(HashMap<String, String> customerInfo) {
+
+    }
+
+    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
+
+        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
+
+        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
+
+        txtDeliveryAdress.setText(address.get("Street"));
+        txtPostCode.setText(address.get("Postal"));
+        txtCity.setText(address.get("City"));
+        txtCountry.setText(address.get("Country"));
+        jPanelOrderAddress.setVisible(true);
+        lblCustomerNumber.setText(customerNr);
+
+    }
+
+    //till här
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -761,6 +815,13 @@ public class LoginMenu extends javax.swing.JFrame {
             hashMapStandardHat.clear();
             arrayOtherHat.clear();
             hashMapListPrice.clear();
+            lblCustomerName.setText("");
+            lblCustomerNumber.setText("");
+            txtDeliveryAdress.setText("");
+            txtCity.setText("");
+            txtCountry.setText("");
+            txtPostCode.setText("");
+            txtExpectedDate.setText("");
             listOrderItems();
         }
 
@@ -807,58 +868,7 @@ public class LoginMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    // från här
-    public static void listAllCustomers(DefaultListModel listModel) {
-
-//        DefaultListModel<String> listModel = new DefaultListModel<>();
-//        resultList.setModel(listModel);
-        listModel.clear();
-
-        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
-        int index = 0;
-        while (index < allCustomers.size()) {
-            HashMap<String, String> currentCustomer = allCustomers.get(index);
-            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
-
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + currentCustomer.get("Comment"),
-                    currentCustomer.get("Customer_Nr"),
-                    currentCustomer.get("First_Name"),
-                    currentCustomer.get("Last_Name"),
-                    currentCustomer.get("Email"),
-                    currentAddress.get("Street"),
-                    currentAddress.get("Postal"),
-                    currentAddress.get("City"),
-                    currentAddress.get("Country")
-            ));
-
-            index++;
-        }
-
-//        Font defaultListFont = resultList.getFont();
-//        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-    }
-
-    public void setCustomerStuff(HashMap<String, String> customerInfo) {
-
-    }
-
-    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
-
-        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
-
-        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
-
-        txtDeliveryAdress.setText(address.get("Street"));
-        txtPostCode.setText(address.get("Postal"));
-        txtCity.setText(address.get("City"));
-        txtCountry.setText(address.get("Country"));
-        jPanelOrderAddress.setVisible(true);
-        lblCustomerNumber.setText(customerNr);
-
-    }
-
-    //till här
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbDeleteChosenHat;
