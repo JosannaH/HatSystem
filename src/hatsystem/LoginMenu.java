@@ -68,7 +68,6 @@ public class LoginMenu extends javax.swing.JFrame {
         lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
 
-        hashMapListPriceNonStatic = hashMapListPrice;
     }
 
     /**
@@ -211,38 +210,6 @@ public class LoginMenu extends javax.swing.JFrame {
         orderListModel.clear();
         hashMapListPrice.clear();
         lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
-    }
-
-       // från här
-    public static void listAllCustomers(DefaultListModel listModel) {
-
-//        DefaultListModel<String> listModel = new DefaultListModel<>();
-//        resultList.setModel(listModel);
-        listModel.clear();
-
-        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
-        int index = 0;
-        while (index < allCustomers.size()) {
-            HashMap<String, String> currentCustomer = allCustomers.get(index);
-            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
-
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + currentCustomer.get("Comment"),
-                    currentCustomer.get("Customer_Nr"),
-                    currentCustomer.get("First_Name"),
-                    currentCustomer.get("Last_Name"),
-                    currentCustomer.get("Email"),
-                    currentAddress.get("Street"),
-                    currentAddress.get("Postal"),
-                    currentAddress.get("City"),
-                    currentAddress.get("Country")
-            ));
-
-            index++;
-        }
-
-//        Font defaultListFont = resultList.getFont();
-//        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
     public void setCustomerStuff(HashMap<String, String> customerInfo) {
@@ -863,21 +830,6 @@ public class LoginMenu extends javax.swing.JFrame {
         fillCorrectCategory();
     }//GEN-LAST:event_btnUpdateCategoryActionPerformed
 
-    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
-
-        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
-
-        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
-
-        txtDeliveryAdress.setText(address.get("Street"));
-        txtPostCode.setText(address.get("Postal"));
-        txtCity.setText(address.get("City"));
-        txtCountry.setText(address.get("Country"));
-        jPanelOrderAddress.setVisible(true);
-        lblCustomerNumber.setText(customerNr);
-
-    }
-
     public void fillCorrectCategory() {
         String category = cbCategory.getSelectedItem().toString();
 
@@ -965,10 +917,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index++;
         }
-    }
-
-    //ska denna användas till något??
-    public void setCustomerStuff(HashMap<String, String> customerInfo) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
