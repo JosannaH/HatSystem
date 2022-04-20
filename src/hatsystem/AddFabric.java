@@ -5,6 +5,7 @@
 package hatsystem;
 
 import data.Fabric;
+import data.Validation;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,7 +47,6 @@ public class AddFabric extends javax.swing.JFrame {
         lblCheckName = new javax.swing.JLabel();
         lblCheckPrice = new javax.swing.JLabel();
         lblCheckColor = new javax.swing.JLabel();
-        lblCheckSupplier = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,7 +73,7 @@ public class AddFabric extends javax.swing.JFrame {
             }
         });
 
-        lblErrorMessage.setForeground(new java.awt.Color(204, 0, 51));
+        lblErrorMessage.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorMessage.setText("Detta tyg är redan registrerat");
 
@@ -82,8 +82,6 @@ public class AddFabric extends javax.swing.JFrame {
         lblCheckPrice.setForeground(new java.awt.Color(153, 0, 0));
 
         lblCheckColor.setForeground(new java.awt.Color(153, 0, 0));
-
-        lblCheckSupplier.setForeground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,10 +113,9 @@ public class AddFabric extends javax.swing.JFrame {
                             .addComponent(tfChosenName))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCheckName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCheckName, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                             .addComponent(lblCheckPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCheckColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCheckSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
+                            .addComponent(lblCheckColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,8 +142,7 @@ public class AddFabric extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfChosenSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCheckSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfChosenSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -183,20 +179,22 @@ public class AddFabric extends javax.swing.JFrame {
         String color = tfChosenColor.getText();
         String supplier = tfChosenSupplier.getText();
         String description = tfChosenDescription.getText();
-        
+
         if (name.isBlank() || price.isBlank() || color.isBlank() || supplier.isBlank()) {
             lblErrorMessage.setText("Vänligen fyll i alla fält");
             lblErrorMessage.setVisible(true);
         } else {
-            boolean exists = Fabric.checkIfFabricExists(name, price, color, supplier);
-            if (exists) {
-                lblErrorMessage.setText("Detta tyg finns redan i databasen");
-                lblErrorMessage.setVisible(true);
-            }
-            else{
-                Fabric.addNewFabric(name, price, color, supplier, description);
-                JOptionPane.showMessageDialog(null, "Tyget är registrerat!");
-                this.dispose();
+            if (Validation.onlyLetters(name, lblCheckName) && Validation.isPrice(price, lblCheckPrice)
+                    && Validation.onlyLetters(color, lblCheckColor)) {
+                boolean exists = Fabric.checkIfFabricExists(name, price, color, supplier);
+                if (exists) {
+                    lblErrorMessage.setText("Detta tyg finns redan i databasen");
+                    lblErrorMessage.setVisible(true);
+                } else {
+                    Fabric.addNewFabric(name, price, color, supplier, description);
+                    JOptionPane.showMessageDialog(null, "Tyget är registrerat!");
+                    this.dispose();
+                }
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -214,7 +212,6 @@ public class AddFabric extends javax.swing.JFrame {
     private javax.swing.JLabel lblCheckColor;
     private javax.swing.JLabel lblCheckName;
     private javax.swing.JLabel lblCheckPrice;
-    private javax.swing.JLabel lblCheckSupplier;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JTextField tfChosenColor;
     private javax.swing.JTextArea tfChosenDescription;
