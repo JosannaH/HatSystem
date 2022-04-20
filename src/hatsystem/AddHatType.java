@@ -542,7 +542,13 @@ public class AddHatType extends javax.swing.JFrame {
             boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
                 SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
-                SpecialHat.addSpecialHat(name, price, fabricComboID, image);
+                if(image.isEmpty()){
+                    SpecialHat.addSpecialHatNoImage(name, price, fabricComboID);
+                }
+                else{
+                    SpecialHat.addSpecialHat(name, price, fabricComboID, image);
+                }
+                
 
                 String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
                 orderedHatID = Integer.parseInt(newHatID);
@@ -566,7 +572,10 @@ public class AddHatType extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
-        String filename = file.getAbsolutePath();
+        if(file.getPath() == null){
+            String filename = file.getAbsolutePath();
+        
+        
         //TODO Validering för att det endast går att lägga in bild.
 
         lblImageTxt.setText(filename);
@@ -590,7 +599,7 @@ public class AddHatType extends javax.swing.JFrame {
         ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
 
         lblImage.setIcon(iconNew);
-
+        }
     }//GEN-LAST:event_btbAddImageActionPerformed
 
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged

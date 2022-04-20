@@ -43,6 +43,14 @@ public class SpecialHat {
         String query = "INSERT INTO special_hat VALUES ('" + hatID + "', '" + image + "');";
         SqlQuery.add(query);
     }
+    
+       public static void addSpecialHatNoImage(String chosenName, String chosenPrice, int chosenFabricID) {
+           
+        String id = "SELECT hat_id FROM hat WHERE name = '" + chosenName + "' AND price = '" + chosenPrice +"' AND Hat_fabric = " + chosenFabricID;
+        String hatID = SqlQuery.getValue(id);
+        String query = "INSERT INTO special_hat (Hat_ID) VALUES ('" + hatID + "');";
+        SqlQuery.add(query);
+    }
 
 
 
