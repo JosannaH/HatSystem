@@ -822,6 +822,7 @@ public class LoginMenu extends javax.swing.JFrame {
             txtCountry.setText("");
             txtPostCode.setText("");
             txtExpectedDate.setText("");
+            cmbStatus.setSelectedIndex(0);
             listOrderItems();
         }
 

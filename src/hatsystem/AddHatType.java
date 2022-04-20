@@ -40,6 +40,9 @@ public class AddHatType extends javax.swing.JFrame {
         lblSpecialError.setVisible(false);
         lblStandardErrorMessage.setVisible(false);
         fillList();
+        // Enables enter press.
+        this.getRootPane().setDefaultButton(btn_addHat);
+
     }
     
     
@@ -61,7 +64,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         for (String e : employees) {
             cmbSpecialResponsible.addItem(e);
-            cmb_customEmployee.addItem(e);
+            cmb_customEmployee.addItem(e);            
         }
     }
 
@@ -167,16 +170,16 @@ public class AddHatType extends javax.swing.JFrame {
             .addGroup(panel_standardHatLayout.createSequentialGroup()
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addGap(411, 411, 411)
-                        .addComponent(btn_addHat))
-                    .addGroup(panel_standardHatLayout.createSequentialGroup()
                         .addGap(385, 385, 385)
                         .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblStandardErrorMessage)
                             .addGroup(panel_standardHatLayout.createSequentialGroup()
                                 .addComponent(lbl_size)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel_standardHatLayout.createSequentialGroup()
+                        .addGap(408, 408, 408)
+                        .addComponent(btn_addHat)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_standardHatLayout.setVerticalGroup(
@@ -190,11 +193,11 @@ public class AddHatType extends javax.swing.JFrame {
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_size)
                     .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(lblStandardErrorMessage)
                 .addGap(18, 18, 18)
                 .addComponent(btn_addHat)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Standardhatt", panel_standardHat);
@@ -504,13 +507,14 @@ public class AddHatType extends javax.swing.JFrame {
         String image = lblImageTxt.getText();
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
+        
 
         if (name.isBlank() || price.isBlank()) {
             lblSpecialError.setText("Vänligen fyll i alla fält");
             lblSpecialError.setVisible(true);
         } else {
             int fabricComboID = Fabric.getFabricID(fabric, colour);
-            int employeeComboID = Employee.getEmployeeID(worker);
+            int employeeComboID = Employee.getEmployeeIDAdmin(worker);
             boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
                 SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
@@ -689,7 +693,7 @@ public class AddHatType extends javax.swing.JFrame {
         String description = txtAreaCustomDescription.getText();
         String price = textField_customPrice.getText();
         String employee = cmb_customEmployee.getSelectedItem().toString();
-        int employeeID = Employee.getEmployeeID(employee);
+        int employeeID = Employee.getEmployeeIDAdmin(employee);
 
         String query = "INSERT INTO hat (Name, Price, Size, Description, Hat_Fabric, Worker) VALUES ('" + chosenHatName + "', " + price + ", '" + size + "', '" + description + "', " + fabricID + ", " + employeeID + ");";
         SqlQuery.add(query);
