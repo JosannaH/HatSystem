@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.StandardHat;
 import data.Fabric;
+import data.Validation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
@@ -185,6 +186,8 @@ public class AddStandardHat extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
+        clearAllErrorMessages();
+        
         String chosenName = tfName.getText();
         String chosenPrice = tfPrice.getText();
         String chosenDescription = tfDescription.getText();
@@ -195,6 +198,8 @@ public class AddStandardHat extends javax.swing.JFrame {
             lblErrorMessage.setText("Vänligen fyll i alla fält");
             lblErrorMessage.setVisible(true);
         } else {
+            
+            if(Validation.onlyLetters(chosenName, lblCheckName) && Validation.isPrice(chosenName, lblCheckPrice)){
             int fabricComboID = Fabric.getFabricID(chosenFabric, chosenColor);
             boolean isUniqueHatAndFabricCombo = StandardHat.isUniqueCombination(chosenName, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
@@ -207,46 +212,18 @@ public class AddStandardHat extends javax.swing.JFrame {
                 lblErrorMessage.setVisible(true);
             }
         }
+        }
+        
+        
 
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddStandardHat().setVisible(true);
-            }
-        });
+    private void clearAllErrorMessages() {
+        lblCheckName.setText("");
+        lblCheckPrice.setText("");
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbColors;

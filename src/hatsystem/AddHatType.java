@@ -138,7 +138,6 @@ public class AddHatType extends javax.swing.JFrame {
         cmbSpecialResponsible = new javax.swing.JComboBox<>();
         lblCheckNameSpecial = new javax.swing.JLabel();
         lblCheckPriceSpecial = new javax.swing.JLabel();
-        taBortMig = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -413,8 +412,8 @@ public class AddHatType extends javax.swing.JFrame {
                                     .addComponent(cmbSpecialResponsible, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
                                 .addComponent(btbAddImage)
@@ -431,13 +430,8 @@ public class AddHatType extends javax.swing.JFrame {
                                         .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(945, 945, 945))))))
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
-                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(jLabel10))
-                            .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                .addGap(333, 333, 333)
-                                .addComponent(taBortMig, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel10)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         panel_specialHatLayout.setVerticalGroup(
@@ -449,9 +443,7 @@ public class AddHatType extends javax.swing.JFrame {
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel10)
-                        .addGap(21, 21, 21)
-                        .addComponent(taBortMig, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -464,11 +456,11 @@ public class AddHatType extends javax.swing.JFrame {
                                             .addComponent(txtfSpecialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel12)))
+                                                .addComponent(jLabel12))
+                                            .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(18, 18, 18)
                                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(txtfSpecialDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -774,7 +766,6 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JPanel panel_specialHat;
     private javax.swing.JPanel panel_standardHat;
     private javax.swing.JScrollPane scrollPane_CustomHat;
-    private javax.swing.JLabel taBortMig;
     private javax.swing.JTextField textField_customPrice;
     private javax.swing.JTextArea txtAreaCustomDescription;
     private javax.swing.JTextField txtfSpecialDescription;
