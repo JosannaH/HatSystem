@@ -30,6 +30,7 @@ public class EditOrder extends javax.swing.JFrame {
     private String oldCountry;
     private String oldDeliveryDate;
     private String oldStatus;
+    DefaultListModel<String> listModel = new DefaultListModel<>();
 
     /**
      * Creates new form EditOrder
@@ -40,7 +41,8 @@ public class EditOrder extends javax.swing.JFrame {
         fillHatList();
         fillOrderInfo();
         lblErrorMessage.setVisible(false);
-
+        lblErrorMessage2.setVisible(false);
+        lstListOrderedHats.setModel(listModel);
     }
 
     /**
@@ -79,6 +81,8 @@ public class EditOrder extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         lblErrorMessage = new javax.swing.JLabel();
         btnEditHat = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        lblErrorMessage2 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -90,6 +94,7 @@ public class EditOrder extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Redigera orderuppgifter");
 
+        lstListOrderedHats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lstListOrderedHats);
 
         jLabel2.setText("Ordernummer:");
@@ -162,6 +167,16 @@ public class EditOrder extends javax.swing.JFrame {
             }
         });
 
+        btnUpdate.setText("Uppdatera");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblErrorMessage2.setForeground(new java.awt.Color(153, 0, 51));
+        lblErrorMessage2.setText("Vänligen välj en hatt i listan först");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,12 +191,11 @@ public class EditOrder extends javax.swing.JFrame {
                         .addComponent(btnDeleteOrder)
                         .addGap(19, 19, 19))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEditHat))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblErrorMessage2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel2)
@@ -227,7 +241,13 @@ public class EditOrder extends javax.swing.JFrame {
                                                 .addComponent(lblOrderNr, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(tfExpectedDeliveryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(161, 161, 161))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEditHat)))
                         .addGap(0, 52, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
@@ -279,10 +299,13 @@ public class EditOrder extends javax.swing.JFrame {
                 .addComponent(lblErrorMessage)
                 .addGap(18, 18, 18)
                 .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(lblErrorMessage2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(btnEditHat))
+                    .addComponent(btnEditHat)
+                    .addComponent(btnUpdate))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -308,29 +331,29 @@ public class EditOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteOrderActionPerformed
 
     private void btnDeleteHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHatActionPerformed
-        double totalPrice = Double.parseDouble(SqlQuery.getValue("SELECT Total_Price FROM orders WHERE Orders_ID = "+ orderID +";"));
+        double totalPrice = Double.parseDouble(SqlQuery.getValue("SELECT Total_Price FROM orders WHERE Orders_ID = " + orderID + ";"));
         int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna hatt från ordern?", "Varning!", JOptionPane.YES_NO_OPTION);
 
         if (x == JOptionPane.YES_OPTION) {
             String chosenHat = lstListOrderedHats.getSelectedValue();
-            if (chosenHat.substring(1, 2).equalsIgnoreCase("S")) {
-                String hatID = chosenHat.substring(0, 1);
+            if (chosenHat.substring(0, 1).equalsIgnoreCase("S")) {
+                String hatID = chosenHat.substring(1, 9).trim();
                 SqlQuery.delete("DELETE FROM ordered_st_hat WHERE Standard_Hat = " + hatID + " AND Order_Nr = " + orderID + ";");
-                HashMap<String,String> hat = StandardHat.getHat(Integer.parseInt(hatID));
+                HashMap<String, String> hat = StandardHat.getHat(Integer.parseInt(hatID));
                 totalPrice -= Double.parseDouble(hat.get("Price"));
-                SqlQuery.update("UPDATE orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
+                SqlQuery.update("UPDATE orders SET Total_Price = " + totalPrice + " WHERE Orders_ID = " + orderID + ";");
             } else {
-                String hatID = chosenHat.substring(0, 1);
-                totalPrice -= Double.parseDouble(SqlQuery.getValue("SELECT Price FROM hat WHERE Hat_ID = "+ hatID +";"));
-                SqlQuery.update("UPDATE orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
-                
+                String hatID = chosenHat.substring(1, 9).trim();
+                totalPrice -= Double.parseDouble(SqlQuery.getValue("SELECT Price FROM hat WHERE Hat_ID = " + hatID + ";"));
+                SqlQuery.update("UPDATE orders SET Total_Price = " + totalPrice + " WHERE Orders_ID = " + orderID + ";");
+
                 SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM ordered_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + hatID + ";");
             }
         }
-        
+
         fillHatList();
     }//GEN-LAST:event_btnDeleteHatActionPerformed
 
@@ -388,15 +411,31 @@ public class EditOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditHatActionPerformed
-    
+        lblErrorMessage2.setVisible(false);
+        String id = lstListOrderedHats.getSelectedValue();
+        if (id == null) {
+            lblErrorMessage2.setVisible(true);
+        } else {
+            if (id.substring(0, 1).equals("C")) {
+                new EditCustomHatFromOrder(id).setVisible(true);
+            } else {
+                new EditStandardHatFromOrder(id).setVisible(true);
+            }
+        }
+
     }//GEN-LAST:event_btnEditHatActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        fillHatList();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * Hämtar alla hattar
      */
     public void fillHatList() {
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        lstListOrderedHats.setModel(listModel);
+
+        listModel.clear();
+
         double totalPrice = 0;
 
         ArrayList<HashMap<String, String>> orderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM Ordered_St_Hat WHERE Order_Nr = " + orderID + ")");
@@ -408,9 +447,9 @@ public class EditOrder extends javax.swing.JFrame {
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
             String size = SqlQuery.getValue("SELECT Size FROM ordered_st_hat WHERE Standard_Hat = " + currentHat.get("Standard_Hat_ID") + " AND Order_Nr = " + orderID + ";");
 
-            listModel.addElement(String.format("%-8s %-20s %-8s %-20s %-20s "
+            listModel.addElement(String.format("%-10s %-20s %-8s %-20s %-20s "
                     + currentHat.get("Price"),
-                    currentHat.get("Standard_Hat_ID") + "S",
+                    "S" + currentHat.get("Standard_Hat_ID"),
                     currentHat.get("Name"),
                     size,
                     currentFabric.get("Name"),
@@ -429,9 +468,9 @@ public class EditOrder extends javax.swing.JFrame {
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            listModel.addElement(String.format("%-8s %-20s %-8s %-20s %-20s "
+            listModel.addElement(String.format("%-10s %-20s %-8s %-20s %-20s "
                     + currentHat.get("Price"),
-                    currentHat.get("Hat_ID") + "C",
+                    "C" + currentHat.get("Hat_ID"),
                     currentHat.get("Name"),
                     currentHat.get("Size"),
                     currentFabric.get("Name"),
@@ -516,6 +555,7 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteOrder;
     private javax.swing.JButton btnEditHat;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -530,6 +570,7 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblErrorMessage;
+    private javax.swing.JLabel lblErrorMessage2;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderDate;
     private javax.swing.JLabel lblOrderNr;

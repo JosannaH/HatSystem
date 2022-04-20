@@ -6,25 +6,28 @@ package hatsystem;
 
 import data.Fabric;
 import data.SqlQuery;
+import data.Validation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Friday
  */
-public class EditHatFromOrder extends javax.swing.JFrame {
+public class EditCustomHatFromOrder extends javax.swing.JFrame {
 
     String hatID;
     /**
      * Creates new form EditHatFromOrder
      */
-    public EditHatFromOrder() {
+    public EditCustomHatFromOrder(String hatID) {
         initComponents();
-        hatID = "2C";
-        fillValues();
+        this.hatID = hatID;
         fillFabricComboBox();
+        fillValues();
+        lblErrorMessage.setVisible(false);
     }
     
     private void editHat(){
@@ -34,7 +37,7 @@ public class EditHatFromOrder extends javax.swing.JFrame {
     }
     
     private void fillValues(){
-        String chosenHatID = hatID.substring(0, 1);
+        String chosenHatID = hatID.substring(1, 9).trim();
         HashMap<String, String> hatHM = SqlQuery.getRow("SELECT * FROM hat Where Hat_ID = "+ chosenHatID +";");
         tfHatName.setText(hatHM.get("Name"));
         tfPrice.setText(hatHM.get("Price"));
@@ -59,8 +62,8 @@ public class EditHatFromOrder extends javax.swing.JFrame {
         HashMap<String, String> hatFabric = Fabric.getFabricFromID(hatHM.get("Hat_Fabric"));
         cmbFabricName.setSelectedItem(hatFabric.get("Name"));
         fillColorComboBox(hatFabric.get("Name"));
-        cmbColor.setSelectedItem(hatFabric.get("Color"));
-        //fyller inte tyger som det ska 
+        String color = hatFabric.get("Color");
+        cmbColor.setSelectedItem(color);
     }
     
         /**
@@ -112,8 +115,9 @@ public class EditHatFromOrder extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cmbWorker = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Storlek");
 
@@ -145,6 +149,11 @@ public class EditHatFromOrder extends javax.swing.JFrame {
         jLabel6.setText("Beskrivning");
 
         btnSave.setText("Spara ändringar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Hattmakare");
 
@@ -152,48 +161,53 @@ public class EditHatFromOrder extends javax.swing.JFrame {
 
         jLabel8.setText("Redigera hatt");
 
+        lblErrorMessage.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorMessage.setText("jLabel9");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btnSave))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblHatName)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)))
-                                    .addComponent(jLabel7))
-                                .addGap(61, 61, 61)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboxDone)
-                                    .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfHatName)
-                                    .addComponent(tfPrice)
-                                    .addComponent(cmbFabricName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblHatName)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)))
+                            .addComponent(jLabel7))
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbWorker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboxDone)
+                            .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfHatName)
+                            .addComponent(tfPrice)
+                            .addComponent(cmbFabricName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))))
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(261, 261, 261))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addGap(236, 236, 236))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,9 +246,11 @@ public class EditHatFromOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
+                .addComponent(lblErrorMessage)
+                .addGap(19, 19, 19)
                 .addComponent(btnSave)
-                .addGap(59, 59, 59))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -247,6 +263,72 @@ public class EditHatFromOrder extends javax.swing.JFrame {
         fillColorComboBox(chosenFabric);
     }//GEN-LAST:event_cmbFabricNameActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+      saveChanges();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void saveChanges(){
+        lblErrorMessage.setVisible(false);
+        String chosenHatID = hatID.substring(1, 9).trim();
+        HashMap<String, String> hatHM = SqlQuery.getRow("SELECT * FROM hat Where Hat_ID = "+ chosenHatID +";");
+        
+        String hatName = tfHatName.getText();
+        String hatPrice = tfPrice.getText();
+        String fabricName = cmbFabricName.getSelectedItem().toString();
+        String fabricColor = cmbColor.getSelectedItem().toString();
+        String hatSize = cmbSize.getSelectedItem().toString();
+        boolean hatDone = cboxDone.isSelected();
+        String hatMaker = cmbWorker.getSelectedItem().toString();
+        String description = taDescription.getText();
+        
+        String isFinished = "1";
+        String worker = "1";
+        
+        if(!hatDone){
+            isFinished = "0";
+        }
+        
+        if (hatMaker.equals("Judith")) {
+            worker = "2";
+        }
+        
+        if (hatName.isBlank() || hatPrice.isBlank()){
+            lblErrorMessage.setText("Vänligen se till att hattnamn och pris är ifyllt");
+            lblErrorMessage.setVisible(true);
+        }
+        else if (!Validation.isDouble(hatPrice)){
+            lblErrorMessage.setText("Priset får bara innehålla siffror");
+            lblErrorMessage.setVisible(true);
+        }
+        else{
+            if(!hatHM.get("Name").equals(hatName)){
+             SqlQuery.update("UPDATE hat SET Name = '"+ hatName +"' WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            if (!hatHM.get("Price").equals(hatPrice)){
+              SqlQuery.update("UPDATE hat SET Price = "+ hatPrice +" WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            if (!hatHM.get("Size").equals(hatSize)) {
+               SqlQuery.update("UPDATE hat SET Size = '"+ hatSize +"' WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            if (!hatHM.get("Finished").equals(isFinished)) {
+               SqlQuery.update("UPDATE hat SET Finished = "+ isFinished +" WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            if (!hatHM.get("Worker").equals(worker)) {
+                SqlQuery.update("UPDATE hat SET Worker = "+ worker +" WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            if (!hatHM.get("Description").equals(description)) {
+                SqlQuery.update("UPDATE hat SET Description = '"+ description +"' WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            int fabricID = Fabric.getFabricID(fabricName, fabricColor);
+            if (!hatHM.get("Hat_Fabric").equals(fabricID)) {
+                SqlQuery.update("UPDATE hat SET Hat_Fabric = "+ fabricID +" WHERE Hat_ID = "+ chosenHatID +";");
+            }
+            JOptionPane.showMessageDialog(null, "Ändringar sparade");
+            fillValues();
+            
+        }
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -265,6 +347,7 @@ public class EditHatFromOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblHatName;
     private javax.swing.JTextArea taDescription;
     private javax.swing.JTextField tfHatName;
