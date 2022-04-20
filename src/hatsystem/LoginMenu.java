@@ -46,14 +46,13 @@ public class LoginMenu extends javax.swing.JFrame {
     //Had to create a static label variable that references to the non-static lable
     //to be able to use it with static methods.
     private static JLabel totalPriceLabel;
-    
+
     // refers to current LoginMenu object
     private static LoginMenu mainLoginMenu;
 
     public LoginMenu(String username) {
         this.username = username;
         initComponents();
-        
 
         jListAllOrders.setModel(orderListModel);
         defaultListFontOther = jListAllOrders.getFont();
@@ -66,9 +65,9 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
 
         this.mainLoginMenu = mainLoginMenu;
-        
+        lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
-        
+
         hashMapListPriceNonStatic = hashMapListPrice;
     }
 
@@ -82,8 +81,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * Retrieves one standard hats compeleteID and size, and adds them to the
-     * jList "listFoundResults". Used in the "Sök" tab.
+     * Retrieves one standard hats compeleteID and size, and adds them to the jList "listFoundResults". Used in the "Sök" tab.
      */
     public static void addToListStandardHat(String completeHatIdentifier, String size) {
         hashMapStandardHat.put(completeHatIdentifier, size);
@@ -91,8 +89,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * Retrives one custum or special hats id and adds it to the ArrayList. Is
-     * then used for retrieving the hat from db.
+     * Retrives one custum or special hats id and adds it to the ArrayList. Is then used for retrieving the hat from db.
      *
      * @param hatID
      */
@@ -102,51 +99,26 @@ public class LoginMenu extends javax.swing.JFrame {
 
     }
 
-    /**
-     * Fills the jList with standard hats from db.
-     */
-    private void listAllStandardHats() {
-        
-        hashMapListPrice.clear();
-        
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        listFoundResults.setModel(listModel);
-
-        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
-        int index = 0;
-        while (index < allHats.size()) {
-            HashMap<String, String> currentHat = allHats.get(index);
-            String fabricID = currentHat.get("Hat_Fabric");
-            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-
-            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
-
-            index++;
-        }
-        Font defaultListFont = listFoundResults.getFont();
-        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-    }
-    
-    private static double getTotalPrice(){
+    private static double getTotalPrice() {
         double totalPrice = 0;
-        for (String i : hashMapListPrice.keySet()){
+        for (String i : hashMapListPrice.keySet()) {
             Double price = Double.parseDouble(hashMapListPrice.get(i));
-            
+
             totalPrice += price;
-            
+
         }
         //String stringPrice = Integer.toString(totalPrice);
         return totalPrice;
         //currentOrderPrice = totalPrice;
     }
-    
-    private double getTotalPriceNonStatic(){
+
+    private double getTotalPriceNonStatic() {
         double totalPrice = 0;
-        for (String i : hashMapListPrice.keySet()){
+        for (String i : hashMapListPrice.keySet()) {
             Double price = Double.parseDouble(hashMapListPrice.get(i));
-            
+
             totalPrice += price;
-            
+
         }
         //String stringPrice = Integer.toString(totalPrice);
         return totalPrice;
@@ -173,9 +145,9 @@ public class LoginMenu extends javax.swing.JFrame {
 
             });
 
-           // for (String currentKey : hashMapStandardHat.keySet()) {
-           //     String key = currentKey;
-           // }
+            // for (String currentKey : hashMapStandardHat.keySet()) {
+            //     String key = currentKey;
+            // }
             int index = 0;
 
             while (index < hashMapStandardHat.size()) {
@@ -189,7 +161,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"),
                         completeID, currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), size));
-                
+
                 hashMapListPrice.put(completeID, currentHat.get("Price"));
                 index++;
 
@@ -213,7 +185,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 orderListModel.addElement(String.format("%-7s %-12s %-10s %-10s %-10s" + currentHat.get("Price"), "C"
                         + currentHat.get("Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"),
                         currentFabric.get("Color"), currentHat.get("Size")));
-                hashMapListPrice.put(currentHat.get("Hat_ID"), currentHat.get("Price"));   
+                hashMapListPrice.put(currentHat.get("Hat_ID"), currentHat.get("Price"));
                 index2++;
 
             }
@@ -223,7 +195,6 @@ public class LoginMenu extends javax.swing.JFrame {
         String totalPrice = String.valueOf(getTotalPrice());
         totalPriceLabel.setText(totalPrice);
     }
-    
 
     /**
      * Deletes all hats in jList from db and static lists.
@@ -243,9 +214,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -289,10 +258,11 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_search = new javax.swing.JPanel();
         lblChooseCategory = new javax.swing.JLabel();
         cbCategory = new javax.swing.JComboBox<>();
-        tfUserInput = new javax.swing.JTextField();
-        btnSearchCategory = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listFoundResults = new javax.swing.JList<>();
+        btnEditCatergory = new javax.swing.JButton();
+        lblErrorMessageCategory = new javax.swing.JLabel();
+        btnUpdateCategory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -328,26 +298,27 @@ public class LoginMenu extends javax.swing.JFrame {
             .addGroup(panel_startLayout.createSequentialGroup()
                 .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(312, 312, 312)
-                        .addComponent(btn_logout))
+                        .addGap(332, 332, 332)
+                        .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_startLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btn_logout))
+                            .addComponent(btn_changePassword)))
                     .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(btn_changePassword))
-                    .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(217, 217, 217)
+                        .addGap(257, 257, 257)
                         .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(454, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         panel_startLayout.setVerticalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(44, 44, 44)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102)
+                .addGap(160, 160, 160)
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         lbl_title.getAccessibleContext().setAccessibleDescription("");
@@ -450,8 +421,8 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_createOrder.setLayout(panel_createOrderLayout);
         panel_createOrderLayout.setHorizontalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_createOrderLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +446,7 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblCustomerNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCustomerName, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                            .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(52, 52, 52)
                         .addComponent(btnCreateNewCustomerFromOrder))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
@@ -491,8 +462,8 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btbDeleteChosenHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(21, 190, Short.MAX_VALUE))
+                            .addComponent(jButton4))))
+                .addGap(63, 63, 63))
         );
         panel_createOrderLayout.setVerticalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,28 +538,27 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_registerLayout.setHorizontalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_registerLayout.createSequentialGroup()
+                .addGap(303, 303, 303)
                 .addGroup(panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(294, 294, 294)
+                        .addGap(19, 19, 19)
                         .addComponent(btnRegisterCustomer))
+                    .addComponent(btnRegisterStandardHat)
                     .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(btnRegisterStandardHat))
-                    .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(296, 296, 296)
+                        .addGap(21, 21, 21)
                         .addComponent(btnRegisterFabric)))
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         panel_registerLayout.setVerticalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_registerLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(167, 167, 167)
                 .addComponent(btnRegisterCustomer)
                 .addGap(50, 50, 50)
                 .addComponent(btnRegisterStandardHat)
                 .addGap(45, 45, 45)
                 .addComponent(btnRegisterFabric)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera", panel_register);
@@ -602,49 +572,63 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        btnSearchCategory.setText("Sök");
-        btnSearchCategory.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane1.setViewportView(listFoundResults);
+
+        btnEditCatergory.setText("Redigera");
+        btnEditCatergory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchCategoryActionPerformed(evt);
+                btnEditCatergoryActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(listFoundResults);
+        lblErrorMessageCategory.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorMessageCategory.setText("Vänligen välj något objekt att redigera först");
+
+        btnUpdateCategory.setText("Uppdatera");
+        btnUpdateCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
         panel_searchLayout.setHorizontalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
+                    .addGroup(panel_searchLayout.createSequentialGroup()
+                        .addGap(222, 222, 222)
                         .addComponent(lblChooseCategory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfUserInput)
-                            .addComponent(cbCategory, 0, 229, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearchCategory)
-                        .addGap(196, 196, 196))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
+                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_searchLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblErrorMessageCategory)
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addComponent(btnUpdateCategory)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditCatergory))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         panel_searchLayout.setVerticalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(46, 46, 46)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblChooseCategory))
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
+                .addComponent(lblErrorMessageCategory)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUserInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchCategory))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                    .addComponent(btnEditCatergory)
+                    .addComponent(btnUpdateCategory))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sök", panel_search);
@@ -677,25 +661,8 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
-        // TODO add your handling code here:
+        fillCorrectCategory();
     }//GEN-LAST:event_cbCategoryActionPerformed
-
-    private void btnSearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCategoryActionPerformed
-
-        switch (cbCategory.getSelectedItem().toString()) {
-            case "Standardhattar":
-                listAllStandardHats();
-                break;
-            case "Ordrar":
-                break;
-            case "Kunder":
-//TODO listOrderItems();
-
-                listAllCustomers(listModel);
-
-                break;
-        }
-    }//GEN-LAST:event_btnSearchCategoryActionPerformed
 
     private void btnRegisterCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterCustomerActionPerformed
         new AddCustomer().setVisible(true);
@@ -727,7 +694,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String customerID = Customer.getCustomerID(customerNr);
 
         int employeeID = Employee.getEmployeeID(username);
-        
+
         if (hashMapStandardHat.isEmpty() && arrayOtherHat.isEmpty()) {
 
         } else {
@@ -736,28 +703,26 @@ public class LoginMenu extends javax.swing.JFrame {
             if (!exists) {
                 Address.addAddress(streetAddress, postCode, city, country);
             }
-            
+
             Order.addToOrder(totalPrice, deliveryDate, orderDate, status, adressID, customerID, employeeID);
             int orderID = Order.getOrderID();
 
             if (!hashMapStandardHat.isEmpty()) {
-                for(String i : hashMapStandardHat.keySet()){
+                for (String i : hashMapStandardHat.keySet()) {
                     String size = hashMapStandardHat.get(i);
                     String standardHatID = i.substring(0, i.indexOf("."));
                     int hatID = Integer.parseInt(standardHatID);
-                                        
+
                     Order.addToOrderedStandardHat(size, hatID, orderID);
                 }
 
             }
             if (!arrayOtherHat.isEmpty()) {
-                
+
             }
         }
 
     }//GEN-LAST:event_btnSaveOrderActionPerformed
-
-
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         deleteNonOrderedHats();
@@ -798,11 +763,86 @@ public class LoginMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    // från här
+    private void btnEditCatergoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCatergoryActionPerformed
+        lblErrorMessageCategory.setVisible(false);
+
+        String category = cbCategory.getSelectedItem().toString();
+        String objectToEdit = listFoundResults.getSelectedValue();
+        if (objectToEdit == null) {
+            lblErrorMessageCategory.setVisible(true);
+        } else {
+            switch (category) {
+                case "Kunder":
+
+                case "Ordrar":
+                    String orderToEdit = objectToEdit.substring(0, 10).trim();
+                    new EditOrder(Integer.parseInt(orderToEdit)).setVisible(true);
+                case "Standardhattar":
+
+            }
+        }
+    }//GEN-LAST:event_btnEditCatergoryActionPerformed
+
+    private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
+        fillCorrectCategory();
+    }//GEN-LAST:event_btnUpdateCategoryActionPerformed
+
+    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
+
+        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
+
+        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
+
+        txtDeliveryAdress.setText(address.get("Street"));
+        txtPostCode.setText(address.get("Postal"));
+        txtCity.setText(address.get("City"));
+        txtCountry.setText(address.get("Country"));
+        jPanelOrderAddress.setVisible(true);
+        lblCustomerNumber.setText(customerNr);
+
+    }
+
+    public void fillCorrectCategory() {
+        String category = cbCategory.getSelectedItem().toString();
+
+        switch (category) {
+            case "Kunder" ->
+                listAllCustomers(listModel);
+            case "Ordrar" ->
+                listAllOrders();
+            case "Standardhattar" ->
+                listAllStandardHats();
+        }
+    }
+
+    //lista alla standardhattar i sökrutan
+    /**
+     * Fills the jList with standard hats from db.
+     */
+    private void listAllStandardHats() {
+
+        hashMapListPrice.clear();
+
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
+        int index = 0;
+        while (index < allHats.size()) {
+            HashMap<String, String> currentHat = allHats.get(index);
+            String fabricID = currentHat.get("Hat_Fabric");
+            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+
+            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+
+            index++;
+        }
+        Font defaultListFont = listFoundResults.getFont();
+        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+
+    //lista alla kunder i sökrutan
     public static void listAllCustomers(DefaultListModel listModel) {
 
-//        DefaultListModel<String> listModel = new DefaultListModel<>();
-//        resultList.setModel(listModel);
         listModel.clear();
 
         ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
@@ -830,36 +870,41 @@ public class LoginMenu extends javax.swing.JFrame {
 //        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
+    //lista alla ordrar i sökrutan
+    public void listAllOrders() {
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allOrders = Order.getAllOrders();
+        int index = 0;
+        while (index < allOrders.size()) {
+            HashMap<String, String> currentOrder = allOrders.get(index);
+
+            listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
+                    + currentOrder.get("Total_Price"),
+                    currentOrder.get("Orders_ID"),
+                    currentOrder.get("Delivery_Date"),
+                    currentOrder.get("Order_Date"),
+                    currentOrder.get("Status")
+            ));
+
+            index++;
+        }
+    }
+
+    //ska denna användas till något??
     public void setCustomerStuff(HashMap<String, String> customerInfo) {
-
     }
-
-    public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
-
-        lblCustomerName.setText(customerInfo.get("First_Name") + " " + customerInfo.get("Last_Name"));
-
-        HashMap<String, String> address = Address.getAddressFromID(customerInfo.get("Address"));
-
-        txtDeliveryAdress.setText(address.get("Street"));
-        txtPostCode.setText(address.get("Postal"));
-        txtCity.setText(address.get("City"));
-        txtCountry.setText(address.get("Country"));
-        jPanelOrderAddress.setVisible(true);
-        lblCustomerNumber.setText(customerNr);
-
-    }
-
-    //till här
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbDeleteChosenHat;
     private javax.swing.JButton btnAddNewHatType;
     private javax.swing.JButton btnCreateNewCustomerFromOrder;
+    private javax.swing.JButton btnEditCatergory;
     private javax.swing.JButton btnRegisterCustomer;
     private javax.swing.JButton btnRegisterFabric;
     private javax.swing.JButton btnRegisterStandardHat;
     private javax.swing.JButton btnSaveOrder;
-    private javax.swing.JButton btnSearchCategory;
+    private javax.swing.JButton btnUpdateCategory;
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
@@ -881,6 +926,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblChooseCategory;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerNumber;
+    private javax.swing.JLabel lblErrorMessageCategory;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JList<String> listFoundResults;
@@ -888,7 +934,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JPanel panel_register;
     private javax.swing.JPanel panel_search;
     private javax.swing.JPanel panel_start;
-    private javax.swing.JTextField tfUserInput;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCountry;
     private javax.swing.JTextField txtDeliveryAdress;
