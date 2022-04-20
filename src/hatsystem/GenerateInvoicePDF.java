@@ -53,6 +53,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                     //skapar fraktsedeln
                     GeneratePDF.generateInvoicePDF(weight, shippingCost, description, searchPath, orderNr);
                     JOptionPane.showMessageDialog(null, "Fraktsedeln har skapats");
+                    this.dispose();
                 }
             } else {
                 lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror");
@@ -82,7 +83,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         lblErrorMessage = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Vikt i kg");
 
@@ -163,6 +164,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
