@@ -22,6 +22,7 @@ import data.Address;
 import data.Employee;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -736,7 +737,10 @@ public class LoginMenu extends javax.swing.JFrame {
                 
             }
             
-            Order.addToOrder(totalPrice, deliveryDate, orderDate, status, addressID, customerID, employeeID);
+            boolean success = Order.addToOrder(totalPrice, deliveryDate, orderDate, status, addressID, customerID, employeeID);
+            if(success){
+                JOptionPane.showMessageDialog(null, "Ordern är skapad!");
+            }
             int orderID = Order.getOrderID();
 
             if (!hashMapStandardHat.isEmpty()) {
