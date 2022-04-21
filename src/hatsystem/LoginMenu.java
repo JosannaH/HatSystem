@@ -64,12 +64,12 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setModel(listModel);
         Font defaultListFont = jListAllOrders.getFont();
         jListAllOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
 
         this.mainLoginMenu = mainLoginMenu;
         lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
+        // Belongs to "Sök" tab
         listAllCustomers(listModel);
 
     }
@@ -112,9 +112,7 @@ public class LoginMenu extends javax.swing.JFrame {
             totalPrice += price;
 
         }
-        //String stringPrice = Integer.toString(totalPrice);
         return totalPrice;
-        //currentOrderPrice = totalPrice;
     }
 
     private double getTotalPriceNonStatic() {
@@ -123,11 +121,8 @@ public class LoginMenu extends javax.swing.JFrame {
             Double price = Double.parseDouble(hashMapListPrice.get(i));
 
             totalPrice += price;
-
         }
-        //String stringPrice = Integer.toString(totalPrice);
         return totalPrice;
-        //currentOrderPrice = totalPrice;
     }
 
     /**
@@ -150,9 +145,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
             });
 
-            // for (String currentKey : hashMapStandardHat.keySet()) {
-            //     String key = currentKey;
-            // }
             int index = 0;
 
             while (index < hashMapStandardHat.size()) {
@@ -236,7 +228,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
     }
 
-    //till här
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -634,6 +625,11 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kundnummer", "Förnamn", "Efternamn" }));
+        cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSearchSpecificActionPerformed(evt);
+            }
+        });
 
         btnSearchSpecific.setText("Sök kund");
         btnSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
@@ -845,7 +841,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 new GenerateInvoicePDF(addedOrder).setVisible(true);
             }
         }
-//        }
+
         cmbStatus.setSelectedIndex(0);
     }//GEN-LAST:event_btnSaveOrderActionPerformed
 
@@ -885,7 +881,9 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btnEditCatergoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCatergoryActionPerformed
@@ -960,6 +958,48 @@ public class LoginMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
 
+    private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
+         //hämta in vad användaren vill söka efter
+//        String category = cmbSearchSpecific.getSelectedItem().toString();
+//
+//        switch (category) {
+//            case "Kundnummer":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            case "Förnamn":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            case "Efternamn":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            case "Ordernummer":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            case "Under utvärdering":
+//                txtSearchWord.setEnabled(false);
+//                break;
+//            case "Pågående":
+//                txtSearchWord.setEnabled(false);
+//                break;
+//            case "Klar att skickas":
+//                txtSearchWord.setEnabled(false);
+//                break;
+//            case "Skickad":
+//                txtSearchWord.setEnabled(false);
+//                break;
+//            case "Hattnamn":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            case "Tyg":
+//                txtSearchWord.setEnabled(true);
+//                break;
+//            default:
+//                throw new AssertionError();
+//        }
+    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
+    /**
+     * Fill listmodel with data depending on user's choice in combobox
+     */
     public void fillCorrectCategory() {
 
         String category = cbCategory.getSelectedItem().toString();
@@ -994,7 +1034,6 @@ public class LoginMenu extends javax.swing.JFrame {
         }
     }
 
-    //lista alla standardhattar i sökrutan
     /**
      * Fills the jList with standard hats from db.
      */
@@ -1019,7 +1058,11 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
-    //lista alla kunder i sökrutan
+    /**
+     * List all customers in a listmodel
+     *
+     * @param listModel
+     */
     public static void listAllCustomers(DefaultListModel listModel) {
 
         listModel.clear();
@@ -1044,12 +1087,11 @@ public class LoginMenu extends javax.swing.JFrame {
 
             index++;
         }
-
-//        Font defaultListFont = resultList.getFont();
-//        resultList.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
 
-    //lista alla ordrar i sökrutan
+    /**
+     * List all orders in a listmodel
+     */
     public void listAllOrders() {
         listModel.clear();
 
