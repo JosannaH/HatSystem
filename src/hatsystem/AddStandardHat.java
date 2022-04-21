@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.StandardHat;
 import data.Fabric;
+import data.Validation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
@@ -65,6 +66,8 @@ public class AddStandardHat extends javax.swing.JFrame {
         cbColors = new javax.swing.JComboBox<>();
         btnSave = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        lblCheckName = new javax.swing.JLabel();
+        lblCheckPrice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,6 +99,10 @@ public class AddStandardHat extends javax.swing.JFrame {
 
         jLabel6.setText("Registerera ny standardmodell av hatt ");
 
+        lblCheckName.setForeground(new java.awt.Color(153, 0, 0));
+
+        lblCheckPrice.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,14 +127,18 @@ public class AddStandardHat extends javax.swing.JFrame {
                             .addComponent(tfDescription)
                             .addComponent(tfPrice)
                             .addComponent(tfName)
-                            .addComponent(cbColors, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbColors, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCheckName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCheckPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(214, 214, 214)
                         .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +148,13 @@ public class AddStandardHat extends javax.swing.JFrame {
                 .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(lblCheckName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(lblCheckPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,6 +186,8 @@ public class AddStandardHat extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
+        clearAllErrorMessages();
+        
         String chosenName = tfName.getText();
         String chosenPrice = tfPrice.getText();
         String chosenDescription = tfDescription.getText();
@@ -183,6 +198,8 @@ public class AddStandardHat extends javax.swing.JFrame {
             lblErrorMessage.setText("Vänligen fyll i alla fält");
             lblErrorMessage.setVisible(true);
         } else {
+            
+            if(Validation.onlyLetters(chosenName, lblCheckName) && Validation.isPrice(chosenName, lblCheckPrice)){
             int fabricComboID = Fabric.getFabricID(chosenFabric, chosenColor);
             boolean isUniqueHatAndFabricCombo = StandardHat.isUniqueCombination(chosenName, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
@@ -195,46 +212,18 @@ public class AddStandardHat extends javax.swing.JFrame {
                 lblErrorMessage.setVisible(true);
             }
         }
+        }
+        
+        
 
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddStandardHat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddStandardHat().setVisible(true);
-            }
-        });
+    private void clearAllErrorMessages() {
+        lblCheckName.setText("");
+        lblCheckPrice.setText("");
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbColors;
@@ -245,6 +234,8 @@ public class AddStandardHat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblCheckName;
+    private javax.swing.JLabel lblCheckPrice;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JTextField tfDescription;
     private javax.swing.JTextField tfName;

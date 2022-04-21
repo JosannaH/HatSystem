@@ -17,7 +17,7 @@ import javax.swing.DefaultListModel;
  * @author Friday
  */
 public class EditCustomer extends javax.swing.JFrame {
-    
+
     private static String customerID;
     private String oldFirstName;
     private String oldLastName;
@@ -35,16 +35,16 @@ public class EditCustomer extends javax.swing.JFrame {
         initComponents();
         this.customerID = "1";
         fillOrderList();
-        fillCustomerInfo();   
+        fillCustomerInfo();
     }
-    
+
     private void fillOrderList(){
-                
+
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listCustomerOrders.setModel(listModel);
         Font defaultListFont = listCustomerOrders.getFont();
         listCustomerOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-        
+
         ArrayList<HashMap<String, String>> orders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Customer = "+ customerID +";");
         int index = 0;
         while (index < orders.size()) {
@@ -60,13 +60,13 @@ public class EditCustomer extends javax.swing.JFrame {
 
             index++;
         }
-        
+
     }
-    
+
     private void fillCustomerInfo(){
         HashMap<String, String> customer = SqlQuery.getRow("SELECT * FROM customer WHERE Customer_ID = "+ customerID +";");
         HashMap<String, String> address = Address.getAddressFromID(customer.get("Address"));
-        
+
         oldFirstName = customer.get("First_Name");
         txt_firstName.setText(oldFirstName);
         oldLastName = customer.get("Last_Name");
@@ -77,7 +77,7 @@ public class EditCustomer extends javax.swing.JFrame {
         txt_telephone.setText(oldTelephone);
         oldComment = customer.get("Comment");
         txt_comment.setText(oldComment);
-        
+
         oldStreetAddress = address.get("Street");
         txt_streetAddress.setText(oldStreetAddress);
         oldPostCode = address.get("Postal");
@@ -87,7 +87,7 @@ public class EditCustomer extends javax.swing.JFrame {
         oldCountry = address.get("Country");
         txt_country.setText(oldCountry);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
