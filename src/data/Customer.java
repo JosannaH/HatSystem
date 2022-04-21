@@ -145,31 +145,7 @@ public class Customer {
 
         return allCustomers;
     }
-
-    /**
-     * Populate listmodel with date based on customer number
-     * @param customerNr
-     * @param listModel 
-     */
-    public static void listCustomerFromNr(String customerNr, DefaultListModel listModel) {
-        listModel.clear();
-        String ID = getCustomerID(customerNr);
-        HashMap<String, String> customer = getCustomer(ID);
-        
-        HashMap<String, String> address = Address.getAddressFromID(customer.get("Address"));
-
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + customer.get("Comment"),
-                    customer.get("Customer_Nr"),
-                    customer.get("First_Name"),
-                    customer.get("Last_Name"),
-                    customer.get("Email"),
-                    address.get("Street"),
-                    address.get("Postal"),
-                    address.get("City"),
-                    address.get("Country")));
-    }
-
+    
     /**
      * Populate listmodel with data based on customer's first name
      * @param firstName
@@ -212,7 +188,7 @@ public class Customer {
         listModel.clear();
         
          ArrayList<HashMap<String, String>> customers = new ArrayList<>();
-        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where First_Name = '" + lastName + "';");
+        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where Last_Name = '" + lastName + "';");
 
         int index = 0;
         while (index < customers.size()) {

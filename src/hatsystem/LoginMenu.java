@@ -624,7 +624,7 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord.setText("Sökord");
         txtSearchWord.setToolTipText("");
 
-        cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kundnummer", "Förnamn", "Efternamn" }));
+        cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn" }));
         cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSearchSpecificActionPerformed(evt);
@@ -930,9 +930,6 @@ public class LoginMenu extends javax.swing.JFrame {
         String searchWord = txtSearchWord.getText();
 
         switch (category) {
-            case "Kundnummer":
-                Customer.listCustomerFromNr(searchWord, listModel);
-                break;
             case "Förnamn":
                 Customer.listCustomersFromFirstName(searchWord, listModel);
                 break;
@@ -1009,7 +1006,6 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Kunder": {
                 listAllCustomers(listModel);
                 btnSearchSpecific.setText("Sök kund");
-                cmbSearchSpecific.addItem("Kundnummer");
                 cmbSearchSpecific.addItem("Förnamn");
                 cmbSearchSpecific.addItem("Efternamn");
                 break;
