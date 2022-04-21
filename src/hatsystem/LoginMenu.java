@@ -70,7 +70,7 @@ public class LoginMenu extends javax.swing.JFrame {
         this.mainLoginMenu = mainLoginMenu;
         lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
-        fillCorrectCategory();
+        listAllCustomers(listModel);
 
     }
 
@@ -196,7 +196,6 @@ public class LoginMenu extends javax.swing.JFrame {
             }
 
         }
-        //myLabel.setText("Test");
         String totalPrice = String.valueOf(getTotalPrice());
         totalPriceLabel.setText(totalPrice);
     }
@@ -635,11 +634,6 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kundnummer", "Förnamn", "Efternamn" }));
-        cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSearchSpecificActionPerformed(evt);
-            }
-        });
 
         btnSearchSpecific.setText("Sök kund");
         btnSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
@@ -761,6 +755,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
+
         fillCorrectCategory();
     }//GEN-LAST:event_cbCategoryActionPerformed
 
@@ -965,54 +960,13 @@ public class LoginMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
 
-    private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
-        
-        String category = cmbSearchSpecific.getSelectedItem().toString();
-
-        switch (category) {
-            case "Kundnummer":
-                txtSearchWord.setEnabled(true);
-                break;
-            case "Förnamn":
-                txtSearchWord.setEnabled(true);
-                break;
-            case "Efternamn":
-                txtSearchWord.setEnabled(true);
-                break;
-            case "Ordernummer":
-                txtSearchWord.setEnabled(true);
-                break;
-            case "Under utvärdering":
-                txtSearchWord.setEnabled(false);
-                break;
-            case "Pågående":
-                txtSearchWord.setEnabled(false);
-                break;
-            case "Klar att skickas":
-                txtSearchWord.setEnabled(false);
-                break;
-            case "Skickad":
-                txtSearchWord.setEnabled(false);
-                break;
-            case "Hattnamn":
-                txtSearchWord.setEnabled(true);
-                break;
-            case "Tyg":
-                txtSearchWord.setEnabled(true);
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
-
     public void fillCorrectCategory() {
-        
-                
+
         String category = cbCategory.getSelectedItem().toString();
+        cmbSearchSpecific.removeAllItems();
 
         switch (category) {
             case "Kunder": {
-                cmbSearchSpecific.removeAllItems();
                 listAllCustomers(listModel);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.addItem("Kundnummer");
@@ -1021,7 +975,6 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             }
             case "Ordrar": {
-                cmbSearchSpecific.removeAllItems();
                 listAllOrders();
                 btnSearchSpecific.setText("Sök order");
                 cmbSearchSpecific.addItem("Ordernummer");
@@ -1032,7 +985,6 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             }
             case "Standardhattar": {
-                cmbSearchSpecific.removeAllItems();
                 listAllStandardHats();
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.addItem("Hattnamn");
