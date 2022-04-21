@@ -95,12 +95,21 @@ public class Customer {
         return customerID;
     }
 
+    /**
+     * Get customer number by ID
+     * @param customerID
+     * @return 
+     */
     public static String getCustomerNr(String customerID) {
         String query = "SELECT Customer_Nr from Customer WHERE Customer_ID = '" + customerID + "';";
         String customerNr = SqlQuery.getValue(query);
         return customerNr;
     }
 
+    /**
+     * Get latest added customer
+     * @return 
+     */
     public static String getLatestCustomer() {
         String query = "SELECT MAX(Customer_ID) FROM Customer";
         String customerID = SqlQuery.getValue(query);
@@ -125,6 +134,10 @@ public class Customer {
 
     }
 
+    /**
+     * Get all active customers
+     * @return 
+     */
     public static ArrayList<HashMap<String, String>> getAllCustomers() {
         ArrayList<HashMap<String, String>> allCustomers = new ArrayList<>();
 
@@ -133,6 +146,11 @@ public class Customer {
         return allCustomers;
     }
 
+    /**
+     * Populate listmodel with date based on customer number
+     * @param customerNr
+     * @param listModel 
+     */
     public static void listCustomerFromNr(String customerNr, DefaultListModel listModel) {
         listModel.clear();
         String ID = getCustomerID(customerNr);
@@ -152,6 +170,11 @@ public class Customer {
                     address.get("Country")));
     }
 
+    /**
+     * Populate listmodel with data based on customer's first name
+     * @param firstName
+     * @param listModel 
+     */
     public static void listCustomersFromFirstName(String firstName, DefaultListModel listModel) {
         listModel.clear();
         
@@ -179,10 +202,16 @@ public class Customer {
         }
 
     }
-
+    
+/**
+ * Populates listmodel with data based on customer's last name
+ * @param lastName
+ * @param listModel 
+ */
     public static void listCustomerFromLastName(String lastName, DefaultListModel listModel) {
         listModel.clear();
- ArrayList<HashMap<String, String>> customers = new ArrayList<>();
+        
+         ArrayList<HashMap<String, String>> customers = new ArrayList<>();
         customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where First_Name = '" + lastName + "';");
 
         int index = 0;
@@ -205,5 +234,4 @@ public class Customer {
             index++;
         }
     }
-
 }
