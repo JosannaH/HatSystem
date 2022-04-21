@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="lblCheckCountry1">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -24,11 +34,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                              <Component id="lbl_redigera_kunduppifter" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lbl_country" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_lastName" min="-2" max="-2" attributes="0"/>
@@ -38,54 +52,58 @@
                                   <Component id="lbl_streetAddress" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_postCode" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_city" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_country" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Component id="txt_email" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_lastName" max="32767" attributes="0"/>
-                                  <Component id="txt_firstName" max="32767" attributes="0"/>
-                                  <Component id="txt_telephone" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblErrorMessage" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_country" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_lastName" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_firstName" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_telephone" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_streetAddress" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_postCode" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_city" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="txt_streetAddress" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Component id="txt_postCode" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Component id="txt_city" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
-                      <Component id="lbl_redigera_kunduppifter" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
                       <Component id="btn_save" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="513" max="-2" attributes="0"/>
-                      <Component id="btn_Delete" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="589" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_kundens_tidigare_ordrar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_Delete" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblCheckPostal" max="32767" attributes="0"/>
+                                  <Component id="lblCheckStreet" max="32767" attributes="0"/>
+                                  <Component id="lblCheckCity" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblCheckCountry" alignment="0" pref="176" max="32767" attributes="0"/>
+                                  <Component id="lblCheckEmail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblCheckPhone" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblCheckLastName" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblCheckFirstName" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="464" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -105,53 +123,64 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckLastName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbl_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_telephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckStreet" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_postCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckPostal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_city" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_city" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckCity" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_country" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_country" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheckCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_comment" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblErrorMessage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_save" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_save" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Delete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -233,6 +262,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Spara &#xe4;ndringar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_saveActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_redigera_kunduppifter">
       <Properties>
@@ -278,6 +310,71 @@
     <Component class="javax.swing.JLabel" name="lbl_kundens_tidigare_ordrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kundens tidigare ordrar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckFirstName">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckLastName">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckPhone">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckStreet">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckEmail">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckPostal">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckCity">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCheckCountry">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblErrorMessage">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="V&#xe4;nligen fyll i alla f&#xe4;lt"/>
       </Properties>
     </Component>
   </SubComponents>
