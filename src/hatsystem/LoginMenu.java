@@ -559,6 +559,11 @@ public class LoginMenu extends javax.swing.JFrame {
         });
 
         btnRegisterFabric.setText("Registrera nytt tyg");
+        btnRegisterFabric.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterFabricActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_registerLayout = new javax.swing.GroupLayout(panel_register);
         panel_register.setLayout(panel_registerLayout);
@@ -877,6 +882,10 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnGenerateMomsPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateMomsPDFActionPerformed
         new GenerateMomsPDF().setVisible(true);
     }//GEN-LAST:event_btnGenerateMomsPDFActionPerformed
+
+    private void btnRegisterFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterFabricActionPerformed
+       new AddFabric().setVisible(true);
+    }//GEN-LAST:event_btnRegisterFabricActionPerformed
 
     public void fillCorrectCategory() {
         String category = cbCategory.getSelectedItem().toString();
