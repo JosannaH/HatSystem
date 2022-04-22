@@ -14,13 +14,11 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Friday
  */
 public class GeneratePDF {
-
 
     public static void generateMomsPDF(String year, String searchPath) {
         try {
@@ -30,21 +28,73 @@ public class GeneratePDF {
 
             document.open();
 
-            Paragraph paragraph = new Paragraph("Totalförsäljning år " + year + " inkl. moms");
+            Paragraph paragraph = new Paragraph("Totalförsäljning år " + year);
 
             document.add(paragraph);
 
-            ArrayList<String> allOrders = SqlQuery.getColumn("SELECT Total_Price FROM orders WHERE Order_Date LIKE '" + year + "%';");
+            ArrayList<HashMap<String, String>> allOrders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Order_Date LIKE '" + year + "%';");
+
+            int nrOfOrders = 0;
+            int nrOfHats = 0;
+            int nrOfStandardHats = 0;
+            int nrOfCustomHats = 0;
+            int nrOfSpecialHats = 0;
 
             double totalPrice = 0;
 
-            for (String s : allOrders) {
-                totalPrice += Double.parseDouble(s);
+            for (HashMap<String, String> order : allOrders) {
+                totalPrice += Double.parseDouble(order.get("Total_Price"));
+                nrOfOrders += 1;
+
+                String currentOrderID = order.get("Orders_ID");
+                ArrayList<String> orderedStandardHats = SqlQuery.getColumn("SELECT Standard_Hat FROM ordered_st_hat WHERE Order_Nr = " + currentOrderID + ";");
+                ArrayList<String> orderedCustomHats = SqlQuery.getColumn("SELECT Hat_ID FROM ordered_hat WHERE Order_Nr = " + currentOrderID + ";");
+                ArrayList<String> allCustomHats = SqlQuery.getColumn("SELECT Hat_ID FROM custom_hat");
+                ArrayList<String> allSpecialHats = SqlQuery.getColumn("SELECT Hat_ID FROM special_hat");
+
+                for (String standardHat : orderedStandardHats) {
+                    nrOfHats += 1;
+                    nrOfStandardHats += 1;
+                }
+                for (String customHat : orderedCustomHats) {
+                    nrOfHats += 1;
+
+                    if (allCustomHats.contains(customHat)) {
+                        nrOfCustomHats += 1;
+                    }
+                    if (allSpecialHats.contains(customHat)) {
+                        nrOfSpecialHats += 1;
+                    }
+                }
             }
+            paragraph = new Paragraph(" ");
+            document.add(paragraph);
+            
             paragraph = new Paragraph("Totalförsäljning: " + totalPrice);
             document.add(paragraph);
 
-            paragraph = new Paragraph("Moms: " + totalPrice * 0.25);
+            paragraph = new Paragraph("   Varav moms: " + totalPrice * 0.25);
+            document.add(paragraph);
+            
+            paragraph = new Paragraph(" ");
+            document.add(paragraph);
+
+            paragraph = new Paragraph("Antal ordrar: " + nrOfOrders);
+            document.add(paragraph);
+            
+            paragraph = new Paragraph(" ");
+            document.add(paragraph);
+
+            paragraph = new Paragraph("Antal sålda hattar: " + nrOfHats);
+            document.add(paragraph);
+
+            paragraph = new Paragraph("   Varav standardhattar: " + nrOfStandardHats);
+            document.add(paragraph);
+            
+            paragraph = new Paragraph("   Varav anpassade hattar: " + nrOfCustomHats);
+            document.add(paragraph);
+            
+            paragraph = new Paragraph("   Varav specialhattar: " + nrOfSpecialHats);
             document.add(paragraph);
 
             document.close();
@@ -109,30 +159,30 @@ public class GeneratePDF {
             //custom och special hattar
             ArrayList<HashMap<String, String>> otherHats = SqlQuery.getMultipleRows(query1);
 
-                for (HashMap<String, String> hs : otherHats) {
+            for (HashMap<String, String> hs : otherHats) {
 
-                    table.addCell(hs.get("Name"));
-                    table.addCell(hs.get("Price"));
-                    totalPrice += Double.parseDouble(hs.get("Price"));
-                }
-            
+                table.addCell(hs.get("Name"));
+                table.addCell(hs.get("Price"));
+                totalPrice += Double.parseDouble(hs.get("Price"));
+            }
+
             //standardhattar
             ArrayList<HashMap<String, String>> standardHats = SqlQuery.getMultipleRows(query2);
 
-                for (HashMap<String, String> hs : standardHats) {
+            for (HashMap<String, String> hs : standardHats) {
 
-                    table.addCell(hs.get("Name"));
-                    table.addCell(hs.get("Price"));
-                    totalPrice += Double.parseDouble(hs.get("Price"));
-                }
+                table.addCell(hs.get("Name"));
+                table.addCell(hs.get("Price"));
+                totalPrice += Double.parseDouble(hs.get("Price"));
+            }
 
             table.setHeaderRows(1);
 
             document.add(table);
 
             //pris och moms
-            paragraph = new Paragraph("Pris innehåll: " + totalPrice 
-                                        + ", varav moms: " + totalPrice * 0.25);
+            paragraph = new Paragraph("Pris innehåll: " + totalPrice
+                    + ", varav moms: " + totalPrice * 0.25);
             document.add(paragraph);
 
             paragraph = new Paragraph("Beskrivning av innehållet: " + description);
@@ -150,10 +200,9 @@ public class GeneratePDF {
         try {
 
             Document document = new Document();
-          PdfWriter.getInstance(document, new FileOutputStream(searchPath + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(searchPath + ".pdf"));
 
             document.open();
-
 
             HashMap<String, String> order = SqlQuery.getRow("SELECT * FROM orders WHERE Orders_ID = 1;");
             HashMap<String, String> deliveryAddress = SqlQuery.getRow("SELECT * FROM address WHERE Address_ID IN (SELECT Delivery_Address FROM orders WHERE Orders_ID = " + orderNr + ");");
