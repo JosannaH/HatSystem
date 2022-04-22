@@ -70,7 +70,7 @@ public class LoginMenu extends javax.swing.JFrame {
         lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
         // Belongs to "Sök" tab
-        listAllCustomers(listModel);
+        Customer.listAllCustomers(listModel);
 
     }
 
@@ -939,12 +939,16 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Ordernummer":
                 break;
             case "Under utvärdering":
+                Order.listOrdersByStatus(category, listModel);
                 break;
             case "Pågående":
+                Order.listOrdersByStatus(category, listModel);
                 break;
             case "Klar att skickas":
+                Order.listOrdersByStatus(category, listModel);
                 break;
             case "Skickad":
+                Order.listOrdersByStatus(category, listModel);
                 break;
             case "Hattnamn":
                 break;
@@ -956,7 +960,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
 
     private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
-         //hämta in vad användaren vill söka efter
+        //hämta in vad användaren vill söka efter
 //        String category = cmbSearchSpecific.getSelectedItem().toString();
 //
 //        switch (category) {
@@ -1004,14 +1008,14 @@ public class LoginMenu extends javax.swing.JFrame {
 
         switch (category) {
             case "Kunder": {
-                listAllCustomers(listModel);
+                Customer.listAllCustomers(listModel);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.addItem("Förnamn");
                 cmbSearchSpecific.addItem("Efternamn");
                 break;
             }
             case "Ordrar": {
-                listAllOrders();
+                Order.listAllOrders(listModel);
                 btnSearchSpecific.setText("Sök order");
                 cmbSearchSpecific.addItem("Ordernummer");
                 cmbSearchSpecific.addItem("Under utvärdering");
@@ -1021,7 +1025,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             }
             case "Standardhattar": {
-                listAllStandardHats();
+                StandardHat.listAllStandardHats(listModel);
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.addItem("Hattnamn");
                 cmbSearchSpecific.addItem("Tyg");
@@ -1030,83 +1034,6 @@ public class LoginMenu extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Fills the jList with standard hats from db.
-     */
-    private void listAllStandardHats() {
-
-        hashMapListPrice.clear();
-
-        listModel.clear();
-
-        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
-        int index = 0;
-        while (index < allHats.size()) {
-            HashMap<String, String> currentHat = allHats.get(index);
-            String fabricID = currentHat.get("Hat_Fabric");
-            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-
-            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
-
-            index++;
-        }
-        Font defaultListFont = listFoundResults.getFont();
-        listFoundResults.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-    }
-
-    /**
-     * List all customers in a listmodel
-     *
-     * @param listModel
-     */
-    public static void listAllCustomers(DefaultListModel listModel) {
-
-        listModel.clear();
-
-        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
-        int index = 0;
-        while (index < allCustomers.size()) {
-            HashMap<String, String> currentCustomer = allCustomers.get(index);
-            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
-
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + currentCustomer.get("Comment"),
-                    currentCustomer.get("Customer_Nr"),
-                    currentCustomer.get("First_Name"),
-                    currentCustomer.get("Last_Name"),
-                    currentCustomer.get("Email"),
-                    currentAddress.get("Street"),
-                    currentAddress.get("Postal"),
-                    currentAddress.get("City"),
-                    currentAddress.get("Country")
-            ));
-
-            index++;
-        }
-    }
-
-    /**
-     * List all orders in a listmodel
-     */
-    public void listAllOrders() {
-        listModel.clear();
-
-        ArrayList<HashMap<String, String>> allOrders = Order.getAllOrders();
-        int index = 0;
-        while (index < allOrders.size()) {
-            HashMap<String, String> currentOrder = allOrders.get(index);
-
-            listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
-                    + currentOrder.get("Total_Price"),
-                    currentOrder.get("Orders_ID"),
-                    currentOrder.get("Delivery_Date"),
-                    currentOrder.get("Order_Date"),
-                    currentOrder.get("Status")
-            ));
-
-            index++;
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbDeleteChosenHat;
