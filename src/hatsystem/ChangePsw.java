@@ -25,12 +25,15 @@ public class ChangePsw extends javax.swing.JFrame {
     public ChangePsw() {
         initComponents();
         lblError.setVisible(false);
+        lblErrorOldPsw.setVisible(false);
     }
 
     public ChangePsw(String userName) {
         initComponents();
         this.userName = userName;
         lblError.setVisible(false);
+        lblErrorOldPsw.setVisible(false);
+
     }
 
     /**
@@ -48,6 +51,7 @@ public class ChangePsw extends javax.swing.JFrame {
         lblNewPsw = new javax.swing.JLabel();
         lblRepNewPsw = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
+        lblErrorOldPsw = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,9 +74,11 @@ public class ChangePsw extends javax.swing.JFrame {
 
         lblRepNewPsw.setText("Upprepa nytt lösenord");
 
-        lblError.setForeground(new java.awt.Color(255, 0, 0));
-        lblError.setText("Försök igen");
-        lblError.setEnabled(false);
+        lblError.setForeground(new java.awt.Color(153, 0, 0));
+        lblError.setText("Vänligen fyll i alla fält");
+
+        lblErrorOldPsw.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorOldPsw.setText("Fel lösenord");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,22 +89,26 @@ public class ChangePsw extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblOldPsw)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblNewPsw)
-                                .addComponent(lblRepNewPsw)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtConfirmPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtOldPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNewPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNewPsw)
+                                    .addComponent(lblRepNewPsw))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtConfirmPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtOldPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtNewPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(48, 48, 48)
+                                        .addComponent(lblErrorOldPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblOldPsw)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_save)
-                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(318, Short.MAX_VALUE))
+                        .addComponent(btn_save)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +116,8 @@ public class ChangePsw extends javax.swing.JFrame {
                 .addGap(143, 143, 143)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOldPsw)
-                    .addComponent(txtOldPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOldPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblErrorOldPsw))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,14 +126,15 @@ public class ChangePsw extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtConfirmPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRepNewPsw))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(lblError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(btn_save)
                 .addGap(44, 44, 44))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtOldPswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOldPswActionPerformed
@@ -133,8 +145,8 @@ public class ChangePsw extends javax.swing.JFrame {
 //        char[] oldPsw = txtOldPsw.getPassword();
 //        char[] newPsw = txtNewPsw.getPassword();
 
-        //lblError.setVisible(false);
-
+        lblError.setVisible(false);
+        lblErrorOldPsw.setVisible(false);
         if (txtOldPsw.getPassword().length == 0 || txtNewPsw.getPassword().length == 0
                 || txtConfirmPsw.getPassword().length == 0) {
 
@@ -143,38 +155,62 @@ public class ChangePsw extends javax.swing.JFrame {
 
         } else {
 
+            oldPasw = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + userName + "'");
+            char[] dbPsw = oldPasw.toCharArray();
+            char[] oldPsw = txtOldPsw.getPassword();
+            String dbPswString = new String(dbPsw);
+            String oldPswString = new String(oldPsw);
+
             char[] newPsw = txtNewPsw.getPassword();
             char[] confirmPsw = txtConfirmPsw.getPassword();
-            oldPasw = SqlQuery.getValue("SELECT Password FROM employee WHERE Username = '" + userName + "'");
 
-            if (((!Arrays.equals(newPsw, confirmPsw)) || !(Arrays.equals(txtOldPsw.getPassword(), oldPasw.toCharArray())))) {
-                lblError.setText("Försök igen");
-                lblError.setVisible(true);
+            if (!dbPswString.equals(oldPswString)) {
+                lblErrorOldPsw.setText("Fel lösenord");
+                lblErrorOldPsw.setVisible(true);
             } else {
-                boolean updated = false;
-                newPasw = new String(newPsw);
-                if (JOptionPane.showConfirmDialog(null, "Är du säker?", "Du ska uppdatera ditt losenord!",
-                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    // yes option
-                    updatePaswQuery = "update employee set Password ='" + newPasw + "' where Username ='" + userName + "';";
-                    updated = SqlQuery.update(updatePaswQuery);
-                } else {
-                    // no option
-                }
-                if (updated) {
-                    JOptionPane.showMessageDialog(null, "Lösenordet har uppdaterats!");
+
+                if (!Arrays.equals(newPsw, confirmPsw)) {
+                    lblError.setText("Lösenorden stämmer ej överens");
+                    lblError.setVisible(true);
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Lösenordet har inte ändrats.");
-                }
-                dispose();
+                    boolean updated = false;
+                    newPasw = new String(newPsw);
+                    if (JOptionPane.showConfirmDialog(null, "Är du säker?", "Du ska uppdatera ditt losenord!",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        // yes option
+                        updatePaswQuery = "update employee set Password ='" + newPasw + "' where Username ='" + userName + "';";
+                        updated = SqlQuery.update(updatePaswQuery);
+                    } else {
+                        // no option
+                    }
+                    if (updated) {
+                        JOptionPane.showMessageDialog(null, "Lösenordet har uppdaterats!");
+                        dispose();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lösenordet har inte ändrats.");
+                    }
+
     }//GEN-LAST:event_btn_saveActionPerformed
+
+            }
+            dbPswString = "";
+            oldPswString = "";
+            dbPsw = null;
+            oldPsw = null;
+            newPsw = null;
+            confirmPsw = null;
         }
+        oldPasw = "";
+        newPasw = "";
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_save;
     private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblErrorOldPsw;
     private javax.swing.JLabel lblNewPsw;
     private javax.swing.JLabel lblOldPsw;
     private javax.swing.JLabel lblRepNewPsw;

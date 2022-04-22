@@ -8,6 +8,7 @@ import data.SqlQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -19,7 +20,8 @@ public class Fabric {
     }
 
     /**
-     * Adds a new fabric to the database. User input errors should be checked before calling this method.
+     * Adds a new fabric to the database. User input errors should be checked
+     * before calling this method.
      *
      * @param chosenName
      * @param chosenPrice
@@ -35,7 +37,8 @@ public class Fabric {
     }
 
     /**
-     * Retrieves all information of all fabrics from the database and stores them in an ArrayList of HashMaps.
+     * Retrieves all information of all fabrics from the database and stores
+     * them in an ArrayList of HashMaps.
      *
      * @return All fabrics in the database.
      */
@@ -48,7 +51,8 @@ public class Fabric {
     }
 
     /**
-     * Retrieves all fabric names from the database and stores them in a HashSet, which can only contain unique values.
+     * Retrieves all fabric names from the database and stores them in a
+     * HashSet, which can only contain unique values.
      *
      * @return All unique fabric names.
      */
@@ -61,7 +65,8 @@ public class Fabric {
     }
 
     /**
-     * Retrieves every color option for a specific fabric name and stores them in an ArrayList.
+     * Retrieves every color option for a specific fabric name and stores them
+     * in an ArrayList.
      *
      * @return All colors for a specific fabric,
      */
@@ -86,6 +91,12 @@ public class Fabric {
         return fabricID;
     }
 
+    public static int getFabricIDFromName(String fabricName) {
+        String fabric = SqlQuery.getValue("SELECT Fabric_ID from fabric WHERE Name = '" + fabricName + "';");
+        int fabricID = Integer.parseInt(fabric);
+        return fabricID;
+    }
+
     /**
      * Retrieves a fabric from the database having the specified id.
      *
@@ -96,11 +107,12 @@ public class Fabric {
 
         HashMap<String, String> fabric = SqlQuery.getRow("SELECT * FROM fabric WHERE Fabric_ID = " + fabricID + ";");
         return fabric;
-
     }
 
     /**
-     * Checks whether a fabric with the specified values already exists in the db.
+     * Checks whether a fabric with the specified values already exists in the
+     * db.
+     *
      * @param name
      * @param price
      * @param color
@@ -116,5 +128,21 @@ public class Fabric {
             exists = false;
         }
         return exists;
+    }
+
+    public static void fillCmbWithAllFabrics(JComboBox cmb) {
+        ArrayList<String> fabrics = SqlQuery.getColumn("SELECT Name FROM fabric;");
+        for (String f : fabrics) {
+            cmb.addItem(f);
+        }
+
+    }
+
+    public static ArrayList<HashMap<String, String>> getHatsFromFabric(int fabricID) {
+
+        ArrayList<HashMap<String, String>> hats
+                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE Hat_Fabric = " + fabricID + ";");
+        return hats;
+
     }
 }

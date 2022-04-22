@@ -4,14 +4,11 @@
  */
 package hatsystem;
 
-import data.Address;
 import data.Fabric;
 import data.StandardHat;
 import data.Order;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
@@ -25,7 +22,6 @@ import data.Validation;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -285,8 +281,12 @@ public class LoginMenu extends javax.swing.JFrame {
         cmbSearchSpecific = new javax.swing.JComboBox<>();
         btnSearchSpecific = new javax.swing.JButton();
         lblErrorValidateSearchWord = new javax.swing.JLabel();
+        cmbSearchStandardHats = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
-        btnGenerateMomsPDF = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cmbChosenYear = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        btnGeneratePDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -636,6 +636,8 @@ public class LoginMenu extends javax.swing.JFrame {
 
         lblErrorValidateSearchWord.setForeground(new java.awt.Color(153, 0, 0));
 
+        cmbSearchStandardHats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
         panel_searchLayout.setHorizontalGroup(
@@ -665,6 +667,8 @@ public class LoginMenu extends javax.swing.JFrame {
                                 .addComponent(btnEditCatergory))
                             .addGroup(panel_searchLayout.createSequentialGroup()
                                 .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblErrorMessageCategory)))))
                 .addGap(63, 63, 63))
@@ -687,7 +691,9 @@ public class LoginMenu extends javax.swing.JFrame {
                             .addComponent(btnSearchSpecific)))
                     .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_searchLayout.createSequentialGroup()
-                        .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -697,10 +703,16 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sök", panel_search);
 
-        btnGenerateMomsPDF.setText("Generera årssammanställning");
-        btnGenerateMomsPDF.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setText("Skapa årssammanställning av totalförsäljning samt moms");
+
+        cmbChosenYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
+
+        jLabel10.setText("Välj år");
+
+        btnGeneratePDF.setText("Generera PDF");
+        btnGeneratePDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateMomsPDFActionPerformed(evt);
+                btnGeneratePDFActionPerformed(evt);
             }
         });
 
@@ -709,19 +721,35 @@ public class LoginMenu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(btnGenerateMomsPDF)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(315, 315, 315)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(346, 346, 346)
+                        .addComponent(btnGeneratePDF)))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btnGenerateMomsPDF)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addGap(115, 115, 115)
+                .addComponent(jLabel8)
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(59, 59, 59)
+                .addComponent(btnGeneratePDF)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Statistik", jPanel1);
+        jTabbedPane1.addTab("Årsredovisning", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -904,7 +932,8 @@ public class LoginMenu extends javax.swing.JFrame {
                     new EditOrder(Integer.parseInt(orderToEdit)).setVisible(true);
                     break;
                 case "Standardhattar":
-
+                    String hatID = objectToEdit.substring(0, 10).trim();
+                    new EditStandardHat(hatID).setVisible(true);
                     break;
 
             }
@@ -914,10 +943,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
         fillCorrectCategory();
     }//GEN-LAST:event_btnUpdateCategoryActionPerformed
-
-    private void btnGenerateMomsPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateMomsPDFActionPerformed
-        new GenerateMomsPDF().setVisible(true);
-    }//GEN-LAST:event_btnGenerateMomsPDFActionPerformed
 
     private void btnRegisterFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterFabricActionPerformed
         new AddFabric().setVisible(true);
@@ -929,6 +954,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String category = cmbSearchSpecific.getSelectedItem().toString();
         //hämta in sökord
         String searchWord = txtSearchWord.getText();
+        lblErrorValidateSearchWord.setText("");
 
         //TODO fixa så att errormeddelande försvinner till nästa sökning
         if(Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)){
@@ -952,14 +978,39 @@ public class LoginMenu extends javax.swing.JFrame {
                 Order.listOrdersByStatus(category, listModel);
                 break;
             case "Hattnamn":
+                StandardHat.listAllHatsByHatName(searchWord, listModel);
                 break;
             case "Tyg":
+                StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
                 break;
             default:
                 throw new AssertionError();
         }
         }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
+
+    private void btnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneratePDFActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        //så användaren endast kan välja mappar
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            File file = fc.getSelectedFile();
+            //hämtar den valda mappens sökväg
+            String searchPath = file.getAbsolutePath();
+
+            String year = cmbChosenYear.getSelectedItem().toString();
+            searchPath += ("\\Oversikt_Moms_" + year);
+
+            //skapar fraktsedeln
+            GeneratePDF.generateMomsPDF(year, searchPath);
+            JOptionPane.showMessageDialog(null, "Sammanställning har skapats");
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnGeneratePDFActionPerformed
     /**
      * Fill listmodel with data depending on user's choice in combobox
      */
@@ -971,6 +1022,7 @@ public class LoginMenu extends javax.swing.JFrame {
         switch (category) {
             case "Kunder": {
                 Customer.listAllCustomers(listModel);
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(true);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.addItem("Förnamn");
@@ -979,8 +1031,9 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Ordrar": {
                 Order.listAllOrders(listModel);
-                btnSearchSpecific.setText("Sök order");
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(false);
+                btnSearchSpecific.setText("Sök order");
                 cmbSearchSpecific.addItem("Under utvärdering");
                 cmbSearchSpecific.addItem("Pågående");
                 cmbSearchSpecific.addItem("Redo att skickas");
@@ -989,6 +1042,7 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Standardhattar": {
                 StandardHat.listAllStandardHats(listModel);
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEditable(true);
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.addItem("Hattnamn");
@@ -1004,7 +1058,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAddNewHatType;
     private javax.swing.JButton btnCreateNewCustomerFromOrder;
     private javax.swing.JButton btnEditCatergory;
-    private javax.swing.JButton btnGenerateMomsPDF;
+    private javax.swing.JButton btnGeneratePDF;
     private javax.swing.JButton btnRegisterCustomer;
     private javax.swing.JButton btnRegisterFabric;
     private javax.swing.JButton btnRegisterStandardHat;
@@ -1014,16 +1068,20 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JComboBox<String> cmbChosenYear;
     private javax.swing.JComboBox<String> cmbSearchSpecific;
+    private javax.swing.JComboBox<String> cmbSearchStandardHats;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListAllOrders;
     private javax.swing.JPanel jPanel1;

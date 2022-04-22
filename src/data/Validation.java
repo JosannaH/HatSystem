@@ -122,6 +122,7 @@ public class Validation {
         if (!allLetters) {
 
             result = false;
+            lbl.setVisible(true);
             lbl.setText("Endast bokstäver");
         }
 
@@ -161,6 +162,7 @@ public class Validation {
 
         if (!text.matches("^\\d+(\\.\\d{1,2})?$")) {
             result = false;
+            lbl.setVisible(true);
             lbl.setText("Endast siffror/punkt");
         }
         

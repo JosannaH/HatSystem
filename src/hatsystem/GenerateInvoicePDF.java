@@ -56,7 +56,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                     this.dispose();
                 }
             } else {
-                lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror");
+                lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror och punkt");
                 lblErrorMessage.setVisible(true);
             }
         } else {

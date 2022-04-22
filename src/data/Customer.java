@@ -22,7 +22,6 @@ public class Customer {
      * Adds a customer to the database. User inputs should be checked before
      * calling this method.
      *
-     * @param customerNr
      * @param firstName
      * @param lastName
      * @param email
