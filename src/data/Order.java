@@ -62,26 +62,30 @@ public class Order {
     public static void listOrdersByStatus(String status, DefaultListModel listModel) {
         listModel.clear();
         ArrayList<HashMap<String, String>> orders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Status = '" + status + "';");
-        listModel.addElement(String.format("%-10s %-20s %-20s %-20s" +
-                "Summa", "OrderID", "Leveransdatum", "Orderdatum", "Status"));
-        int index = 0;
-        while (index < orders.size()) {
-            HashMap<String, String> currentOrder = orders.get(index);
 
+        if (orders.isEmpty()) {
+            listModel.addElement("Inget resultat");
+        } else {
             listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
-                    + currentOrder.get("Total_Price"),
-                    currentOrder.get("Orders_ID"),
-                    currentOrder.get("Delivery_Date"),
-                    currentOrder.get("Order_Date"),
-                    currentOrder.get("Status")
-            ));
+                    + "Summa", "OrderID", "Leveransdatum", "Orderdatum", "Status"));
+            int index = 0;
+            while (index < orders.size()) {
+                HashMap<String, String> currentOrder = orders.get(index);
 
-            index++;
+                listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
+                        + currentOrder.get("Total_Price"),
+                        currentOrder.get("Orders_ID"),
+                        currentOrder.get("Delivery_Date"),
+                        currentOrder.get("Order_Date"),
+                        currentOrder.get("Status")
+                ));
+
+                index++;
+            }
         }
-
     }
-    
-     /**
+
+    /**
      * List all orders in a listmodel
      */
     public static void listAllOrders(DefaultListModel listModel) {

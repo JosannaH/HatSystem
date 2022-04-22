@@ -21,6 +21,7 @@ import data.Customer;
 import data.Address;
 import data.Employee;
 import data.GeneratePDF;
+import data.Validation;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -283,6 +284,7 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord = new javax.swing.JTextField();
         cmbSearchSpecific = new javax.swing.JComboBox<>();
         btnSearchSpecific = new javax.swing.JButton();
+        lblErrorValidateSearchWord = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnGenerateMomsPDF = new javax.swing.JButton();
 
@@ -621,15 +623,9 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        txtSearchWord.setText("Sökord");
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn" }));
-        cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSearchSpecificActionPerformed(evt);
-            }
-        });
 
         btnSearchSpecific.setText("Sök kund");
         btnSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
@@ -637,6 +633,8 @@ public class LoginMenu extends javax.swing.JFrame {
                 btnSearchSpecificActionPerformed(evt);
             }
         });
+
+        lblErrorValidateSearchWord.setForeground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
@@ -649,24 +647,27 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addComponent(lblChooseCategory)
                         .addGap(18, 18, 18)
                         .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_searchLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_searchLayout.createSequentialGroup()
-                                .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblErrorMessageCategory, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
-                                        .addComponent(btnUpdateCategory)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnEditCatergory)))))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                                .addGap(216, 216, 216)
+                                .addComponent(btnUpdateCategory)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditCatergory))
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblErrorMessageCategory)))))
+                .addGap(63, 63, 63))
         );
         panel_searchLayout.setVerticalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,24 +676,23 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblChooseCategory))
-                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(34, 34, 34)
+                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_searchLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addComponent(lblErrorMessageCategory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnEditCatergory)
-                            .addComponent(btnUpdateCategory))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
+                            .addComponent(btnUpdateCategory)
+                            .addComponent(btnSearchSpecific)))
+                    .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_searchLayout.createSequentialGroup()
+                        .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchSpecific))
-                        .addGap(29, 29, 29)))
+                        .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sök", panel_search);
@@ -929,14 +929,14 @@ public class LoginMenu extends javax.swing.JFrame {
         //hämta in sökord
         String searchWord = txtSearchWord.getText();
 
+        //TODO fixa så att errormeddelande försvinner till nästa sökning
+        if(Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)){
         switch (category) {
             case "Förnamn":
                 Customer.listCustomersFromFirstName(searchWord, listModel);
                 break;
             case "Efternamn":
                 Customer.listCustomerFromLastName(searchWord, listModel);
-                break;
-            case "Ordernummer":
                 break;
             case "Under utvärdering":
                 Order.listOrdersByStatus(category, listModel);
@@ -957,47 +957,8 @@ public class LoginMenu extends javax.swing.JFrame {
             default:
                 throw new AssertionError();
         }
+        }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
-
-    private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
-        //hämta in vad användaren vill söka efter
-//        String category = cmbSearchSpecific.getSelectedItem().toString();
-//
-//        switch (category) {
-//            case "Kundnummer":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            case "Förnamn":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            case "Efternamn":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            case "Ordernummer":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            case "Under utvärdering":
-//                txtSearchWord.setEnabled(false);
-//                break;
-//            case "Pågående":
-//                txtSearchWord.setEnabled(false);
-//                break;
-//            case "Klar att skickas":
-//                txtSearchWord.setEnabled(false);
-//                break;
-//            case "Skickad":
-//                txtSearchWord.setEnabled(false);
-//                break;
-//            case "Hattnamn":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            case "Tyg":
-//                txtSearchWord.setEnabled(true);
-//                break;
-//            default:
-//                throw new AssertionError();
-//        }
-    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
     /**
      * Fill listmodel with data depending on user's choice in combobox
      */
@@ -1009,6 +970,7 @@ public class LoginMenu extends javax.swing.JFrame {
         switch (category) {
             case "Kunder": {
                 Customer.listAllCustomers(listModel);
+                txtSearchWord.setEnabled(true);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.addItem("Förnamn");
                 cmbSearchSpecific.addItem("Efternamn");
@@ -1017,7 +979,7 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Ordrar": {
                 Order.listAllOrders(listModel);
                 btnSearchSpecific.setText("Sök order");
-                cmbSearchSpecific.addItem("Ordernummer");
+                txtSearchWord.setEnabled(false);
                 cmbSearchSpecific.addItem("Under utvärdering");
                 cmbSearchSpecific.addItem("Pågående");
                 cmbSearchSpecific.addItem("Redo att skickas");
@@ -1026,6 +988,7 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Standardhattar": {
                 StandardHat.listAllStandardHats(listModel);
+                txtSearchWord.setEditable(true);
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.addItem("Hattnamn");
                 cmbSearchSpecific.addItem("Tyg");
@@ -1071,6 +1034,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerNumber;
     private javax.swing.JLabel lblErrorMessageCategory;
+    private javax.swing.JLabel lblErrorValidateSearchWord;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JList<String> listFoundResults;

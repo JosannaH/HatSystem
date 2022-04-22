@@ -97,8 +97,9 @@ public class Customer {
 
     /**
      * Get customer number by ID
+     *
      * @param customerID
-     * @return 
+     * @return
      */
     public static String getCustomerNr(String customerID) {
         String query = "SELECT Customer_Nr from Customer WHERE Customer_ID = '" + customerID + "';";
@@ -108,7 +109,8 @@ public class Customer {
 
     /**
      * Get latest added customer
-     * @return 
+     *
+     * @return
      */
     public static String getLatestCustomer() {
         String query = "SELECT MAX(Customer_ID) FROM Customer";
@@ -136,7 +138,8 @@ public class Customer {
 
     /**
      * Get all active customers
-     * @return 
+     *
+     * @return
      */
     public static ArrayList<HashMap<String, String>> getAllCustomers() {
         ArrayList<HashMap<String, String>> allCustomers = new ArrayList<>();
@@ -145,73 +148,82 @@ public class Customer {
 
         return allCustomers;
     }
-    
+
     /**
      * Populate listmodel with data based on customer's first name
+     *
      * @param firstName
-     * @param listModel 
+     * @param listModel
      */
     public static void listCustomersFromFirstName(String firstName, DefaultListModel listModel) {
         listModel.clear();
-        
-         ArrayList<HashMap<String, String>> customers = new ArrayList<>();
+
+        ArrayList<HashMap<String, String>> customers = new ArrayList<>();
         customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where First_Name = '" + firstName + "';");
 
-        int index = 0;
-        while (index < customers.size()) {
-            HashMap<String, String> currentCustomer = customers.get(index);
-            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+        if (customers.isEmpty()) {
+            listModel.addElement("Inget resultat");
+        } else {
+            int index = 0;
+            while (index < customers.size()) {
+                HashMap<String, String> currentCustomer = customers.get(index);
+                HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
 
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + currentCustomer.get("Comment"),
-                    currentCustomer.get("Customer_Nr"),
-                    currentCustomer.get("First_Name"),
-                    currentCustomer.get("Last_Name"),
-                    currentCustomer.get("Email"),
-                    currentAddress.get("Street"),
-                    currentAddress.get("Postal"),
-                    currentAddress.get("City"),
-                    currentAddress.get("Country")
-            ));
+                listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                        + currentCustomer.get("Comment"),
+                        currentCustomer.get("Customer_Nr"),
+                        currentCustomer.get("First_Name"),
+                        currentCustomer.get("Last_Name"),
+                        currentCustomer.get("Email"),
+                        currentAddress.get("Street"),
+                        currentAddress.get("Postal"),
+                        currentAddress.get("City"),
+                        currentAddress.get("Country")
+                ));
 
-            index++;
+                index++;
+            }
         }
-
     }
-    
-/**
- * Populates listmodel with data based on customer's last name
- * @param lastName
- * @param listModel 
- */
+
+    /**
+     * Populates listmodel with data based on customer's last name
+     *
+     * @param lastName
+     * @param listModel
+     */
     public static void listCustomerFromLastName(String lastName, DefaultListModel listModel) {
         listModel.clear();
-        
-         ArrayList<HashMap<String, String>> customers = new ArrayList<>();
+
+        ArrayList<HashMap<String, String>> customers = new ArrayList<>();
         customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where Last_Name = '" + lastName + "';");
 
-        int index = 0;
-        while (index < customers.size()) {
-            HashMap<String, String> currentCustomer = customers.get(index);
-            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+        if (customers.isEmpty()) {
+            listModel.addElement("Inget resultat");
+        } else {
+            int index = 0;
+            while (index < customers.size()) {
+                HashMap<String, String> currentCustomer = customers.get(index);
+                HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
 
-            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
-                    + currentCustomer.get("Comment"),
-                    currentCustomer.get("Customer_Nr"),
-                    currentCustomer.get("First_Name"),
-                    currentCustomer.get("Last_Name"),
-                    currentCustomer.get("Email"),
-                    currentAddress.get("Street"),
-                    currentAddress.get("Postal"),
-                    currentAddress.get("City"),
-                    currentAddress.get("Country")
-            ));
+                listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                        + currentCustomer.get("Comment"),
+                        currentCustomer.get("Customer_Nr"),
+                        currentCustomer.get("First_Name"),
+                        currentCustomer.get("Last_Name"),
+                        currentCustomer.get("Email"),
+                        currentAddress.get("Street"),
+                        currentAddress.get("Postal"),
+                        currentAddress.get("City"),
+                        currentAddress.get("Country")
+                ));
 
-            index++;
+                index++;
+            }
         }
     }
-    
-       /**
+
+    /**
      * List all customers in a listmodel
      *
      * @param listModel
@@ -241,4 +253,5 @@ public class Customer {
             index++;
         }
     }
+
 }
