@@ -20,7 +20,7 @@ import javax.swing.DefaultListModel;
  */
 public class EditCustomer extends javax.swing.JFrame {
 
-    private static String customerID;
+    private String customerID;
     private String oldFirstName;
     private String oldLastName;
     private String oldEmail;
@@ -31,17 +31,24 @@ public class EditCustomer extends javax.swing.JFrame {
     private String oldCity;
     private String oldCountry;
     private String oldAddressID;
+    private String customerNr;
 
     /**
      * Creates new form EditInformation
      */
-    public EditCustomer() {
+    public EditCustomer(String customerNr) {
+        this.customerNr = customerNr;
+        customerNr();
         initComponents();
-        this.customerID = "2";
         fillOrderList();
         fillCustomerInfo();
         lblErrorMessage.setVisible(false);
         clearErrorMessages();
+        
+    }
+    
+    private void customerNr(){
+        customerID = Customer.getCustomerID(customerNr);        
     }
 
     private void clearErrorMessages() {

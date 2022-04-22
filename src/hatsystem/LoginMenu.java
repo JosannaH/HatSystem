@@ -861,7 +861,8 @@ public class LoginMenu extends javax.swing.JFrame {
         } else {
             switch (category) {
                 case "Kunder":
-
+                    String customerNr = objectToEdit.substring(0, 9);
+                    new EditCustomer(customerNr).setVisible(true);
                     break;
                 case "Ordrar":
                     String orderToEdit = objectToEdit.substring(0, 10).trim();
