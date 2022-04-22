@@ -4,14 +4,11 @@
  */
 package hatsystem;
 
-import data.Address;
 import data.Fabric;
 import data.StandardHat;
 import data.Order;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import data.SqlQuery;
@@ -25,7 +22,6 @@ import data.Validation;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -951,6 +947,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String category = cmbSearchSpecific.getSelectedItem().toString();
         //hämta in sökord
         String searchWord = txtSearchWord.getText();
+        lblErrorValidateSearchWord.setText("");
 
         //TODO fixa så att errormeddelande försvinner till nästa sökning
         if(Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)){
@@ -1016,6 +1013,7 @@ public class LoginMenu extends javax.swing.JFrame {
         switch (category) {
             case "Kunder": {
                 Customer.listAllCustomers(listModel);
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(true);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.addItem("Förnamn");
@@ -1024,8 +1022,9 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Ordrar": {
                 Order.listAllOrders(listModel);
-                btnSearchSpecific.setText("Sök order");
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(false);
+                btnSearchSpecific.setText("Sök order");
                 cmbSearchSpecific.addItem("Under utvärdering");
                 cmbSearchSpecific.addItem("Pågående");
                 cmbSearchSpecific.addItem("Redo att skickas");
@@ -1034,6 +1033,7 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Standardhattar": {
                 StandardHat.listAllStandardHats(listModel);
+                lblErrorMessageCategory.setText("");
                 txtSearchWord.setEditable(true);
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.addItem("Hattnamn");
