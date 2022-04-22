@@ -210,4 +210,35 @@ public class Customer {
             index++;
         }
     }
+    
+       /**
+     * List all customers in a listmodel
+     *
+     * @param listModel
+     */
+    public static void listAllCustomers(DefaultListModel listModel) {
+
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allCustomers = Customer.getAllCustomers();
+        int index = 0;
+        while (index < allCustomers.size()) {
+            HashMap<String, String> currentCustomer = allCustomers.get(index);
+            HashMap<String, String> currentAddress = Address.getAddressFromID(currentCustomer.get("Address"));
+
+            listModel.addElement(String.format("%-12s %-15s %-20s %-25s %-20s %-10s %-15s %-15s"
+                    + currentCustomer.get("Comment"),
+                    currentCustomer.get("Customer_Nr"),
+                    currentCustomer.get("First_Name"),
+                    currentCustomer.get("Last_Name"),
+                    currentCustomer.get("Email"),
+                    currentAddress.get("Street"),
+                    currentAddress.get("Postal"),
+                    currentAddress.get("City"),
+                    currentAddress.get("Country")
+            ));
+
+            index++;
+        }
+    }
 }
