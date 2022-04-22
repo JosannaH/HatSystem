@@ -138,6 +138,7 @@ public class AddHatType extends javax.swing.JFrame {
         cmbSpecialResponsible = new javax.swing.JComboBox<>();
         lblCheckNameSpecial = new javax.swing.JLabel();
         lblCheckPriceSpecial = new javax.swing.JLabel();
+        checkBoxSaveAsStandard = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -381,6 +382,8 @@ public class AddHatType extends javax.swing.JFrame {
 
         lblSpecialResponsible.setText("Ansvarig");
 
+        checkBoxSaveAsStandard.setText("Spara som standardmodell");
+
         javax.swing.GroupLayout panel_specialHatLayout = new javax.swing.GroupLayout(panel_specialHat);
         panel_specialHat.setLayout(panel_specialHatLayout);
         panel_specialHatLayout.setHorizontalGroup(
@@ -420,15 +423,18 @@ public class AddHatType extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                        .addComponent(btnSpecialSave)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(checkBoxSaveAsStandard)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
                                         .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnSpecialSave)
-                                            .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(945, 945, 945))))))
+                                        .addGap(1051, 1051, 1051))))))
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jLabel10)
@@ -487,9 +493,11 @@ public class AddHatType extends javax.swing.JFrame {
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSpecialError))))
-                .addGap(45, 45, 45)
-                .addComponent(btnSpecialSave)
-                .addGap(55, 55, 55))
+                .addGap(44, 44, 44)
+                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSpecialSave)
+                    .addComponent(checkBoxSaveAsStandard))
+                .addGap(56, 56, 56))
         );
 
         jTabbedPane1.addTab("Specialsydd hatt", panel_specialHat);
@@ -546,11 +554,13 @@ public class AddHatType extends javax.swing.JFrame {
                 orderedHatID = Integer.parseInt(newHatID);
                 LoginMenu.addToListOtherHat(orderedHatID);
                 LoginMenu.listOrderItems();
-                //TODO validering för om hatten verkligen kom in i databasen.
+                
+                if(checkBoxSaveAsStandard.isSelected()){
+                    StandardHat.addStandardHat(name, price, description, fabricComboID);
+                }
+                
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
-
-                //TODO Lägg in automatisk kodning av status
             } else {
                 lblSpecialError.setText("Denna kombinationen är redan registrerad som en hatt");
                 lblSpecialError.setVisible(true);
@@ -570,7 +580,7 @@ public class AddHatType extends javax.swing.JFrame {
         else{
         
         File file = chooser.getSelectedFile();
-        String filename = "null"; //file.getAbsolutePath();
+        String filename = file.getAbsolutePath();
         if(file.getAbsolutePath() == null){
             System.out.println("ifsats");
         }
@@ -740,6 +750,7 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JButton btnSpecialSave;
     private javax.swing.JButton btn_addHat;
     private javax.swing.JButton btn_customAddToOrder;
+    private javax.swing.JCheckBox checkBoxSaveAsStandard;
     private javax.swing.JComboBox<String> cmbSpecialColors;
     private javax.swing.JComboBox<String> cmbSpecialFabrics;
     private javax.swing.JComboBox<String> cmbSpecialResponsible;

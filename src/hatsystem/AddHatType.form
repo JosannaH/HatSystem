@@ -482,18 +482,21 @@
                                       <Component id="btbAddImage" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnSpecialSave" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="checkBoxSaveAsStandard" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="lblImageTxt" min="-2" pref="330" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="btnSpecialSave" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblSpecialError" min="-2" pref="146" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="lblSpecialError" min="-2" pref="146" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="lblImageText" min="-2" pref="281" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="945" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="1051" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -577,9 +580,12 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="btnSpecialSave" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnSpecialSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxSaveAsStandard" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -716,6 +722,11 @@
             <Component class="javax.swing.JLabel" name="lblCheckNameSpecial">
             </Component>
             <Component class="javax.swing.JLabel" name="lblCheckPriceSpecial">
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="checkBoxSaveAsStandard">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Spara som standardmodell"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
