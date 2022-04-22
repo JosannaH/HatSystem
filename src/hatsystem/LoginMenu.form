@@ -559,6 +559,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="cmbSearchSpecific" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="cmbSearchStandardHats" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="lblErrorMessageCategory" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -590,7 +592,10 @@
                           </Group>
                           <Component id="lblErrorValidateSearchWord" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="cmbSearchSpecific" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cmbSearchSpecific" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbSearchStandardHats" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtSearchWord" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -700,6 +705,18 @@
                   <Color blue="0" green="0" red="99" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbSearchStandardHats">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="1">
+                    <StringItem index="0" value=""/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

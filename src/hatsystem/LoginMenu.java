@@ -281,6 +281,7 @@ public class LoginMenu extends javax.swing.JFrame {
         cmbSearchSpecific = new javax.swing.JComboBox<>();
         btnSearchSpecific = new javax.swing.JButton();
         lblErrorValidateSearchWord = new javax.swing.JLabel();
+        cmbSearchStandardHats = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         cmbChosenYear = new javax.swing.JComboBox<>();
@@ -635,6 +636,8 @@ public class LoginMenu extends javax.swing.JFrame {
 
         lblErrorValidateSearchWord.setForeground(new java.awt.Color(153, 0, 0));
 
+        cmbSearchStandardHats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
         panel_searchLayout.setHorizontalGroup(
@@ -664,6 +667,8 @@ public class LoginMenu extends javax.swing.JFrame {
                                 .addComponent(btnEditCatergory))
                             .addGroup(panel_searchLayout.createSequentialGroup()
                                 .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblErrorMessageCategory)))))
                 .addGap(63, 63, 63))
@@ -686,7 +691,9 @@ public class LoginMenu extends javax.swing.JFrame {
                             .addComponent(btnSearchSpecific)))
                     .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_searchLayout.createSequentialGroup()
-                        .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -971,8 +978,10 @@ public class LoginMenu extends javax.swing.JFrame {
                 Order.listOrdersByStatus(category, listModel);
                 break;
             case "Hattnamn":
+                StandardHat.listAllHatsByHatName(searchWord, listModel);
                 break;
             case "Tyg":
+                StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
                 break;
             default:
                 throw new AssertionError();
@@ -1061,6 +1070,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JComboBox<String> cmbChosenYear;
     private javax.swing.JComboBox<String> cmbSearchSpecific;
+    private javax.swing.JComboBox<String> cmbSearchStandardHats;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
