@@ -7,7 +7,7 @@ package data;
 import java.util.HashMap;
 import javax.swing.JLabel;
 
-
+// TODO det blir databasfel om man skriver datum i fel format i Skapa order
 /**
  *
  * @author Friday

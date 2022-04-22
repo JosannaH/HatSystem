@@ -66,8 +66,9 @@ public class Order {
         if (orders.isEmpty()) {
             listModel.addElement("Inget resultat");
         } else {
-            listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
-                    + "Summa", "OrderID", "Leveransdatum", "Orderdatum", "Status"));
+            // Rubriker
+//            listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
+//                    + "Summa", "OrderID", "Leveransdatum", "Orderdatum", "Status"));
             int index = 0;
             while (index < orders.size()) {
                 HashMap<String, String> currentOrder = orders.get(index);

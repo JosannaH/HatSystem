@@ -4,7 +4,6 @@
  */
 package data;
 
-import data.SqlQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -132,7 +131,7 @@ public class Fabric {
 
     public static void fillCmbWithAllFabrics(JComboBox cmb) {
         cmb.removeAllItems();
-        ArrayList<String> fabrics = SqlQuery.getColumn("SELECT Name FROM fabric;");
+        ArrayList<String> fabrics = SqlQuery.getColumn("SELECT DISTINCT Name FROM fabric;");
         for (String f : fabrics) {
             cmb.addItem(f);
         }

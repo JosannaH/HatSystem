@@ -374,7 +374,8 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
 
             if (changes) {
                 JOptionPane.showMessageDialog(null, "Ändringar sparade");
-                fillValues();
+                this.dispose();
+                //fillValues();
             }
 
         }

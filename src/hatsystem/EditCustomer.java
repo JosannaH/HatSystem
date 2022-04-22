@@ -446,6 +446,8 @@ public class EditCustomer extends javax.swing.JFrame {
         }
         if (deActivated) {
             JOptionPane.showMessageDialog(null, "Kunden är nu raderad!");
+            Customer.listAllCustomers(LoginMenu.getSearchListModel());
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Ingen kund har raderats!");
         }

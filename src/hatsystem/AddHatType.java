@@ -19,6 +19,8 @@ import data.StandardHat;
 import data.Validation;
 import java.awt.Color;
 import java.awt.Font;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.function.ToDoubleFunction;
 import javax.swing.DefaultListModel;
@@ -647,7 +649,7 @@ public class AddHatType extends javax.swing.JFrame {
         String stringID = listCustHat.getSelectedValue().substring(0, 8);
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
-        setValues(customSelectedHatID);
+        setCustomValues(customSelectedHatID);
         lblCustomErrorMessage.setVisible(false);
 
     }//GEN-LAST:event_listCustHatValueChanged
@@ -749,12 +751,18 @@ public class AddHatType extends javax.swing.JFrame {
         jListStandardHat.setFont(new Font("monospaced", defaultListFontStandard.getStyle(), defaultListFontStandard.getSize()));
     }
 
-    private void setValues(int hatID) {
+    private void setCustomValues(int hatID) {
         // get fabric for chosen hat
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
         String fabricID = chosenHat.get("Hat_Fabric");
         Double price = Double.parseDouble(chosenHat.get("Price"));
-        textField_customPrice.setText(Double.toString(price*1.2));
+        Double priceExtraCost = price*1.2;
+        
+        // round up price to two decimals
+        DecimalFormat df = new DecimalFormat("####0.00");
+        String formatPrice = df.format(priceExtraCost);
+
+        textField_customPrice.setText(formatPrice);
         HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
         String fabricName = defaultFabric.get("Name");
         

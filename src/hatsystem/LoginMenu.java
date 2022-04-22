@@ -49,6 +49,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     // refers to current LoginMenu object
     private static LoginMenu mainLoginMenu;
+    private static DefaultListModel listModelStatic = listModel;
 
     public LoginMenu(String username) {
         this.username = username;
@@ -72,6 +73,9 @@ public class LoginMenu extends javax.swing.JFrame {
 
     }
 
+    public static DefaultListModel getSearchListModel(){
+        return listModelStatic;
+    }
     /**
      * Returns the logged in username
      *
@@ -205,10 +209,6 @@ public class LoginMenu extends javax.swing.JFrame {
         orderListModel.clear();
         hashMapListPrice.clear();
         lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
-    }
-
-    public void setCustomerStuff(HashMap<String, String> customerInfo) {
-        // TODO Vad har vi tänkt här??
     }
 
     public void addCustomerInfoToOrder(HashMap<String, String> customerInfo, String customerNr) {
@@ -627,6 +627,14 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn" }));
+        cmbSearchSpecific.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbSearchSpecificFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbSearchSpecificFocusLost(evt);
+            }
+        });
         cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSearchSpecificActionPerformed(evt);
@@ -908,7 +916,7 @@ public class LoginMenu extends javax.swing.JFrame {
             hashMapListPrice.remove(standardHatID);
         }
         listOrderItems();
-        //lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
+        lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
 
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
@@ -923,8 +931,10 @@ public class LoginMenu extends javax.swing.JFrame {
 
         String category = cbCategory.getSelectedItem().toString();
         String objectToEdit = listFoundResults.getSelectedValue();
+
         if (objectToEdit == null) {
             lblErrorMessageCategory.setVisible(true);
+
         } else {
             switch (category) {
                 case "Kunder":
@@ -939,9 +949,12 @@ public class LoginMenu extends javax.swing.JFrame {
                     String hatID = objectToEdit.substring(0, 10).trim();
                     new EditStandardHat(hatID).setVisible(true);
                     break;
+                    default:
+                        lblErrorMessageCategory.setVisible(true);
 
             }
         }
+
     }//GEN-LAST:event_btnEditCatergoryActionPerformed
 
     private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
@@ -961,35 +974,35 @@ public class LoginMenu extends javax.swing.JFrame {
         lblErrorValidateSearchWord.setText("");
 
         //TODO fixa så att errormeddelande försvinner till nästa sökning
-        if(Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)){
-        switch (category) {
-            case "Förnamn":
-                Customer.listCustomersFromFirstName(searchWord, listModel);
-                break;
-            case "Efternamn":
-                Customer.listCustomerFromLastName(searchWord, listModel);
-                break;
-            case "Under utvärdering":
-                Order.listOrdersByStatus(category, listModel);
-                break;
-            case "Pågående":
-                Order.listOrdersByStatus(category, listModel);
-                break;
-            case "Redo att skickas":
-                Order.listOrdersByStatus(category, listModel);
-                break;
-            case "Skickad":
-                Order.listOrdersByStatus(category, listModel);
-                break;
-            case "Hattnamn":
-                StandardHat.listAllHatsByHatName(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
-                break;
-            case "Tyg":
-                StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
-                break;
-            default:
-                throw new AssertionError();
-        }
+        if (Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)) {
+            switch (category) {
+                case "Förnamn":
+                    Customer.listCustomersFromFirstName(searchWord, listModel);
+                    break;
+                case "Efternamn":
+                    Customer.listCustomerFromLastName(searchWord, listModel);
+                    break;
+                case "Under utvärdering":
+                    Order.listOrdersByStatus(category, listModel);
+                    break;
+                case "Pågående":
+                    Order.listOrdersByStatus(category, listModel);
+                    break;
+                case "Redo att skickas":
+                    Order.listOrdersByStatus(category, listModel);
+                    break;
+                case "Skickad":
+                    Order.listOrdersByStatus(category, listModel);
+                    break;
+                case "Hattnamn":
+                    StandardHat.listAllHatsByHatName(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
+                    break;
+                case "Tyg":
+                    StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
         }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
 
@@ -1017,27 +1030,38 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGeneratePDFActionPerformed
 
     private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
-       if(cbCategory.equals("Standardhattar")){
-        String category = cmbSearchSpecific.getSelectedItem().toString();
+
+    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
+
+    private void cmbSearchSpecificFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSearchSpecificFocusGained
         
+    }//GEN-LAST:event_cmbSearchSpecificFocusGained
+
+    private void cmbSearchSpecificFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSearchSpecificFocusLost
+        String headCategory = cbCategory.getSelectedItem().toString();
+        if (headCategory.equals("Standardhattar"));
+        String category = cmbSearchSpecific.getSelectedItem().toString();
+
         switch (category) {
-            case "Hattnamn":
+            case "Hattnamn": {
+                cmbSearchStandardHats.removeAllItems();
                 StandardHat.fillCmbWithAllHatNames(cmbSearchStandardHats);
                 break;
-            case "Tyg":
+            }
+            case "Tyg": {
+                cmbSearchStandardHats.removeAllItems();
                 Fabric.fillCmbWithAllFabrics(cmbSearchStandardHats);
-            default:
-                throw new AssertionError();
+                break;
+            }
         }
-       }
-    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
+    }//GEN-LAST:event_cmbSearchSpecificFocusLost
     /**
      * Fill listmodel with data depending on user's choice in combobox
      */
     public void fillCorrectCategory() {
 
         String category = cbCategory.getSelectedItem().toString();
-       // cmbSearchSpecific.removeAllItems();
+        // cmbSearchSpecific.removeAllItems();
 
         switch (category) {
             case "Kunder": {
