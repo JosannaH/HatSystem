@@ -904,7 +904,8 @@ public class LoginMenu extends javax.swing.JFrame {
                     new EditOrder(Integer.parseInt(orderToEdit)).setVisible(true);
                     break;
                 case "Standardhattar":
-
+                    String hatID = objectToEdit.substring(0, 10).trim();
+                    new EditStandardHat(hatID).setVisible(true);
                     break;
 
             }
