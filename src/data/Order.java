@@ -62,6 +62,8 @@ public class Order {
     public static void listOrdersByStatus(String status, DefaultListModel listModel) {
         listModel.clear();
         ArrayList<HashMap<String, String>> orders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Status = '" + status + "';");
+        listModel.addElement(String.format("%-10s %-20s %-20s %-20s" +
+                "Summa", "OrderID", "Leveransdatum", "Orderdatum", "Status"));
         int index = 0;
         while (index < orders.size()) {
             HashMap<String, String> currentOrder = orders.get(index);

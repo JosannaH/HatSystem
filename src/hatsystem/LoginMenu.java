@@ -944,7 +944,7 @@ public class LoginMenu extends javax.swing.JFrame {
             case "Pågående":
                 Order.listOrdersByStatus(category, listModel);
                 break;
-            case "Klar att skickas":
+            case "Redo att skickas":
                 Order.listOrdersByStatus(category, listModel);
                 break;
             case "Skickad":
