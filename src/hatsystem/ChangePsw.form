@@ -118,7 +118,7 @@
     <Component class="javax.swing.JLabel" name="lblError">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="0" red="ff" type="rgb"/>
+          <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="F&#xf6;rs&#xf6;k igen"/>
         <Property name="enabled" type="boolean" value="false"/>
