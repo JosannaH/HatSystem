@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
 import data.StandardHat;
+import data.Validation;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.function.ToDoubleFunction;
@@ -39,13 +41,14 @@ public class AddHatType extends javax.swing.JFrame {
         fillEmployeeComboBox();
         lblSpecialError.setVisible(false);
         lblStandardErrorMessage.setVisible(false);
+        lblCustomErrorMessage.setVisible(false);
+        lblCustomErrorPrice.setVisible(false);
         fillList();
         // Enables enter press.
         this.getRootPane().setDefaultButton(btn_addHat);
 
     }
-    
-    
+
     //public String getHatIdentifier;
     /**
      * Fills the fabric combo box with fabric options.
@@ -64,7 +67,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         for (String e : employees) {
             cmbSpecialResponsible.addItem(e);
-            cmb_customEmployee.addItem(e);            
+            cmb_customEmployee.addItem(e);
         }
     }
 
@@ -114,6 +117,8 @@ public class AddHatType extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaCustomDescription = new javax.swing.JTextArea();
         lblCheckPriceCustomHat = new javax.swing.JLabel();
+        lblCustomErrorMessage = new javax.swing.JLabel();
+        lblCustomErrorPrice = new javax.swing.JLabel();
         panel_specialHat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -131,7 +136,6 @@ public class AddHatType extends javax.swing.JFrame {
         lblImage = new javax.swing.JLabel();
         lblImageTxt = new javax.swing.JLabel();
         btbAddImage = new javax.swing.JButton();
-        lblImageText = new javax.swing.JLabel();
         lblSpecialSize = new javax.swing.JLabel();
         cmbSpecialSize = new javax.swing.JComboBox<>();
         lblSpecialResponsible = new javax.swing.JLabel();
@@ -141,6 +145,11 @@ public class AddHatType extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jListStandardHat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListStandardHatValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListStandardHat);
 
         btn_addHat.setText("Lägg till hatt i order");
@@ -174,15 +183,15 @@ public class AddHatType extends javax.swing.JFrame {
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
                         .addGap(385, 385, 385)
-                        .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStandardErrorMessage)
-                            .addGroup(panel_standardHatLayout.createSequentialGroup()
-                                .addComponent(lbl_size)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lbl_size)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addGap(408, 408, 408)
-                        .addComponent(btn_addHat)))
+                        .addGap(396, 396, 396)
+                        .addComponent(btn_addHat))
+                    .addGroup(panel_standardHatLayout.createSequentialGroup()
+                        .addGap(374, 374, 374)
+                        .addComponent(lblStandardErrorMessage)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_standardHatLayout.setVerticalGroup(
@@ -197,10 +206,10 @@ public class AddHatType extends javax.swing.JFrame {
                     .addComponent(lbl_size)
                     .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblStandardErrorMessage)
-                .addGap(18, 18, 18)
                 .addComponent(btn_addHat)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblStandardErrorMessage)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Standardhatt", panel_standardHat);
@@ -254,6 +263,12 @@ public class AddHatType extends javax.swing.JFrame {
 
         lblCheckPriceCustomHat.setForeground(new java.awt.Color(153, 0, 0));
 
+        lblCustomErrorMessage.setForeground(new java.awt.Color(153, 0, 0));
+        lblCustomErrorMessage.setText("Vänligen välj en hatt i listan först");
+
+        lblCustomErrorPrice.setForeground(new java.awt.Color(153, 0, 0));
+        lblCustomErrorPrice.setText("Endast siffror och punkt");
+
         javax.swing.GroupLayout panel_customHatLayout = new javax.swing.GroupLayout(panel_customHat);
         panel_customHat.setLayout(panel_customHatLayout);
         panel_customHatLayout.setHorizontalGroup(
@@ -285,7 +300,10 @@ public class AddHatType extends javax.swing.JFrame {
                                     .addComponent(textField_customPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                                     .addComponent(cmb_customEmployee, 0, 209, Short.MAX_VALUE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lblCheckPriceCustomHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(panel_customHatLayout.createSequentialGroup()
+                                        .addComponent(lblCustomErrorPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblCheckPriceCustomHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(68, 68, 68))
                     .addGroup(panel_customHatLayout.createSequentialGroup()
                         .addComponent(lbl_customTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,6 +311,8 @@ public class AddHatType extends javax.swing.JFrame {
             .addGroup(panel_customHatLayout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(btn_customAddToOrder)
+                .addGap(81, 81, 81)
+                .addComponent(lblCustomErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panel_customHatLayout.setVerticalGroup(
@@ -305,7 +325,9 @@ public class AddHatType extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_customHatLayout.createSequentialGroup()
                         .addComponent(scrollPane_CustomHat, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)
-                        .addComponent(btn_customAddToOrder))
+                        .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_customAddToOrder)
+                            .addComponent(lblCustomErrorMessage)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_customHatLayout.createSequentialGroup()
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_customFabric, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,11 +352,14 @@ public class AddHatType extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(textField_customPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(3, 3, 3)
-                        .addComponent(lblCheckPriceCustomHat, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCheckPriceCustomHat, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCustomErrorPrice))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmb_customEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)))))
+                            .addComponent(jLabel13))))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Anpassad hatt", panel_customHat);
@@ -381,6 +406,10 @@ public class AddHatType extends javax.swing.JFrame {
 
         lblSpecialResponsible.setText("Ansvarig");
 
+        lblCheckNameSpecial.setForeground(new java.awt.Color(204, 0, 51));
+
+        lblCheckPriceSpecial.setForeground(new java.awt.Color(204, 0, 51));
+
         javax.swing.GroupLayout panel_specialHatLayout = new javax.swing.GroupLayout(panel_specialHat);
         panel_specialHat.setLayout(panel_specialHatLayout);
         panel_specialHatLayout.setHorizontalGroup(
@@ -413,22 +442,16 @@ public class AddHatType extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
                                 .addComponent(btbAddImage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                        .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnSpecialSave)
-                                            .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(945, 945, 945))))))
+                                .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                .addComponent(btnSpecialSave)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(185, Short.MAX_VALUE))
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jLabel10)
@@ -439,57 +462,58 @@ public class AddHatType extends javax.swing.JFrame {
             .addGroup(panel_specialHatLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addGroup(panel_specialHatLayout.createSequentialGroup()
+                        .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                        .addGap(119, 119, 119))
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSpecialResponsible, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_specialHatLayout.createSequentialGroup()
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtfSpecialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12))
+                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtfSpecialDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbSpecialFabrics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbSpecialColors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbSpecialSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSpecialSize))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbSpecialResponsible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addGap(256, 256, 256))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_specialHatLayout.createSequentialGroup()
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblSpecialResponsible)
-                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtfSpecialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel12))
-                                            .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtfSpecialDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbSpecialFabrics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbSpecialColors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel9))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbSpecialSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblSpecialSize))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbSpecialResponsible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btbAddImage)
-                                    .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
-                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblImageText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSpecialError))))
-                .addGap(45, 45, 45)
-                .addComponent(btnSpecialSave)
-                .addGap(55, 55, 55))
+                                .addComponent(btbAddImage)
+                                .addGap(31, 31, 31)))
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSpecialSave)
+                            .addComponent(lblSpecialError))
+                        .addGap(95, 95, 95))))
         );
 
         jTabbedPane1.addTab("Specialsydd hatt", panel_specialHat);
@@ -498,7 +522,7 @@ public class AddHatType extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,6 +530,7 @@ public class AddHatType extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -523,37 +548,41 @@ public class AddHatType extends javax.swing.JFrame {
         String image = lblImageTxt.getText();
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
-        
+
+        lblCheckNameSpecial.setVisible(false);
+        lblCheckPriceSpecial.setVisible(false);
 
         if (name.isBlank() || price.isBlank()) {
             lblSpecialError.setText("Vänligen fyll i alla fält");
             lblSpecialError.setVisible(true);
         } else {
-            int fabricComboID = Fabric.getFabricID(fabric, colour);
-            int employeeComboID = Employee.getEmployeeIDAdmin(worker);
-            boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
-            if (isUniqueHatAndFabricCombo) {
-                SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
-                if(image.isEmpty()){
-                    SpecialHat.addSpecialHatNoImage(name, price, fabricComboID);
-                }
-                else{
-                    SpecialHat.addSpecialHat(name, price, fabricComboID, image);
-                }
+            if (Validation.onlyLetters(name, lblCheckNameSpecial)
+                    && Validation.isPrice(price, lblCheckPriceSpecial)) {
                 
+                int fabricComboID = Fabric.getFabricID(fabric, colour);
+                int employeeComboID = Employee.getEmployeeIDAdmin(worker);
+                boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
+                if (isUniqueHatAndFabricCombo) {
+                    SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
+                    if (image.isEmpty()) {
+                        SpecialHat.addSpecialHatNoImage(name, price, fabricComboID);
+                    } else {
+                        SpecialHat.addSpecialHat(name, price, fabricComboID, image);
+                    }
 
-                String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
-                orderedHatID = Integer.parseInt(newHatID);
-                LoginMenu.addToListOtherHat(orderedHatID);
-                LoginMenu.listOrderItems();
-                //TODO validering för om hatten verkligen kom in i databasen.
-                JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
-                this.dispose();
+                    String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
+                    orderedHatID = Integer.parseInt(newHatID);
+                    LoginMenu.addToListOtherHat(orderedHatID);
+                    LoginMenu.listOrderItems();
+                    //TODO validering för om hatten verkligen kom in i databasen.
+                    JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
+                    this.dispose();
 
-                //TODO Lägg in automatisk kodning av status
-            } else {
-                lblSpecialError.setText("Denna kombinationen är redan registrerad som en hatt");
-                lblSpecialError.setVisible(true);
+                    //TODO Lägg in automatisk kodning av status
+                } else {
+                    lblSpecialError.setText("Denna kombinationen är redan registrerad som en hatt");
+                    lblSpecialError.setVisible(true);
+                }
             }
         }
 
@@ -563,42 +592,42 @@ public class AddHatType extends javax.swing.JFrame {
 
         JFileChooser chooser = new JFileChooser();
         int isFileChosen = chooser.showOpenDialog(null);
-        
-        if (isFileChosen == 1){
 
-        }
-        else{
-        
-        File file = chooser.getSelectedFile();
-        String filename = "null"; //file.getAbsolutePath();
-        if(file.getAbsolutePath() == null){
-            System.out.println("ifsats");
-        }
-        
-        
-        //TODO Validering för att det endast går att lägga in bild.
+        if (isFileChosen == 1) {
 
-        lblImageTxt.setText(filename);
+        } else {
 
-        ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
+            File file = chooser.getSelectedFile();
+            String filename = file.getAbsolutePath();
+            if (filename.matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
 
-        //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
-        //fortfarande behåller sitt ursprungliga bildförhållande relativt till ramen.
-        double frameWidth = 300;
-        double frameHeight = 350;
-        double selectedImgWidth = icon.getIconWidth();
-        double selectedImgHeight = icon.getIconHeight();
+                //TODO Validering för att det endast går att lägga in bild.
+                lblImageTxt.setText(filename);
+                lblImageTxt.setForeground(new Color(60, 63, 65));
 
-        double widthRatio = frameWidth / selectedImgWidth;
-        double heightRatio = frameHeight / selectedImgHeight;
-        double ratio = Math.min(widthRatio, heightRatio);
+                ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
 
-        int resizedWidth = (int) (selectedImgWidth * ratio);
-        int resizedHeight = (int) (selectedImgHeight * ratio);
+                //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
+                //fortfarande behåller sitt ursprungliga bildförhållande relativt till ramen.
+                double frameWidth = 300;
+                double frameHeight = 350;
+                double selectedImgWidth = icon.getIconWidth();
+                double selectedImgHeight = icon.getIconHeight();
 
-        ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
+                double widthRatio = frameWidth / selectedImgWidth;
+                double heightRatio = frameHeight / selectedImgHeight;
+                double ratio = Math.min(widthRatio, heightRatio);
 
-        lblImage.setIcon(iconNew);
+                int resizedWidth = (int) (selectedImgWidth * ratio);
+                int resizedHeight = (int) (selectedImgHeight * ratio);
+
+                ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
+
+                lblImage.setIcon(iconNew);
+            } else {
+                lblImageTxt.setText("Fel filformat");
+                lblImageTxt.setForeground(new Color(204, 0, 51));
+            }
         }
     }//GEN-LAST:event_btbAddImageActionPerformed
 
@@ -608,6 +637,7 @@ public class AddHatType extends javax.swing.JFrame {
         String newString = stringID.replaceAll("\\s", "");
         customSelectedHatID = Integer.parseInt(newString);
         setValues(customSelectedHatID);
+        lblCustomErrorMessage.setVisible(false);
 
     }//GEN-LAST:event_listCustHatValueChanged
 
@@ -617,13 +647,28 @@ public class AddHatType extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_customFabricActionPerformed
 
     private void btn_customAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_customAddToOrderActionPerformed
-        saveCustomHatToDB();
 
-        LoginMenu.addToListOtherHat(orderedHatID);
-        LoginMenu.listOrderItems();
-        JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
-        //TODO: Om alla fönster stängs ner, ändra här.
-        dispose();
+        lblCustomErrorMessage.setVisible(false);
+        lblCustomErrorPrice.setVisible(false);
+
+        if (listCustHat.isSelectionEmpty()) {
+
+            lblCustomErrorMessage.setVisible(true);
+
+        } else {
+            if (Validation.isPrice(textField_customPrice.getText(), lblCustomErrorPrice)) {
+
+                saveCustomHatToDB();
+
+                LoginMenu.addToListOtherHat(orderedHatID);
+                LoginMenu.listOrderItems();
+                JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
+                //TODO: Om alla fönster stängs ner, ändra här
+                this.dispose();
+
+            }
+        }
+
 
     }//GEN-LAST:event_btn_customAddToOrderActionPerformed
 
@@ -632,35 +677,36 @@ public class AddHatType extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_customEmployeeActionPerformed
 
     private void btn_addHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addHatActionPerformed
-        
+
         String separator = ".";
-        
-        
+
         lblStandardErrorMessage.setVisible(false);
- 
+
         try {
             String stringID = jListStandardHat.getSelectedValue().substring(0, 8);
             String newString = stringID.replaceAll("\\s", "");
             String completeHatIdentifier = newString + separator + hatIdentifier;
             int selectedHatID = Integer.parseInt(newString);
-            
+
             String chosenSize = cmbStandardChosenSize.getSelectedItem().toString();
-            
+
             LoginMenu.addToListStandardHat(completeHatIdentifier, chosenSize);
             LoginMenu.listOrderItems();
             JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
             hatIdentifier++;
             this.dispose();
-            
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             lblStandardErrorMessage.setVisible(true);
         }
-        
 
 //        String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
 //        orderedHatID = Integer.parseInt(newHatID);
 //        LoginMenu.addToListOtherHat(orderedHatID);
     }//GEN-LAST:event_btn_addHatActionPerformed
+
+    private void jListStandardHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListStandardHatValueChanged
+        lblStandardErrorMessage.setVisible(false);
+    }//GEN-LAST:event_jListStandardHatValueChanged
 
     private void fillList() {
         //custom hat
@@ -721,6 +767,7 @@ public class AddHatType extends javax.swing.JFrame {
         String chosenHatName = chosenHat.get("Name");
         String fabricName = cmb_customFabric.getSelectedItem().toString();
         String fabricColor = cmb_customColor.getSelectedItem().toString();
+
         int fabricID = Fabric.getFabricID(fabricName, fabricColor);
         String size = cmb_customSize.getSelectedItem().toString();
         String description = txtAreaCustomDescription.getText();
@@ -764,8 +811,9 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JLabel lblCheckNameSpecial;
     private javax.swing.JLabel lblCheckPriceCustomHat;
     private javax.swing.JLabel lblCheckPriceSpecial;
+    private javax.swing.JLabel lblCustomErrorMessage;
+    private javax.swing.JLabel lblCustomErrorPrice;
     private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lblImageText;
     private javax.swing.JLabel lblImageTxt;
     private javax.swing.JLabel lblSpecialError;
     private javax.swing.JLabel lblSpecialResponsible;
