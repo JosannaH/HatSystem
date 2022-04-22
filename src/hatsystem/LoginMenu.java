@@ -728,7 +728,7 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(349, 349, 349)
+                        .addGap(346, 346, 346)
                         .addComponent(btnGeneratePDF)))
                 .addContainerGap(253, Short.MAX_VALUE))
         );
@@ -741,9 +741,9 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(61, 61, 61)
+                .addGap(59, 59, 59)
                 .addComponent(btnGeneratePDF)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Årsredovisning", jPanel1);
