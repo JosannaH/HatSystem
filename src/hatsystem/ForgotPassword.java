@@ -8,8 +8,6 @@ import data.SqlQuery;
 import data.Employee;
 import javax.swing.JOptionPane;
 import java.util.Arrays;
-import oru.inf.InfDB;
-import oru.inf.InfException;
 /**
  *
  * @author Mo
@@ -18,7 +16,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     public String userName;
     public String securityQuestion;
     public String answer;
-    public String newPasw;
+    private String newPasw;
     public String updatePaswQuery;
     public String rightAnswer;
     
@@ -29,7 +27,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         initComponents();
         lblError.setVisible(false);
         btnSave.setEnabled(false);
-        txtSecurityQuest.setEditable(false);
+        cbSecurityQuestion.setEnabled(false);
         this.rightAnswer = rightAnswer;
     }
 
@@ -49,7 +47,6 @@ public class ForgotPassword extends javax.swing.JFrame {
         lblNewPassword = new javax.swing.JLabel();
         lblRepeatPassword = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        txtSecurityQuest = new javax.swing.JTextField();
         txtAnswer = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnGoBack = new javax.swing.JButton();
@@ -57,8 +54,10 @@ public class ForgotPassword extends javax.swing.JFrame {
         txtNewPassw = new javax.swing.JPasswordField();
         txtRepeatPasw = new javax.swing.JPasswordField();
         btnSearchUser = new javax.swing.JButton();
+        cbSecurityQuestion = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
 
         lblChangePassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblChangePassword.setForeground(new java.awt.Color(225, 0, 0));
@@ -80,11 +79,9 @@ public class ForgotPassword extends javax.swing.JFrame {
         lblRepeatPassword.setText("Upprepa lösenord");
 
         txtUserName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        txtSecurityQuest.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtSecurityQuest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSecurityQuestActionPerformed(evt);
+        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameKeyPressed(evt);
             }
         });
 
@@ -123,6 +120,13 @@ public class ForgotPassword extends javax.swing.JFrame {
             }
         });
 
+        cbSecurityQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj din fråga", "_______________", "Vad är din favoritmaträtt?", "Vad heter din första husdjur?", "Vilket bilmärke var din pappas bil?" }));
+        cbSecurityQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSecurityQuestionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,12 +149,12 @@ public class ForgotPassword extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNewPassw, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSecurityQuest, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtUserName)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSearchUser))
-                            .addComponent(txtRepeatPasw, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
+                            .addComponent(txtRepeatPasw, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(cbSecurityQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -164,7 +168,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnGoBack, btnSave});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAnswer, txtNewPassw, txtRepeatPasw, txtSecurityQuest});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbSecurityQuestion, txtAnswer, txtNewPassw, txtRepeatPasw});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +182,9 @@ public class ForgotPassword extends javax.swing.JFrame {
                         .addComponent(btnSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSecurityQuest, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSecurityQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSecurityQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSecurityQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,12 +203,12 @@ public class ForgotPassword extends javax.swing.JFrame {
                         .addComponent(btnGoBack, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblAnswer, lblNewPassword, lblRepeatPassword, lblSecurityQuestion, lblUserName});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbSecurityQuestion, lblAnswer, lblNewPassword, lblRepeatPassword, lblSecurityQuestion, lblUserName});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAnswer, txtNewPassw, txtRepeatPasw, txtSecurityQuest, txtUserName});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAnswer, txtNewPassw, txtRepeatPasw, txtUserName});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnGoBack, btnSave, lblError});
 
@@ -214,15 +218,10 @@ public class ForgotPassword extends javax.swing.JFrame {
         lblNewPassword.getAccessibleContext().setAccessibleDescription("");
         lblRepeatPassword.getAccessibleContext().setAccessibleDescription("");
         txtUserName.getAccessibleContext().setAccessibleDescription("");
-        txtSecurityQuest.getAccessibleContext().setAccessibleDescription("");
         txtAnswer.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtSecurityQuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecurityQuestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSecurityQuestActionPerformed
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         new Login().setVisible(true);
@@ -242,7 +241,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         rightAnswer = Employee.getSecurityAnswer(userName);
         
 
-        if (((!Arrays.equals(newPsw, confirmPsw)) || !(Arrays.equals(answer.toCharArray(), rightAnswer.toCharArray())))){  
+        if ((!Arrays.equals(newPsw, confirmPsw)) || !(answer.equals(rightAnswer)) || !(securityQuestion.equals(cbSecurityQuestion.getSelectedItem().toString()))){  
             lblError.setText("Försök igen");
             lblError.setVisible(true);
         }
@@ -271,17 +270,31 @@ public class ForgotPassword extends javax.swing.JFrame {
     private void btnSearchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchUserActionPerformed
         lblError.setVisible(false);
         userName = txtUserName.getText();
-        txtSecurityQuest.setText(Employee.getSecurityQuestion(userName));
+        securityQuestion = Employee.getSecurityQuestion(userName);
         rightAnswer = Employee.getSecurityAnswer(userName);
         if(rightAnswer != null){
-            btnSave.setEnabled(true);
+            cbSecurityQuestion.setEnabled(true);
         }
         else{
             lblError.setText("Fel användare uppgifter!");
             lblError.setVisible(true);
         }
-
     }//GEN-LAST:event_btnSearchUserActionPerformed
+
+    private void cbSecurityQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSecurityQuestionActionPerformed
+    
+        btnSave.setEnabled(false);
+        if("Välj din fråga".equals(cbSecurityQuestion.getSelectedItem().toString())){
+            btnSave.setEnabled(false);
+        }
+        else{
+            btnSave.setEnabled(true);            
+        }
+    }//GEN-LAST:event_cbSecurityQuestionActionPerformed
+
+    private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameKeyPressed
 
     /**
      * @param args the command line arguments
@@ -292,6 +305,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearchUser;
+    private javax.swing.JComboBox<String> cbSecurityQuestion;
     private javax.swing.JLabel lblAnswer;
     private javax.swing.JLabel lblChangePassword;
     private javax.swing.JLabel lblError;
@@ -302,7 +316,6 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JTextField txtAnswer;
     private javax.swing.JPasswordField txtNewPassw;
     private javax.swing.JPasswordField txtRepeatPasw;
-    private javax.swing.JTextField txtSecurityQuest;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
