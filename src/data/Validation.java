@@ -5,6 +5,7 @@
 package data;
 
 import java.util.HashMap;
+import javax.swing.JLabel;
 
 
 /**
@@ -111,5 +112,73 @@ public class Validation {
         monthsAndDays.put("12", "31");
 
         return monthsAndDays;
+    }
+    
+    public static boolean onlyLetters(String text, JLabel lbl) {
+
+        boolean result = true;
+        boolean allLetters = text.chars().allMatch(Character::isLetter);
+
+        if (!allLetters) {
+
+            result = false;
+            lbl.setText("Endast bokstäver");
+        }
+
+        return result;
+    }
+
+    public static boolean onlyDigits(String text, JLabel lbl) {
+
+        boolean result = true;
+
+        if (!text.matches("[0-9]+")) {
+            result = false;
+            lbl.setText("Endast siffror");
+        }
+        
+
+        return result;
+
+    }
+    
+    public static boolean noSpecialCharacters(String text, JLabel lbl) {
+
+        boolean result = true;
+
+        if (!text.matches("[\\p{L}\\d\\s]+")) {
+            result = false;
+            lbl.setText("Ej specialtecken");
+        }
+
+        return result;
+
+    }
+    
+    public static boolean isPrice(String text, JLabel lbl) {
+
+        boolean result = true;
+
+        if (!text.matches("^\\d+(\\.\\d{1,2})?$")) {
+            result = false;
+            lbl.setText("Endast siffror/punkt");
+        }
+        
+
+        return result;
+
+    }
+
+    public static boolean emailFormat(String text, JLabel lbl) {
+
+        boolean result = true;
+
+        if (!text.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")) {
+            result = false;
+            lbl.setText("Fel format");
+        }
+
+        return result;
+
     }
 }

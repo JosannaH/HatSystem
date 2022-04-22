@@ -28,7 +28,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
         jListResult.setModel(customerListModel);
         defaultListFontOther = jListResult.getFont();
         jListResult.setFont(new Font("monospaced", defaultListFontOther.getStyle(), defaultListFontOther.getSize()));
-        LoginMenu.listAllCustomers(customerListModel);
+        Customer.listAllCustomers(customerListModel);
         
         this.mainLoginMenu = mainLoginMenu;
         
