@@ -68,6 +68,7 @@ public class LoginMenu extends javax.swing.JFrame {
         totalPriceLabel = lblTotalPrice;
         // Belongs to "Sök" tab
         Customer.listAllCustomers(listModel);
+        cmbSearchStandardHats.setEnabled(false);
 
     }
 
@@ -626,6 +627,11 @@ public class LoginMenu extends javax.swing.JFrame {
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn" }));
+        cmbSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSearchSpecificActionPerformed(evt);
+            }
+        });
 
         btnSearchSpecific.setText("Sök kund");
         btnSearchSpecific.addActionListener(new java.awt.event.ActionListener() {
@@ -635,8 +641,6 @@ public class LoginMenu extends javax.swing.JFrame {
         });
 
         lblErrorValidateSearchWord.setForeground(new java.awt.Color(153, 0, 0));
-
-        cmbSearchStandardHats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
@@ -978,7 +982,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 Order.listOrdersByStatus(category, listModel);
                 break;
             case "Hattnamn":
-                StandardHat.listAllHatsByHatName(searchWord, listModel);
+                StandardHat.listAllHatsByHatName(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
                 break;
             case "Tyg":
                 StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
@@ -1011,20 +1015,39 @@ public class LoginMenu extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnGeneratePDFActionPerformed
+
+    private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
+       if(cbCategory.equals("Standardhattar")){
+        String category = cmbSearchSpecific.getSelectedItem().toString();
+        
+        switch (category) {
+            case "Hattnamn":
+                StandardHat.fillCmbWithAllHatNames(cmbSearchStandardHats);
+                break;
+            case "Tyg":
+                Fabric.fillCmbWithAllFabrics(cmbSearchStandardHats);
+            default:
+                throw new AssertionError();
+        }
+       }
+    }//GEN-LAST:event_cmbSearchSpecificActionPerformed
     /**
      * Fill listmodel with data depending on user's choice in combobox
      */
     public void fillCorrectCategory() {
 
         String category = cbCategory.getSelectedItem().toString();
-        cmbSearchSpecific.removeAllItems();
+       // cmbSearchSpecific.removeAllItems();
 
         switch (category) {
             case "Kunder": {
                 Customer.listAllCustomers(listModel);
                 lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(true);
+                cmbSearchStandardHats.setEnabled(false);
+                cmbSearchStandardHats.removeAllItems();
                 btnSearchSpecific.setText("Sök kund");
+                cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Förnamn");
                 cmbSearchSpecific.addItem("Efternamn");
                 break;
@@ -1033,7 +1056,11 @@ public class LoginMenu extends javax.swing.JFrame {
                 Order.listAllOrders(listModel);
                 lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(false);
+                txtSearchWord.setText("");
+                cmbSearchStandardHats.setEnabled(false);
+                cmbSearchStandardHats.removeAllItems();
                 btnSearchSpecific.setText("Sök order");
+                cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Under utvärdering");
                 cmbSearchSpecific.addItem("Pågående");
                 cmbSearchSpecific.addItem("Redo att skickas");
@@ -1042,9 +1069,13 @@ public class LoginMenu extends javax.swing.JFrame {
             }
             case "Standardhattar": {
                 StandardHat.listAllStandardHats(listModel);
+                StandardHat.fillCmbWithAllHatNames(cmbSearchStandardHats);
                 lblErrorMessageCategory.setText("");
-                txtSearchWord.setEditable(true);
+                txtSearchWord.setEnabled(false);
+                txtSearchWord.setText("");
+                cmbSearchStandardHats.setEnabled(true);
                 btnSearchSpecific.setText("Sök hatt");
+                cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Hattnamn");
                 cmbSearchSpecific.addItem("Tyg");
                 break;

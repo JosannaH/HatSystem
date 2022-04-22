@@ -131,6 +131,7 @@ public class Fabric {
     }
 
     public static void fillCmbWithAllFabrics(JComboBox cmb) {
+        cmb.removeAllItems();
         ArrayList<String> fabrics = SqlQuery.getColumn("SELECT Name FROM fabric;");
         for (String f : fabrics) {
             cmb.addItem(f);

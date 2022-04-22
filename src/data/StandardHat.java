@@ -75,7 +75,7 @@ public class StandardHat {
 
     public static ArrayList<HashMap<String, String>> getHatsFromName(String hatName) {
         ArrayList<HashMap<String, String>> hats
-                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE Name = " + hatName + ";");
+                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE Name = '" + hatName + "';");
         return hats;
     }
 
@@ -126,10 +126,11 @@ public class StandardHat {
         int index = 0;
         while (index < allHats.size()) {
             HashMap<String, String> currentHat = allHats.get(index);
-            String fabricID = currentHat.get("Name");
+            String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
 
-            listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+            listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), 
+                    currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
 
             index++;
         }
