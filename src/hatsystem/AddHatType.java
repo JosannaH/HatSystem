@@ -44,8 +44,7 @@ public class AddHatType extends javax.swing.JFrame {
         this.getRootPane().setDefaultButton(btn_addHat);
 
     }
-    
-    
+
     //public String getHatIdentifier;
     /**
      * Fills the fabric combo box with fabric options.
@@ -64,7 +63,7 @@ public class AddHatType extends javax.swing.JFrame {
 
         for (String e : employees) {
             cmbSpecialResponsible.addItem(e);
-            cmb_customEmployee.addItem(e);            
+            cmb_customEmployee.addItem(e);
         }
     }
 
@@ -531,7 +530,6 @@ public class AddHatType extends javax.swing.JFrame {
         String image = lblImageTxt.getText();
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
-        
 
         if (name.isBlank() || price.isBlank()) {
             lblSpecialError.setText("Vänligen fyll i alla fält");
@@ -542,23 +540,25 @@ public class AddHatType extends javax.swing.JFrame {
             boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
             if (isUniqueHatAndFabricCombo) {
                 SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
-                if(image.isEmpty()){
+                if (image.isEmpty()) {
                     SpecialHat.addSpecialHatNoImage(name, price, fabricComboID);
-                }
-                else{
+                } else {
                     SpecialHat.addSpecialHat(name, price, fabricComboID, image);
                 }
-                
 
                 String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
                 orderedHatID = Integer.parseInt(newHatID);
                 LoginMenu.addToListOtherHat(orderedHatID);
                 LoginMenu.listOrderItems();
-                
-                if(checkBoxSaveAsStandard.isSelected()){
-                    StandardHat.addStandardHat(name, price, description, fabricComboID);
+
+                if (checkBoxSaveAsStandard.isSelected()) {
+                    if (StandardHat.isUniqueCombination(name, fabricComboID)) {
+                        StandardHat.addStandardHat(name, price, description, fabricComboID);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Denna modell finns redan som standardmodell");
+                    }
                 }
-                
+
                 JOptionPane.showMessageDialog(null, "Hatten är registrerad!");
                 this.dispose();
             } else {
@@ -573,42 +573,39 @@ public class AddHatType extends javax.swing.JFrame {
 
         JFileChooser chooser = new JFileChooser();
         int isFileChosen = chooser.showOpenDialog(null);
-        
-        if (isFileChosen == 1){
 
-        }
-        else{
-        
-        File file = chooser.getSelectedFile();
-        String filename = file.getAbsolutePath();
-        if(file.getAbsolutePath() == null){
-            System.out.println("ifsats");
-        }
-        
-        
-        //TODO Validering för att det endast går att lägga in bild.
+        if (isFileChosen == 1) {
 
-        lblImageTxt.setText(filename);
+        } else {
 
-        ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
+            File file = chooser.getSelectedFile();
+            String filename = file.getAbsolutePath();
+            if (file.getAbsolutePath() == null) {
+                System.out.println("ifsats");
+            }
 
-        //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
-        //fortfarande behåller sitt ursprungliga bildförhållande relativt till ramen.
-        double frameWidth = 300;
-        double frameHeight = 350;
-        double selectedImgWidth = icon.getIconWidth();
-        double selectedImgHeight = icon.getIconHeight();
+            //TODO Validering för att det endast går att lägga in bild.
+            lblImageTxt.setText(filename);
 
-        double widthRatio = frameWidth / selectedImgWidth;
-        double heightRatio = frameHeight / selectedImgHeight;
-        double ratio = Math.min(widthRatio, heightRatio);
+            ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
 
-        int resizedWidth = (int) (selectedImgWidth * ratio);
-        int resizedHeight = (int) (selectedImgHeight * ratio);
+            //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
+            //fortfarande behåller sitt ursprungliga bildförhållande relativt till ramen.
+            double frameWidth = 300;
+            double frameHeight = 350;
+            double selectedImgWidth = icon.getIconWidth();
+            double selectedImgHeight = icon.getIconHeight();
 
-        ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
+            double widthRatio = frameWidth / selectedImgWidth;
+            double heightRatio = frameHeight / selectedImgHeight;
+            double ratio = Math.min(widthRatio, heightRatio);
 
-        lblImage.setIcon(iconNew);
+            int resizedWidth = (int) (selectedImgWidth * ratio);
+            int resizedHeight = (int) (selectedImgHeight * ratio);
+
+            ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
+
+            lblImage.setIcon(iconNew);
         }
     }//GEN-LAST:event_btbAddImageActionPerformed
 
@@ -642,30 +639,28 @@ public class AddHatType extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_customEmployeeActionPerformed
 
     private void btn_addHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addHatActionPerformed
-        
+
         String separator = ".";
-        
-        
+
         lblStandardErrorMessage.setVisible(false);
- 
+
         try {
             String stringID = jListStandardHat.getSelectedValue().substring(0, 8);
             String newString = stringID.replaceAll("\\s", "");
             String completeHatIdentifier = newString + separator + hatIdentifier;
             int selectedHatID = Integer.parseInt(newString);
-            
+
             String chosenSize = cmbStandardChosenSize.getSelectedItem().toString();
-            
+
             LoginMenu.addToListStandardHat(completeHatIdentifier, chosenSize);
             LoginMenu.listOrderItems();
             JOptionPane.showMessageDialog(null, "Hatten är tillagd i ordern!");
             hatIdentifier++;
             this.dispose();
-            
+
         } catch (NullPointerException e) {
             lblStandardErrorMessage.setVisible(true);
         }
-        
 
 //        String newHatID = SqlQuery.getValue("SELECT MAX(Hat_ID) FROM hat;");
 //        orderedHatID = Integer.parseInt(newHatID);
