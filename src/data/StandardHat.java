@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -20,7 +21,8 @@ public class StandardHat {
     }
 
     /**
-     * Adds a new standard hat model to the database. User input errors should be checked before calling this method.
+     * Adds a new standard hat model to the database. User input errors should
+     * be checked before calling this method.
      *
      * @param chosenName
      * @param chosenPrice
@@ -34,14 +36,15 @@ public class StandardHat {
     }
 
     /**
-     * Retrieves all standard hats from the database and stores them in an ArrayList of HashMap.
+     * Retrieves all standard hats from the database and stores them in an
+     * ArrayList of HashMap.
      *
      * @return All standard hats in the database.
      */
     public static ArrayList<HashMap<String, String>> getAllStandardHats() {
 
-        ArrayList<HashMap<String, String>> allStandardHats =
-        SqlQuery.getMultipleRows("SELECT * FROM standard_hat ORDER BY Name;");
+        ArrayList<HashMap<String, String>> allStandardHats
+                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat ORDER BY Name;");
 
         return allStandardHats;
     }
@@ -69,15 +72,20 @@ public class StandardHat {
         HashMap<String, String> foundHat = SqlQuery.getRow("SELECT * FROM standard_hat WHERE Standard_Hat_ID = " + hatID + ";");
         return foundHat;
     }
-    
-        /**
+
+    public static ArrayList<HashMap<String, String>> getHatsFromName(String hatName) {
+        ArrayList<HashMap<String, String>> hats
+                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE Name = " + hatName + ";");
+        return hats;
+    }
+
+    /**
      * Fills the jList with standard hats from db.
      */
     public static void listAllStandardHats(DefaultListModel listModel) {
 
         // Tror ej denna behövs:
         //hashMapListPrice.clear();
-
         listModel.clear();
 
         ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
@@ -92,4 +100,46 @@ public class StandardHat {
             index++;
         }
     }
+
+    public static void listAllHatsByFabric(String fabricName, DefaultListModel listModel) {
+        listModel.clear();
+        int fabricId = Fabric.getFabricIDFromName(fabricName);
+
+        ArrayList<HashMap<String, String>> allHats = Fabric.getHatsFromFabric(fabricId);
+        int index = 0;
+        while (index < allHats.size()) {
+            HashMap<String, String> currentHat = allHats.get(index);
+            String fabricID = currentHat.get("Hat_Fabric");
+            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+
+            listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+
+            index++;
+        }
+
+    }
+
+    public static void listAllHatsByHatName(String hatName, DefaultListModel listModel) {
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allHats = getHatsFromName(hatName);
+        int index = 0;
+        while (index < allHats.size()) {
+            HashMap<String, String> currentHat = allHats.get(index);
+            String fabricID = currentHat.get("Name");
+            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+
+            listModel.addElement(String.format("%-10s %-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Standard_Hat_ID"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+
+            index++;
+        }
+    }
+
+    public static void fillCmbWithAllHatNames(JComboBox cmb) {
+        ArrayList<String> types = SqlQuery.getColumn("SELECT DISTINCT Name FROM standard_hat;");
+        for (String t : types) {
+            cmb.addItem(t);
+        }
+    }
+
 }
