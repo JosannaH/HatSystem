@@ -8,6 +8,7 @@ import data.SqlQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -116,5 +117,20 @@ public class Fabric {
             exists = false;
         }
         return exists;
+    }
+    
+    public static void fillCmbWithAllFabrics(JComboBox cmb){
+                ArrayList<String> fabrics = SqlQuery.getColumn("SELECT Name FROM fabric;");
+                for(String f : fabrics){
+                    cmb.addItem(f);
+                }
+
+    }
+    
+    public static void fillCmbWithAllColors(JComboBox cmb){
+         ArrayList<String> colors = SqlQuery.getColumn("SELECT DISTINCT Color FROM fabric;");
+                for(String c : colors){
+                    cmb.addItem(c);
+                }
     }
 }
