@@ -753,6 +753,8 @@ public class AddHatType extends javax.swing.JFrame {
         // get fabric for chosen hat
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
         String fabricID = chosenHat.get("Hat_Fabric");
+        Double price = Double.parseDouble(chosenHat.get("Price"));
+        textField_customPrice.setText(Double.toString(price*1.2));
         HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
         String fabricName = defaultFabric.get("Name");
         // set values in fabric cmb
@@ -760,6 +762,7 @@ public class AddHatType extends javax.swing.JFrame {
         fillColorComboBox(fabricName);
         cmb_customColor.setSelectedItem(defaultFabric.get("Color"));
         // TODO: nåt fel med cmb för color, den byter inte färg som den ska när man byter hatt i listan
+        
     }
 
     private void fillColorComboBox(String fabricName) {
