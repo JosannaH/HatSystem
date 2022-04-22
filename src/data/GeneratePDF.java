@@ -121,6 +121,13 @@ public class GeneratePDF {
             //ska de ha en standardadress?
             paragraph = new Paragraph("Avsändaradress: Hattmakargatan 69, 66666, Örebro, Sverige");
             document.add(paragraph);
+            
+            
+            
+            HashMap<String, String> customer = SqlQuery.getRow("SELECT * FROM customer WHERE Customer_ID IN (SELECT Customer FROM orders WHERE Orders_ID = " + orderNr + ");");
+            
+            paragraph = new Paragraph("Kund: " + customer.get("First_Name") + " " + customer.get("Last_Name"));
+            document.add(paragraph);
 
             HashMap<String, String> deliveryAddress = SqlQuery.getRow("SELECT * FROM address WHERE Address_ID IN "
                     + "(SELECT Delivery_Address FROM orders WHERE Orders_ID = " + orderNr + ");");
