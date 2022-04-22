@@ -5,8 +5,10 @@
 package data;
 
 import data.SqlQuery;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -66,5 +68,28 @@ public class StandardHat {
     public static HashMap<String, String> getHat(int hatID) {
         HashMap<String, String> foundHat = SqlQuery.getRow("SELECT * FROM standard_hat WHERE Standard_Hat_ID = " + hatID + ";");
         return foundHat;
+    }
+    
+        /**
+     * Fills the jList with standard hats from db.
+     */
+    public static void listAllStandardHats(DefaultListModel listModel) {
+
+        // Tror ej denna behövs:
+        //hashMapListPrice.clear();
+
+        listModel.clear();
+
+        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
+        int index = 0;
+        while (index < allHats.size()) {
+            HashMap<String, String> currentHat = allHats.get(index);
+            String fabricID = currentHat.get("Hat_Fabric");
+            HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
+
+            listModel.addElement(String.format("%-20s %-20s %-20s" + currentHat.get("Price"), currentHat.get("Name"), currentFabric.get("Name"), currentFabric.get("Color")));
+
+            index++;
+        }
     }
 }
