@@ -459,7 +459,7 @@ public class EditOrder extends javax.swing.JFrame {
             lblErrorMessage2.setVisible(true);
         } else {
             if (id.substring(0, 1).equals("C")) {
-                new EditCustomHatFromOrder(id,orderID).setVisible(true);
+                new EditCustomHatFromOrder(id).setVisible(true);
             } else {
                 new EditStandardHatFromOrder(id).setVisible(true);
             }
