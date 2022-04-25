@@ -86,7 +86,7 @@ public class AddCustomer extends javax.swing.JFrame {
         lbl_lastName = new javax.swing.JLabel();
         lbl_firstName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setText("Registrera ny kund");
 

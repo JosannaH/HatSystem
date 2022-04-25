@@ -6,6 +6,7 @@ package data;
 
 import java.util.HashMap;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 // TODO det blir databasfel om man skriver datum i fel format i Skapa order
 /**
@@ -13,41 +14,44 @@ import javax.swing.JLabel;
  * @author Friday
  */
 public class Validation {
-    
+
     /**
      * Check if a String only contains numbers and can be converted to an Integer.
+     *
      * @param stringToCheck
      * @return True if the conversion succeeded, otherwise false.
      */
-    public static boolean isInteger(String stringToCheck){
+    public static boolean isInteger(String stringToCheck) {
         boolean isInteger = false;
         try {
             Integer.parseInt(stringToCheck);
             isInteger = true;
         } catch (NumberFormatException e) {
-            
+
         }
         return isInteger;
     }
-    
+
     /**
      * Check if a String only contains numbers and can be converted to a Double.
+     *
      * @param stringToCheck
      * @return True if the conversion succeeded, otherwise false.
      */
-    public static boolean isDouble(String stringToCheck){
+    public static boolean isDouble(String stringToCheck) {
         boolean isDouble = false;
         try {
             Double.parseDouble(stringToCheck);
             isDouble = true;
         } catch (NumberFormatException e) {
-            
+
         }
         return isDouble;
     }
-    
+
     /**
      * Checks if a string is in the correct date format, yyyy-mm-dd.
+     *
      * @param stringToCheck
      * @return true if correct format, otherwise false
      */
@@ -65,34 +69,54 @@ public class Validation {
         }
         return returBoolean;
     }
-    
-  /**
-   * Kontrollerar om en angiven day är giltig för angiven månad
-   * @param month månaden man vill kolla
-   * @param day dagen man vill kolla
-   * @return true och datumet är giltigt, annars false
-   */
+
+    public static boolean isDate(String stringToCheck, JLabel lbl) {
+        boolean returBoolean = false;
+
+        if (stringToCheck.length() == 10) {
+            String subText1 = stringToCheck.substring(0, 4) + stringToCheck.substring(5, 7) + stringToCheck.substring(8, 10);
+            String subText2 = stringToCheck.substring(4, 5) + stringToCheck.substring(7, 8);
+            if ((isInteger(subText1) && subText2.equals("--"))) {
+                returBoolean = true;
+            } else {
+
+                lbl.setText("åååå-mm-dd");
+                lbl.setVisible(true);
+
+            }
+        } else {
+            lbl.setText("åååå-mm-dd");
+            lbl.setVisible(true);
+        }
+        return returBoolean;
+    }
+
+    /**
+     * Kontrollerar om en angiven day är giltig för angiven månad
+     *
+     * @param month månaden man vill kolla
+     * @param day dagen man vill kolla
+     * @return true och datumet är giltigt, annars false
+     */
     public static boolean isValidMonthAndDay(String month, String day) {
         HashMap<String, String> monthsAndDays = monthsAndDays();
         boolean isVaild = false;
 
         if (monthsAndDays.containsKey(month)) {
-            
+
             int chosenDay = Integer.parseInt(day);
             int nrOfDays = Integer.parseInt(monthsAndDays.get(month));
-            
+
             if (chosenDay > 0 && chosenDay <= nrOfDays) {
                 isVaild = true;
             }
         }
         return isVaild;
     }
-    
+
     /**
-     * En HashMap för att hålla reda på hur många dagar det finns i respektive månad.
-     * Används av metoden isValidMonthAndDay
-     * Används för att kontrollera användares datum-input.
-     * Fungerar inte med skottår.
+     * En HashMap för att hålla reda på hur många dagar det finns i respektive månad. Används av metoden isValidMonthAndDay Används för att kontrollera användares datum-input. Fungerar inte med skottår.
+     *
      * @return En HashMap med månadens nr (01-12) och tillhörande antal dagar i den månaden.
      */
     private static HashMap<String, String> monthsAndDays() {
@@ -113,7 +137,7 @@ public class Validation {
 
         return monthsAndDays;
     }
-    
+
     public static boolean onlyLetters(String text, JLabel lbl) {
 
         boolean result = true;
@@ -135,14 +159,14 @@ public class Validation {
 
         if (!text.matches("[0-9]+")) {
             result = false;
+            lbl.setVisible(true);
             lbl.setText("Endast siffror");
         }
-        
 
         return result;
 
     }
-    
+
     public static boolean noSpecialCharacters(String text, JLabel lbl) {
 
         boolean result = true;
@@ -155,7 +179,7 @@ public class Validation {
         return result;
 
     }
-    
+
     public static boolean isPrice(String text, JLabel lbl) {
 
         boolean result = true;
@@ -165,7 +189,6 @@ public class Validation {
             lbl.setVisible(true);
             lbl.setText("Endast siffror/punkt");
         }
-        
 
         return result;
 
@@ -178,6 +201,20 @@ public class Validation {
         if (!text.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")) {
             result = false;
             lbl.setText("Fel format");
+        }
+
+        return result;
+
+    }
+
+    public static boolean isBlank(JTextField txtField, JLabel lbl) {
+
+        boolean result = false;
+
+        if (txtField.getText().isBlank()) {
+            result = true;
+            lbl.setVisible(true);
+            lbl.setText("Vänligen fyll i fält");
         }
 
         return result;
