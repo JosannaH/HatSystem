@@ -4,6 +4,7 @@
  */
 package hatsystem;
 
+import com.mysql.cj.protocol.a.NativeConstants;
 import data.Fabric;
 import data.StandardHat;
 import data.Order;
@@ -20,6 +21,7 @@ import data.Employee;
 import data.GeneratePDF;
 import data.Validation;
 import java.io.File;
+import java.util.stream.IntStream;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -79,6 +81,8 @@ public class LoginMenu extends javax.swing.JFrame {
         fillCorrectCategory();
 //        Customer.listAllCustomers(listModel);
         cmbSearchStandardHats.setEnabled(false);
+
+        setYearsTotalSales();
 
     }
 
@@ -231,6 +235,16 @@ public class LoginMenu extends javax.swing.JFrame {
         txtCountry.setText(address.get("Country"));
         jPanelOrderAddress.setVisible(true);
         lblCustomerNumber.setText(customerNr);
+
+    }
+
+    private void setYearsTotalSales() {
+
+        ArrayList<String> years = SqlQuery.getColumn("SELECT DISTINCT year(Order_Date) FROM orders;");
+
+        for (String element : years) {
+            cmbChosenYear.addItem(element);
+        }
 
     }
 
@@ -506,32 +520,26 @@ public class LoginMenu extends javax.swing.JFrame {
                             .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblErrorEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(72, 72, 72))
-                                    .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(31, 31, 31)))
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                        .addComponent(txtExpectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblErrorDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblCustomerNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(52, 52, 52)
-                                .addComponent(btnCreateNewCustomerFromOrder)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtExpectedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblErrorDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel_createOrderLayout.createSequentialGroup()
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCustomerNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addComponent(btnCreateNewCustomerFromOrder))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -776,7 +784,11 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jLabel8.setText("Skapa årssammanställning av totalförsäljning");
 
-        cmbChosenYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
+        cmbChosenYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbChosenYearActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Välj år");
 
@@ -1164,6 +1176,10 @@ public class LoginMenu extends javax.swing.JFrame {
 
         lblError.setVisible(false);
     }//GEN-LAST:event_jListAllOrdersValueChanged
+
+    private void cmbChosenYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChosenYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbChosenYearActionPerformed
     /**
      * Fill listmodel with data depending on user's choice in combobox
      */
