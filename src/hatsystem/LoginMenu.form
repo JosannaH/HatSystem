@@ -552,9 +552,7 @@
                                       <Component id="lblErrorValidateSearchWord" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnSearchSpecific" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                                      <Component id="btnUpdateCategory" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
                                       <Component id="btnEditCatergory" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -586,7 +584,6 @@
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnEditCatergory" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnUpdateCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnSearchSpecific" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -664,14 +661,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="V&#xe4;nligen v&#xe4;lj n&#xe5;got objekt att redigera f&#xf6;rst"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnUpdateCategory">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Uppdatera"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateCategoryActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSearchWord">
               <Properties>

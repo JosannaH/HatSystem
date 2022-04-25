@@ -432,6 +432,7 @@ public class EditOrder extends javax.swing.JFrame {
                                 fillOrderInfo();
                                 JOptionPane.showMessageDialog(null, "Ändringar sparade");
                                 loginMenu.fillCorrectCategory();
+                                dispose();
                             } else {
                                 lblErrorMessage.setText("Kund med angivet kundnummer existerar inte");
                                 lblErrorMessage.setVisible(true);

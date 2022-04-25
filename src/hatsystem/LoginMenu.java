@@ -277,7 +277,6 @@ public class LoginMenu extends javax.swing.JFrame {
         listFoundResults = new javax.swing.JList<>();
         btnEditCatergory = new javax.swing.JButton();
         lblErrorMessageCategory = new javax.swing.JLabel();
-        btnUpdateCategory = new javax.swing.JButton();
         txtSearchWord = new javax.swing.JTextField();
         cmbSearchSpecific = new javax.swing.JComboBox<>();
         btnSearchSpecific = new javax.swing.JButton();
@@ -617,13 +616,6 @@ public class LoginMenu extends javax.swing.JFrame {
         lblErrorMessageCategory.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorMessageCategory.setText("Vänligen välj något objekt att redigera först");
 
-        btnUpdateCategory.setText("Uppdatera");
-        btnUpdateCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateCategoryActionPerformed(evt);
-            }
-        });
-
         txtSearchWord.setToolTipText("");
 
         cmbSearchSpecific.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn" }));
@@ -673,9 +665,7 @@ public class LoginMenu extends javax.swing.JFrame {
                                 .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(216, 216, 216)
-                                .addComponent(btnUpdateCategory)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(309, 309, 309)
                                 .addComponent(btnEditCatergory))
                             .addGroup(panel_searchLayout.createSequentialGroup()
                                 .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -699,7 +689,6 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnEditCatergory)
-                            .addComponent(btnUpdateCategory)
                             .addComponent(btnSearchSpecific)))
                     .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_searchLayout.createSequentialGroup()
@@ -957,10 +946,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEditCatergoryActionPerformed
 
-    private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
-        fillCorrectCategory();
-    }//GEN-LAST:event_btnUpdateCategoryActionPerformed
-
     private void btnRegisterFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterFabricActionPerformed
         new AddFabric().setVisible(true);
     }//GEN-LAST:event_btnRegisterFabricActionPerformed
@@ -1119,7 +1104,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnRegisterStandardHat;
     private javax.swing.JButton btnSaveOrder;
     private javax.swing.JButton btnSearchSpecific;
-    private javax.swing.JButton btnUpdateCategory;
     private javax.swing.JButton btn_changePassword;
     private javax.swing.JButton btn_logout;
     private javax.swing.JComboBox<String> cbCategory;
