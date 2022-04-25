@@ -20,13 +20,15 @@ import javax.swing.JOptionPane;
 public class EditCustomHatFromOrder extends javax.swing.JFrame {
 
     String hatID;
+    EditOrder editOrder;
 
     /**
      * Creates new form EditHatFromOrder
      */
-    public EditCustomHatFromOrder(String hatID) {
+    public EditCustomHatFromOrder(String hatID, EditOrder editOrder) {
         initComponents();
         this.hatID = hatID;
+        this.editOrder = editOrder;
         fillFabricComboBox();
         fillValues();
         lblErrorMessage.setVisible(false);
@@ -375,6 +377,7 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
 
             if (changes) {
                 JOptionPane.showMessageDialog(null, "Ändringar sparade");
+                editOrder.fillHatList();
                 dispose();
                 //fillValues();
             }

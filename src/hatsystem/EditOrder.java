@@ -96,7 +96,6 @@ public class EditOrder extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         lblErrorMessage = new javax.swing.JLabel();
         btnEditHat = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         lblErrorMessage2 = new javax.swing.JLabel();
         btnGenerateInvoice = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -183,13 +182,6 @@ public class EditOrder extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setText("Uppdatera listan");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
         lblErrorMessage2.setForeground(new java.awt.Color(153, 0, 51));
         lblErrorMessage2.setText("Vänligen välj en hatt i listan först");
 
@@ -273,23 +265,20 @@ public class EditOrder extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(146, 146, 146)
-                                    .addComponent(btnUpdate)
+                                    .addGap(9, 9, 9)
+                                    .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnDeleteHat, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(207, 207, 207)
+                                            .addComponent(btnSave)))
                                     .addGap(18, 18, 18)
-                                    .addComponent(btnEditHat)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnDeleteHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(btnEditHat))))
                         .addGap(62, 62, 62))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(btnSave)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,9 +301,9 @@ public class EditOrder extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(lblOrderNr))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblOrderDate)
-                                    .addComponent(jLabel8))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(lblOrderDate))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel7))
                             .addComponent(tfExpectedDeliveryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -346,7 +335,6 @@ public class EditOrder extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditHat)
-                    .addComponent(btnUpdate)
                     .addComponent(jLabel6)
                     .addComponent(btnDeleteHat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -459,17 +447,13 @@ public class EditOrder extends javax.swing.JFrame {
             lblErrorMessage2.setVisible(true);
         } else {
             if (id.substring(0, 1).equals("C")) {
-                new EditCustomHatFromOrder(id).setVisible(true);
+                new EditCustomHatFromOrder(id, this).setVisible(true);
             } else {
                 new EditStandardHatFromOrder(id).setVisible(true);
             }
         }
 
     }//GEN-LAST:event_btnEditHatActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        fillHatList();
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnGenerateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateInvoiceActionPerformed
         new GenerateInvoicePDF(Integer.toString(orderID)).setVisible(true);
@@ -626,7 +610,6 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnEditHat;
     private javax.swing.JButton btnGenerateInvoice;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
