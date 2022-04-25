@@ -169,7 +169,7 @@ public class Validation {
         if (!text.matches("^\\d+(\\.\\d{1,2})?$")) {
             result = false;
             lbl.setVisible(true);
-            lbl.setText("Endast siffror/punkt");
+            lbl.setText("Endast siffror, punkt, och max 2 decimaler");
         }
 
         return result;
