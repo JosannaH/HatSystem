@@ -72,7 +72,7 @@ public class SpecialHat {
     public static boolean isSpecialHat(String hatID) {
         boolean result = true;
         String checkID = getHatID(hatID);
-        String query = "SELECT count(*) FROM special_hat WHERE Hat_ID = '" + checkID + "';";
+        String query = "SELECT count(*) FROM special_hat WHERE Hat_ID = " + checkID + ";";
         String answer = SqlQuery.getValue(query);
         System.out.println(answer);
         if (answer.equals("0")) {
@@ -84,7 +84,7 @@ public class SpecialHat {
     public static String getImageFilePath(String hatID) {
         String checkID = getHatID(hatID);
         System.out.println("getImageFilePath checkID:" + checkID);
-        String query = "SELECT image_path FROM special_hat WHERE ID = " + checkID + ";";
+        String query = "SELECT image_path FROM special_hat WHERE Hat_ID = " + checkID + ";";
 
         String path = SqlQuery.getValue(query);
         System.out.println("getImageFilePath path: " + path);
@@ -100,8 +100,11 @@ public class SpecialHat {
 
         } else {
 
+           
             File file = chooser.getSelectedFile();
             String filename = file.getAbsolutePath();
+            System.out.println(filename);
+          
             if (filename.matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
 
                 //TODO Validering för att det endast går att lägga in bild.
@@ -137,6 +140,7 @@ public class SpecialHat {
     public static void showImage(JLabel lblImage, JLabel lblFilename, String hatID){
                 //String hat = getHatID(hatID);
                 String filename = getImageFilePath(hatID);
+
                 System.out.println(filename);
                 lblFilename.setText(filename);
                 lblFilename.setForeground(new Color(60, 63, 65));
