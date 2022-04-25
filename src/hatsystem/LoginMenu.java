@@ -73,9 +73,10 @@ public class LoginMenu extends javax.swing.JFrame {
 
     }
 
-    public static DefaultListModel getSearchListModel(){
+    public static DefaultListModel getSearchListModel() {
         return listModelStatic;
     }
+
     /**
      * Returns the logged in username
      *
@@ -938,8 +939,8 @@ public class LoginMenu extends javax.swing.JFrame {
                     String hatID = objectToEdit.substring(0, 10).trim();
                     new EditStandardHat(hatID, this).setVisible(true);
                     break;
-                    default:
-                        lblErrorMessageCategory.setVisible(true);
+                default:
+                    lblErrorMessageCategory.setVisible(true);
 
             }
         }
@@ -958,36 +959,33 @@ public class LoginMenu extends javax.swing.JFrame {
         String searchWord = txtSearchWord.getText();
         lblErrorValidateSearchWord.setText("");
 
-        //TODO fixa så att errormeddelande försvinner till nästa sökning
-        if (Validation.onlyLetters(searchWord, lblErrorValidateSearchWord)) {
-            switch (category) {
-                case "Förnamn":
-                    Customer.listCustomersFromFirstName(searchWord, listModel);
-                    break;
-                case "Efternamn":
-                    Customer.listCustomerFromLastName(searchWord, listModel);
-                    break;
-                case "Under utvärdering":
-                    Order.listOrdersByStatus(category, listModel);
-                    break;
-                case "Pågående":
-                    Order.listOrdersByStatus(category, listModel);
-                    break;
-                case "Redo att skickas":
-                    Order.listOrdersByStatus(category, listModel);
-                    break;
-                case "Skickad":
-                    Order.listOrdersByStatus(category, listModel);
-                    break;
-                case "Hattnamn":
-                    StandardHat.listAllHatsByHatName(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
-                    break;
-                case "Tyg":
-                    StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
+        switch (category) {
+            case "Förnamn":
+                Customer.listCustomersFromFirstName(searchWord, listModel);
+                break;
+            case "Efternamn":
+                Customer.listCustomerFromLastName(searchWord, listModel);
+                break;
+            case "Under utvärdering":
+                Order.listOrdersByStatus(category, listModel);
+                break;
+            case "Pågående":
+                Order.listOrdersByStatus(category, listModel);
+                break;
+            case "Redo att skickas":
+                Order.listOrdersByStatus(category, listModel);
+                break;
+            case "Skickad":
+                Order.listOrdersByStatus(category, listModel);
+                break;
+            case "Hattnamn":
+                StandardHat.listAllHatsByHatName(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
+                break;
+            case "Tyg":
+                StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
+                break;
+            default:
+                throw new AssertionError();
         }
     }//GEN-LAST:event_btnSearchSpecificActionPerformed
 
@@ -1019,7 +1017,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSearchSpecificActionPerformed
 
     private void cmbSearchSpecificFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSearchSpecificFocusGained
-        
+
     }//GEN-LAST:event_cmbSearchSpecificFocusGained
 
     private void cmbSearchSpecificFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSearchSpecificFocusLost
