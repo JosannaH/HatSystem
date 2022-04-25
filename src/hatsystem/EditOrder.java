@@ -4,6 +4,7 @@
  */
 package hatsystem;
 
+import com.mysql.cj.log.Log;
 import data.Fabric;
 import data.SqlQuery;
 import java.awt.Font;
@@ -122,6 +123,11 @@ public class EditOrder extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -505,6 +511,10 @@ public class EditOrder extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        loginMenu.fillCorrectCategory();
+    }//GEN-LAST:event_formWindowClosing
+    
     /**
      * Hämtar alla hattar
      */
@@ -556,7 +566,8 @@ public class EditOrder extends javax.swing.JFrame {
 
             index++;
         }
-
+        
+       SqlQuery.update("UPDATE Orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
        lblTotPrice.setText(Double.toString(totalPrice));
 
     }
