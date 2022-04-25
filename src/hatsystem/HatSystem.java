@@ -31,7 +31,7 @@ public class HatSystem {
 
         SqlQuery.setDatabase(idb);
 
-        new Login().setVisible(true);
+        new LoginMenu("ottoadmin").setVisible(true);
 
     }
 }

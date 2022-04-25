@@ -45,6 +45,9 @@ public class AddHatType extends javax.swing.JFrame {
         lblStandardErrorMessage.setVisible(false);
         lblCustomErrorMessage.setVisible(false);
         lblCustomErrorPrice.setVisible(false);
+        txtfSpecialDescription.setLineWrap(true);
+        txtfSpecialDescription.setWrapStyleWord(true);
+
         fillList();
         // Enables enter press.
         this.getRootPane().setDefaultButton(btn_addHat);
@@ -131,7 +134,6 @@ public class AddHatType extends javax.swing.JFrame {
         btnSpecialSave = new javax.swing.JButton();
         txtfSpecialPrice = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtfSpecialDescription = new javax.swing.JTextField();
         lblSpecialError = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -145,6 +147,8 @@ public class AddHatType extends javax.swing.JFrame {
         lblCheckNameSpecial = new javax.swing.JLabel();
         lblCheckPriceSpecial = new javax.swing.JLabel();
         checkBoxSaveAsStandard = new javax.swing.JCheckBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtfSpecialDescription = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,43 +180,42 @@ public class AddHatType extends javax.swing.JFrame {
         panel_standardHat.setLayout(panel_standardHatLayout);
         panel_standardHatLayout.setHorizontalGroup(
             panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_standardHatLayout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
-                .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88))
             .addGroup(panel_standardHatLayout.createSequentialGroup()
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_standardHatLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
                         .addGap(385, 385, 385)
                         .addComponent(lbl_size)
                         .addGap(18, 18, 18)
                         .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addGap(396, 396, 396)
-                        .addComponent(btn_addHat))
+                        .addGap(398, 398, 398)
+                        .addComponent(lblStandardErrorMessage))
                     .addGroup(panel_standardHatLayout.createSequentialGroup()
-                        .addGap(374, 374, 374)
-                        .addComponent(lblStandardErrorMessage)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(421, 421, 421)
+                        .addComponent(btn_addHat)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         panel_standardHatLayout.setVerticalGroup(
             panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_standardHatLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(panel_standardHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_size)
                     .addComponent(cmbStandardChosenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_addHat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblStandardErrorMessage)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_addHat)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Standardhatt", panel_standardHat);
@@ -310,12 +313,15 @@ public class AddHatType extends javax.swing.JFrame {
                         .addGap(68, 68, 68))
                     .addGroup(panel_customHatLayout.createSequentialGroup()
                         .addComponent(lbl_customTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(581, Short.MAX_VALUE))))
+                        .addContainerGap(631, Short.MAX_VALUE))))
             .addGroup(panel_customHatLayout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(btn_customAddToOrder)
-                .addGap(81, 81, 81)
-                .addComponent(lblCustomErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_customHatLayout.createSequentialGroup()
+                        .addGap(431, 431, 431)
+                        .addComponent(btn_customAddToOrder))
+                    .addGroup(panel_customHatLayout.createSequentialGroup()
+                        .addGap(405, 405, 405)
+                        .addComponent(lblCustomErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panel_customHatLayout.setVerticalGroup(
@@ -325,12 +331,7 @@ public class AddHatType extends javax.swing.JFrame {
                 .addComponent(lbl_customTitle)
                 .addGap(33, 33, 33)
                 .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_customHatLayout.createSequentialGroup()
-                        .addComponent(scrollPane_CustomHat, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_customAddToOrder)
-                            .addComponent(lblCustomErrorMessage)))
+                    .addComponent(scrollPane_CustomHat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_customHatLayout.createSequentialGroup()
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_customFabric, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,7 +363,11 @@ public class AddHatType extends javax.swing.JFrame {
                         .addGroup(panel_customHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmb_customEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(lblCustomErrorMessage)
+                .addGap(26, 26, 26)
+                .addComponent(btn_customAddToOrder)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Anpassad hatt", panel_customHat);
@@ -389,6 +394,7 @@ public class AddHatType extends javax.swing.JFrame {
         jLabel10.setText("Lägg till specialsydd hatt");
 
         lblSpecialError.setForeground(new java.awt.Color(204, 0, 51));
+        lblSpecialError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSpecialError.setText("Vänligen fyll i alla fält");
 
         jLabel11.setText("Namn");
@@ -415,6 +421,10 @@ public class AddHatType extends javax.swing.JFrame {
 
         checkBoxSaveAsStandard.setText("Spara som standardmodell");
 
+        txtfSpecialDescription.setColumns(20);
+        txtfSpecialDescription.setRows(5);
+        jScrollPane3.setViewportView(txtfSpecialDescription);
+
         javax.swing.GroupLayout panel_specialHatLayout = new javax.swing.GroupLayout(panel_specialHat);
         panel_specialHat.setLayout(panel_specialHatLayout);
         panel_specialHatLayout.setHorizontalGroup(
@@ -428,40 +438,52 @@ public class AddHatType extends javax.swing.JFrame {
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
                                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel11)
-                                    .addComponent(lblSpecialSize)
-                                    .addComponent(lblSpecialResponsible))
+                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(jLabel4))
                                 .addGap(38, 38, 38)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbSpecialFabrics, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtfSpecialDescription)
-                                    .addComponent(txtfSpecialPrice)
-                                    .addComponent(txtfSpecialName)
-                                    .addComponent(cmbSpecialColors, 0, 175, Short.MAX_VALUE)
-                                    .addComponent(cmbSpecialSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmbSpecialResponsible, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                .addComponent(btbAddImage)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                                    .addComponent(txtfSpecialName))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                .addComponent(btnSpecialSave)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkBoxSaveAsStandard, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(185, Short.MAX_VALUE))
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblSpecialError, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                        .addComponent(btbAddImage)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblImageTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8)
+                                            .addComponent(lblSpecialSize)
+                                            .addComponent(lblSpecialResponsible))
+                                        .addGap(38, 38, 38)
+                                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(checkBoxSaveAsStandard, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                                            .addComponent(cmbSpecialResponsible, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbSpecialSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbSpecialColors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbSpecialFabrics, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(0, 183, Short.MAX_VALUE))
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel10)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(btnSpecialSave))
+                            .addGroup(panel_specialHatLayout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(jLabel10)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panel_specialHatLayout.setVerticalGroup(
             panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,54 +494,54 @@ public class AddHatType extends javax.swing.JFrame {
                         .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(panel_specialHatLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSpecialResponsible, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_specialHatLayout.createSequentialGroup()
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtfSpecialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCheckNameSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel12))
-                                    .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(txtfSpecialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11)))
                                 .addGap(18, 18, 18)
                                 .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtfSpecialDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbSpecialFabrics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbSpecialColors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbSpecialSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSpecialSize))
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbSpecialResponsible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
+                                    .addComponent(txtfSpecialPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)))
+                            .addComponent(lblCheckPriceSpecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel_specialHatLayout.createSequentialGroup()
-                                .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_specialHatLayout.createSequentialGroup()
-                                .addComponent(btbAddImage)
-                                .addGap(22, 22, 22)))
-                        .addComponent(checkBoxSaveAsStandard)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel4)))
                         .addGap(18, 18, 18)
                         .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSpecialSave)
-                            .addComponent(lblSpecialError))
-                        .addGap(66, 66, 66))))
+                            .addComponent(cmbSpecialFabrics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSpecialColors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSpecialSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSpecialSize))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSpecialResponsible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSpecialResponsible))
+                        .addGap(18, 18, 18)
+                        .addComponent(checkBoxSaveAsStandard)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel_specialHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btbAddImage)
+                            .addComponent(lblImageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addComponent(lblSpecialError)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSpecialSave)
+                        .addGap(35, 35, 35))))
         );
 
         jTabbedPane1.addTab("Specialsydd hatt", panel_specialHat);
@@ -555,6 +577,8 @@ public class AddHatType extends javax.swing.JFrame {
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
 
+        String nameWithoutWitespace = name.replaceAll(" ", "");
+
         lblCheckNameSpecial.setVisible(false);
         lblCheckPriceSpecial.setVisible(false);
 
@@ -562,14 +586,14 @@ public class AddHatType extends javax.swing.JFrame {
             lblSpecialError.setText("Vänligen fyll i alla fält");
             lblSpecialError.setVisible(true);
         } else {
-            if (Validation.onlyLetters(name, lblCheckNameSpecial)
+            if (Validation.onlyLetters(nameWithoutWitespace, lblCheckNameSpecial)
                     && Validation.isPrice(price, lblCheckPriceSpecial)) {
 
                 int fabricComboID = Fabric.getFabricID(fabric, colour);
                 int employeeComboID = Employee.getEmployeeIDAdmin(worker);
                 boolean isUniqueHatAndFabricCombo = SpecialHat.isUniqueCombination(name, fabricComboID);
                 if (isUniqueHatAndFabricCombo) {
-                    SpecialHat.addHat(name, price, size, description, fabricComboID, employeeComboID);
+                    SpecialHat.addHat(name.trim(), price, size, description, fabricComboID, employeeComboID);
                     if (image.isEmpty()) {
                         SpecialHat.addSpecialHatNoImage(name, price, fabricComboID);
                     } else {
@@ -756,20 +780,28 @@ public class AddHatType extends javax.swing.JFrame {
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
         String fabricID = chosenHat.get("Hat_Fabric");
         Double price = Double.parseDouble(chosenHat.get("Price"));
+<<<<<<< Updated upstream
         Double priceExtraCost = price*1.2;
         
         String formatPrice = Validation.setTwoDecimals(priceExtraCost);
+=======
+        Double priceExtraCost = price * 1.2;
+
+        // round up price to two decimals
+        DecimalFormat df = new DecimalFormat("####0.00");
+        String formatPrice = df.format(priceExtraCost);
+>>>>>>> Stashed changes
 
         String priceDot = formatPrice.replaceAll(",", ".");
         textField_customPrice.setText(priceDot);
        
         HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
         String fabricName = defaultFabric.get("Name");
-        
+
         cmb_customFabric.setSelectedItem(fabricName);
         fillColorComboBox(fabricName);
         cmb_customColor.setSelectedItem(defaultFabric.get("Color"));
-        
+
     }
 
     private void fillColorComboBox(String fabricName) {
@@ -829,6 +861,7 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JList<String> jListStandardHat;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCheckNameSpecial;
     private javax.swing.JLabel lblCheckPriceCustomHat;
@@ -855,7 +888,7 @@ public class AddHatType extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollPane_CustomHat;
     private javax.swing.JTextField textField_customPrice;
     private javax.swing.JTextArea txtAreaCustomDescription;
-    private javax.swing.JTextField txtfSpecialDescription;
+    private javax.swing.JTextArea txtfSpecialDescription;
     private javax.swing.JTextField txtfSpecialName;
     private javax.swing.JTextField txtfSpecialPrice;
     // End of variables declaration//GEN-END:variables
