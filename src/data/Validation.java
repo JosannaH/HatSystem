@@ -7,6 +7,7 @@ package data;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 // TODO det blir databasfel om man skriver datum i fel format i Skapa order
 /**
@@ -16,8 +17,7 @@ import javax.swing.JLabel;
 public class Validation {
 
     /**
-     * Check if a String only contains numbers and can be converted to an
-     * Integer.
+     * Check if a String only contains numbers and can be converted to an Integer.
      *
      * @param stringToCheck
      * @return True if the conversion succeeded, otherwise false.
@@ -67,6 +67,27 @@ public class Validation {
             }
         } else {
             returBoolean = false;
+        }
+        return returBoolean;
+    }
+
+    public static boolean isDate(String stringToCheck, JLabel lbl) {
+        boolean returBoolean = false;
+
+        if (stringToCheck.length() == 10) {
+            String subText1 = stringToCheck.substring(0, 4) + stringToCheck.substring(5, 7) + stringToCheck.substring(8, 10);
+            String subText2 = stringToCheck.substring(4, 5) + stringToCheck.substring(7, 8);
+            if ((isInteger(subText1) && subText2.equals("--"))) {
+                returBoolean = true;
+            } else {
+
+                lbl.setText("åååå-mm-dd");
+                lbl.setVisible(true);
+
+            }
+        } else {
+            lbl.setText("åååå-mm-dd");
+            lbl.setVisible(true);
         }
         return returBoolean;
     }
@@ -142,6 +163,7 @@ public class Validation {
 
         if (!text.matches("[0-9]+")) {
             result = false;
+            lbl.setVisible(true);
             lbl.setText("Endast siffror");
         }
 
@@ -189,13 +211,27 @@ public class Validation {
 
     }
 
-    /**
-     * Round up to two decimals för doubles
-     */
-    public static String setTwoDecimals(Double formatDouble) {
+    public static boolean isBlank(JTextField txtField, JLabel lbl) {
 
-        DecimalFormat df = new DecimalFormat("####0.00");
-        String formatPrice = df.format(formatDouble);
-        return formatPrice;
+        boolean result = false;
+
+        if (txtField.getText().isBlank()) {
+            result = true;
+            lbl.setVisible(true);
+            lbl.setText("Vänligen fyll i fält");
+        }
+
+        return result;
+      }
+
+        /**
+         * Round up to two decimals för doubles
+         */
+        public static String setTwoDecimals(Double formatDouble) {
+
+            DecimalFormat df = new DecimalFormat("####0.00");
+            String formatPrice = df.format(formatDouble);
+            return formatPrice;
+
     }
 }
