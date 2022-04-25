@@ -24,19 +24,17 @@ import javax.swing.JFileChooser;
 /*
 TODO om man redigerar en customthatfromorder och sparar den så uppdateras priset på hatten,
 men totalpriset på ordern ändras inte i databasen även om man trycker på spara kund och orderuppgifter
-*/
-/*
+ */
+ /*
 TODO jag redigerade en order med tre hattar:  raderade en hatt, totalpriset på ordern uppdaterades i 
 databasen men det blev fel pris, den räknade bara en av hattarna som var kvar i ordern
-*/
-
-
+ */
 /**
  *
  * @author Friday
  */
 public class EditOrder extends javax.swing.JFrame {
-
+    
     private int orderID;
     private String oldCustomerID;
     private String oldStreet;
@@ -47,6 +45,7 @@ public class EditOrder extends javax.swing.JFrame {
     private String oldStatus;
     DefaultListModel<String> listModel = new DefaultListModel<>();
     private LoginMenu loginMenu;
+
     /**
      * Creates new form EditOrder
      */
@@ -61,11 +60,11 @@ public class EditOrder extends javax.swing.JFrame {
         Font defaultListFont = lstListOrderedHats.getFont();
         lstListOrderedHats.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
     }
-    
+
     /**
      * For aditing from Sök-lista i LoginMenu
      */
-        public EditOrder(int orderID, LoginMenu loginMenu) {
+    public EditOrder(int orderID, LoginMenu loginMenu) {
         initComponents();
         this.orderID = orderID;
         this.loginMenu = loginMenu;
@@ -375,9 +374,10 @@ public class EditOrder extends javax.swing.JFrame {
 
     private void btnDeleteOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrderActionPerformed
         int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna order?", "Varning!", JOptionPane.YES_NO_OPTION);
-
+        
         if (x == JOptionPane.YES_OPTION) {
             SqlQuery.update("UPDATE orders SET Active = 0 WHERE Orders_ID = " + orderID + ";");
+            loginMenu.fillCorrectCategory();
             this.dispose();
         }
 
@@ -386,7 +386,7 @@ public class EditOrder extends javax.swing.JFrame {
     private void btnDeleteHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHatActionPerformed
         double totalPrice = Double.parseDouble(SqlQuery.getValue("SELECT Total_Price FROM orders WHERE Orders_ID = " + orderID + ";"));
         int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera denna hatt från ordern?", "Varning!", JOptionPane.YES_NO_OPTION);
-
+        
         if (x == JOptionPane.YES_OPTION) {
             String chosenHat = lstListOrderedHats.getSelectedValue();
             if (chosenHat.substring(0, 1).equalsIgnoreCase("S")) {
@@ -399,20 +399,20 @@ public class EditOrder extends javax.swing.JFrame {
                 String hatID = chosenHat.substring(1, 9).trim();
                 totalPrice -= Double.parseDouble(SqlQuery.getValue("SELECT Price FROM hat WHERE Hat_ID = " + hatID + ";"));
                 SqlQuery.update("UPDATE orders SET Total_Price = " + totalPrice + " WHERE Orders_ID = " + orderID + ";");
-
+                
                 SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM ordered_hat WHERE Hat_ID = " + hatID + ";");
                 SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + hatID + ";");
             }
         }
-
+        
         fillHatList();
     }//GEN-LAST:event_btnDeleteHatActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         lblErrorMessage.setVisible(false);
-
+        
         String chosenDeliveryDate = tfExpectedDeliveryDate.getText();
         String chosenCustomerNr = tfCustomerNr.getText();
         String chosenStreet = tfStreet.getText();
@@ -420,45 +420,52 @@ public class EditOrder extends javax.swing.JFrame {
         String chosenCity = tfCity.getText();
         String chosenCountry = tfCountry.getText();
         String chosenStatus = cmbStatus.getSelectedItem().toString();
-
+        
         if (chosenDeliveryDate.isBlank() || chosenCustomerNr.isBlank() || chosenStreet.isBlank() || chosenPostal.isBlank() || chosenCity.isBlank() || chosenCountry.isBlank()) {
             lblErrorMessage.setText("Vänligen se till att alla fält är ifyllda");
             lblErrorMessage.setVisible(true);
         } else {
-            if (Validation.isDate(chosenDeliveryDate)) {
-                if (Validation.isInteger(chosenCustomerNr)) {
-                    if (Validation.isInteger(chosenPostal)) {
-                        if (Validation.isValidMonthAndDay(chosenDeliveryDate.substring(5, 7), chosenDeliveryDate.substring(8, 10))) {
-                            HashMap<String, String> foundCustomer = Customer.getCustomer(chosenCustomerNr);
-                            if (!foundCustomer.isEmpty()) {
-                                setDeliveryDate(chosenDeliveryDate);
-                                setCustomer(chosenCustomerNr);
-                                setDeliveryAddress();
-                                setOrderStatus(chosenStatus);
-                                fillOrderInfo();
-                                JOptionPane.showMessageDialog(null, "Ändringar sparade");
-                                loginMenu.fillCorrectCategory();
-                                dispose();
+            if (chosenCustomerNr.length() == 8) {
+                if (Validation.isDate(chosenDeliveryDate)) {
+                    if (Validation.isInteger(chosenCustomerNr)) {
+                        if (Validation.isInteger(chosenPostal)) {
+                            if (Validation.isValidMonthAndDay(chosenDeliveryDate.substring(5, 7), chosenDeliveryDate.substring(8, 10))) {
+                                HashMap<String, String> foundCustomer = Customer.getCustomer(chosenCustomerNr);
+                                if (!foundCustomer.isEmpty()) {
+                                    setDeliveryDate(chosenDeliveryDate);
+                                    setCustomer(chosenCustomerNr);
+                                    setDeliveryAddress();
+                                    setOrderStatus(chosenStatus);
+                                    fillOrderInfo();
+                                    JOptionPane.showMessageDialog(null, "Ändringar sparade");
+                                    loginMenu.fillCorrectCategory();
+                                    dispose();
+                                } else {
+                                    lblErrorMessage.setText("Kund med angivet kundnummer existerar inte");
+                                    lblErrorMessage.setVisible(true);
+                                }
                             } else {
-                                lblErrorMessage.setText("Kund med angivet kundnummer existerar inte");
+                                lblErrorMessage.setText("Vänligen ange ett giltigt datum");
                                 lblErrorMessage.setVisible(true);
                             }
                         } else {
-                            lblErrorMessage.setText("Vänligen ange ett giltigt datum");
+                            lblErrorMessage.setText("Postnummer måste bestå av endast siffror");
                             lblErrorMessage.setVisible(true);
                         }
                     } else {
-                        lblErrorMessage.setText("Postnummer måste bestå av endast siffror");
+                        lblErrorMessage.setText("Kundnummer måste bestå av endast siffror");
                         lblErrorMessage.setVisible(true);
                     }
                 } else {
-                    lblErrorMessage.setText("Kundnummer måste bestå av endast siffror");
+                    lblErrorMessage.setText("Vänligen ange datum i formatet yyyy-mm-dd");
                     lblErrorMessage.setVisible(true);
-                }
-            } else {
-                lblErrorMessage.setText("Vänligen ange datum i formatet yyyy-mm-dd");
-                lblErrorMessage.setVisible(true);
+                }                
             }
+            else {
+                    lblErrorMessage.setText("Kundrumret ska bestå av 8 siffror");
+                    lblErrorMessage.setVisible(true);
+                }  
+            
         }
 
 //        InputValidering.isValidMonthAndDay(datum.substring(5, 7), datum.substring(8, 10));
@@ -485,22 +492,22 @@ public class EditOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerateInvoiceActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         int x = JOptionPane.showConfirmDialog(null, "Vill du generera en ordersammanställning?", "Ordersammanställning", JOptionPane.YES_NO_OPTION);
-
+        
         if (x == JOptionPane.YES_OPTION) {
-
+            
             JFileChooser fc = new JFileChooser();
             //så användaren endast kan välja mappar
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
+            
             int returnVal = fc.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-
+                
                 File file = fc.getSelectedFile();
                 //hämtar den valda mappens sökväg
                 String searchPath = file.getAbsolutePath();
-
+                
                 searchPath += ("\\Orderoversikt_" + orderID);
 
                 //skapar fraktsedeln
@@ -514,25 +521,25 @@ public class EditOrder extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         loginMenu.fillCorrectCategory();
     }//GEN-LAST:event_formWindowClosing
-    
+
     /**
      * Hämtar alla hattar
      */
     public void fillHatList() {
-
+        
         listModel.clear();
-
+        
         double totalPrice = 0;
-
+        
         ArrayList<HashMap<String, String>> orderedStandardHats = SqlQuery.getMultipleRows("SELECT * FROM Standard_Hat WHERE Standard_Hat_ID IN (SELECT Standard_Hat FROM Ordered_St_Hat WHERE Order_Nr = " + orderID + ")");
-
+        
         int index = 0;
         while (index < orderedStandardHats.size()) {
             HashMap<String, String> currentHat = orderedStandardHats.get(index);
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
             String size = SqlQuery.getValue("SELECT Size FROM ordered_st_hat WHERE Standard_Hat = " + currentHat.get("Standard_Hat_ID") + " AND Order_Nr = " + orderID + ";");
-
+            
             listModel.addElement(String.format("%-10s %-20s %-8s %-20s %-20s "
                     + currentHat.get("Price"),
                     "S" + currentHat.get("Standard_Hat_ID"),
@@ -540,20 +547,20 @@ public class EditOrder extends javax.swing.JFrame {
                     size,
                     currentFabric.get("Name"),
                     currentFabric.get("Color")));
-
+            
             totalPrice += Double.parseDouble(currentHat.get("Price"));
-
+            
             index++;
         }
-
+        
         ArrayList<HashMap<String, String>> orderedOtherHats = SqlQuery.getMultipleRows("SELECT * FROM hat WHERE Hat_ID IN (SELECT Hat_ID FROM ordered_hat WHERE Order_Nr = " + orderID + ");");
-
+        
         index = 0;
         while (index < orderedOtherHats.size()) {
             HashMap<String, String> currentHat = orderedOtherHats.get(index);
             String fabricID = currentHat.get("Hat_Fabric");
             HashMap<String, String> currentFabric = Fabric.getFabricFromID(fabricID);
-
+            
             listModel.addElement(String.format("%-10s %-20s %-8s %-20s %-20s "
                     + currentHat.get("Price"),
                     "C" + currentHat.get("Hat_ID"),
@@ -561,17 +568,19 @@ public class EditOrder extends javax.swing.JFrame {
                     currentHat.get("Size"),
                     currentFabric.get("Name"),
                     currentFabric.get("Color")));
-
+            
             totalPrice += Double.parseDouble(currentHat.get("Price"));
-
+            
             index++;
         }
+        String priceTwoDecimals = Validation.setTwoDecimals(totalPrice);        
         
-       SqlQuery.update("UPDATE Orders SET Total_Price = "+ totalPrice +" WHERE Orders_ID = "+ orderID +";");
-       lblTotPrice.setText(Double.toString(totalPrice));
-
+        SqlQuery.update("UPDATE Orders SET Total_Price = " + priceTwoDecimals + " WHERE Orders_ID = " + orderID + ";");
+        
+        lblTotPrice.setText(priceTwoDecimals);
+        
     }
-
+    
     public void fillOrderInfo() {
         lblOrderNr.setText(Integer.toString(orderID));
 
@@ -580,7 +589,7 @@ public class EditOrder extends javax.swing.JFrame {
         lblOrderDate.setText(order.get("Order_Date"));
         oldDeliveryDate = order.get("Delivery_Date");
         oldStatus = order.get("Status");
-
+        
         tfExpectedDeliveryDate.setText(oldDeliveryDate);
         cmbStatus.setSelectedItem(oldStatus);
 
@@ -590,7 +599,7 @@ public class EditOrder extends javax.swing.JFrame {
         oldPostal = address.get("Postal");
         oldCity = address.get("City");
         oldCountry = address.get("Country");
-
+        
         tfStreet.setText(oldStreet);
         tfPostal.setText(oldPostal);
         tfCity.setText(oldCity);
@@ -600,30 +609,30 @@ public class EditOrder extends javax.swing.JFrame {
         HashMap<String, String> customer = SqlQuery.getRow("SELECT * FROM customer WHERE Customer_ID IN (SELECT Customer FROM orders WHERE Orders_ID = " + orderID + ");");
         lblName.setText(customer.get("First_Name") + " " + customer.get("Last_Name"));
         oldCustomerID = customer.get("Customer_Nr");
-
+        
         tfCustomerNr.setText(oldCustomerID);
-
+        
     }
-
+    
     public void setOrderStatus(String status) {
         SqlQuery.update("UPDATE orders SET Status = '" + status + "' WHERE Orders_ID = " + orderID + ";");
     }
-
+    
     public void setDeliveryDate(String date) {
         SqlQuery.update("UPDATE orders SET Delivery_Date = '" + date + "' WHERE Orders_ID = " + orderID + ";");
     }
-
+    
     public void setCustomer(String customerNr) {
         String id = SqlQuery.getValue("SELECT Customer_ID FROM customer WHERE Customer_Nr = " + customerNr + ";");
         SqlQuery.update("UPDATE orders SET Customer = " + id + " WHERE Orders_ID = " + orderID + ";");
     }
-
+    
     public void setDeliveryAddress() {
         String street = tfStreet.getText();
         String postal = tfPostal.getText();
         String city = tfCity.getText();
         String country = tfCountry.getText();
-
+        
         HashMap<String, String> existingAddress = Address.getAddress(street, postal, city, country);
         if (existingAddress.isEmpty()) {
             Address.addAddress(street, postal, city, country);
