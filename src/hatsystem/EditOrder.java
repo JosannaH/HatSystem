@@ -574,10 +574,11 @@ public class EditOrder extends javax.swing.JFrame {
             index++;
         }
         String priceTwoDecimals = Validation.setTwoDecimals(totalPrice);        
+        String priceDot = priceTwoDecimals.replaceAll(",", ".");
         
-        SqlQuery.update("UPDATE Orders SET Total_Price = " + priceTwoDecimals + " WHERE Orders_ID = " + orderID + ";");
+        SqlQuery.update("UPDATE Orders SET Total_Price = " + priceDot + " WHERE Orders_ID = " + orderID + ";");
         
-        lblTotPrice.setText(priceTwoDecimals);
+        lblTotPrice.setText(priceDot);
         
     }
     
