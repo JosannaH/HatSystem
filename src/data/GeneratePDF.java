@@ -70,10 +70,10 @@ public class GeneratePDF {
             paragraph = new Paragraph(" ");
             document.add(paragraph);
             
-            paragraph = new Paragraph("Totalförsäljning: " + totalPrice);
+            paragraph = new Paragraph("Totalförsäljning: " + totalPrice + " SEK");
             document.add(paragraph);
 
-            paragraph = new Paragraph("   Varav moms: " + totalPrice * 0.25);
+            paragraph = new Paragraph("   Varav moms: " + totalPrice * 0.25 + " SEK");
             document.add(paragraph);
             
             paragraph = new Paragraph(" ");
@@ -134,10 +134,10 @@ public class GeneratePDF {
             paragraph = new Paragraph("Leveransadress: " + deliveryAddress.get("Street") + ", " + deliveryAddress.get("Postal") + ", " + deliveryAddress.get("City") + ", " + deliveryAddress.get("Country"));
             document.add(paragraph);
 
-            paragraph = new Paragraph("Vikt: " + weight);
+            paragraph = new Paragraph("Vikt: " + weight + " kg");
             document.add(paragraph);
 
-            paragraph = new Paragraph("Fraktkostnad: " + shippingCost);
+            paragraph = new Paragraph("Fraktkostnad: " + shippingCost + " SEK");
             document.add(paragraph);
 
             if (!deliveryAddress.get("Country").equalsIgnoreCase("Sverige")) {
@@ -189,7 +189,7 @@ public class GeneratePDF {
 
             //pris och moms
             paragraph = new Paragraph("Pris innehåll: " + totalPrice
-                    + ", varav moms: " + totalPrice * 0.25);
+                    + " SEK, varav moms: " + totalPrice * 0.25 + " SEK");
             document.add(paragraph);
 
             paragraph = new Paragraph("Beskrivning av innehållet: " + description);
@@ -214,7 +214,7 @@ public class GeneratePDF {
             HashMap<String, String> order = SqlQuery.getRow("SELECT * FROM orders WHERE Orders_ID = 1;");
             HashMap<String, String> deliveryAddress = SqlQuery.getRow("SELECT * FROM address WHERE Address_ID IN (SELECT Delivery_Address FROM orders WHERE Orders_ID = " + orderNr + ");");
 
-            Paragraph paragraph = new Paragraph("Ordersammnställning: " + orderNr);
+            Paragraph paragraph = new Paragraph("Ordersammanställning: " + orderNr);
             document.add(paragraph);
 
             //hämtar kunden
@@ -308,7 +308,7 @@ public class GeneratePDF {
             document.add(table);
 
             //pris och moms
-            paragraph = new Paragraph("Pris innehåll: " + totalPrice + ", varav moms: " + totalPrice * 0.25);
+            paragraph = new Paragraph("Pris innehåll: " + totalPrice + " SEK, varav moms: " + totalPrice * 0.25 + " SEK");
             document.add(paragraph);
 
             document.close();

@@ -21,6 +21,8 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
     public GenerateInvoicePDF(String orderNr) {
         initComponents();
         this.orderNr = orderNr;
+        taChosenDescription.setLineWrap(true);
+        taChosenDescription.setWrapStyleWord(true);
         lblErrorMessage.setVisible(false);
     }
 
@@ -56,7 +58,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                     this.dispose();
                 }
             } else {
-                lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror och punkt");
+                lblErrorMessage.setText("Vikt och fraktkostnad får endast innehålla siffror och punkt samt två decimaler");
                 lblErrorMessage.setVisible(true);
             }
         } else {
@@ -97,7 +99,7 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
 
         jLabel4.setText("Skapa fraktsedel");
 
-        jButton1.setText("Generara fraktsedel");
+        jButton1.setText("Generera fraktsedel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -122,22 +124,24 @@ public class GenerateInvoicePDF extends javax.swing.JFrame {
                 .addGap(212, 212, 212))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfChosenShippingCost)
-                            .addComponent(tfChosenWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(141, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfChosenShippingCost)
+                                    .addComponent(tfChosenWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(40, 40, 40)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 135, Short.MAX_VALUE))
+                    .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

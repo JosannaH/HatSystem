@@ -1008,7 +1008,7 @@ public class LoginMenu extends javax.swing.JFrame {
             //skapar fraktsedeln
             GeneratePDF.generateMomsPDF(year, searchPath);
             JOptionPane.showMessageDialog(null, "Sammanställning har skapats");
-            this.dispose();
+
         }
     }//GEN-LAST:event_btnGeneratePDFActionPerformed
 
