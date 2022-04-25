@@ -115,13 +115,32 @@ public class Validation {
         return isVaild;
     }
 
+    public static boolean isValidMonthAndDayWithLabel(String month, String day, JLabel lbl) {
+        HashMap<String, String> monthsAndDays = monthsAndDays();
+        boolean isVaild = false;
+
+        if (monthsAndDays.containsKey(month)) {
+
+            int chosenDay = Integer.parseInt(day);
+            int nrOfDays = Integer.parseInt(monthsAndDays.get(month));
+
+            if (chosenDay > 0 && chosenDay <= nrOfDays) {
+                isVaild = true;
+            } else {
+                lbl.setText("Ej ett giltigt datum");
+                lbl.setVisible(true);
+            }
+        } else {
+            lbl.setText("Ej ett giltigt datum");
+            lbl.setVisible(true);
+        }
+        return isVaild;
+    }
+
     /**
-     * En HashMap för att hålla reda på hur många dagar det finns i respektive
-     * månad. Används av metoden isValidMonthAndDay Används för att kontrollera
-     * användares datum-input. Fungerar inte med skottår.
+     * En HashMap för att hålla reda på hur många dagar det finns i respektive månad. Används av metoden isValidMonthAndDay Används för att kontrollera användares datum-input. Fungerar inte med skottår.
      *
-     * @return En HashMap med månadens nr (01-12) och tillhörande antal dagar i
-     * den månaden.
+     * @return En HashMap med månadens nr (01-12) och tillhörande antal dagar i den månaden.
      */
     private static HashMap<String, String> monthsAndDays() {
         HashMap<String, String> monthsAndDays = new HashMap<>();
@@ -222,16 +241,16 @@ public class Validation {
         }
 
         return result;
-      }
+    }
 
-        /**
-         * Round up to two decimals för doubles
-         */
-        public static String setTwoDecimals(Double formatDouble) {
+    /**
+     * Round up to two decimals för doubles
+     */
+    public static String setTwoDecimals(Double formatDouble) {
 
-            DecimalFormat df = new DecimalFormat("####0.00");
-            String formatPrice = df.format(formatDouble);
-            return formatPrice;
+        DecimalFormat df = new DecimalFormat("####0.00");
+        String formatPrice = df.format(formatDouble);
+        return formatPrice;
 
     }
 }

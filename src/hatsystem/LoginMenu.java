@@ -907,7 +907,8 @@ public class LoginMenu extends javax.swing.JFrame {
                 if (Validation.onlyDigits(txtPostCode.getText(), lblErrorPostAddress)
                         && Validation.onlyLetters(txtCity.getText(), lblErrorPostAddress)
                         && Validation.onlyLetters(txtCountry.getText(), lblErrorCountry)
-                        && Validation.isDate(txtExpectedDate.getText(), lblErrorDate)) {
+                        && Validation.isDate(txtExpectedDate.getText(), lblErrorDate)
+                        && Validation.isValidMonthAndDayWithLabel(txtExpectedDate.getText().substring(5, 7), txtExpectedDate.getText().substring(8, 10), lblErrorDate)) {
 
                     boolean exists = Address.doesAddressExist(streetAddress, postCode, city, country);
                     if (!exists) {
