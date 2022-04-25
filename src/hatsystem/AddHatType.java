@@ -573,7 +573,7 @@ public class AddHatType extends javax.swing.JFrame {
         String description = txtfSpecialDescription.getText();
         String fabric = cmbSpecialFabrics.getSelectedItem().toString();
         String colour = cmbSpecialColors.getSelectedItem().toString();
-        String image = lblImageTxt.getText();
+        String image = lblImageTxt.getText().replaceAll("\\\\", "\\\\\\\\");
         String size = cmbSpecialSize.getSelectedItem().toString();
         String worker = cmbSpecialResponsible.getSelectedItem().toString();
 
