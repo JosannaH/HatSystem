@@ -758,11 +758,11 @@ public class AddHatType extends javax.swing.JFrame {
         Double price = Double.parseDouble(chosenHat.get("Price"));
         Double priceExtraCost = price*1.2;
         
-        // round up price to two decimals
-        DecimalFormat df = new DecimalFormat("####0.00");
-        String formatPrice = df.format(priceExtraCost);
+        String formatPrice = Validation.setTwoDecimals(priceExtraCost);
 
-        textField_customPrice.setText(formatPrice);
+        String priceDot = formatPrice.replaceAll(",", ".");
+        textField_customPrice.setText(priceDot);
+       
         HashMap<String, String> defaultFabric = Fabric.getFabricFromID(fabricID);
         String fabricName = defaultFabric.get("Name");
         
