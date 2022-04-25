@@ -70,10 +70,15 @@ public class GeneratePDF {
             paragraph = new Paragraph(" ");
             document.add(paragraph);
             
-            paragraph = new Paragraph("Totalförsäljning: " + totalPrice + " SEK");
+            String totalPriceTwoDecimals = Validation.setTwoDecimals(totalPrice);
+            
+            paragraph = new Paragraph("Totalförsäljning: " + totalPriceTwoDecimals + " SEK");
             document.add(paragraph);
 
-            paragraph = new Paragraph("   Varav moms: " + totalPrice * 0.25 + " SEK");
+            Double totalPriceMoms = totalPrice * 0.25;
+            String totalPriceMomsTwoDecimals = Validation.setTwoDecimals(totalPriceMoms);
+            
+            paragraph = new Paragraph("   Varav moms: " + totalPriceMomsTwoDecimals + " SEK");
             document.add(paragraph);
             
             paragraph = new Paragraph(" ");
