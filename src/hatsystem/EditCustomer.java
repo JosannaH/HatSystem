@@ -32,6 +32,7 @@ public class EditCustomer extends javax.swing.JFrame {
     private String oldCountry;
     private String oldAddressID;
     private String customerNr;
+    private LoginMenu loginMenu;
 
     /**
      * Creates new form EditInformation
@@ -44,7 +45,21 @@ public class EditCustomer extends javax.swing.JFrame {
         fillCustomerInfo();
         lblErrorMessage.setVisible(false);
         clearErrorMessages();
-        
+    }
+    
+    /**
+     * For editing from Sök-lista
+     * @param customerNr 
+     */
+       public EditCustomer(String customerNr, LoginMenu loginMenu) {
+        this.customerNr = customerNr;
+        this.loginMenu = loginMenu;
+        customerNr();
+        initComponents();
+        fillOrderList();
+        fillCustomerInfo();
+        lblErrorMessage.setVisible(false);
+        clearErrorMessages();
     }
     
     private void customerNr(){
@@ -140,6 +155,8 @@ public class EditCustomer extends javax.swing.JFrame {
         }
         if (infoChanged) {
             JOptionPane.showMessageDialog(null, "Ändringar sparade");
+            loginMenu.fillCorrectCategory();
+            dispose();
         }
     }
 

@@ -939,15 +939,15 @@ public class LoginMenu extends javax.swing.JFrame {
             switch (category) {
                 case "Kunder":
                     String customerNr = objectToEdit.substring(0, 9);
-                    new EditCustomer(customerNr).setVisible(true);
+                    new EditCustomer(customerNr, this).setVisible(true);
                     break;
                 case "Ordrar":
                     String orderToEdit = objectToEdit.substring(0, 10).trim();
-                    new EditOrder(Integer.parseInt(orderToEdit)).setVisible(true);
+                    new EditOrder(Integer.parseInt(orderToEdit), this).setVisible(true);
                     break;
                 case "Standardhattar":
                     String hatID = objectToEdit.substring(0, 10).trim();
-                    new EditStandardHat(hatID).setVisible(true);
+                    new EditStandardHat(hatID, this).setVisible(true);
                     break;
                     default:
                         lblErrorMessageCategory.setVisible(true);

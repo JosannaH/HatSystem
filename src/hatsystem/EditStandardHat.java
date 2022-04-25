@@ -25,6 +25,7 @@ public class EditStandardHat extends javax.swing.JFrame {
     private String oldDescription;
     private String oldFabricName;
     private String oldFabricColor;
+    private LoginMenu loginMenu;
 
     /**
      * Creates new form EditStandardHat
@@ -32,6 +33,19 @@ public class EditStandardHat extends javax.swing.JFrame {
     public EditStandardHat(String hatId) {
         initComponents();
         this.hatId = hatId;
+        fillFabricComboBox();
+        fillValue();
+        lblErrorMessage.setVisible(false);
+    }
+    
+    /** For editing from sök-lista i LoginMenu
+     * 
+     * @param hatId 
+     */
+     public EditStandardHat(String hatId, LoginMenu loginMenu) {
+        initComponents();
+        this.hatId = hatId;
+        this.loginMenu = loginMenu;
         fillFabricComboBox();
         fillValue();
         lblErrorMessage.setVisible(false);
@@ -263,6 +277,7 @@ public class EditStandardHat extends javax.swing.JFrame {
                     SqlQuery.update("UPDATE Standard_Hat SET Description = '" + hatDescription + "' WHERE Standard_Hat_ID = " + hatId + ";");
                     SqlQuery.update("UPDATE Standard_Hat SET Hat_Fabric = '" + fabricID + "' WHERE Standard_Hat_ID = " + hatId + ";");
                     JOptionPane.showMessageDialog(null, "Ändringar sparade!");
+                    loginMenu.fillCorrectCategory();
                     this.dispose();
                 } else {
                     lblErrorMessage.setVisible(true);

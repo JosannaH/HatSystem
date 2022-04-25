@@ -45,12 +45,29 @@ public class EditOrder extends javax.swing.JFrame {
     private String oldDeliveryDate;
     private String oldStatus;
     DefaultListModel<String> listModel = new DefaultListModel<>();
+    private LoginMenu loginMenu;
     /**
      * Creates new form EditOrder
      */
     public EditOrder(int orderID) {
         initComponents();
         this.orderID = orderID;
+        fillHatList();
+        fillOrderInfo();
+        lblErrorMessage.setVisible(false);
+        lblErrorMessage2.setVisible(false);
+        lstListOrderedHats.setModel(listModel);
+        Font defaultListFont = lstListOrderedHats.getFont();
+        lstListOrderedHats.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
+    }
+    
+    /**
+     * For aditing from Sök-lista i LoginMenu
+     */
+        public EditOrder(int orderID, LoginMenu loginMenu) {
+        initComponents();
+        this.orderID = orderID;
+        this.loginMenu = loginMenu;
         fillHatList();
         fillOrderInfo();
         lblErrorMessage.setVisible(false);
@@ -414,6 +431,7 @@ public class EditOrder extends javax.swing.JFrame {
                                 setOrderStatus(chosenStatus);
                                 fillOrderInfo();
                                 JOptionPane.showMessageDialog(null, "Ändringar sparade");
+                                loginMenu.fillCorrectCategory();
                             } else {
                                 lblErrorMessage.setText("Kund med angivet kundnummer existerar inte");
                                 lblErrorMessage.setVisible(true);
