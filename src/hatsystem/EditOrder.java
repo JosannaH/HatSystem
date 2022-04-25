@@ -88,7 +88,7 @@ public class EditOrder extends javax.swing.JFrame {
         lstListOrderedHats.setModel(listModel);
         Font defaultListFont = lstListOrderedHats.getFont();
         lstListOrderedHats.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-        editCustomer = true;
+
     }
 
     /**
@@ -545,7 +545,7 @@ public class EditOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if(editCustomer){
+        if(mainEditCustomer != null){
             mainEditCustomer.fillOrderList();
         }
         else{
