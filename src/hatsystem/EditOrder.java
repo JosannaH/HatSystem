@@ -449,7 +449,7 @@ public class EditOrder extends javax.swing.JFrame {
             if (id.substring(0, 1).equals("C")) {
                 new EditCustomHatFromOrder(id, this).setVisible(true);
             } else {
-                new EditStandardHatFromOrder(id).setVisible(true);
+                new EditStandardHatFromOrder(id, this).setVisible(true);
             }
         }
 

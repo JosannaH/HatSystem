@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
 public class EditStandardHatFromOrder extends javax.swing.JFrame {
 
     String hatID;
+    EditOrder editOrder;
     /**
      * Creates new form EditStandardHatFromOrder
      */
-    public EditStandardHatFromOrder(String hatId) {
+    public EditStandardHatFromOrder(String hatId, EditOrder editOrder) {
         initComponents();
         this.hatID = hatId;
+        this.editOrder = editOrder;
         setSizeComboBox();
     }
 
@@ -99,7 +101,8 @@ public class EditStandardHatFromOrder extends javax.swing.JFrame {
         
         SqlQuery.update("UPDATE ordered_st_hat SET Size = '"+ selectedSize +"' WHERE Standard_Hat = "+ trimmedID +";");
         JOptionPane.showMessageDialog(null, "Ändring sparad");
-        this.dispose();
+        editOrder.fillHatList();
+        dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
