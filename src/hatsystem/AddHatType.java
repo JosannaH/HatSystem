@@ -586,8 +586,7 @@ public class AddHatType extends javax.swing.JFrame {
             lblSpecialError.setText("Vänligen fyll i alla fält");
             lblSpecialError.setVisible(true);
         } else {
-            if (Validation.onlyLetters(nameWithoutWitespace, lblCheckNameSpecial)
-                    && Validation.isPrice(price, lblCheckPriceSpecial)) {
+            if (Validation.isPrice(price, lblCheckPriceSpecial)) {
 
                 int fabricComboID = Fabric.getFabricID(fabric, colour);
                 int employeeComboID = Employee.getEmployeeIDAdmin(worker);

@@ -123,13 +123,13 @@ public class EditOrder extends javax.swing.JFrame {
         btnDeleteHat = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-        tfCustomerNr = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
         lblErrorMessage = new javax.swing.JLabel();
         btnEditHat = new javax.swing.JButton();
         lblErrorMessage2 = new javax.swing.JLabel();
         btnGenerateInvoice = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lblCustomerNr = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -153,7 +153,7 @@ public class EditOrder extends javax.swing.JFrame {
 
         lblOrderNr.setText("jLabel3");
 
-        jLabel4.setText("Kundnummer");
+        jLabel4.setText("Kund och nummer");
 
         jLabel5.setText("Leveransadress");
 
@@ -180,6 +180,7 @@ public class EditOrder extends javax.swing.JFrame {
         tfCountry.setToolTipText("Land");
 
         btnDeleteOrder.setBackground(new java.awt.Color(153, 0, 0));
+        btnDeleteOrder.setForeground(new java.awt.Color(204, 204, 204));
         btnDeleteOrder.setText("Radera order");
         btnDeleteOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,8 +203,6 @@ public class EditOrder extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-
-        tfCustomerNr.setText("----------");
 
         lblName.setText("Bertil Bertilsson");
 
@@ -234,6 +233,8 @@ public class EditOrder extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        lblCustomerNr.setText("-----------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,16 +286,8 @@ public class EditOrder extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton1))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnGenerateInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblOrderNr, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tfCustomerNr, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(tfStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -304,7 +297,19 @@ public class EditOrder extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(tfCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblOrderDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 235, Short.MAX_VALUE)
+                                                .addComponent(btnGenerateInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblCustomerNr, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addGap(33, 33, 33))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,8 +351,8 @@ public class EditOrder extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(tfCustomerNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName))))
+                            .addComponent(lblName)
+                            .addComponent(lblCustomerNr))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -375,7 +380,7 @@ public class EditOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotPrice)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(lblErrorMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
@@ -436,7 +441,7 @@ public class EditOrder extends javax.swing.JFrame {
         lblErrorMessage.setVisible(false);
 
         String chosenDeliveryDate = tfExpectedDeliveryDate.getText();
-        String chosenCustomerNr = tfCustomerNr.getText();
+        String chosenCustomerNr = lblCustomerNr.getText();
         String chosenStreet = tfStreet.getText();
         String chosenPostal = tfPostal.getText();
         String chosenCity = tfCity.getText();
@@ -642,7 +647,7 @@ public class EditOrder extends javax.swing.JFrame {
         lblName.setText(customer.get("First_Name") + " " + customer.get("Last_Name"));
         oldCustomerID = customer.get("Customer_Nr");
 
-        tfCustomerNr.setText(oldCustomerID);
+        lblCustomerNr.setText(oldCustomerID);
 
     }
 
@@ -695,6 +700,7 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblCustomerNr;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblErrorMessage2;
     private javax.swing.JLabel lblName;
@@ -704,7 +710,6 @@ public class EditOrder extends javax.swing.JFrame {
     private javax.swing.JList<String> lstListOrderedHats;
     private javax.swing.JTextField tfCity;
     private javax.swing.JTextField tfCountry;
-    private javax.swing.JTextField tfCustomerNr;
     private javax.swing.JTextField tfExpectedDeliveryDate;
     private javax.swing.JTextField tfPostal;
     private javax.swing.JTextField tfStreet;
