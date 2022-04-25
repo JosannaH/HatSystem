@@ -780,17 +780,10 @@ public class AddHatType extends javax.swing.JFrame {
         HashMap<String, String> chosenHat = StandardHat.getHat(hatID);
         String fabricID = chosenHat.get("Hat_Fabric");
         Double price = Double.parseDouble(chosenHat.get("Price"));
-<<<<<<< Updated upstream
+
         Double priceExtraCost = price*1.2;
         
         String formatPrice = Validation.setTwoDecimals(priceExtraCost);
-=======
-        Double priceExtraCost = price * 1.2;
-
-        // round up price to two decimals
-        DecimalFormat df = new DecimalFormat("####0.00");
-        String formatPrice = df.format(priceExtraCost);
->>>>>>> Stashed changes
 
         String priceDot = formatPrice.replaceAll(",", ".");
         textField_customPrice.setText(priceDot);
