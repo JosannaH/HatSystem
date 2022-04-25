@@ -322,7 +322,7 @@ public class AddCustomer extends javax.swing.JFrame {
                         String customerID = Customer.getLatestCustomer();
                         String customerNr = Customer.getCustomerNr(customerID);
                         JOptionPane.showMessageDialog(null, "Kunden är registrerad!");
-                        if (findCustomerFromOrder.isVisible()) {
+                        if (findCustomerFromOrder != null) {
                             HashMap<String, String> customerMap = Customer.getCustomer(customerNr);
                             mainLoginMenu.addCustomerInfoToOrder(customerMap, customerNr);
 
