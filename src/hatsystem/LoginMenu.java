@@ -75,7 +75,9 @@ public class LoginMenu extends javax.swing.JFrame {
         lblErrorMessageCategory.setVisible(false);
         totalPriceLabel = lblTotalPrice;
         // Belongs to "Sök" tab
-        Customer.listAllCustomers(listModel);
+        cbCategory.setSelectedItem("Kunder");
+        fillCorrectCategory();
+//        Customer.listAllCustomers(listModel);
         cmbSearchStandardHats.setEnabled(false);
 
     }
@@ -330,29 +332,28 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_startLayout.setHorizontalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
+                .addGap(320, 320, 320)
                 .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(332, 332, 332)
+                        .addGap(75, 75, 75)
                         .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_startLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(btn_logout))
                             .addComponent(btn_changePassword)))
-                    .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(397, Short.MAX_VALUE))
+                    .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         panel_startLayout.setVerticalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(64, 64, 64)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160)
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         lbl_title.getAccessibleContext().setAccessibleDescription("");
@@ -480,8 +481,8 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_createOrder.setLayout(panel_createOrderLayout);
         panel_createOrderLayout.setHorizontalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
-                .addGap(217, 217, 217)
+            .addGroup(panel_createOrderLayout.createSequentialGroup()
+                .addGap(179, 179, 179)
                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_createOrderLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -512,7 +513,7 @@ public class LoginMenu extends javax.swing.JFrame {
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(72, 72, 72))
                                     .addGroup(panel_createOrderLayout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(31, 31, 31)))
                                 .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -530,7 +531,7 @@ public class LoginMenu extends javax.swing.JFrame {
                                     .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(52, 52, 52)
                                 .addComponent(btnCreateNewCustomerFromOrder)))
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panel_createOrderLayout.createSequentialGroup()
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -540,10 +541,11 @@ public class LoginMenu extends javax.swing.JFrame {
                         .addComponent(jPanelOrderAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblErrorDeliveryAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(lblErrorDeliveryAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblErrorPostAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblErrorCountry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(lblErrorCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(38, 38, 38))
         );
         panel_createOrderLayout.setVerticalGroup(
             panel_createOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,27 +639,23 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_registerLayout.setHorizontalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_registerLayout.createSequentialGroup()
-                .addGap(303, 303, 303)
-                .addGroup(panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnRegisterCustomer))
-                    .addComponent(btnRegisterStandardHat)
-                    .addGroup(panel_registerLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(btnRegisterFabric)))
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addGap(363, 363, 363)
+                .addGroup(panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRegisterCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegisterStandardHat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegisterFabric, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(412, Short.MAX_VALUE))
         );
         panel_registerLayout.setVerticalGroup(
             panel_registerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_registerLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(148, 148, 148)
                 .addComponent(btnRegisterCustomer)
                 .addGap(50, 50, 50)
                 .addComponent(btnRegisterStandardHat)
                 .addGap(45, 45, 45)
                 .addComponent(btnRegisterFabric)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera", panel_register);
@@ -673,7 +671,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(listFoundResults);
 
-        btnEditCatergory.setText("Redigera");
+        btnEditCatergory.setText("Visa/redigera");
         btnEditCatergory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditCatergoryActionPerformed(evt);
@@ -714,50 +712,55 @@ public class LoginMenu extends javax.swing.JFrame {
         panel_searchLayout.setHorizontalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(lblChooseCategory)
+                .addGap(18, 18, 18)
+                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panel_searchLayout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_searchLayout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(lblChooseCategory)
+                        .addComponent(btnSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_searchLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_searchLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(panel_searchLayout.createSequentialGroup()
-                                .addComponent(txtSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(309, 309, 309)
-                                .addComponent(btnEditCatergory))
-                            .addGroup(panel_searchLayout.createSequentialGroup()
-                                .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblErrorMessageCategory)))))
-                .addGap(63, 63, 63))
+                        .addComponent(btnEditCatergory))
+                    .addGroup(panel_searchLayout.createSequentialGroup()
+                        .addComponent(cmbSearchStandardHats, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblErrorMessageCategory)))
+                .addGap(77, 77, 77))
+            .addGroup(panel_searchLayout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         panel_searchLayout.setVerticalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(27, 27, 27)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblChooseCategory))
-                .addGap(34, 34, 34)
+                .addGap(53, 53, 53)
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_searchLayout.createSequentialGroup()
                         .addComponent(lblErrorMessageCategory)
-                        .addGap(12, 12, 12)
-                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEditCatergory)
-                            .addComponent(btnSearchSpecific)))
-                    .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnSearchSpecific))
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEditCatergory))
+                            .addGroup(panel_searchLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_searchLayout.createSequentialGroup()
                         .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbSearchSpecific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -771,7 +774,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sök", panel_search);
 
-        jLabel8.setText("Skapa årssammanställning av totalförsäljning samt moms");
+        jLabel8.setText("Skapa årssammanställning av totalförsäljning");
 
         cmbChosenYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
 
@@ -791,30 +794,30 @@ public class LoginMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
+                        .addGap(367, 367, 367)
                         .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(346, 346, 346)
-                        .addComponent(btnGeneratePDF)))
-                .addContainerGap(347, Short.MAX_VALUE))
+                        .addGap(417, 417, 417)
+                        .addComponent(btnGeneratePDF))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(341, 341, 341)
+                        .addComponent(jLabel8)))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(108, 108, 108)
                 .addComponent(jLabel8)
-                .addGap(63, 63, 63)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbChosenYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(59, 59, 59)
+                .addGap(48, 48, 48)
                 .addComponent(btnGeneratePDF)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Årsredovisning", jPanel1);
@@ -844,7 +847,11 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddNewHatTypeActionPerformed
 
     private void btnClearHatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearHatsActionPerformed
-        deleteNonOrderedHats();
+        int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera alla hattar?", "Varning!", JOptionPane.YES_NO_OPTION);
+        if (x == JOptionPane.YES_OPTION) {
+
+            deleteNonOrderedHats();
+        }
     }//GEN-LAST:event_btnClearHatsActionPerformed
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
@@ -949,7 +956,7 @@ public class LoginMenu extends javax.swing.JFrame {
                     txtPostCode.setText("");
                     txtExpectedDate.setText("");
                     listOrderItems();
-                    
+
                     //fraktsedel
                     if (cmbStatus.getSelectedIndex() == 2) {
                         int x = JOptionPane.showConfirmDialog(null, "Vill du generera en fraktsedel för ordern?", "Fraktsedel", JOptionPane.YES_NO_OPTION);
@@ -962,8 +969,6 @@ public class LoginMenu extends javax.swing.JFrame {
                     }
                 }
             }
-
-            
 
             cmbStatus.setSelectedIndex(0);
     }//GEN-LAST:event_btnSaveOrderActionPerformed
@@ -978,34 +983,39 @@ public class LoginMenu extends javax.swing.JFrame {
      * @param evt
      */
     private void btbDeleteChosenHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbDeleteChosenHatActionPerformed
+
         int test = jListAllOrders.getSelectedIndex();
 
         String hatIdentifier;
         if (jListAllOrders.getSelectedIndex() > -1) {
-            String itemToDelete = orderListModel.getElementAt(jListAllOrders.getSelectedIndex());
-            String typeOfHat = itemToDelete.substring(0, 1);
-            String customHatID = itemToDelete.substring(1, 7).replaceAll("\\s", "");
-            String standardHatID = itemToDelete.substring(0, 7).replaceAll("\\s", "");
-            if (typeOfHat.equals("C")) {
+            int x = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill radera vald hatt?", "Varning!", JOptionPane.YES_NO_OPTION);
 
-                //Lambda uttryck som tar bort ALLA element i listan som har värdet av hatID.
-                arrayOtherHat.removeIf(s -> s == Integer.parseInt(customHatID));
+            if (x == JOptionPane.YES_OPTION) {
+                String itemToDelete = orderListModel.getElementAt(jListAllOrders.getSelectedIndex());
+                String typeOfHat = itemToDelete.substring(0, 1);
+                String customHatID = itemToDelete.substring(1, 7).replaceAll("\\s", "");
+                String standardHatID = itemToDelete.substring(0, 7).replaceAll("\\s", "");
+                if (typeOfHat.equals("C")) {
 
-                SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + customHatID + ";");
-                SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + customHatID + ";");
-                SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + customHatID + ";");
-                hashMapListPrice.remove(customHatID);
+                    //Lambda uttryck som tar bort ALLA element i listan som har värdet av hatID.
+                    arrayOtherHat.removeIf(s -> s == Integer.parseInt(customHatID));
 
-            } else {
-                hashMapStandardHat.remove(standardHatID);
-                hashMapListPrice.remove(standardHatID);
+                    SqlQuery.delete("DELETE FROM special_hat WHERE Hat_ID = " + customHatID + ";");
+                    SqlQuery.delete("DELETE FROM custom_hat WHERE Hat_ID = " + customHatID + ";");
+                    SqlQuery.delete("DELETE FROM hat WHERE Hat_ID = " + customHatID + ";");
+                    hashMapListPrice.remove(customHatID);
+
+                } else {
+                    hashMapStandardHat.remove(standardHatID);
+                    hashMapListPrice.remove(standardHatID);
+                }
+                listOrderItems();
+                lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
             }
-            listOrderItems();
-            lblTotalPrice.setText(String.valueOf(getTotalPriceNonStatic()));
-
         } else {
             lblError.setVisible(true);
         }
+
     }//GEN-LAST:event_btbDeleteChosenHatActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -1054,7 +1064,7 @@ public class LoginMenu extends javax.swing.JFrame {
         //hämta in vad användaren vill söka efter
         String category = cmbSearchSpecific.getSelectedItem().toString();
         //hämta in sökord
-        String searchWord = txtSearchWord.getText();
+        String searchWord = txtSearchWord.getText().trim();
         lblErrorValidateSearchWord.setText("");
 
         switch (category) {
@@ -1081,6 +1091,15 @@ public class LoginMenu extends javax.swing.JFrame {
                 break;
             case "Tyg":
                 StandardHat.listAllHatsByFabric(cmbSearchStandardHats.getSelectedItem().toString(), listModel);
+                break;
+            case "Lista alla kunder":
+                Customer.listAllCustomers(listModel);
+                break;
+            case "Lista alla ordrar":
+                Order.listAllOrders(listModel);
+                break;
+            case "Lista alla standardhattar":
+                StandardHat.listAllStandardHats(listModel);
                 break;
             default:
                 throw new AssertionError();
@@ -1111,7 +1130,11 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGeneratePDFActionPerformed
 
     private void cmbSearchSpecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSearchSpecificActionPerformed
-
+//        String searchingFor = cmbSearchSpecific.getSelectedItem().toString();
+//        if(searchingFor.equals("Visa alla")){
+//            cmbSearchStandardHats.setEnabled(false);
+//            txtSearchWord.setEditable(false);
+//        }
     }//GEN-LAST:event_cmbSearchSpecificActionPerformed
 
     private void cmbSearchSpecificFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSearchSpecificFocusGained
@@ -1160,6 +1183,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Förnamn");
                 cmbSearchSpecific.addItem("Efternamn");
+                cmbSearchSpecific.addItem("Lista alla kunder");
                 break;
             }
             case "Ordrar": {
@@ -1175,10 +1199,12 @@ public class LoginMenu extends javax.swing.JFrame {
                 cmbSearchSpecific.addItem("Pågående");
                 cmbSearchSpecific.addItem("Redo att skickas");
                 cmbSearchSpecific.addItem("Skickad");
+                cmbSearchSpecific.addItem("Lista alla ordrar");
                 break;
             }
             case "Standardhattar": {
                 StandardHat.listAllStandardHats(listModel);
+                cmbSearchStandardHats.removeAllItems();
                 StandardHat.fillCmbWithAllHatNames(cmbSearchStandardHats);
                 lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(false);
@@ -1188,6 +1214,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Hattnamn");
                 cmbSearchSpecific.addItem("Tyg");
+                cmbSearchSpecific.addItem("Lista alla standardhattar");
                 break;
             }
         }

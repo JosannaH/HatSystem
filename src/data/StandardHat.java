@@ -48,6 +48,14 @@ public class StandardHat {
 
         return allStandardHats;
     }
+    
+    public static ArrayList<HashMap<String, String>> getAllActiveStandardHats() {
+
+        ArrayList<HashMap<String, String>> allStandardHats
+                = SqlQuery.getMultipleRows("SELECT * FROM standard_hat WHERE Active = 1 ORDER BY Name;");
+
+        return allStandardHats;
+    }
 
     /**
      * Checks whether a specific hat name and fabric combination already exists.
@@ -88,7 +96,7 @@ public class StandardHat {
         //hashMapListPrice.clear();
         listModel.clear();
 
-        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllStandardHats();
+        ArrayList<HashMap<String, String>> allHats = StandardHat.getAllActiveStandardHats();
         int index = 0;
         while (index < allHats.size()) {
             HashMap<String, String> currentHat = allHats.get(index);
@@ -137,7 +145,7 @@ public class StandardHat {
     }
 
     public static void fillCmbWithAllHatNames(JComboBox cmb) {
-        ArrayList<String> types = SqlQuery.getColumn("SELECT DISTINCT Name FROM standard_hat;");
+        ArrayList<String> types = SqlQuery.getColumn("SELECT DISTINCT Name FROM standard_hat WHERE Active = 1;");
         for (String t : types) {
             cmb.addItem(t);
         }
