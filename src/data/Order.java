@@ -108,5 +108,15 @@ public class Order {
             index++;
         }
     }
+    
+    public static boolean checkIfActive(String orderID){
+        
+        boolean isActive = true;
+        String active = SqlQuery.getValue("SELECT Active FROM Orders WHERE Orders_ID = "+ orderID +"");
+        if(Integer.parseInt(active) == 0){
+            isActive = false;
+        }
+        return isActive;
+    }
 
 }

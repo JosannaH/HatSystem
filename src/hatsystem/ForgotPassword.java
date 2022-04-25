@@ -276,7 +276,7 @@ public class ForgotPassword extends javax.swing.JFrame {
             cbSecurityQuestion.setEnabled(true);
         }
         else{
-            lblError.setText("Fel användare uppgifter!");
+            lblError.setText("Fel användaruppgifter!");
             lblError.setVisible(true);
         }
     }//GEN-LAST:event_btnSearchUserActionPerformed

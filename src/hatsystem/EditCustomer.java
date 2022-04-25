@@ -6,6 +6,7 @@ package hatsystem;
 
 import data.Address;
 import data.Customer;
+import data.Order;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import data.SqlQuery;
@@ -33,6 +34,8 @@ public class EditCustomer extends javax.swing.JFrame {
     private String oldAddressID;
     private String customerNr;
     private LoginMenu loginMenu;
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
+    private Font defaultListFont;
 
     /**
      * Creates new form EditInformation
@@ -41,6 +44,9 @@ public class EditCustomer extends javax.swing.JFrame {
         this.customerNr = customerNr;
         customerNr();
         initComponents();
+        listCustomerOrders.setModel(listModel);
+        defaultListFont = listCustomerOrders.getFont();
+        listCustomerOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
         fillOrderList();
         fillCustomerInfo();
         lblErrorMessage.setVisible(false);
@@ -50,12 +56,16 @@ public class EditCustomer extends javax.swing.JFrame {
     /**
      * For editing from Sök-lista
      * @param customerNr 
+     * @param loginMenu 
      */
        public EditCustomer(String customerNr, LoginMenu loginMenu) {
         this.customerNr = customerNr;
         this.loginMenu = loginMenu;
         customerNr();
         initComponents();
+        listCustomerOrders.setModel(listModel);
+        defaultListFont = listCustomerOrders.getFont();
+        listCustomerOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
         fillOrderList();
         fillCustomerInfo();
         lblErrorMessage.setVisible(false);
@@ -64,6 +74,12 @@ public class EditCustomer extends javax.swing.JFrame {
     
     private void customerNr(){
         customerID = Customer.getCustomerID(customerNr);        
+    }
+    
+    private int orderID(){
+        String stringOfOrders = listModel.getElementAt(listCustomerOrders.getSelectedIndex());
+        int orderID = Integer.parseInt(stringOfOrders.substring(0, 5).trim());
+        return orderID;
     }
 
     private void clearErrorMessages() {
@@ -122,6 +138,7 @@ public class EditCustomer extends javax.swing.JFrame {
                     SqlQuery.update("UPDATE customer SET Last_Name = '" + lastName + "' WHERE Customer_ID = " + customerID + ";");
                     SqlQuery.update("UPDATE customer SET Phone_Nr = '" + telephone + "' WHERE Customer_ID = " + customerID + ";");
                     SqlQuery.update("UPDATE customer SET Email = '" + email + "' WHERE Customer_ID = " + customerID + ";");
+                    SqlQuery.update("UPDATE customer SET Comment = '" + comment + "' WHERE Customer_ID = " + customerID + ";");
                     infoChanged = true;
                 } else {
                     changeAddress = false;
@@ -160,29 +177,28 @@ public class EditCustomer extends javax.swing.JFrame {
         }
     }
 
-    private void fillOrderList() {
-
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        listCustomerOrders.setModel(listModel);
-        Font defaultListFont = listCustomerOrders.getFont();
-        listCustomerOrders.setFont(new Font("monospaced", defaultListFont.getStyle(), defaultListFont.getSize()));
-
+    public void fillOrderList() {
+        listModel.clear();
         ArrayList<HashMap<String, String>> orders = SqlQuery.getMultipleRows("SELECT * FROM orders WHERE Customer = " + customerID + ";");
         int index = 0;
+        
         while (index < orders.size()) {
             HashMap<String, String> currentOrder = orders.get(index);
-
-            listModel.addElement(String.format("%-10s %-20s %-20s %-20s"
+            
+            
+            if(Order.checkIfActive(currentOrder.get("Orders_ID"))){
+            listModel.addElement(String.format("%-7s %-15s %-15s %-20s"
                     + currentOrder.get("Total_Price"),
                     currentOrder.get("Orders_ID"),
                     currentOrder.get("Delivery_Date"),
                     currentOrder.get("Order_Date"),
                     currentOrder.get("Status")
             ));
+            }
 
             index++;
         }
-
+        
     }
 
     private void fillCustomerInfo() {
@@ -211,6 +227,9 @@ public class EditCustomer extends javax.swing.JFrame {
 
         oldAddressID = address.get("Address_ID");
     }
+    
+    
+           
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -251,6 +270,7 @@ public class EditCustomer extends javax.swing.JFrame {
         lblCheckCity = new javax.swing.JLabel();
         lblCheckCountry = new javax.swing.JLabel();
         lblErrorMessage = new javax.swing.JLabel();
+        btnShowOrder = new javax.swing.JButton();
 
         lblCheckCountry1.setForeground(new java.awt.Color(153, 0, 0));
         lblCheckCountry1.setText("jLabel1");
@@ -321,6 +341,13 @@ public class EditCustomer extends javax.swing.JFrame {
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorMessage.setText("Vänligen fyll i alla fält");
 
+        btnShowOrder.setText("Visa order");
+        btnShowOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -360,11 +387,7 @@ public class EditCustomer extends javax.swing.JFrame {
                         .addGap(189, 189, 189)
                         .addComponent(btn_save)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_kundens_tidigare_ordrar)
-                        .addGap(248, 248, 248))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -375,14 +398,20 @@ public class EditCustomer extends javax.swing.JFrame {
                                     .addComponent(lblCheckPostal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblCheckStreet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblCheckCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblCheckCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(lblCheckCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                                     .addComponent(lblCheckEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblCheckPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblCheckLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblCheckFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(41, 41, 41))))
+                                .addGap(19, 19, 19)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnShowOrder)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_kundens_tidigare_ordrar)
+                        .addGap(303, 303, 303))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,54 +422,57 @@ public class EditCustomer extends javax.swing.JFrame {
                     .addComponent(lbl_kundens_tidigare_ordrar))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_firstName)
-                            .addComponent(lblCheckFirstName))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_lastName)
-                            .addComponent(lblCheckLastName))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_telephone)
-                            .addComponent(txt_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCheckPhone))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_email)
-                            .addComponent(lblCheckEmail))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_streetAddress)
-                            .addComponent(lblCheckStreet))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_postCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_postCode)
-                            .addComponent(lblCheckPostal))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_city)
-                            .addComponent(lblCheckCity))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_country)
-                            .addComponent(lblCheckCountry))
-                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_comment))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblErrorMessage)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_firstName)
+                                    .addComponent(lblCheckFirstName))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_lastName)
+                                    .addComponent(lblCheckLastName))
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_telephone)
+                                    .addComponent(txt_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCheckPhone))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_email)
+                                    .addComponent(lblCheckEmail))
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_streetAddress)
+                                    .addComponent(lblCheckStreet))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_postCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_postCode)
+                                    .addComponent(lblCheckPostal))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_city)
+                                    .addComponent(lblCheckCity))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_country)
+                                    .addComponent(lblCheckCountry))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_comment))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblErrorMessage))
+                            .addComponent(btnShowOrder))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_save)
@@ -475,8 +507,13 @@ public class EditCustomer extends javax.swing.JFrame {
         updateCustomerInfo();
     }//GEN-LAST:event_btn_saveActionPerformed
 
+    private void btnShowOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowOrderActionPerformed
+        new EditOrder(orderID(), this).setVisible(true); 
+    }//GEN-LAST:event_btnShowOrderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnShowOrder;
     private javax.swing.JButton btn_Delete;
     private javax.swing.JButton btn_save;
     private javax.swing.JScrollPane jScrollPane1;
