@@ -627,45 +627,8 @@ public class AddHatType extends javax.swing.JFrame {
 
     private void btbAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddImageActionPerformed
 
-        JFileChooser chooser = new JFileChooser();
-        int isFileChosen = chooser.showOpenDialog(null);
+        SpecialHat.chooseFile(lblImage, lblImageTxt);
 
-        if (isFileChosen == 1) {
-
-        } else {
-
-            File file = chooser.getSelectedFile();
-            String filename = file.getAbsolutePath();
-            if (filename.matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
-
-                //TODO Validering för att det endast går att lägga in bild.
-                lblImageTxt.setText(filename);
-                lblImageTxt.setForeground(new Color(60, 63, 65));
-
-                ImageIcon icon = new ImageIcon(new ImageIcon(filename).getImage());
-
-                //Vi kan här ändra värdet i "frame" för att få den storlek vi vill ha på ramen, men att bilden
-                //fortfarande behåller sitt ursprungliga bildförhållande relativt till ramen.
-                double frameWidth = 300;
-                double frameHeight = 350;
-                double selectedImgWidth = icon.getIconWidth();
-                double selectedImgHeight = icon.getIconHeight();
-
-                double widthRatio = frameWidth / selectedImgWidth;
-                double heightRatio = frameHeight / selectedImgHeight;
-                double ratio = Math.min(widthRatio, heightRatio);
-
-                int resizedWidth = (int) (selectedImgWidth * ratio);
-                int resizedHeight = (int) (selectedImgHeight * ratio);
-
-                ImageIcon iconNew = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(resizedWidth, resizedHeight, Image.SCALE_DEFAULT));
-
-                lblImage.setIcon(iconNew);
-            } else {
-                lblImageTxt.setText("Fel filformat");
-                lblImageTxt.setForeground(new Color(204, 0, 51));
-            }
-        }
     }//GEN-LAST:event_btbAddImageActionPerformed
 
     private void listCustHatValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCustHatValueChanged
