@@ -33,7 +33,8 @@ public class HatSystem {
 
         new LoginMenu("Ottoadmin").setVisible(true);
         
-        //new AddHatType().setVisible(true);
+        
+        new AddHatType().setVisible(true);
         //new ChangePsw("Ottoadmin").setVisible(true);
         
     }
