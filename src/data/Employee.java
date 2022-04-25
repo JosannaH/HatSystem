@@ -32,4 +32,14 @@ public class Employee {
         int employeeID = Integer.parseInt(employeeToCheck);
         return employeeID;
     }
+    
+    public static String getSecurityAnswer(String userName){
+        String securityAnswer = SqlQuery.getValue("SELECT Security_Answer FROM employee WHERE Username = '" + userName + "'");
+        return securityAnswer;
+    }
+    
+    public static String getSecurityQuestion(String userName){
+        String securityQuestion = SqlQuery.getValue("SELECT Security_Question FROM employee WHERE Username = '" + userName + "'");
+        return securityQuestion;
+    }
 }

@@ -204,7 +204,7 @@ public class ChangePsw extends javax.swing.JFrame {
         }
         oldPasw = "";
         newPasw = "";
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
