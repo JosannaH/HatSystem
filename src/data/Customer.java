@@ -158,7 +158,7 @@ public class Customer {
         listModel.clear();
 
         ArrayList<HashMap<String, String>> customers = new ArrayList<>();
-        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where First_Name = '" + firstName + "';");
+        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where First_Name like '%" + firstName + "%';");
 
         if (customers.isEmpty()) {
             listModel.addElement("Inget resultat");
@@ -195,7 +195,7 @@ public class Customer {
         listModel.clear();
 
         ArrayList<HashMap<String, String>> customers = new ArrayList<>();
-        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where Last_Name = '" + lastName + "';");
+        customers = SqlQuery.getMultipleRows("SELECT * FROM Customer where Last_Name like '%" + lastName + "%';");
 
         if (customers.isEmpty()) {
             listModel.addElement("Inget resultat");
