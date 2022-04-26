@@ -72,6 +72,9 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
             System.out.println("funkar");
             SpecialHat.showImage(lblImage, lblPath, hatID);
         }
+        else{
+            btnChangeImage.setVisible(false);
+        }
     }
 
     /**
