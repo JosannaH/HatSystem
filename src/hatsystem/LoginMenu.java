@@ -1046,6 +1046,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         if (objectToEdit == null) {
             lblErrorMessageCategory.setVisible(true);
+            lblErrorMessageCategory.setText("Vänligen välj något objekt att redigera först");
 
         } else {
             switch (category) {
@@ -1063,7 +1064,7 @@ public class LoginMenu extends javax.swing.JFrame {
                     break;
                 default:
                     lblErrorMessageCategory.setVisible(true);
-
+                    lblErrorMessageCategory.setText("Vänligen välj något objekt att redigera först");
             }
         }
 
