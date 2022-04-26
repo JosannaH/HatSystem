@@ -262,7 +262,7 @@ public class LoginMenu extends javax.swing.JFrame {
         lbl_title = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         btn_changePassword = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        lblImageHat = new javax.swing.JLabel();
         panel_createOrder = new javax.swing.JPanel();
         btnSaveOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -347,8 +347,7 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TopIT.png"))); // NOI18N
+        lblImageHat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout panel_startLayout = new javax.swing.GroupLayout(panel_start);
         panel_start.setLayout(panel_startLayout);
@@ -359,7 +358,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_startLayout.createSequentialGroup()
                         .addGap(73, 73, 73)
-                        .addComponent(jLabel9))
+                        .addComponent(lblImageHat))
                     .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(349, Short.MAX_VALUE))
             .addGroup(panel_startLayout.createSequentialGroup()
@@ -373,14 +372,14 @@ public class LoginMenu extends javax.swing.JFrame {
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addComponent(jLabel9)
+                .addComponent(lblImageHat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88)
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         lbl_title.getAccessibleContext().setAccessibleDescription("");
@@ -1282,7 +1281,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListAllOrders;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelOrderAddress;
@@ -1300,6 +1298,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorMessageCategory;
     private javax.swing.JLabel lblErrorPostAddress;
     private javax.swing.JLabel lblErrorValidateSearchWord;
+    private javax.swing.JLabel lblImageHat;
     private javax.swing.JLabel lblSum;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lbl_title;
