@@ -82,6 +82,7 @@ public class LoginMenu extends javax.swing.JFrame {
         fillCorrectCategory();
 //        Customer.listAllCustomers(listModel);
         cmbSearchStandardHats.setEnabled(false);
+        cmbSearchStandardHats.setVisible(false);
 
         setYearsTotalSales();
 
@@ -1210,6 +1211,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 txtSearchWord.setEnabled(true);
                 cmbSearchStandardHats.setEnabled(false);
                 cmbSearchStandardHats.removeAllItems();
+                cmbSearchStandardHats.setVisible(false);
                 btnSearchSpecific.setText("Sök kund");
                 cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Förnamn");
@@ -1224,6 +1226,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 txtSearchWord.setText("");
                 cmbSearchStandardHats.setEnabled(false);
                 cmbSearchStandardHats.removeAllItems();
+                cmbSearchStandardHats.setVisible(false);
                 btnSearchSpecific.setText("Sök order");
                 cmbSearchSpecific.removeAllItems();
                 cmbSearchSpecific.addItem("Under utvärdering");
@@ -1240,6 +1243,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 lblErrorMessageCategory.setText("");
                 txtSearchWord.setEnabled(false);
                 txtSearchWord.setText("");
+                cmbSearchStandardHats.setVisible(true);
                 cmbSearchStandardHats.setEnabled(true);
                 btnSearchSpecific.setText("Sök hatt");
                 cmbSearchSpecific.removeAllItems();
