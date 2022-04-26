@@ -65,7 +65,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
             }
         });
 
-        lblHeader.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblHeader.setText("Välj kund");
 
         spResult.setViewportView(jListResult);
@@ -116,8 +116,8 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
                             .addComponent(spResult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblErrorValidateSearchWord, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)))))
-                .addGap(67, 67, 67))
+                                .addGap(21, 21, 21)))))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +136,7 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateCustomer)
                     .addComponent(btnSelectCustomer))
-                .addGap(202, 202, 202))
+                .addGap(64, 64, 64))
         );
 
         pack();
