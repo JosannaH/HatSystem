@@ -4,7 +4,6 @@
  */
 package hatsystem;
 
-import com.mysql.cj.protocol.a.NativeConstants;
 import data.Fabric;
 import data.StandardHat;
 import data.Order;
@@ -21,7 +20,6 @@ import data.Employee;
 import data.GeneratePDF;
 import data.Validation;
 import java.io.File;
-import java.util.stream.IntStream;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +35,7 @@ public class LoginMenu extends javax.swing.JFrame {
      */
     private static String username;
     // A HashMap that stores id and size from class AddHatType.
+    private static String employeeFirstName;
     private static HashMap<String, String> hashMapStandardHat = new HashMap<>();
     // An Array that stores id from class AddHatType.
     private static ArrayList<Integer> arrayOtherHat = new ArrayList<Integer>();
@@ -55,6 +54,8 @@ public class LoginMenu extends javax.swing.JFrame {
 
     public LoginMenu(String username) {
         this.username = username;
+        
+        employeeFirstName = SqlQuery.getValue("SELECT Name FROM employee WHERE Username = '"+ username +"';");
         initComponents();
 
         lblError.setVisible(false);
@@ -325,7 +326,7 @@ public class LoginMenu extends javax.swing.JFrame {
         jTabbedPane1.setFocusable(false);
 
         lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_title.setText("Välkommen "+ username);
+        lbl_title.setText("Välkommen "+ employeeFirstName + "!");
 
         btn_logout.setText("Logga ut");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
@@ -869,7 +870,6 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearHatsActionPerformed
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
-
         fillCorrectCategory();
     }//GEN-LAST:event_cbCategoryActionPerformed
 
@@ -1175,7 +1175,6 @@ public class LoginMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSearchSpecificFocusLost
 
     private void jListAllOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAllOrdersValueChanged
-
         lblError.setVisible(false);
     }//GEN-LAST:event_jListAllOrdersValueChanged
 
