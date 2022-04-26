@@ -166,6 +166,11 @@ public class EditOrder extends javax.swing.JFrame {
         jLabel3.setText("Orderstatus");
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Under utvärdering", "Pågående", "Redo att skickas", "Skickad" }));
+        cmbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbStatusActionPerformed(evt);
+            }
+        });
 
         lblOrderDate.setText("jLabel7");
 
@@ -557,6 +562,10 @@ public class EditOrder extends javax.swing.JFrame {
             loginMenu.fillCorrectCategory();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbStatusActionPerformed
 
     /**
      * Hämtar alla hattar
