@@ -70,6 +70,8 @@ public class AddStandardHat extends javax.swing.JFrame {
         lblCheckPrice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         lblErrorMessage.setForeground(new java.awt.Color(204, 0, 51));
         lblErrorMessage.setText("Vänligen fyll i alla fält");

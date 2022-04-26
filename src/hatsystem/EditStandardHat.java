@@ -76,6 +76,8 @@ public class EditStandardHat extends javax.swing.JFrame {
         txtDescription = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         txtName.setText("jTextField1");
         txtName.addActionListener(new java.awt.event.ActionListener() {

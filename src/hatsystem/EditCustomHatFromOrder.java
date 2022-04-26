@@ -138,6 +138,8 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
         btnChangeImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         jLabel1.setText("Storlek");
 
@@ -324,7 +326,6 @@ public class EditCustomHatFromOrder extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnChangeImage))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
                 .addGap(7, 7, 7))
         );

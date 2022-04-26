@@ -87,6 +87,8 @@ public class AddCustomer extends javax.swing.JFrame {
         lbl_firstName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         lblTitle.setText("Registrera ny kund");
 

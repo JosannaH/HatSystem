@@ -54,6 +54,8 @@ public class ChangePsw extends javax.swing.JFrame {
         lblErrorOldPsw = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         btn_save.setText("Spara nytt lösenord");
         btn_save.addActionListener(new java.awt.event.ActionListener() {

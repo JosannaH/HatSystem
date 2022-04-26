@@ -276,6 +276,8 @@ public class EditCustomer extends javax.swing.JFrame {
         lblCheckCountry1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
 
         lbl_firstName.setText("Förnamn");
 

@@ -54,6 +54,8 @@ public class FindCustomerFromOrder extends javax.swing.JFrame {
         lblErrorValidateSearchWord = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TopIT");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/topITcute32px.png")).getImage());
         setPreferredSize(new java.awt.Dimension(1220, 602));
 
         btnCreateCustomer.setText("Skapa ny kund");
