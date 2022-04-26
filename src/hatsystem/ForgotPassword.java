@@ -241,14 +241,14 @@ public class ForgotPassword extends javax.swing.JFrame {
         rightAnswer = Employee.getSecurityAnswer(userName);
         
 
-        if ((!Arrays.equals(newPsw, confirmPsw)) || !(answer.equals(rightAnswer)) || !(securityQuestion.equals(cbSecurityQuestion.getSelectedItem().toString()))){  
+        if ((!Arrays.equals(newPsw, confirmPsw)) || !(answer.equalsIgnoreCase(rightAnswer)) || !(securityQuestion.equals(cbSecurityQuestion.getSelectedItem().toString()))){  
             lblError.setText("Försök igen");
             lblError.setVisible(true);
         }
         else{        
         boolean updated = false;
         newPasw = new String(newPsw);
-        if (JOptionPane.showConfirmDialog(null, "Är du säker?", "Du ska uppdatera ditt losenord!",
+        if (JOptionPane.showConfirmDialog(null, "Är du säker?", "Uppdatera ditt lösenord",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // yes option
             updatePaswQuery = "update employee set Password ='"+newPasw+"' where Username ='"+userName+"';";
