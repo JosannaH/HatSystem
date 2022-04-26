@@ -261,6 +261,7 @@ public class LoginMenu extends javax.swing.JFrame {
         lbl_title = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         btn_changePassword = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         panel_createOrder = new javax.swing.JPanel();
         btnSaveOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -325,6 +326,7 @@ public class LoginMenu extends javax.swing.JFrame {
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFocusable(false);
 
+        lbl_title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_title.setText("Välkommen "+ employeeFirstName + "!");
 
@@ -342,33 +344,42 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TopIT.png"))); // NOI18N
+
         javax.swing.GroupLayout panel_startLayout = new javax.swing.GroupLayout(panel_start);
         panel_start.setLayout(panel_startLayout);
         panel_startLayout.setHorizontalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
-                .addGap(320, 320, 320)
                 .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_startLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(343, 343, 343)
+                        .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_startLayout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(jLabel9))
+                            .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_startLayout.createSequentialGroup()
+                        .addGap(409, 409, 409)
                         .addGroup(panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_startLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(btn_logout))
-                            .addComponent(btn_changePassword)))
-                    .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(373, Short.MAX_VALUE))
+                            .addComponent(btn_changePassword))))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         panel_startLayout.setVerticalGroup(
             panel_startLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_startLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(btn_changePassword)
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addGap(126, 126, 126))
         );
 
         lbl_title.getAccessibleContext().setAccessibleDescription("");
@@ -1267,6 +1278,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListAllOrders;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelOrderAddress;
