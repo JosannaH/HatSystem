@@ -1,6 +1,6 @@
 # HatSystem
 
-Group project with 6 students, focus being on developing according to Scrum. Developed in NetBeans with Java and Swing. The ER-modelling and MySQL script was made by the student group, the InfDB.jar was provided by the professor. We got a general description of the hat making business, and by having meetings with the client we collected the requirements along the way.
+Group project by six University students, focus being on developing according to Scrum. Developed in NetBeans with Java and Swing. The ER-modelling and MySQL script was made by the student group, the InfDB.jar was provided by the professor. We got a general description of the hat making business, and by having meetings with the client we collected the requirements along the way.
 
 We mostly programmed in pairs, collaborating through Zoom, Discord and GitHub.
 
