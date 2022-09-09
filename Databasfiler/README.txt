@@ -1,8 +1,5 @@
 Förklaringar för vad de olika filerna gör
 
-* mibdb_komplett.sql
-Skript som ska köras i Datagrip så att databasen “mibdb” skapas och kan användas
-
 * InfDB.jar
 Klasser för att kunna hantera databasfrågor i Netbeans. Ska importeras till projektets library via Netbeans
 
